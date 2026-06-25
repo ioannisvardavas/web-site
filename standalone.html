@@ -737,13 +737,83 @@ h2 {
   font-size: 0.92rem;
 }
 
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 @media (max-width: 980px) {
   .site-header {
-    grid-template-columns: 1fr auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand {
+    margin-right: auto;
+  }
+
+  .nav-toggle {
+    display: flex;
   }
 
   .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px clamp(16px, 5vw, 72px) 20px;
+    background: rgba(251, 250, 247, 0.98);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.05rem;
+  }
+
+  .nav-links a:last-child {
+    border-bottom: none;
   }
 
   .hero,
@@ -884,7 +954,7 @@ h2 {
         <span data-i18n="brand">Γιάννης Βαρδαβάς, lutcf</span>
       </a>
 
-      <nav class="nav-links" aria-label="Main navigation">
+      <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="#services" data-i18n="navServices">Υπηρεσίες</a>
         <a href="#method" data-i18n="navMethod">Μεθοδολογία</a>
         <a href="#contact" data-i18n="navContact">Επικοινωνία</a>
@@ -894,6 +964,12 @@ h2 {
         <button class="lang-button is-active" type="button" data-lang="el">EL</button>
         <button class="lang-button" type="button" data-lang="en">EN</button>
       </div>
+
+      <button class="nav-toggle" type="button" aria-label="Μενού" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
 
     <main id="top">
@@ -1373,6 +1449,23 @@ function setLanguage(language) {
 languageButtons.forEach((button) => {
   button.addEventListener("click", () => setLanguage(button.dataset.lang));
 });
+
+const navToggle = document.querySelector(".nav-toggle");
+const primaryNav = document.querySelector(".nav-links");
+
+if (navToggle && primaryNav) {
+  navToggle.addEventListener("click", () => {
+    const open = primaryNav.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(open));
+  });
+
+  primaryNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      primaryNav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
 const revealNodes = document.querySelectorAll(".reveal");
 
