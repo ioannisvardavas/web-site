@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- build 20260625204749 -->
 <html lang="el">
   <head>
     <meta charset="utf-8" />
@@ -12,19 +13,19 @@
     <meta name="theme-color" content="#0f6f6a" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230f6f6a%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2215%22%20fill%3D%22none%22%20stroke%3D%22%23fbfaf7%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%225%22%20fill%3D%22%23b69152%22/%3E%3C/svg%3E" />
 
-    <!-- Open Graph / share preview (ολοκλήρωσε og:url & og:image μετά το hosting) -->
+    <!-- Open Graph / share preview (share preview (Cloudflare Workers)) -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="el_GR" />
     <meta property="og:site_name" content="Γιάννης Βαρδαβάς" />
     <meta property="og:title" content="Γιάννης Βαρδαβάς, lutcf | Financial Planning &amp; Business Risk Management" />
     <meta property="og:description" content="Ασφαλιστική, επενδυτική συμβουλευτική και business risk management — με αφετηρία τις πραγματικές ανάγκες σας." />
-    <meta property="og:url" content="https://ioannis-vardavas.netlify.app/" />
-    <meta property="og:image" content="https://ioannis-vardavas.netlify.app/og-image.png" />
+    <meta property="og:url" content="https://vardavas.ioannis-vardavas.workers.dev/" />
+    <meta property="og:image" content="https://vardavas.ioannis-vardavas.workers.dev/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Γιάννης Βαρδαβάς, lutcf | Financial Planning &amp; Business Risk Management" />
-    <meta name="twitter:image" content="https://ioannis-vardavas.netlify.app/og-image.png" />
+    <meta name="twitter:image" content="https://vardavas.ioannis-vardavas.workers.dev/og-image.png" />
     <meta name="twitter:description" content="Ασφαλιστική, επενδυτική συμβουλευτική και business risk management — με αφετηρία τις πραγματικές ανάγκες σας." />
     <style>
 :root {
@@ -774,6 +775,20 @@ h2 {
   cursor: pointer;
 }
 
+.contact-form .form-status {
+  margin: 6px 0 0;
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+
+.contact-form .form-status.is-success {
+  color: #8fd8ad;
+}
+
+.contact-form .form-status.is-error {
+  color: #ffb4a8;
+}
+
 .contact-quick {
   display: flex;
   flex-wrap: wrap;
@@ -1295,16 +1310,15 @@ h2 {
         <div class="contact-actions">
           <form
             class="contact-form"
-            name="contact"
+            id="contact-form"
+            action="https://api.web3forms.com/submit"
             method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
             aria-label="Φόρμα επικοινωνίας"
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <p class="hp-field" hidden>
-              <label>Μην το συμπληρώνετε: <input name="bot-field" /></label>
-            </p>
+            <input type="hidden" name="access_key" value="c1b7a492-e2bd-4715-8227-6d7f5a5f4620" />
+            <input type="hidden" name="subject" value="Νέο μήνυμα από το site σου" />
+            <input type="hidden" name="from_name" value="Vardavas site" />
+            <input type="checkbox" name="botcheck" class="hp-field" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <label class="field">
               <span data-i18n="formNameLabel">Όνομα</span>
               <input type="text" name="name" autocomplete="name" required />
@@ -1318,6 +1332,7 @@ h2 {
               <textarea name="message" rows="3" required></textarea>
             </label>
             <button class="button primary" type="submit" data-i18n="formSubmit">Αποστολή</button>
+            <p class="form-status" role="status" aria-live="polite" hidden></p>
           </form>
 
           <div class="contact-quick">
@@ -1578,6 +1593,49 @@ if (navToggle && primaryNav) {
       primaryNav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
     });
+  });
+}
+
+const contactForm = document.querySelector("#contact-form");
+if (contactForm) {
+  const statusEl = contactForm.querySelector(".form-status");
+  const formMessages = {
+    el: {
+      sending: "Αποστολή…",
+      ok: "Ευχαριστώ! Το μήνυμα στάλθηκε — θα επικοινωνήσω σύντομα.",
+      err: "Κάτι πήγε στραβά. Δοκιμάστε ξανά ή τηλεφωνήστε μου.",
+    },
+    en: {
+      sending: "Sending…",
+      ok: "Thank you! Your message was sent — I'll be in touch soon.",
+      err: "Something went wrong. Please try again or call me.",
+    },
+  };
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const m = formMessages[lang];
+    statusEl.hidden = false;
+    statusEl.className = "form-status";
+    statusEl.textContent = m.sending;
+    try {
+      const response = await fetch(contactForm.action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(contactForm),
+      });
+      if (response.ok) {
+        statusEl.classList.add("is-success");
+        statusEl.textContent = m.ok;
+        contactForm.reset();
+      } else {
+        statusEl.classList.add("is-error");
+        statusEl.textContent = m.err;
+      }
+    } catch (error) {
+      statusEl.classList.add("is-error");
+      statusEl.textContent = m.err;
+    }
   });
 }
 
