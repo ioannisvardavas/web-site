@@ -718,10 +718,64 @@ h2 {
 
 .contact-actions {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 12px;
+  width: min(420px, 100%);
+}
+
+.contact-form .field {
+  display: grid;
+  gap: 6px;
+}
+
+.contact-form .field span {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white);
+  font: inherit;
+  resize: vertical;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.contact-form .button.primary {
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.contact-quick {
+  display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  gap: 16px;
   justify-content: flex-end;
-  gap: 14px;
 }
 
 .contact-link {
@@ -1236,17 +1290,47 @@ h2 {
           </p>
         </div>
         <div class="contact-actions">
-          <a class="button primary" href="mailto:ioannis.vardavas@gmail.com" data-i18n="contactCta">Στείλε μήνυμα</a>
-          <a class="contact-link" href="tel:+306983880746" data-i18n="phoneLabel">698 388 0746</a>
-          <a
-            class="contact-link"
-            href="https://www.linkedin.com/in/ioannis-vardavas-a1906250"
-            target="_blank"
-            rel="noreferrer"
-            data-i18n="linkedinLabel"
+          <form
+            class="contact-form"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            aria-label="Φόρμα επικοινωνίας"
           >
-            LinkedIn
-          </a>
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="hp-field" hidden>
+              <label>Μην το συμπληρώνετε: <input name="bot-field" /></label>
+            </p>
+            <label class="field">
+              <span data-i18n="formNameLabel">Όνομα</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label class="field">
+              <span data-i18n="formEmailLabel">Email</span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label class="field">
+              <span data-i18n="formMessageLabel">Μήνυμα</span>
+              <textarea name="message" rows="3" required></textarea>
+            </label>
+            <button class="button primary" type="submit" data-i18n="formSubmit">Αποστολή</button>
+          </form>
+
+          <div class="contact-quick">
+            <a class="contact-link" href="tel:+306983880746" data-i18n="phoneLabel">698 388 0746</a>
+            <a class="contact-link" href="https://wa.me/306983880746" target="_blank" rel="noreferrer" data-i18n="whatsappLabel">WhatsApp</a>
+            <a class="contact-link" href="mailto:ioannis.vardavas@gmail.com" data-i18n="emailLabel">Email</a>
+            <a
+              class="contact-link"
+              href="https://www.linkedin.com/in/ioannis-vardavas-a1906250"
+              target="_blank"
+              rel="noreferrer"
+              data-i18n="linkedinLabel"
+            >
+              LinkedIn
+            </a>
+          </div>
         </div>
       </section>
     </main>
@@ -1345,7 +1429,13 @@ const copy = {
     contactTitle: "Ας μιλήσουμε — χωρίς δέσμευση, χωρίς πίεση.",
     contactText: "Μια πρώτη συζήτηση — χωρίς άγχος, χωρίς έτοιμες απαντήσεις. Βλέπουμε μαζί πού βρίσκεστε και αν μπορώ να βοηθήσω.",
     contactCta: "Στείλε μήνυμα",
+    formNameLabel: "Όνομα",
+    formEmailLabel: "Email",
+    formMessageLabel: "Μήνυμα",
+    formSubmit: "Αποστολή",
     phoneLabel: "698 388 0746",
+    whatsappLabel: "WhatsApp",
+    emailLabel: "Email",
     linkedinLabel: "LinkedIn",
     footerName: "Γιάννης Βαρδαβάς, lutcf",
     footerRole: "Life, Health, P&C & Investment Architect"
@@ -1437,7 +1527,13 @@ const copy = {
     contactTitle: "Let’s talk — no commitment, no pressure.",
     contactText: "One conversation — no rush, no ready answers. We simply look together at where you are and whether I can help.",
     contactCta: "Send a message",
+    formNameLabel: "Name",
+    formEmailLabel: "Email",
+    formMessageLabel: "Message",
+    formSubmit: "Send",
     phoneLabel: "+30 698 388 0746",
+    whatsappLabel: "WhatsApp",
+    emailLabel: "Email",
     linkedinLabel: "LinkedIn",
     footerName: "Ioannis Vardavas, lutcf",
     footerRole: "Life, Health, P&C & Investment Architect"
