@@ -254,6 +254,7 @@ h1 {
 .intelligence-band,
 .method-section,
 .tools-section,
+.calculator-section,
 .about-section,
 .contact-section {
   padding: clamp(70px, 9vw, 128px) clamp(20px, 5vw, 72px);
@@ -645,6 +646,356 @@ h2 {
   font-size: 2rem;
 }
 
+.module-tool {
+  position: absolute;
+  left: clamp(24px, 3vw, 34px);
+  bottom: clamp(20px, 3vw, 26px);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.86rem;
+  color: var(--white);
+  background: var(--petrol);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.module-tool:hover {
+  background: var(--petrol-deep);
+  transform: translateY(-1px);
+}
+
+.policy-branches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+.policy-branches span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--petrol-deep);
+  background: var(--petrol-soft);
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.policy-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.policy-tab {
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 800;
+  padding: 9px 14px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.policy-tab.is-active {
+  color: var(--petrol);
+  border-bottom-color: var(--petrol);
+}
+
+.policy-eval {
+  background: var(--petrol-soft);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 22px 0 18px;
+}
+
+.policy-eval-title {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--petrol-deep);
+}
+
+.policy-eval-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.tool-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(16px, 5vh, 56px) 16px;
+  background: rgba(10, 30, 28, 0.62);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tool-modal-overlay[hidden] {
+  display: none;
+}
+
+.tool-modal {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+}
+
+.tool-modal-x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--muted);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tool-modal-x:hover {
+  color: var(--ink);
+  border-color: var(--petrol);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.calculator-section {
+  background: var(--white);
+  display: flex;
+  justify-content: center;
+}
+
+.calc-card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(24px, 4vw, 40px);
+  box-shadow: var(--shadow);
+}
+
+.calc-title {
+  margin: 0 0 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.calc-sub {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.calc-goals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.goal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--petrol-soft);
+  color: var(--petrol-deep);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.goal-btn:hover {
+  border-color: var(--petrol);
+}
+
+.goal-btn.active {
+  background: var(--petrol);
+  color: var(--white);
+  border-color: var(--petrol);
+}
+
+.goal-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.calc-field {
+  margin-bottom: 22px;
+}
+
+.calc-field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 9px;
+}
+
+.calc-field-head label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.calc-field-head output {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--petrol-deep);
+}
+
+.calc-field input[type="range"] {
+  width: 100%;
+  accent-color: var(--petrol);
+  cursor: pointer;
+}
+
+.calc-results {
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+
+.calc-row-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 7px;
+}
+
+.calc-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.calc-row-head span {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.calc-row-head strong {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.calc-bar-track {
+  height: 9px;
+  border-radius: 5px;
+  background: var(--petrol-soft);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.calc-bar {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.35s ease;
+}
+
+.calc-totals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 4px 0 14px;
+}
+
+.calc-total {
+  background: var(--petrol-soft);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.calc-total p:first-child {
+  margin: 0 0 3px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.calc-total p:last-child {
+  margin: 0;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.calc-total.gain p:last-child {
+  color: var(--petrol);
+}
+
+.calc-note {
+  margin: 0 0 20px;
+  font-size: 0.76rem;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+.calc-cta {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 14px;
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.98rem;
+  background: var(--petrol);
+  color: var(--white);
+  border: 0;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calc-cta:hover {
+  background: var(--petrol-deep);
+}
+
+@media (max-width: 560px) {
+  .calc-totals {
+    grid-template-columns: 1fr;
+  }
+}
+
 .about-section {
   background: var(--paper);
 }
@@ -1031,6 +1382,10 @@ h2 {
   }
 }
 
+.viber-float{position:fixed;bottom:28px;right:28px;z-index:9999;width:60px;height:60px;border-radius:50%;background:#7360f2;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35);cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none}
+.viber-float:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.viber-float svg{width:32px;height:32px;fill:#fff}
+@media(max-width:600px){.viber-float{bottom:18px;right:18px;width:54px;height:54px}.viber-float svg{width:28px;height:28px}}
 </style>
   </head>
   <body>
@@ -1043,6 +1398,7 @@ h2 {
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="#services" data-i18n="navServices">Υπηρεσίες</a>
         <a href="#method" data-i18n="navMethod">Μεθοδολογία</a>
+        <a href="#about" data-i18n="navAbout">Σχετικά</a>
         <a href="#contact" data-i18n="navContact">Επικοινωνία</a>
       </nav>
 
@@ -1141,7 +1497,7 @@ h2 {
               <li data-i18n="moduleOnePointB">Retirement and children planning</li>
               <li data-i18n="moduleOnePointC">Goal-based investment direction</li>
             </ul>
-            <a href="#contact" class="module-link" data-i18n="moduleLink">Συζήτηση για αυτό</a>
+            <button type="button" class="module-tool" data-target="toolModal" data-i18n="moduleToolCalc">Δοκίμασε τον υπολογιστή →</button>
           </article>
 
           <article class="service-card reveal">
@@ -1176,7 +1532,7 @@ h2 {
               <li data-i18n="moduleThreePointB">Investment profile alignment</li>
               <li data-i18n="moduleThreePointC">Long-term review logic</li>
             </ul>
-            <a href="#contact" class="module-link" data-i18n="moduleLink">Συζήτηση για αυτό</a>
+            <button type="button" class="module-tool" data-target="policyModal" data-i18n="moduleToolPolicy">Δες δείγμα ανάλυσης →</button>
           </article>
 
           <article class="service-card service-card-dark reveal">
@@ -1285,15 +1641,132 @@ h2 {
         </div>
       </section>
 
-      <section class="about-section" aria-labelledby="about-title">
+      <div class="tool-modal-overlay" id="toolModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="calc-title">
+          <button type="button" class="tool-modal-x" id="toolModalClose" aria-label="Κλείσιμο">&times;</button>
+        <div class="calc-card">
+          <p class="eyebrow" data-i18n="calcEyebrow">Δοκιμάστε</p>
+          <h2 id="calc-title" class="calc-title" data-i18n="calcTitle">Τι κεφάλαιο μπορώ να χτίσω;</h2>
+          <p class="calc-sub" data-i18n="calcSub">Επιλέξτε στόχο ή ρυθμίστε ελεύθερα.</p>
+
+          <div class="calc-goals" role="group" aria-label="Στόχοι">
+            <button type="button" class="goal-btn active" data-years="25" data-save="250">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a1 1 0 011 1v1a1 1 0 01-2 0V4a1 1 0 011-1zm6.36 2.64a1 1 0 010 1.41l-.71.71a1 1 0 11-1.41-1.41l.71-.71a1 1 0 011.41 0zM21 12a1 1 0 01-1 1h-1a1 1 0 010-2h1a1 1 0 011 1zM3 13a1 1 0 010-2h1a1 1 0 010 2H3zm3.34-6.36a1 1 0 01-1.41 0l-.71-.71a1 1 0 011.41-1.41l.71.71a1 1 0 010 1.41zM12 8a4 4 0 014 4H8a4 4 0 014-4zM4 17h16a1 1 0 010 2H4a1 1 0 010-2zm2 3h12a1 1 0 010 2H6a1 1 0 010-2z"/></svg>
+              <span data-i18n="calcGoalRetire">Σύνταξη</span>
+            </button>
+            <button type="button" class="goal-btn" data-years="18" data-save="150">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L1 9l11 6 9-4.91V17a1 1 0 002 0V9L12 3zM5 13.18v3.32c0 .73.4 1.4 1.05 1.74C7.6 19.05 9.71 20 12 20s4.4-.95 5.95-1.76A1.97 1.97 0 0019 16.5v-3.32l-7 3.82-7-3.82z"/></svg>
+              <span data-i18n="calcGoalStudies">Σπουδές παιδιών</span>
+            </button>
+            <button type="button" class="goal-btn" data-years="10" data-save="300">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-2v9h-5v-6h-4v6H5v-9H3l9-8z"/></svg>
+              <span data-i18n="calcGoalHome">Πρώτο σπίτι</span>
+            </button>
+            <button type="button" class="goal-btn" data-years="15" data-save="200">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 5.2L20 8l-4 4 1 6-5-2.8L7 18l1-6-4-4 5.6-.8L12 2z"/></svg>
+              <span data-i18n="calcGoalDreams">Τα όνειρά μου</span>
+            </button>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-field-head">
+              <label for="calcSave" data-i18n="calcSaveLabel">Μηνιαία αποταμίευση</label>
+              <output id="calcSaveOut" for="calcSave">€250</output>
+            </div>
+            <input type="range" id="calcSave" min="50" max="1000" value="250" step="25" />
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-field-head">
+              <label for="calcYears" data-i18n="calcYearsLabel">Σε πόσα χρόνια;</label>
+              <output id="calcYearsOut" for="calcYears">25 χρόνια</output>
+            </div>
+            <input type="range" id="calcYears" min="5" max="30" value="25" step="1" />
+          </div>
+
+          <div class="calc-results">
+            <div class="calc-row-head">
+              <span class="calc-dot" style="background:#9cc3bf"></span>
+              <span data-i18n="calcConservative">Συντηρητικό (3%)</span>
+              <strong id="calcR1">€111.552</strong>
+            </div>
+            <div class="calc-bar-track"><div class="calc-bar" id="calcBar1" style="background:#9cc3bf;width:47%"></div></div>
+
+            <div class="calc-row-head">
+              <span class="calc-dot" style="background:var(--petrol)"></span>
+              <span data-i18n="calcBalanced">Ισορροπημένο (6%)</span>
+              <strong id="calcR2">€173.886</strong>
+            </div>
+            <div class="calc-bar-track"><div class="calc-bar" id="calcBar2" style="background:var(--petrol);width:73%"></div></div>
+
+            <div class="calc-row-head">
+              <span class="calc-dot" style="background:var(--petrol-deep)"></span>
+              <span data-i18n="calcDynamic">Δυναμικό (8%)</span>
+              <strong id="calcR3">€237.863</strong>
+            </div>
+            <div class="calc-bar-track"><div class="calc-bar" id="calcBar3" style="background:var(--petrol-deep);width:100%"></div></div>
+
+            <div class="calc-totals">
+              <div class="calc-total">
+                <p data-i18n="calcTotalYou">Δικές σου καταβολές</p>
+                <p id="calcTotalYou">€75.000</p>
+              </div>
+              <div class="calc-total gain">
+                <p data-i18n="calcTotalGain">Κέρδος από αποδόσεις*</p>
+                <p id="calcTotalGain">€98.886</p>
+              </div>
+            </div>
+
+            <p class="calc-note" data-i18n="calcNote">*Ισορροπημένο σενάριο. Οι αποδόσεις δεν είναι εγγυημένες — η εικόνα είναι ενδεικτική.</p>
+
+            <a class="calc-cta" href="#contact" data-i18n="calcCta">Θέλεις να δούμε μαζί ποιο σενάριο σου ταιριάζει;</a>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="tool-modal-overlay" id="policyModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="policy-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="policyEyebrow">PolicyLens · Ανάλυση &amp; σύγκριση</p>
+            <h2 id="policy-title" class="calc-title" data-i18n="policyTitle">Τι πληρώνει το συμβόλαιο — και τι μένει από την τσέπη σου;</h2>
+            <p class="calc-sub" data-i18n="policySub">Ανεβάζεις το συμβόλαιό σου, οποιουδήποτε κλάδου, και το βλέπεις καθαρά: καλύψεις, χρεώσεις, κενά — και πόσο θα κόστιζε μια πραγματική ζημιά.</p>
+            <div class="policy-branches" data-i18n="policyBranches"><span>Ζωή</span><span>Υγεία</span><span>Unit Linked</span><span>Αυτοκίνητο</span><span>Κατοικία</span><span>Επιχείρηση</span></div>
+            <div class="policy-tabs" role="tablist">
+              <button type="button" class="policy-tab is-active" data-tab="health" data-i18n="policyTabHealth">Νοσοκομειακό υγείας</button>
+              <button type="button" class="policy-tab" data-tab="ul" data-i18n="policyTabUL">Unit Linked</button>
+            </div>
+            <div id="policyPanel"></div>
+            <div class="policy-eval">
+              <p class="policy-eval-title" data-i18n="policyEvalTitle">Ανταποκρίνεται στις σημερινές σου ανάγκες;</p>
+              <p class="policy-eval-text" data-i18n="policyEvalText">Στείλε μου το ασφαλιστήριό σου και το αξιολογούμε μαζί — με βάση το σήμερα, όχι το πότε υπογράφηκε. Δωρεάν, χωρίς δέσμευση.</p>
+            </div>
+            <a class="calc-cta policy-cta" href="#contact" data-i18n="policyCta">Στείλε το συμβόλαιό σου για ανάλυση →</a>
+            <p class="calc-note" data-i18n="policyNote">Τα στοιχεία είναι ενδεικτικά, για παρουσίαση της μεθόδου. Καμμία σύγκριση με επώνυμο προϊόν.</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-copy section-heading narrow">
           <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
           <h2 id="about-title" data-i18n="aboutTitle">Η καλύτερη συμβουλή αρχίζει από την κατανόηση, όχι από την πώληση.</h2>
-          <p data-i18n="aboutText">
-            Δουλεύω με ανθρώπους και επιχειρήσεις που θέλουν να καταλάβουν πού βρίσκονται
-            πριν αποφασίσουν τι κάνουν. Ξεκινώ από ερωτήσεις — για τους στόχους, τους
-            κινδύνους, αυτό που ήδη υπάρχει και αυτό που λείπει. Η σχέση που χτίζουμε
-            μαζί είναι μακροχρόνια και προσαρμόζεται καθώς αλλάζουν τα πράγματα.
+          <p data-i18n="aboutText1">
+            <strong>Περισσότερα από 25 χρόνια</strong> στον χρηματοοικονομικό χώρο — με αφετηρία την Τράπεζα Εργασίας και διαδρομή μέσα από την Interamerican, τη MetLife και σήμερα την Allianz. Τραπεζική πειθαρχία, ασφαλιστική τεχνογνωσία, επενδυτικός σχεδιασμός. Τρεις κόσμοι που σπάνια συναντιούνται στο ίδιο γραφείο.
+          </p>
+          <p data-i18n="aboutText2">
+            Κάτοχος της πιστοποίησης <strong>LUTCF</strong> (Life Underwriter Training Council Fellow) — τριετές πρόγραμμα του American College of Financial Services, που προσφέρθηκε στην Ελλάδα μέσω της Interamerican. Μία από τις πιο αναγνωρισμένες διεθνείς πιστοποιήσεις στον ασφαλιστικό και χρηματοοικονομικό σχεδιασμό.
+          </p>
+          <p data-i18n="aboutText3">
+            Σπουδές στα Οικονομικά. Αλλά η πραγματική εκπαίδευση ήρθε από χιλιάδες συναντήσεις — με οικογένειες που σχεδίαζαν το μέλλον τους και επιχειρήσεις που χρειάζονταν σύμμαχο στη διαχείριση κινδύνου.
+          </p>
+          <p data-i18n="aboutText4">
+            Τα τελευταία χρόνια αναπτύσσω <strong>δικά μου εργαλεία τεχνητής νοημοσύνης</strong> — εφαρμογές ανάλυσης κινδύνου, σύγκρισης σεναρίων, αποτύπωσης αναγκών. Δεν αντικαθιστούν τη συμβουλή. Την κάνουν πιο ακριβή, πιο διαφανή, πιο δική σας.
+          </p>
+          <p data-i18n="aboutText5"><strong>Η εμπειρία χτίζει ένστικτο. Η τεχνολογία το κάνει μετρήσιμο.</strong></p>
+          <p class="about-personal" data-i18n="aboutPersonal">
+            <em>Εκτός γραφείου: σπουδές κλασικής κιθάρας και ανώτερα θεωρητικά μουσικής. Ενεργό μέλος επαγγελματικής χορωδίας κλασικού ρεπερτορίου — γιατί και στη μουσική, όπως και στη συμβουλευτική, η αρμονία δεν είναι τυχαία.</em>
           </p>
         </div>
       </section>
@@ -1335,18 +1808,10 @@ h2 {
           </form>
 
           <div class="contact-quick">
-            <a class="contact-link" href="tel:+306983880746" data-i18n="phoneLabel">698 388 0746</a>
-            <a class="contact-link" href="https://wa.me/306983880746" target="_blank" rel="noreferrer" data-i18n="whatsappLabel">WhatsApp</a>
-            <a class="contact-link" href="mailto:ioannis.vardavas@gmail.com" data-i18n="emailLabel">Email</a>
-            <a
-              class="contact-link"
-              href="https://www.linkedin.com/in/ioannis-vardavas-a1906250"
-              target="_blank"
-              rel="noreferrer"
-              data-i18n="linkedinLabel"
-            >
-              LinkedIn
-            </a>
+            <a class="contact-link" href="tel:+306983880746" data-i18n="phoneLabel"><svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>Τηλ. 698 388 0746</a>
+            <a class="contact-link" href="https://wa.me/306983880746" target="_blank" rel="noreferrer" data-i18n="whatsappLabel"><svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            <a class="contact-link" href="mailto:ioannis.vardavas@gmail.com" data-i18n="emailLabel"><svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a class="contact-link" href="https://www.linkedin.com/in/ioannis-vardavas-a1906250" target="_blank" rel="noreferrer" data-i18n="linkedinLabel"><svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
           </div>
         </div>
       </section>
@@ -1363,6 +1828,7 @@ const copy = {
     brand: "Γιάννης Βαρδαβάς, lutcf",
     navServices: "Υπηρεσίες",
     navMethod: "Μεθοδολογία",
+    navAbout: "Σχετικά",
     navContact: "Επικοινωνία",
     eyebrow: "Financial Planning | Business Risk Management",
     roleLine: "Life, Health, P&C & Investment Architect",
@@ -1412,6 +1878,18 @@ const copy = {
     toolChipTwo: "Risk score",
     toolChipThree: "Scenario view",
     moduleLink: "Συζήτηση για αυτό",
+    moduleToolCalc: "Δοκίμασε τον υπολογιστή →",
+    moduleToolPolicy: "Δες δείγμα ανάλυσης →",
+    policyEyebrow: "PolicyLens · Ανάλυση & σύγκριση",
+    policyTitle: "Τι πληρώνει το συμβόλαιο — και τι μένει από την τσέπη σου;",
+    policySub: "Ανεβάζεις το συμβόλαιό σου, οποιουδήποτε κλάδου, και το βλέπεις καθαρά: καλύψεις, χρεώσεις, κενά — και πόσο θα κόστιζε μια πραγματική ζημιά.",
+    policyBranches: "<span>Ζωή</span><span>Υγεία</span><span>Unit Linked</span><span>Αυτοκίνητο</span><span>Κατοικία</span><span>Επιχείρηση</span>",
+    policyTabHealth: "Νοσοκομειακό υγείας",
+    policyTabUL: "Unit Linked",
+    policyEvalTitle: "Ανταποκρίνεται στις σημερινές σου ανάγκες;",
+    policyEvalText: "Στείλε μου το ασφαλιστήριό σου και το αξιολογούμε μαζί — με βάση το σήμερα, όχι το πότε υπογράφηκε. Δωρεάν, χωρίς δέσμευση.",
+    policyCta: "Στείλε το συμβόλαιό σου για ανάλυση →",
+    policyNote: "Τα στοιχεία είναι ενδεικτικά, για παρουσίαση της μεθόδου. Καμμία σύγκριση με επώνυμο προϊόν.",
     intelligenceEyebrow: "Advisor intelligence layer",
     intelligenceTitle: "Η τεχνολογία δεν αντικαθιστά τη συμβουλή. Την κάνει πιο καθαρή.",
     intelligenceText:
@@ -1438,10 +1916,31 @@ const copy = {
     metricOne: "Needs map",
     metricTwo: "Risk gaps",
     metricThree: "Scenarios",
+    calcEyebrow: "Δοκιμάστε",
+    calcTitle: "Τι κεφάλαιο μπορώ να χτίσω;",
+    calcSub: "Επιλέξτε στόχο ή ρυθμίστε ελεύθερα.",
+    calcGoalRetire: "Σύνταξη",
+    calcGoalStudies: "Σπουδές παιδιών",
+    calcGoalHome: "Πρώτο σπίτι",
+    calcGoalDreams: "Τα όνειρά μου",
+    calcSaveLabel: "Μηνιαία αποταμίευση",
+    calcYearsLabel: "Σε πόσα χρόνια;",
+    calcYearsUnit: "χρόνια",
+    calcConservative: "Συντηρητικό (3%)",
+    calcBalanced: "Ισορροπημένο (6%)",
+    calcDynamic: "Δυναμικό (8%)",
+    calcTotalYou: "Δικές σου καταβολές",
+    calcTotalGain: "Κέρδος από αποδόσεις*",
+    calcNote: "*Ισορροπημένο σενάριο. Οι αποδόσεις δεν είναι εγγυημένες — η εικόνα είναι ενδεικτική.",
+    calcCta: "Θέλεις να δούμε μαζί ποιο σενάριο σου ταιριάζει;",
     aboutEyebrow: "About",
     aboutTitle: "Η καλύτερη συμβουλή αρχίζει από την κατανόηση, όχι από την πώληση.",
-    aboutText:
-      "Δουλεύω με ανθρώπους και επιχειρήσεις που θέλουν να καταλάβουν πού βρίσκονται πριν αποφασίσουν τι κάνουν. Ξεκινώ από ερωτήσεις — για τους στόχους, τους κινδύνους, αυτό που ήδη υπάρχει και αυτό που λείπει. Η σχέση που χτίζουμε μαζί είναι μακροχρόνια και προσαρμόζεται καθώς αλλάζουν τα πράγματα.",
+    aboutText1: '<strong>Περισσότερα από 25 χρόνια</strong> στον χρηματοοικονομικό χώρο — με αφετηρία την Τράπεζα Εργασίας και διαδρομή μέσα από την Interamerican, τη MetLife και σήμερα την Allianz. Τραπεζική πειθαρχία, ασφαλιστική τεχνογνωσία, επενδυτικός σχεδιασμός. Τρεις κόσμοι που σπάνια συναντιούνται στο ίδιο γραφείο.',
+    aboutText2: 'Κάτοχος της πιστοποίησης <strong>LUTCF</strong> (Life Underwriter Training Council Fellow) — τριετές πρόγραμμα του American College of Financial Services, που προσφέρθηκε στην Ελλάδα μέσω της Interamerican. Μία από τις πιο αναγνωρισμένες διεθνείς πιστοποιήσεις στον ασφαλιστικό και χρηματοοικονομικό σχεδιασμό.',
+    aboutText3: 'Σπουδές στα Οικονομικά. Αλλά η πραγματική εκπαίδευση ήρθε από χιλιάδες συναντήσεις — με οικογένειες που σχεδίαζαν το μέλλον τους και επιχειρήσεις που χρειάζονταν σύμμαχο στη διαχείριση κινδύνου.',
+    aboutText4: 'Τα τελευταία χρόνια αναπτύσσω <strong>δικά μου εργαλεία τεχνητής νοημοσύνης</strong> — εφαρμογές ανάλυσης κινδύνου, σύγκρισης σεναρίων, αποτύπωσης αναγκών. Δεν αντικαθιστούν τη συμβουλή. Την κάνουν πιο ακριβή, πιο διαφανή, πιο δική σας.',
+    aboutText5: '<strong>Η εμπειρία χτίζει ένστικτο. Η τεχνολογία το κάνει μετρήσιμο.</strong>',
+    aboutPersonal: '<em>Εκτός γραφείου: σπουδές κλασικής κιθάρας και ανώτερα θεωρητικά μουσικής. Ενεργό μέλος επαγγελματικής χορωδίας κλασικού ρεπερτορίου — γιατί και στη μουσική, όπως και στη συμβουλευτική, η αρμονία δεν είναι τυχαία.</em>',
     contactEyebrow: "Επόμενο βήμα",
     contactTitle: "Ας μιλήσουμε — χωρίς δέσμευση, χωρίς πίεση.",
     contactText: "Μια πρώτη συζήτηση — χωρίς άγχος, χωρίς έτοιμες απαντήσεις. Βλέπουμε μαζί πού βρίσκεστε και αν μπορώ να βοηθήσω.",
@@ -1450,10 +1949,10 @@ const copy = {
     formEmailLabel: "Email",
     formMessageLabel: "Μήνυμα",
     formSubmit: "Αποστολή",
-    phoneLabel: "698 388 0746",
-    whatsappLabel: "WhatsApp",
-    emailLabel: "Email",
-    linkedinLabel: "LinkedIn",
+    phoneLabel: '<svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>Τηλ. 698 388 0746',
+    whatsappLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
+    emailLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+    linkedinLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>',
     footerName: "Γιάννης Βαρδαβάς, lutcf",
     footerRole: "Life, Health, P&C & Investment Architect"
   },
@@ -1461,6 +1960,7 @@ const copy = {
     brand: "Ioannis Vardavas, lutcf",
     navServices: "Services",
     navMethod: "Method",
+    navAbout: "About",
     navContact: "Contact",
     eyebrow: "Financial Planning | Business Risk Management",
     roleLine: "Life, Health, P&C & Investment Architect",
@@ -1510,6 +2010,18 @@ const copy = {
     toolChipTwo: "Risk score",
     toolChipThree: "Scenario view",
     moduleLink: "Discuss this module",
+    moduleToolCalc: "Try the calculator →",
+    moduleToolPolicy: "See a sample analysis →",
+    policyEyebrow: "PolicyLens · Analysis & comparison",
+    policyTitle: "What the policy pays — and what comes out of your pocket?",
+    policySub: "Upload your policy, of any branch, and see it clearly: coverages, charges, gaps — and what a real claim would cost.",
+    policyBranches: "<span>Life</span><span>Health</span><span>Unit Linked</span><span>Motor</span><span>Home</span><span>Business</span>",
+    policyTabHealth: "Health / hospital",
+    policyTabUL: "Unit Linked",
+    policyEvalTitle: "Does it match your needs today?",
+    policyEvalText: "Send me your policy and we evaluate it together — based on today, not on when it was signed. Free, no commitment.",
+    policyCta: "Send your policy for analysis →",
+    policyNote: "Figures are indicative, to illustrate the method. No comparison with any named product.",
     intelligenceEyebrow: "Advisor intelligence layer",
     intelligenceTitle: "Technology does not replace advice. It makes it clearer.",
     intelligenceText:
@@ -1536,10 +2048,31 @@ const copy = {
     metricOne: "Needs map",
     metricTwo: "Risk gaps",
     metricThree: "Scenarios",
+    calcEyebrow: "Try it",
+    calcTitle: "What capital can I build?",
+    calcSub: "Pick a goal or adjust freely.",
+    calcGoalRetire: "Retirement",
+    calcGoalStudies: "Children's studies",
+    calcGoalHome: "First home",
+    calcGoalDreams: "My dreams",
+    calcSaveLabel: "Monthly saving",
+    calcYearsLabel: "In how many years?",
+    calcYearsUnit: "years",
+    calcConservative: "Conservative (3%)",
+    calcBalanced: "Balanced (6%)",
+    calcDynamic: "Dynamic (8%)",
+    calcTotalYou: "Your contributions",
+    calcTotalGain: "Gain from returns*",
+    calcNote: "*Balanced scenario. Returns are not guaranteed — this is indicative.",
+    calcCta: "Want to find the scenario that fits you?",
     aboutEyebrow: "About",
     aboutTitle: "The best advice starts with understanding, not with selling.",
-    aboutText:
-      "I work with people and businesses who want to understand where they stand before deciding what to do. I start with questions — about goals, risks, what is already in place, and what is missing. The relationship we build together is long-term and adapts as things change.",
+    aboutText1: '<strong>Over 25 years</strong> in the financial sector — starting at Ergasias Bank, then Interamerican, MetLife, and today Allianz. Banking discipline, insurance expertise, investment planning. Three worlds that rarely meet in the same office.',
+    aboutText2: 'Holder of the <strong>LUTCF</strong> (Life Underwriter Training Council Fellow) designation — a three-year program from the American College of Financial Services, offered in Greece through Interamerican. One of the most recognized international certifications in insurance and financial planning.',
+    aboutText3: 'Economics graduate. But the real education came from thousands of meetings — with families planning their future and businesses that needed an ally in risk management.',
+    aboutText4: 'In recent years I have been developing <strong>my own AI-powered tools</strong> — applications for risk analysis, scenario comparison, and needs mapping. They don\'t replace advice. They make it more precise, more transparent, more yours.',
+    aboutText5: '<strong>Experience builds instinct. Technology makes it measurable.</strong>',
+    aboutPersonal: '<em>Off duty: classical guitar studies and advanced music theory. Active member of a professional classical repertoire choir — because in music, as in advisory, harmony is never accidental.</em>',
     contactEyebrow: "Next step",
     contactTitle: "Let’s talk — no commitment, no pressure.",
     contactText: "One conversation — no rush, no ready answers. We simply look together at where you are and whether I can help.",
@@ -1548,10 +2081,10 @@ const copy = {
     formEmailLabel: "Email",
     formMessageLabel: "Message",
     formSubmit: "Send",
-    phoneLabel: "+30 698 388 0746",
-    whatsappLabel: "WhatsApp",
-    emailLabel: "Email",
-    linkedinLabel: "LinkedIn",
+    phoneLabel: '<svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>Tel. +30 698 388 0746',
+    whatsappLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
+    emailLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+    linkedinLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>',
     footerName: "Ioannis Vardavas, lutcf",
     footerRole: "Life, Health, P&C & Investment Architect"
   }
@@ -1565,13 +2098,17 @@ function setLanguage(language) {
 
   translatableNodes.forEach((node) => {
     const key = node.dataset.i18n;
-    node.textContent = copy[language][key];
+    const val = copy[language][key];
+    if (val && val.includes('<')) { node.innerHTML = val; } else { node.textContent = val; }
   });
 
   languageButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.lang === language);
     button.setAttribute("aria-pressed", String(button.dataset.lang === language));
   });
+
+  if (typeof window._refreshCalc === "function") window._refreshCalc();
+  if (typeof window._refreshPolicy === "function") window._refreshPolicy();
 }
 
 languageButtons.forEach((button) => {
@@ -1638,6 +2175,227 @@ if (contactForm) {
   });
 }
 
+const calcSave = document.getElementById("calcSave");
+const calcYears = document.getElementById("calcYears");
+const goalBtns = document.querySelectorAll(".goal-btn");
+
+if (calcSave && calcYears) {
+  const fmtEur = (v) => "€" + Math.round(v).toLocaleString("el-GR");
+  const fv = (pmt, r, n) => (r === 0 ? pmt * n : pmt * ((Math.pow(1 + r, n) - 1) / r));
+
+  function runCalc() {
+    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const monthly = parseInt(calcSave.value, 10);
+    const years = parseInt(calcYears.value, 10);
+    const months = years * 12;
+    const totalContrib = monthly * months;
+
+    calcSave.parentElement.querySelector("output").textContent = "€" + monthly;
+    calcYears.parentElement.querySelector("output").textContent =
+      years + " " + copy[lang].calcYearsUnit;
+
+    const rates = [0.03, 0.06, 0.08];
+    const results = rates.map((r) => fv(monthly, r / 12, months));
+    const max = results[2] || 1;
+
+    document.getElementById("calcR1").textContent = fmtEur(results[0]);
+    document.getElementById("calcR2").textContent = fmtEur(results[1]);
+    document.getElementById("calcR3").textContent = fmtEur(results[2]);
+    document.getElementById("calcBar1").style.width = Math.round((results[0] / max) * 100) + "%";
+    document.getElementById("calcBar2").style.width = Math.round((results[1] / max) * 100) + "%";
+    document.getElementById("calcBar3").style.width = "100%";
+    document.getElementById("calcTotalYou").textContent = fmtEur(totalContrib);
+    document.getElementById("calcTotalGain").textContent = fmtEur(results[1] - totalContrib);
+  }
+
+  function clearActiveGoals() {
+    goalBtns.forEach((b) => b.classList.remove("active"));
+  }
+
+  goalBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      clearActiveGoals();
+      btn.classList.add("active");
+      calcSave.value = btn.dataset.save;
+      calcYears.value = btn.dataset.years;
+      runCalc();
+    });
+  });
+
+  calcSave.addEventListener("input", () => {
+    clearActiveGoals();
+    runCalc();
+  });
+  calcYears.addEventListener("input", () => {
+    clearActiveGoals();
+    runCalc();
+  });
+
+  window._refreshCalc = runCalc;
+  runCalc();
+}
+
+const modalOverlays = document.querySelectorAll(".tool-modal-overlay");
+
+function openOverlay(id) {
+  const o = document.getElementById(id);
+  if (!o) return;
+  o.hidden = false;
+  document.body.classList.add("modal-open");
+  if (id === "toolModal" && typeof window._refreshCalc === "function") window._refreshCalc();
+  if (id === "policyModal" && typeof window._refreshPolicy === "function") window._refreshPolicy();
+}
+
+function closeOverlay(o) {
+  if (!o) return;
+  o.hidden = true;
+  if (!document.querySelector(".tool-modal-overlay:not([hidden])")) {
+    document.body.classList.remove("modal-open");
+  }
+}
+
+document.querySelectorAll(".module-tool").forEach((t) =>
+  t.addEventListener("click", () => openOverlay(t.dataset.target))
+);
+
+modalOverlays.forEach((o) => {
+  o.addEventListener("click", (e) => {
+    if (e.target === o) closeOverlay(o);
+  });
+  const x = o.querySelector(".tool-modal-x");
+  if (x) x.addEventListener("click", () => closeOverlay(o));
+  o.querySelectorAll('a[href^="#"]').forEach((a) =>
+    a.addEventListener("click", () => closeOverlay(o))
+  );
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  document.querySelectorAll(".tool-modal-overlay:not([hidden])").forEach(closeOverlay);
+});
+
+const policyPanel = document.getElementById("policyPanel");
+if (policyPanel) {
+  const PL = {
+    el: {
+      health: {
+        file: "νοσοκομειακό.pdf · 14 σελ.",
+        costLabel: "Συνολικό κόστος ζημιάς",
+        scenarioTitle: "Νοσηλεία 5 ημερών σε ιδιωτικό νοσοκομείο",
+        total: "€7.000", pays: "€5.500", pocket: "€1.500", paysPct: 79,
+        payLabel: "Πληρώνει το συμβόλαιο", pocketLabel: "Από την τσέπη σου",
+        heatTitle: "Χάρτης καλύψεων",
+        heat: [
+          ["g", "Νοσηλεία σε συμβεβλημένα", "100%"],
+          ["y", "Νοσηλεία εκτός δικτύου", "90%"],
+          ["r", "Εξωνοσοκομειακή (επισκέψεις, εξετάσεις)", "δεν καλύπτεται"],
+          ["g", "ΜΕΘ / ΜΑΦ", "100%"],
+          ["y", "Νοσηλεία στο εξωτερικό", "90% εκτός ΗΠΑ"],
+          ["g", "Αποκλειστική νοσοκόμα", "με ιατρική δικαιολόγηση"]
+        ]
+      },
+      ul: {
+        file: "unit-linked.pdf · 28 σελ.", isValue: true,
+        scenarioTitle: "Εκτιμώμενη αξία στα 20 έτη (υπόθεση 5%)",
+        value: "€37.800", contrib: "€24.000", fromLabel: "από", contribLabel: "καταβολές",
+        gain: "+€13.800", gainLabel: "Καθαρό κέρδος",
+        charges: "−€1.850", chargesLabel: "Σωρευτικές χρεώσεις",
+        heatTitle: "Χάρτης καλύψεων",
+        heat: [
+          ["g", "Επενδυτικές επιλογές", "6 funds"],
+          ["g", "Διαχειριστικά έξοδα", "χαμηλά"],
+          ["y", "Εγγύηση κεφαλαίου", "μόνο στη λήξη"],
+          ["y", "Πρόωρη εξαγορά (έτη 1-5)", "κλιμακωτή"],
+          ["g", "Έκτακτες καταβολές", "επιτρέπονται"],
+          ["g", "Κάλυψη ζωής", "€30.000"]
+        ]
+      }
+    },
+    en: {
+      health: {
+        file: "health-policy.pdf · 14 pp.",
+        costLabel: "Total claim cost",
+        scenarioTitle: "5-day stay in a private hospital",
+        total: "€7,000", pays: "€5,500", pocket: "€1,500", paysPct: 79,
+        payLabel: "Policy pays", pocketLabel: "Out of your pocket",
+        heatTitle: "Coverage map",
+        heat: [
+          ["g", "In-network hospitalisation", "100%"],
+          ["y", "Out-of-network hospitalisation", "90%"],
+          ["r", "Outpatient (visits, tests)", "not covered"],
+          ["g", "ICU / HDU", "100%"],
+          ["y", "Treatment abroad", "90% outside US"],
+          ["g", "Private nurse", "with medical justification"]
+        ]
+      },
+      ul: {
+        file: "unit-linked.pdf · 28 pp.", isValue: true,
+        scenarioTitle: "Estimated value at 20 years (5% assumption)",
+        value: "€37,800", contrib: "€24,000", fromLabel: "from", contribLabel: "contributions",
+        gain: "+€13,800", gainLabel: "Net gain",
+        charges: "−€1,850", chargesLabel: "Cumulative charges",
+        heatTitle: "Coverage map",
+        heat: [
+          ["g", "Investment options", "6 funds"],
+          ["g", "Management fees", "low"],
+          ["y", "Capital guarantee", "at maturity only"],
+          ["y", "Early surrender (yrs 1-5)", "tiered"],
+          ["g", "Extra contributions", "allowed"],
+          ["g", "Life cover", "€30,000"]
+        ]
+      }
+    }
+  };
+
+  function plHeat(color, label, val) {
+    const c = color === "g" ? "#639922" : color === "y" ? "#ba7517" : "#a32d2d";
+    const bg = color === "g" ? "#eaf3de" : color === "y" ? "#faeeda" : "#fcebeb";
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:' + bg + ';border-radius:7px;"><span style="width:9px;height:9px;border-radius:50%;background:' + c + ';flex-shrink:0;"></span><span style="flex:1;font-size:0.82rem;color:#17201f;font-weight:600;">' + label + '</span><span style="font-size:0.8rem;color:' + c + ';font-weight:800;text-align:right;">' + val + '</span></div>';
+  }
+
+  function plRender(lang, tab) {
+    const d = PL[lang][tab];
+    let scenario;
+    if (d.isValue) {
+      scenario = '<div style="background:#fff;border:1px solid #dce4e1;border-radius:10px;padding:14px 16px;margin-bottom:18px;">'
+        + '<p style="margin:0 0 10px;font-size:0.82rem;font-weight:800;color:#17201f;">' + d.scenarioTitle + '</p>'
+        + '<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px;"><span style="font-size:1.7rem;font-weight:800;color:#0f6f6a;">' + d.value + '</span><span style="font-size:0.8rem;color:#65706d;">' + d.fromLabel + ' ' + d.contrib + ' ' + d.contribLabel + '</span></div>'
+        + '<div style="display:flex;gap:8px;"><div style="flex:1;background:#eaf3de;border-radius:6px;padding:8px 10px;"><p style="margin:0;font-size:0.72rem;color:#65706d;font-weight:700;">' + d.gainLabel + '</p><p style="margin:0;font-size:0.95rem;font-weight:800;color:#3b6d11;">' + d.gain + '</p></div>'
+        + '<div style="flex:1;background:#f1efe8;border-radius:6px;padding:8px 10px;"><p style="margin:0;font-size:0.72rem;color:#65706d;font-weight:700;">' + d.chargesLabel + '</p><p style="margin:0;font-size:0.95rem;font-weight:800;color:#5f5e5a;">' + d.charges + '</p></div></div></div>';
+    } else {
+      scenario = '<div style="background:#fff;border:1px solid #dce4e1;border-radius:10px;padding:14px 16px;margin-bottom:18px;">'
+        + '<p style="margin:0 0 3px;font-size:0.82rem;font-weight:800;color:#17201f;">' + d.scenarioTitle + '</p>'
+        + '<p style="margin:0 0 10px;font-size:0.78rem;color:#65706d;">' + d.costLabel + ': <strong style="color:#17201f;">' + d.total + '</strong></p>'
+        + '<div style="display:flex;height:30px;border-radius:6px;overflow:hidden;margin-bottom:6px;"><div style="width:' + d.paysPct + '%;background:#3b6d11;color:#fff;font-size:0.78rem;font-weight:800;display:flex;align-items:center;padding-left:10px;">' + d.pays + '</div><div style="flex:1;background:#a32d2d;color:#fff;font-size:0.78rem;font-weight:800;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;">' + d.pocket + '</div></div>'
+        + '<div style="display:flex;justify-content:space-between;font-size:0.74rem;color:#65706d;font-weight:700;"><span>' + d.payLabel + '</span><span>' + d.pocketLabel + '</span></div></div>';
+    }
+    const heat = d.heat.map((h) => plHeat(h[0], h[1], h[2])).join("");
+    return '<div style="display:inline-flex;align-items:center;gap:6px;background:#e6f1ef;color:#0a4c49;font-size:0.74rem;font-weight:800;padding:5px 12px;border-radius:999px;margin-bottom:14px;">' + d.file + '</div>'
+      + scenario
+      + '<p style="margin:0 0 8px;font-size:0.8rem;font-weight:800;color:#17201f;text-transform:uppercase;letter-spacing:0.3px;">' + d.heatTitle + '</p>'
+      + '<div style="display:flex;flex-direction:column;gap:5px;">' + heat + '</div>';
+  }
+
+  let policyTab = "health";
+
+  function renderPolicy() {
+    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    policyPanel.innerHTML = plRender(lang, policyTab);
+  }
+
+  document.querySelectorAll(".policy-tab").forEach((t) => {
+    t.addEventListener("click", () => {
+      document.querySelectorAll(".policy-tab").forEach((x) => x.classList.remove("is-active"));
+      t.classList.add("is-active");
+      policyTab = t.dataset.tab;
+      renderPolicy();
+    });
+  });
+
+  window._refreshPolicy = renderPolicy;
+  renderPolicy();
+}
+
 const revealNodes = document.querySelectorAll(".reveal");
 
 if ("IntersectionObserver" in window) {
@@ -1659,5 +2417,6 @@ if ("IntersectionObserver" in window) {
 }
 
 </script>
+<a href="viber://chat?number=%2B306983880746" class="viber-float" aria-label="Viber"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.398.002C9.473.028 5.331.344 3.014 2.467 1.294 4.177.518 6.77.404 9.94c-.114 3.17-.26 9.109 5.559 10.734l.01.006.006-.01s-.065 2.275-.01 2.97c.055.696.345 1.114.85.672.7-.61 3.27-3.848 3.27-3.848 1.26.1 2.449.05 3.51-.128.275-.046.543-.1.804-.162 3.641-.862 5.864-3.19 6.655-7.325.823-4.305.36-8.455-2.063-10.605C16.713.6 13.323-.024 11.398.002zm.602 1.997c1.6-.012 4.396.382 6.265 2.088 1.907 1.69 2.26 5.186 1.558 8.862-.68 3.56-2.548 5.205-5.396 5.88-.225.053-.458.098-.698.136-.92.147-1.958.18-3.065.095l-.4-.034-.272.326s-1.344 1.646-2.154 2.672c-.09-.735-.07-1.962-.07-1.962l-.034-.422-.414-.094c-4.266-1.093-4.228-5.478-4.127-8.298.1-2.82.755-5.012 2.14-6.39C6.755 3.375 9.14 2.165 12 2zM9.875 5.91a.909.909 0 00-.592.218c-.387.332-.766.769-.882 1.26-.19.81.105 1.81.846 3.058a14.078 14.078 0 002.674 3.479c.04.044.083.088.126.13l.002.002.002.001.001.002.002.001c.043.043.087.086.13.127a14.078 14.078 0 003.479 2.674c1.247.74 2.248 1.036 3.058.846.491-.116.928-.495 1.26-.882a.909.909 0 00.107-.975l-1.453-2.665a.909.909 0 00-1.01-.442l-1.578.448a.136.136 0 01-.127-.032l-2.467-2.098-.04-.037-.037-.04-2.098-2.467a.136.136 0 01-.032-.127l.449-1.578a.909.909 0 00-.443-1.01L9.607 5.97a.909.909 0 00-.383-.111.909.909 0 00-.35.051zm2.39 1.072c-.02 0-.04.01-.055.03a.077.077 0 00.014.108c.053.042.13.032.164-.014a2.678 2.678 0 013.324-.635c.062.034.14.011.172-.051s.01-.14-.052-.174a2.835 2.835 0 00-3.52.672.116.116 0 01-.047.063zm-.322-.281a.116.116 0 01-.047.063.08.08 0 01-.055.03.077.077 0 01-.067-.039 3.472 3.472 0 015.464-.684c.049.053.045.136-.008.185s-.136.045-.185-.008a3.315 3.315 0 00-5.102.453zm4.903 4.544a.077.077 0 01-.108-.014.077.077 0 01.014-.108 2.678 2.678 0 00.635-3.324.077.077 0 01.051-.172c.062.032.085.11.051.172a2.835 2.835 0 01-.672 3.52.116.116 0 01-.063.047.08.08 0 01-.03.006.077.077 0 01.122-.127zm.281.322a.116.116 0 01-.063.047.08.08 0 01-.03.006.077.077 0 01-.039-.067 3.472 3.472 0 00.684-5.464.131.131 0 01-.008-.185.131.131 0 01.185.008 3.315 3.315 0 01-.453 5.102.077.077 0 01-.276.553z"/></svg></a>
   </body>
 </html>

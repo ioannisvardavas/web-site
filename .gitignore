@@ -1,2 +1,4 @@
 *_checkpoint_*.html
 deploy/
+.wrangler/
+site.zip
