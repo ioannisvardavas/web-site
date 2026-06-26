@@ -776,6 +776,36 @@ h2 {
   }
 }
 
+.ai-overview-img {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin: 4px 0 14px;
+}
+
+.ai-shot {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ai-shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--line);
+}
+
+.ai-shot p {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
 .risk-q {
   margin-bottom: 16px;
 }
@@ -1930,50 +1960,24 @@ body.modal-open {
             </div>
             <p style="margin:0;font-size:0.8rem;line-height:1.5;color:var(--muted);" data-i18n="aiFoundNote">Διεθνή πρότυπα και ελληνικό νομικό &amp; κανονιστικό πλαίσιο — ενημερώνονται άμεσα σε κάθε αλλαγή.</p>
 
+            <img src="assets/ai-overview.png" alt="RiskGuard Family — ολιστική πλατφόρμα 13 ενοτήτων" class="ai-overview-img" loading="lazy">
+
             <div class="ai-grid">
-              <div class="ai-card">
-                <h4 data-i18n="aiCardATitle">360° Risk Score</h4>
-                <svg viewBox="0 0 120 74" style="width:100%;max-width:150px;display:block;margin:8px auto 0;" aria-hidden="true">
-                  <path d="M10,64 A50,50 0 0 1 110,64" fill="none" stroke="#e1ebe8" stroke-width="11" stroke-linecap="round"/>
-                  <path d="M10,64 A50,50 0 0 1 110,64" fill="none" stroke="var(--petrol)" stroke-width="11" stroke-linecap="round" stroke-dasharray="118 200"/>
-                  <text x="60" y="60" text-anchor="middle" font-size="22" font-weight="800" fill="var(--petrol-deep)" font-family="Georgia,serif">360°</text>
-                </svg>
-                <p data-i18n="aiCardACap">13 ενότητες — προστασία, σύνταξη, υγεία, κληρονομιά — σε μία ολιστική εικόνα.</p>
+              <div class="ai-shot">
+                <img src="assets/ai-stress.png" alt="Macroeconomic stress scenarios" loading="lazy">
+                <p data-i18n="aiShotStress">Stress test 3 επιπέδων (ISO 31000 · EBA · Federal Reserve) — αντοχή σε ακραία σενάρια.</p>
               </div>
-
-              <div class="ai-card">
-                <h4 data-i18n="aiCardBTitle">Σενάρια «Τι θα γινόταν αν»</h4>
-                <div style="margin-top:10px;">
-                  <div style="display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;color:#854f0b;"><span>Απαισιόδοξο</span><span>74%</span></div>
-                  <div style="height:6px;border-radius:999px;background:#f1efe8;margin:2px 0 7px;"><div style="height:100%;width:74%;background:#ba7517;border-radius:999px;"></div></div>
-                  <div style="display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;color:#0f6f6a;"><span>Βασικό</span><span>100%</span></div>
-                  <div style="height:6px;border-radius:999px;background:#f1efe8;margin:2px 0 7px;"><div style="height:100%;width:100%;background:var(--petrol);border-radius:999px;"></div></div>
-                  <div style="display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;color:#3b6d11;"><span>Αισιόδοξο</span><span>100%</span></div>
-                  <div style="height:6px;border-radius:999px;background:#f1efe8;margin:2px 0 0;"><div style="height:100%;width:100%;background:#639922;border-radius:999px;"></div></div>
-                </div>
-                <p data-i18n="aiCardBCap">Side-by-side κάλυψη pension gap — πώς αλλάζει το αποτέλεσμα με κάθε υπόθεση.</p>
+              <div class="ai-shot">
+                <img src="assets/ai-efka.png" alt="Ανάλυση κενών ΕΦΚΑ" loading="lazy">
+                <p data-i18n="aiShotEfka">Πραγματικά κενά εισοδήματος έναντι ΕΦΚΑ — ανικανότητα, θάνατος, ανεργία.</p>
               </div>
-
-              <div class="ai-card">
-                <h4 data-i18n="aiCardCTitle">Stress Test &amp; Backtesting</h4>
-                <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;">
-                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#eaf3de;border-radius:6px;font-size:0.73rem;font-weight:700;color:#3b6d11;"><span style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0;"></span>Baseline · Κανονικότητα</div>
-                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#faeeda;border-radius:6px;font-size:0.73rem;font-weight:700;color:#854f0b;"><span style="width:8px;height:8px;border-radius:50%;background:#ba7517;flex-shrink:0;"></span>Adverse · Ήπια ύφεση</div>
-                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#fcebeb;border-radius:6px;font-size:0.73rem;font-weight:700;color:#791f1f;"><span style="width:8px;height:8px;border-radius:50%;background:#a32d2d;flex-shrink:0;"></span>Severely adverse · τύπου 2008</div>
-                </div>
-                <p data-i18n="aiCardCCap">Δοκιμή αντοχής σε ακραία σενάρια — Monte Carlo &amp; historical backtesting.</p>
+              <div class="ai-shot">
+                <img src="assets/ai-inflation.png" alt="Inflation erosion visualizer" loading="lazy">
+                <p data-i18n="aiShotInflation">Πόσο τρώει ο πληθωρισμός την αγοραστική αξία — σε σημερινά ευρώ.</p>
               </div>
-
-              <div class="ai-card">
-                <h4 data-i18n="aiCardDTitle">Inflation Erosion</h4>
-                <svg viewBox="0 0 240 96" style="width:100%;display:block;margin:8px 0 0;" aria-hidden="true">
-                  <path d="M14,16 C 80,34 150,58 226,76 L226,88 L14,88 Z" fill="rgba(15,111,106,0.10)"/>
-                  <path d="M14,16 C 80,34 150,58 226,76" fill="none" stroke="var(--petrol)" stroke-width="2.5"/>
-                  <circle cx="226" cy="76" r="4" fill="#a32d2d"/>
-                  <text x="14" y="12" font-size="11" font-weight="800" fill="var(--petrol-deep)">€100k</text>
-                  <text x="205" y="70" font-size="11" font-weight="800" fill="#a32d2d">€55k</text>
-                </svg>
-                <p data-i18n="aiCardDCap">Πόσο τρώει ο πληθωρισμός την αγοραστική αξία — σε σημερινά ευρώ.</p>
+              <div class="ai-shot">
+                <img src="assets/ai-guardrails.png" alt="Spending guardrails — Guyton-Klinger" loading="lazy">
+                <p data-i18n="aiShotGuardrails">Δυναμικά όρια δαπανών (Guyton-Klinger) βάσει πιθανότητας επιτυχίας πλάνου.</p>
               </div>
             </div>
 
@@ -2143,6 +2147,10 @@ const copy = {
     aiMethodTitle: "Στατιστικά μοντέλα στον πυρήνα",
     aiMethodText: "Stress testing σε ακραία σενάρια, Monte Carlo, historical backtesting και Guyton-Klinger spending guardrails — όχι εικασίες, αλλά τεκμηριωμένη ανάλυση.",
     aiCta: "Θέλεις να δεις τη δική σου μελέτη; →",
+    aiShotStress: "Stress test 3 επιπέδων (ISO 31000 · EBA · Federal Reserve) — αντοχή σε ακραία σενάρια.",
+    aiShotEfka: "Πραγματικά κενά εισοδήματος έναντι ΕΦΚΑ — ανικανότητα, θάνατος, ανεργία.",
+    aiShotInflation: "Πόσο τρώει ο πληθωρισμός την αγοραστική αξία — σε σημερινά ευρώ.",
+    aiShotGuardrails: "Δυναμικά όρια δαπανών (Guyton-Klinger) βάσει πιθανότητας επιτυχίας πλάνου.",
     aiNote: "Τα στοιχεία είναι ενδεικτικά, για παρουσίαση της μεθόδου. Καμμία αναφορά σε πραγματικά δεδομένα πελατών.",
     policyEyebrow: "PolicyLens · Ανάλυση & σύγκριση",
     policyTitle: "Τι πληρώνει το συμβόλαιο — και τι μένει από την τσέπη σου;",
@@ -2299,6 +2307,10 @@ const copy = {
     aiMethodTitle: "Statistical models at the core",
     aiMethodText: "Stress testing under extreme scenarios, Monte Carlo, historical backtesting and Guyton-Klinger spending guardrails — not guesswork, but documented analysis.",
     aiCta: "Want to see your own study? →",
+    aiShotStress: "Three-level stress test (ISO 31000 · EBA · Federal Reserve) — resilience under extreme scenarios.",
+    aiShotEfka: "Real income gaps vs. Greek state cover (ΕΦΚΑ) — disability, death, unemployment.",
+    aiShotInflation: "How inflation erodes purchasing power — in today's euros.",
+    aiShotGuardrails: "Dynamic spending guardrails (Guyton-Klinger) based on plan success probability.",
     aiNote: "Figures are indicative, to present the method. No reference to real client data.",
     policyEyebrow: "PolicyLens · Analysis & comparison",
     policyTitle: "What the policy pays — and what comes out of your pocket?",
