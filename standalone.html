@@ -695,6 +695,87 @@ h2 {
   padding-bottom: clamp(22px, 2.4vw, 30px);
 }
 
+.service-card-dark .module-tool {
+  background: var(--white);
+  color: var(--petrol-deep);
+}
+
+.service-card-dark .module-tool:hover {
+  background: var(--paper);
+  color: var(--petrol-deep);
+}
+
+.ai-found {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 8px;
+}
+
+.ai-found span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--petrol-deep);
+  background: var(--petrol-soft);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.ai-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.ai-card h4 {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.ai-card p {
+  margin: 10px 0 0;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.ai-method {
+  background: var(--petrol-soft);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 4px 0 16px;
+}
+
+.ai-method-title {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--petrol-deep);
+}
+
+.ai-method-text {
+  margin: 0;
+  font-size: 0.83rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .ai-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .risk-q {
   margin-bottom: 16px;
 }
@@ -1621,7 +1702,7 @@ body.modal-open {
               <span data-i18n="toolChipTwo">Risk score</span>
               <span data-i18n="toolChipThree">Scenario view</span>
             </div>
-            <a href="#contact" class="module-link" data-i18n="moduleLink">Συζήτηση για αυτό</a>
+            <button type="button" class="module-tool" data-target="aiModal" data-i18n="moduleToolAi">Δες την πλατφόρμα →</button>
           </article>
         </div>
       </section>
@@ -1835,6 +1916,78 @@ body.modal-open {
         </div>
       </div>
 
+      <div class="tool-modal-overlay" id="aiModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="ai-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="aiEyebrow">RiskGuard Family · Η μηχανή πίσω από τη μελέτη</p>
+            <h2 id="ai-title" class="calc-title" data-i18n="aiTitle">Αυτό βλέπει ο πελάτης στη συνάντηση</h2>
+            <p class="calc-sub" data-i18n="aiSub">Μια ολιστική πλατφόρμα 13 ενοτήτων που μετατρέπει σύνθετα δεδομένα σε καθαρή, τεκμηριωμένη εικόνα.</p>
+
+            <p style="margin:14px 0 4px;font-size:0.78rem;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:0.3px;" data-i18n="aiFoundLabel">Θεμελιωμένο σε</p>
+            <div class="ai-found">
+              <span>ISO 31000</span><span>Core-FM</span><span>ΕΦΚΑ Ν.4387/2016</span><span>ΔΥΠΑ Ν.4921/2022</span><span>GDPR</span>
+            </div>
+            <p style="margin:0;font-size:0.8rem;line-height:1.5;color:var(--muted);" data-i18n="aiFoundNote">Διεθνή πρότυπα και ελληνικό νομικό &amp; κανονιστικό πλαίσιο — ενημερώνονται άμεσα σε κάθε αλλαγή.</p>
+
+            <div class="ai-grid">
+              <div class="ai-card">
+                <h4 data-i18n="aiCardATitle">360° Risk Score</h4>
+                <svg viewBox="0 0 120 74" style="width:100%;max-width:150px;display:block;margin:8px auto 0;" aria-hidden="true">
+                  <path d="M10,64 A50,50 0 0 1 110,64" fill="none" stroke="#e1ebe8" stroke-width="11" stroke-linecap="round"/>
+                  <path d="M10,64 A50,50 0 0 1 110,64" fill="none" stroke="var(--petrol)" stroke-width="11" stroke-linecap="round" stroke-dasharray="118 200"/>
+                  <text x="60" y="60" text-anchor="middle" font-size="22" font-weight="800" fill="var(--petrol-deep)" font-family="Georgia,serif">360°</text>
+                </svg>
+                <p data-i18n="aiCardACap">13 ενότητες — προστασία, σύνταξη, υγεία, κληρονομιά — σε μία ολιστική εικόνα.</p>
+              </div>
+
+              <div class="ai-card">
+                <h4 data-i18n="aiCardBTitle">Σενάρια «Τι θα γινόταν αν»</h4>
+                <div style="margin-top:10px;">
+                  <div style="display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;color:#854f0b;"><span>Απαισιόδοξο</span><span>74%</span></div>
+                  <div style="height:6px;border-radius:999px;background:#f1efe8;margin:2px 0 7px;"><div style="height:100%;width:74%;background:#ba7517;border-radius:999px;"></div></div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;color:#0f6f6a;"><span>Βασικό</span><span>100%</span></div>
+                  <div style="height:6px;border-radius:999px;background:#f1efe8;margin:2px 0 7px;"><div style="height:100%;width:100%;background:var(--petrol);border-radius:999px;"></div></div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.72rem;font-weight:700;color:#3b6d11;"><span>Αισιόδοξο</span><span>100%</span></div>
+                  <div style="height:6px;border-radius:999px;background:#f1efe8;margin:2px 0 0;"><div style="height:100%;width:100%;background:#639922;border-radius:999px;"></div></div>
+                </div>
+                <p data-i18n="aiCardBCap">Side-by-side κάλυψη pension gap — πώς αλλάζει το αποτέλεσμα με κάθε υπόθεση.</p>
+              </div>
+
+              <div class="ai-card">
+                <h4 data-i18n="aiCardCTitle">Stress Test &amp; Backtesting</h4>
+                <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;">
+                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#eaf3de;border-radius:6px;font-size:0.73rem;font-weight:700;color:#3b6d11;"><span style="width:8px;height:8px;border-radius:50%;background:#639922;flex-shrink:0;"></span>Baseline · Κανονικότητα</div>
+                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#faeeda;border-radius:6px;font-size:0.73rem;font-weight:700;color:#854f0b;"><span style="width:8px;height:8px;border-radius:50%;background:#ba7517;flex-shrink:0;"></span>Adverse · Ήπια ύφεση</div>
+                  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#fcebeb;border-radius:6px;font-size:0.73rem;font-weight:700;color:#791f1f;"><span style="width:8px;height:8px;border-radius:50%;background:#a32d2d;flex-shrink:0;"></span>Severely adverse · τύπου 2008</div>
+                </div>
+                <p data-i18n="aiCardCCap">Δοκιμή αντοχής σε ακραία σενάρια — Monte Carlo &amp; historical backtesting.</p>
+              </div>
+
+              <div class="ai-card">
+                <h4 data-i18n="aiCardDTitle">Inflation Erosion</h4>
+                <svg viewBox="0 0 240 96" style="width:100%;display:block;margin:8px 0 0;" aria-hidden="true">
+                  <path d="M14,16 C 80,34 150,58 226,76 L226,88 L14,88 Z" fill="rgba(15,111,106,0.10)"/>
+                  <path d="M14,16 C 80,34 150,58 226,76" fill="none" stroke="var(--petrol)" stroke-width="2.5"/>
+                  <circle cx="226" cy="76" r="4" fill="#a32d2d"/>
+                  <text x="14" y="12" font-size="11" font-weight="800" fill="var(--petrol-deep)">€100k</text>
+                  <text x="205" y="70" font-size="11" font-weight="800" fill="#a32d2d">€55k</text>
+                </svg>
+                <p data-i18n="aiCardDCap">Πόσο τρώει ο πληθωρισμός την αγοραστική αξία — σε σημερινά ευρώ.</p>
+              </div>
+            </div>
+
+            <div class="ai-method">
+              <p class="ai-method-title" data-i18n="aiMethodTitle">Στατιστικά μοντέλα στον πυρήνα</p>
+              <p class="ai-method-text" data-i18n="aiMethodText">Stress testing σε ακραία σενάρια, Monte Carlo, historical backtesting και Guyton-Klinger spending guardrails — όχι εικασίες, αλλά τεκμηριωμένη ανάλυση.</p>
+            </div>
+
+            <a class="calc-cta" href="#contact" data-i18n="aiCta">Θέλεις να δεις τη δική σου μελέτη; →</a>
+            <p class="calc-note" data-i18n="aiNote">Τα στοιχεία είναι ενδεικτικά, για παρουσίαση της μεθόδου. Καμμία αναφορά σε πραγματικά δεδομένα πελατών.</p>
+          </div>
+        </div>
+      </div>
+
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-copy section-heading narrow">
           <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
@@ -1973,6 +2126,24 @@ const copy = {
     riskSub: "6 γρήγορες ερωτήσεις. Καμμία καταχώρηση στοιχείων — μόνο μια καθαρή εικόνα.",
     riskCta: "Θέλεις δωρεάν αξιολόγηση των κενών σου; →",
     riskNote: "Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη μελέτη αναγκών.",
+    moduleToolAi: "Δες την πλατφόρμα →",
+    aiEyebrow: "RiskGuard Family · Η μηχανή πίσω από τη μελέτη",
+    aiTitle: "Αυτό βλέπει ο πελάτης στη συνάντηση",
+    aiSub: "Μια ολιστική πλατφόρμα 13 ενοτήτων που μετατρέπει σύνθετα δεδομένα σε καθαρή, τεκμηριωμένη εικόνα.",
+    aiFoundLabel: "Θεμελιωμένο σε",
+    aiFoundNote: "Διεθνή πρότυπα και ελληνικό νομικό & κανονιστικό πλαίσιο — ενημερώνονται άμεσα σε κάθε αλλαγή.",
+    aiCardATitle: "360° Risk Score",
+    aiCardACap: "13 ενότητες — προστασία, σύνταξη, υγεία, κληρονομιά — σε μία ολιστική εικόνα.",
+    aiCardBTitle: "Σενάρια «Τι θα γινόταν αν»",
+    aiCardBCap: "Side-by-side κάλυψη pension gap — πώς αλλάζει το αποτέλεσμα με κάθε υπόθεση.",
+    aiCardCTitle: "Stress Test & Backtesting",
+    aiCardCCap: "Δοκιμή αντοχής σε ακραία σενάρια — Monte Carlo & historical backtesting.",
+    aiCardDTitle: "Inflation Erosion",
+    aiCardDCap: "Πόσο τρώει ο πληθωρισμός την αγοραστική αξία — σε σημερινά ευρώ.",
+    aiMethodTitle: "Στατιστικά μοντέλα στον πυρήνα",
+    aiMethodText: "Stress testing σε ακραία σενάρια, Monte Carlo, historical backtesting και Guyton-Klinger spending guardrails — όχι εικασίες, αλλά τεκμηριωμένη ανάλυση.",
+    aiCta: "Θέλεις να δεις τη δική σου μελέτη; →",
+    aiNote: "Τα στοιχεία είναι ενδεικτικά, για παρουσίαση της μεθόδου. Καμμία αναφορά σε πραγματικά δεδομένα πελατών.",
     policyEyebrow: "PolicyLens · Ανάλυση & σύγκριση",
     policyTitle: "Τι πληρώνει το συμβόλαιο — και τι μένει από την τσέπη σου;",
     policySub: "Ανεβάζεις το συμβόλαιό σου, οποιουδήποτε κλάδου, και το βλέπεις καθαρά: καλύψεις, χρεώσεις, κενά — και πόσο θα κόστιζε μια πραγματική ζημιά.",
@@ -2111,6 +2282,24 @@ const copy = {
     riskSub: "6 quick questions. No data entry — just a clear picture.",
     riskCta: "Want a free review of your gaps? →",
     riskNote: "An indicative picture based on your answers — it does not replace a full needs analysis.",
+    moduleToolAi: "See the platform →",
+    aiEyebrow: "RiskGuard Family · The engine behind the study",
+    aiTitle: "This is what the client sees in the meeting",
+    aiSub: "A holistic 13-module platform that turns complex data into a clear, documented picture.",
+    aiFoundLabel: "Built on",
+    aiFoundNote: "International standards and the Greek legal & regulatory framework — updated immediately on any change.",
+    aiCardATitle: "360° Risk Score",
+    aiCardACap: "13 modules — protection, pension, health, inheritance — in one holistic view.",
+    aiCardBTitle: "\u201cWhat-if\u201d scenarios",
+    aiCardBCap: "Side-by-side pension-gap coverage — how the outcome shifts with each assumption.",
+    aiCardCTitle: "Stress Test & Backtesting",
+    aiCardCCap: "Resilience testing under extreme scenarios — Monte Carlo & historical backtesting.",
+    aiCardDTitle: "Inflation Erosion",
+    aiCardDCap: "How inflation erodes purchasing power — in today's euros.",
+    aiMethodTitle: "Statistical models at the core",
+    aiMethodText: "Stress testing under extreme scenarios, Monte Carlo, historical backtesting and Guyton-Klinger spending guardrails — not guesswork, but documented analysis.",
+    aiCta: "Want to see your own study? →",
+    aiNote: "Figures are indicative, to present the method. No reference to real client data.",
     policyEyebrow: "PolicyLens · Analysis & comparison",
     policyTitle: "What the policy pays — and what comes out of your pocket?",
     policySub: "Upload your policy, of any branch, and see it clearly: coverages, charges, gaps — and what a real claim would cost.",
