@@ -100,10 +100,9 @@ a {
 }
 
 .brand-logo {
-  height: 52px;
-  width: auto;
+  height: auto;
+  width: 200px;
   display: block;
-  max-width: 220px;
 }
 
 .nav-links {
@@ -667,6 +666,78 @@ h2 {
 .module-tool:hover {
   background: var(--petrol-deep);
   transform: translateY(-1px);
+}
+
+.module-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.module-tools .module-tool {
+  position: static;
+  left: auto;
+  bottom: auto;
+}
+
+.module-tool.alt {
+  color: var(--petrol-deep);
+  background: var(--petrol-soft);
+}
+
+.module-tool.alt:hover {
+  background: #cfe3df;
+  color: var(--petrol-deep);
+}
+
+.service-card.has-tools {
+  padding-bottom: clamp(22px, 2.4vw, 30px);
+}
+
+.risk-q {
+  margin-bottom: 16px;
+}
+
+.risk-q-label {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.risk-opts {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.risk-opt {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 10px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+}
+
+.risk-opt:hover {
+  border-color: var(--petrol);
+}
+
+.risk-opt.is-active {
+  color: var(--petrol-deep);
+  background: var(--petrol-soft);
+  border-color: var(--petrol);
 }
 
 .policy-branches {
@@ -1481,7 +1552,7 @@ body.modal-open {
         </div>
 
         <div class="module-grid">
-          <article class="service-card reveal">
+          <article class="service-card has-tools reveal">
             <div class="service-card-top">
               <span class="service-number">01</span>
               <span class="service-tag" data-i18n="moduleOneTag">Individuals & Families</span>
@@ -1495,7 +1566,10 @@ body.modal-open {
               <li data-i18n="moduleOnePointB">Retirement and children planning</li>
               <li data-i18n="moduleOnePointC">Goal-based investment direction</li>
             </ul>
-            <button type="button" class="module-tool" data-target="toolModal" data-i18n="moduleToolCalc">Δοκίμασε τον υπολογιστή →</button>
+            <div class="module-tools">
+              <button type="button" class="module-tool" data-target="toolModal" data-i18n="moduleToolCalc">Δοκίμασε τον υπολογιστή →</button>
+              <button type="button" class="module-tool alt" data-target="riskModal" data-i18n="moduleToolRisk">Έλεγξε την έκθεσή σου →</button>
+            </div>
           </article>
 
           <article class="service-card reveal">
@@ -1746,6 +1820,21 @@ body.modal-open {
         </div>
       </div>
 
+      <div class="tool-modal-overlay" id="riskModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="risk-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="riskEyebrow">RiskGuard Family · Γρήγορος έλεγχος</p>
+            <h2 id="risk-title" class="calc-title" data-i18n="riskTitle">Πόσο εκτεθειμένη είναι η οικογένειά σου;</h2>
+            <p class="calc-sub" data-i18n="riskSub">6 γρήγορες ερωτήσεις. Καμμία καταχώρηση στοιχείων — μόνο μια καθαρή εικόνα.</p>
+            <div id="riskQuestions"></div>
+            <div id="riskResult"></div>
+            <a class="calc-cta" href="#contact" data-i18n="riskCta">Θέλεις δωρεάν αξιολόγηση των κενών σου; →</a>
+            <p class="calc-note" data-i18n="riskNote">Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη μελέτη αναγκών.</p>
+          </div>
+        </div>
+      </div>
+
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-copy section-heading narrow">
           <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
@@ -1877,7 +1966,13 @@ const copy = {
     toolChipThree: "Scenario view",
     moduleLink: "Συζήτηση για αυτό",
     moduleToolCalc: "Δοκίμασε τον υπολογιστή →",
+    moduleToolRisk: "Έλεγξε την έκθεσή σου →",
     moduleToolPolicy: "Δες δείγμα ανάλυσης →",
+    riskEyebrow: "RiskGuard Family · Γρήγορος έλεγχος",
+    riskTitle: "Πόσο εκτεθειμένη είναι η οικογένειά σου;",
+    riskSub: "6 γρήγορες ερωτήσεις. Καμμία καταχώρηση στοιχείων — μόνο μια καθαρή εικόνα.",
+    riskCta: "Θέλεις δωρεάν αξιολόγηση των κενών σου; →",
+    riskNote: "Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη μελέτη αναγκών.",
     policyEyebrow: "PolicyLens · Ανάλυση & σύγκριση",
     policyTitle: "Τι πληρώνει το συμβόλαιο — και τι μένει από την τσέπη σου;",
     policySub: "Ανεβάζεις το συμβόλαιό σου, οποιουδήποτε κλάδου, και το βλέπεις καθαρά: καλύψεις, χρεώσεις, κενά — και πόσο θα κόστιζε μια πραγματική ζημιά.",
@@ -2009,7 +2104,13 @@ const copy = {
     toolChipThree: "Scenario view",
     moduleLink: "Discuss this module",
     moduleToolCalc: "Try the calculator →",
+    moduleToolRisk: "Check your exposure →",
     moduleToolPolicy: "See a sample analysis →",
+    riskEyebrow: "RiskGuard Family · Quick check",
+    riskTitle: "How exposed is your family?",
+    riskSub: "6 quick questions. No data entry — just a clear picture.",
+    riskCta: "Want a free review of your gaps? →",
+    riskNote: "An indicative picture based on your answers — it does not replace a full needs analysis.",
     policyEyebrow: "PolicyLens · Analysis & comparison",
     policyTitle: "What the policy pays — and what comes out of your pocket?",
     policySub: "Upload your policy, of any branch, and see it clearly: coverages, charges, gaps — and what a real claim would cost.",
@@ -2107,6 +2208,7 @@ function setLanguage(language) {
 
   if (typeof window._refreshCalc === "function") window._refreshCalc();
   if (typeof window._refreshPolicy === "function") window._refreshPolicy();
+  if (typeof window._refreshRisk === "function") window._refreshRisk();
 }
 
 languageButtons.forEach((button) => {
@@ -2242,6 +2344,7 @@ function openOverlay(id) {
   document.body.classList.add("modal-open");
   if (id === "toolModal" && typeof window._refreshCalc === "function") window._refreshCalc();
   if (id === "policyModal" && typeof window._refreshPolicy === "function") window._refreshPolicy();
+  if (id === "riskModal" && typeof window._refreshRisk === "function") window._refreshRisk();
 }
 
 function closeOverlay(o) {
@@ -2392,6 +2495,139 @@ if (policyPanel) {
 
   window._refreshPolicy = renderPolicy;
   renderPolicy();
+}
+
+const riskQuestions = document.getElementById("riskQuestions");
+if (riskQuestions) {
+  const RISK = {
+    el: {
+      questions: [
+        { q: "Αν σταματούσε αύριο το εισόδημά σου, για πόσο αντέχει οικονομικά η οικογένεια;",
+          gap: "Προστασία εισοδήματος",
+          opts: [ { t: "Πάνω από 1 χρόνο", r: 0 }, { t: "3–12 μήνες", r: 1 }, { t: "Κάτω από 3 μήνες", r: 2 } ] },
+        { q: "Η ασφάλιση ζωής σου καλύπτει δάνεια και έξοδα της οικογένειας;",
+          gap: "Ασφάλιση ζωής",
+          opts: [ { t: "Ναι, επαρκώς", r: 0 }, { t: "Έχω, αλλά λίγο", r: 1 }, { t: "Δεν έχω", r: 2 } ] },
+        { q: "Υπάρχει ιδιωτική ασφάλιση υγείας για την οικογένεια;",
+          gap: "Ασφάλιση υγείας",
+          opts: [ { t: "Ναι, όλοι", r: 0 }, { t: "Μερικώς", r: 1 }, { t: "Όχι", r: 2 } ] },
+        { q: "Αποταμιεύεις ή επενδύεις συστηματικά για το μέλλον;",
+          gap: "Συνταξιοδοτικό / αποταμιευτικό πλάνο",
+          opts: [ { t: "Ναι, με πλάνο", r: 0 }, { t: "Περιστασιακά", r: 1 }, { t: "Όχι", r: 2 } ] },
+        { q: "Έχεις ρευστό απόθεμα για 3–6 μήνες απρόοπτων;",
+          gap: "Αποθεματικό έκτακτης ανάγκης",
+          opts: [ { t: "Ναι", r: 0 }, { t: "Λίγο", r: 1 }, { t: "Όχι", r: 2 } ] },
+        { q: "Υπάρχει πρόβλεψη για τις σπουδές ή το μέλλον των παιδιών;",
+          gap: "Πρόβλεψη για τα παιδιά",
+          opts: [ { t: "Δεν έχω παιδιά", r: 0 }, { t: "Ναι, υπάρχει", r: 0 }, { t: "Όχι ακόμα", r: 2 } ] }
+      ],
+      levels: {
+        green: { t: "Καλά προστατευμένος", d: "Η οικογένειά σου έχει γερές βάσεις. Αξίζει μια επανεξέταση για να μείνει έτσι." },
+        yellow: { t: "Υπάρχουν κενά", d: "Κάποιες περιοχές χρειάζονται προσοχή πριν γίνουν πρόβλημα." },
+        red: { t: "Σημαντική έκθεση", d: "Υπάρχουν σοβαρά κενά που μπορεί να κοστίσουν ακριβά σε μια δύσκολη στιγμή." }
+      },
+      scoreLabel: "Δείκτης έκθεσης",
+      gapsLabel: "Πού εστιάζουμε πρώτα",
+      noGaps: "Δεν εντοπίστηκαν κρίσιμα κενά — μπράβο."
+    },
+    en: {
+      questions: [
+        { q: "If your income stopped tomorrow, how long could your family cope financially?",
+          gap: "Income protection",
+          opts: [ { t: "Over 1 year", r: 0 }, { t: "3–12 months", r: 1 }, { t: "Under 3 months", r: 2 } ] },
+        { q: "Does your life insurance cover loans and family expenses?",
+          gap: "Life insurance",
+          opts: [ { t: "Yes, fully", r: 0 }, { t: "Some, but low", r: 1 }, { t: "None", r: 2 } ] },
+        { q: "Is there private health insurance for the family?",
+          gap: "Health insurance",
+          opts: [ { t: "Yes, everyone", r: 0 }, { t: "Partially", r: 1 }, { t: "No", r: 2 } ] },
+        { q: "Do you save or invest systematically for the future?",
+          gap: "Retirement / savings plan",
+          opts: [ { t: "Yes, with a plan", r: 0 }, { t: "Occasionally", r: 1 }, { t: "No", r: 2 } ] },
+        { q: "Do you have a cash reserve for 3–6 months of surprises?",
+          gap: "Emergency fund",
+          opts: [ { t: "Yes", r: 0 }, { t: "A little", r: 1 }, { t: "No", r: 2 } ] },
+        { q: "Is there a plan for your children's studies or future?",
+          gap: "Provision for children",
+          opts: [ { t: "No children", r: 0 }, { t: "Yes, there is", r: 0 }, { t: "Not yet", r: 2 } ] }
+      ],
+      levels: {
+        green: { t: "Well protected", d: "Your family has solid foundations. A periodic review keeps it that way." },
+        yellow: { t: "There are gaps", d: "Some areas need attention before they become a problem." },
+        red: { t: "Significant exposure", d: "There are serious gaps that could be costly in a difficult moment." }
+      },
+      scoreLabel: "Exposure index",
+      gapsLabel: "Where we focus first",
+      noGaps: "No critical gaps found — well done."
+    }
+  };
+
+  const riskResult = document.getElementById("riskResult");
+  let answers = [1, 1, 1, 1, 1, 0];
+
+  function lvlColors(level) {
+    if (level === "green") return { c: "#3b6d11", bg: "#eaf3de", bar: "#639922" };
+    if (level === "yellow") return { c: "#854f0b", bg: "#faeeda", bar: "#ba7517" };
+    return { c: "#791f1f", bg: "#fcebeb", bar: "#a32d2d" };
+  }
+
+  function renderRisk() {
+    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const d = RISK[lang];
+
+    riskQuestions.innerHTML = d.questions.map(function (q, qi) {
+      const opts = q.opts.map(function (o, oi) {
+        const active = answers[qi] === oi ? " is-active" : "";
+        return '<button type="button" class="risk-opt' + active + '" data-q="' + qi + '" data-o="' + oi + '">' + o.t + '</button>';
+      }).join("");
+      return '<div class="risk-q"><span class="risk-q-label">' + (qi + 1) + '. ' + q.q + '</span><div class="risk-opts">' + opts + '</div></div>';
+    }).join("");
+
+    let total = 0, maxTotal = 0;
+    const gaps = [];
+    d.questions.forEach(function (q, qi) {
+      const maxR = Math.max.apply(null, q.opts.map(function (o) { return o.r; }));
+      maxTotal += maxR;
+      const r = q.opts[answers[qi]].r;
+      total += r;
+      if (r >= 2) gaps.push(q.gap);
+    });
+    const pct = maxTotal ? Math.round((total / maxTotal) * 100) : 0;
+    const level = pct < 30 ? "green" : pct <= 60 ? "yellow" : "red";
+    const lv = d.levels[level];
+    const col = lvlColors(level);
+
+    let gapsHtml;
+    if (gaps.length) {
+      gapsHtml = '<p style="margin:14px 0 8px;font-size:0.8rem;font-weight:800;color:#17201f;text-transform:uppercase;letter-spacing:0.3px;">' + d.gapsLabel + '</p>'
+        + '<div style="display:flex;flex-direction:column;gap:5px;">'
+        + gaps.map(function (g) {
+            return '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fcebeb;border-radius:7px;"><span style="width:9px;height:9px;border-radius:50%;background:#a32d2d;flex-shrink:0;"></span><span style="flex:1;font-size:0.82rem;color:#17201f;font-weight:600;">' + g + '</span></div>';
+          }).join("")
+        + '</div>';
+    } else {
+      gapsHtml = '<p style="margin:14px 0 0;padding:10px 12px;background:#eaf3de;border-radius:7px;font-size:0.82rem;color:#3b6d11;font-weight:700;">' + d.noGaps + '</p>';
+    }
+
+    riskResult.innerHTML =
+      '<div style="background:' + col.bg + ';border-radius:10px;padding:16px 18px;margin:20px 0 4px;">'
+      + '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;"><span style="font-size:0.74rem;font-weight:800;color:' + col.c + ';text-transform:uppercase;letter-spacing:0.3px;">' + d.scoreLabel + '</span><span style="font-size:1.3rem;font-weight:800;color:' + col.c + ';">' + pct + '%</span></div>'
+      + '<div style="height:8px;border-radius:999px;background:rgba(0,0,0,0.08);overflow:hidden;margin-bottom:12px;"><div style="height:100%;width:' + pct + '%;background:' + col.bar + ';border-radius:999px;transition:width 0.3s ease;"></div></div>'
+      + '<p style="margin:0 0 3px;font-size:1rem;font-weight:800;color:' + col.c + ';">' + lv.t + '</p>'
+      + '<p style="margin:0;font-size:0.85rem;color:#17201f;line-height:1.5;">' + lv.d + '</p>'
+      + gapsHtml
+      + '</div>';
+  }
+
+  riskQuestions.addEventListener("click", function (e) {
+    const btn = e.target.closest(".risk-opt");
+    if (!btn) return;
+    answers[+btn.dataset.q] = +btn.dataset.o;
+    renderRisk();
+  });
+
+  window._refreshRisk = renderRisk;
+  renderRisk();
 }
 
 const revealNodes = document.querySelectorAll(".reveal");
