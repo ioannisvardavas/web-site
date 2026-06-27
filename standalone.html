@@ -1070,6 +1070,112 @@ h2 {
   border-color: var(--petrol);
 }
 
+/* B4 — Families expanded (familyModal infographics) */
+.fam-block {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.fam-block:first-of-type {
+  margin-top: 18px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.fam-h {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.fam-p {
+  margin: 0 0 14px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.fam-figure {
+  display: block;
+  margin: 4px 0 10px;
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--petrol);
+}
+
+.fam-rows {
+  display: grid;
+  gap: 12px;
+  margin: 6px 0 4px;
+}
+
+.fam-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+
+.fam-label .v {
+  color: var(--petrol);
+  white-space: nowrap;
+}
+
+.fam-track {
+  height: 12px;
+  border-radius: 999px;
+  background: var(--petrol-soft);
+  overflow: hidden;
+}
+
+.fam-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--petrol), var(--gold));
+}
+
+.fam-goals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.fam-goal {
+  flex: 1;
+  min-width: 130px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+  background: var(--paper);
+}
+
+.fam-goal .ico {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.fam-goal .gname {
+  display: block;
+  margin: 8px 0 2px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.fam-goal .gmeta {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 body.modal-open {
   overflow: hidden;
 }
@@ -1798,6 +1904,7 @@ body.modal-open {
             <div class="module-tools">
               <button type="button" class="module-tool" data-target="toolModal" data-i18n="moduleToolCalc">Δοκίμασε τον υπολογιστή →</button>
               <button type="button" class="module-tool alt" data-target="riskModal" data-i18n="moduleToolRisk">Έλεγξε την έκθεσή σου →</button>
+              <button type="button" class="module-tool" data-target="familyModal" data-i18n="moduleToolFamily">Γιατί μετράει — αναλυτικά →</button>
             </div>
           </article>
 
@@ -2126,6 +2233,67 @@ body.modal-open {
         </div>
       </div>
 
+      <div class="tool-modal-overlay" id="familyModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="family-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="famEyebrow">Για ιδιώτες &amp; οικογένειες · Γιατί μετράει</p>
+            <h2 id="family-title" class="calc-title" data-i18n="famTitle">Τρεις αριθμοί που αλλάζουν τη ματιά σας.</h2>
+            <p class="calc-sub" data-i18n="famSub">Όχι θεωρία — απλά, ξεκάθαρα παραδείγματα για το τι πραγματικά διακυβεύεται και τι μπορεί να χτιστεί.</p>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="fam1H">1. Το εισόδημά σας είναι το μεγαλύτερο περιουσιακό σας στοιχείο</p>
+              <p class="fam-p" data-i18n="fam1P">Σκεφτείτε έναν εργαζόμενο 40 ετών με καθαρό εισόδημα €1.800 τον μήνα, 27 χρόνια πριν τη σύνταξη. Το εισόδημα που θα περάσει από τα χέρια του μέχρι τότε:</p>
+              <span class="fam-figure">€583.200</span>
+              <div class="fam-rows">
+                <div>
+                  <div class="fam-label"><span data-i18n="fam1Bar1">Αξία εισοδήματος ως τη σύνταξη</span><span class="v">€583.200</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:100%"></div></div>
+                </div>
+                <div>
+                  <div class="fam-label"><span data-i18n="fam1Bar2">Κάλυψη που συναντώ συχνά στην πράξη</span><span class="v">€70.000</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:12%"></div></div>
+                </div>
+              </div>
+              <p class="fam-p" data-i18n="fam1Note">Αν αυτό το εισόδημα σταματούσε ξαφνικά, πόσο από τα €583.200 είναι σήμερα πραγματικά προστατευμένο; Εκεί ξεκινά η πιο σημαντική κουβέντα.</p>
+            </div>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="fam2H">2. Ο χρόνος κάνει τη μεγαλύτερη δουλειά — δωρεάν</p>
+              <p class="fam-p" data-i18n="fam2P">Ίδια αποταμίευση €200 τον μήνα, ίδια μέση απόδοση. Αλλάζει μόνο πότε ξεκινάς:</p>
+              <div class="fam-rows">
+                <div>
+                  <div class="fam-label"><span data-i18n="fam2A">Ξεκινώντας στα 30 (37 χρόνια)</span><span class="v">€256.000</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:100%"></div></div>
+                </div>
+                <div>
+                  <div class="fam-label"><span data-i18n="fam2B">Ξεκινώντας στα 40 (27 χρόνια)</span><span class="v">€137.000</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:53%"></div></div>
+                </div>
+                <div>
+                  <div class="fam-label"><span data-i18n="fam2C">Ξεκινώντας στα 50 (17 χρόνια)</span><span class="v">€64.000</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:25%"></div></div>
+                </div>
+              </div>
+              <p class="fam-p" data-i18n="fam2Note">Σχεδόν τετραπλάσιο αποτέλεσμα, με την ίδια ακριβώς προσπάθεια. Το καλύτερο σημείο εκκίνησης ήταν χθες· το επόμενο καλύτερο είναι σήμερα.</p>
+            </div>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="fam3H">3. Όχι ένας λογαριασμός — ξεχωριστοί στόχοι</p>
+              <p class="fam-p" data-i18n="fam3P">Κάθε στόχος έχει δικό του ορίζοντα και δική του στρατηγική. Όταν μπαίνουν όλοι σε έναν «σωρό», κανείς δεν εξυπηρετείται σωστά.</p>
+              <div class="fam-goals">
+                <div class="fam-goal"><span class="ico">🏠</span><span class="gname" data-i18n="fam3G1">Σπίτι</span><span class="gmeta" data-i18n="fam3G1m">Ορίζοντας 5–10 ετών</span></div>
+                <div class="fam-goal"><span class="ico">🎓</span><span class="gname" data-i18n="fam3G2">Σπουδές παιδιών</span><span class="gmeta" data-i18n="fam3G2m">Ορίζοντας 10–18 ετών</span></div>
+                <div class="fam-goal"><span class="ico">🌅</span><span class="gname" data-i18n="fam3G3">Σύνταξη</span><span class="gmeta" data-i18n="fam3G3m">Ορίζοντας 20+ ετών</span></div>
+              </div>
+            </div>
+
+            <a class="calc-cta" href="#contact" data-i18n="famCta">Ας βάλουμε τους δικούς σας αριθμούς σε σειρά →</a>
+            <p class="calc-note" data-i18n="famNote">Τα ποσά είναι ενδεικτικά, για κατανόηση της λογικής — όχι πρόβλεψη απόδοσης ή προσφορά. Κάθε πλάνο υπολογίζεται στα δικά σας δεδομένα.</p>
+          </div>
+        </div>
+      </div>
+
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-copy section-heading narrow">
           <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
@@ -2258,6 +2426,7 @@ const copy = {
     moduleLink: "Συζήτηση για αυτό",
     moduleToolCalc: "Δοκίμασε τον υπολογιστή →",
     moduleToolRisk: "Έλεγξε την έκθεσή σου →",
+    moduleToolFamily: "Γιατί μετράει — αναλυτικά →",
     moduleToolPolicy: "Δες δείγμα ανάλυσης →",
     riskEyebrow: "RiskGuard Family · Γρήγορος έλεγχος",
     riskTitle: "Πόσο εκτεθειμένη είναι η οικογένειά σου;",
@@ -2286,6 +2455,30 @@ const copy = {
     aiShotInflation: "Πόσο τρώει ο πληθωρισμός την αγοραστική αξία — σε σημερινά ευρώ.",
     aiShotGuardrails: "Δυναμικά όρια δαπανών (Guyton-Klinger) βάσει πιθανότητας επιτυχίας πλάνου.",
     aiNote: "Τα στοιχεία είναι ενδεικτικά, για παρουσίαση της μεθόδου. Καμμία αναφορά σε πραγματικά δεδομένα πελατών.",
+    famEyebrow: "Για ιδιώτες & οικογένειες · Γιατί μετράει",
+    famTitle: "Τρεις αριθμοί που αλλάζουν τη ματιά σας.",
+    famSub: "Όχι θεωρία — απλά, ξεκάθαρα παραδείγματα για το τι πραγματικά διακυβεύεται και τι μπορεί να χτιστεί.",
+    fam1H: "1. Το εισόδημά σας είναι το μεγαλύτερο περιουσιακό σας στοιχείο",
+    fam1P: "Σκεφτείτε έναν εργαζόμενο 40 ετών με καθαρό εισόδημα €1.800 τον μήνα, 27 χρόνια πριν τη σύνταξη. Το εισόδημα που θα περάσει από τα χέρια του μέχρι τότε:",
+    fam1Bar1: "Αξία εισοδήματος ως τη σύνταξη",
+    fam1Bar2: "Κάλυψη που συναντώ συχνά στην πράξη",
+    fam1Note: "Αν αυτό το εισόδημα σταματούσε ξαφνικά, πόσο από τα €583.200 είναι σήμερα πραγματικά προστατευμένο; Εκεί ξεκινά η πιο σημαντική κουβέντα.",
+    fam2H: "2. Ο χρόνος κάνει τη μεγαλύτερη δουλειά — δωρεάν",
+    fam2P: "Ίδια αποταμίευση €200 τον μήνα, ίδια μέση απόδοση. Αλλάζει μόνο πότε ξεκινάς:",
+    fam2A: "Ξεκινώντας στα 30 (37 χρόνια)",
+    fam2B: "Ξεκινώντας στα 40 (27 χρόνια)",
+    fam2C: "Ξεκινώντας στα 50 (17 χρόνια)",
+    fam2Note: "Σχεδόν τετραπλάσιο αποτέλεσμα, με την ίδια ακριβώς προσπάθεια. Το καλύτερο σημείο εκκίνησης ήταν χθες· το επόμενο καλύτερο είναι σήμερα.",
+    fam3H: "3. Όχι ένας λογαριασμός — ξεχωριστοί στόχοι",
+    fam3P: "Κάθε στόχος έχει δικό του ορίζοντα και δική του στρατηγική. Όταν μπαίνουν όλοι σε έναν «σωρό», κανείς δεν εξυπηρετείται σωστά.",
+    fam3G1: "Σπίτι",
+    fam3G1m: "Ορίζοντας 5–10 ετών",
+    fam3G2: "Σπουδές παιδιών",
+    fam3G2m: "Ορίζοντας 10–18 ετών",
+    fam3G3: "Σύνταξη",
+    fam3G3m: "Ορίζοντας 20+ ετών",
+    famCta: "Ας βάλουμε τους δικούς σας αριθμούς σε σειρά →",
+    famNote: "Τα ποσά είναι ενδεικτικά, για κατανόηση της λογικής — όχι πρόβλεψη απόδοσης ή προσφορά. Κάθε πλάνο υπολογίζεται στα δικά σας δεδομένα.",
     policyEyebrow: "PolicyLens · Ανάλυση & σύγκριση",
     policyTitle: "Τι πληρώνει το συμβόλαιο — και τι μένει από την τσέπη σου;",
     policySub: "Ανεβάζεις το συμβόλαιό σου, οποιουδήποτε κλάδου, και το βλέπεις καθαρά: καλύψεις, χρεώσεις, κενά — και πόσο θα κόστιζε μια πραγματική ζημιά.",
@@ -2423,6 +2616,7 @@ const copy = {
     moduleLink: "Discuss this module",
     moduleToolCalc: "Try the calculator →",
     moduleToolRisk: "Check your exposure →",
+    moduleToolFamily: "Why it matters — in detail →",
     moduleToolPolicy: "See a sample analysis →",
     riskEyebrow: "RiskGuard Family · Quick check",
     riskTitle: "How exposed is your family?",
@@ -2451,6 +2645,30 @@ const copy = {
     aiShotInflation: "How inflation erodes purchasing power — in today's euros.",
     aiShotGuardrails: "Dynamic spending guardrails (Guyton-Klinger) based on plan success probability.",
     aiNote: "Figures are indicative, to present the method. No reference to real client data.",
+    famEyebrow: "For individuals & families · Why it matters",
+    famTitle: "Three numbers that change how you see it.",
+    famSub: "Not theory — simple, clear examples of what is really at stake and what can be built.",
+    fam1H: "1. Your income is your largest asset",
+    fam1P: "Picture a 40-year-old employee with a net income of €1,800 a month, 27 years from retirement. The income that will pass through their hands until then:",
+    fam1Bar1: "Value of income until retirement",
+    fam1Bar2: "Cover I often find in practice",
+    fam1Note: "If that income stopped suddenly, how much of the €583,200 is truly protected today? That is where the most important conversation begins.",
+    fam2H: "2. Time does the heaviest lifting — for free",
+    fam2P: "Same saving of €200 a month, same average return. Only the starting point changes:",
+    fam2A: "Starting at 30 (37 years)",
+    fam2B: "Starting at 40 (27 years)",
+    fam2C: "Starting at 50 (17 years)",
+    fam2Note: "Almost four times the result, with exactly the same effort. The best time to start was yesterday; the next best is today.",
+    fam3H: "3. Not one account — separate goals",
+    fam3P: "Each goal has its own horizon and its own strategy. When they all go into one pile, none of them is served well.",
+    fam3G1: "Home",
+    fam3G1m: "Horizon 5–10 years",
+    fam3G2: "Children's studies",
+    fam3G2m: "Horizon 10–18 years",
+    fam3G3: "Retirement",
+    fam3G3m: "Horizon 20+ years",
+    famCta: "Let's put your own numbers in order →",
+    famNote: "Amounts are indicative, to convey the logic — not a return forecast or an offer. Every plan is calculated on your own data.",
     policyEyebrow: "PolicyLens · Analysis & comparison",
     policyTitle: "What the policy pays — and what comes out of your pocket?",
     policySub: "Upload your policy, of any branch, and see it clearly: coverages, charges, gaps — and what a real claim would cost.",
