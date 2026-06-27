@@ -2066,6 +2066,7 @@ body.modal-open {
             </ul>
             <div class="module-tools">
               <button type="button" class="module-tool" data-target="bizModal" data-i18n="moduleToolBiz">Τι κινδυνεύει — αναλυτικά →</button>
+              <button type="button" class="module-tool alt" data-target="bizRiskModal" data-i18n="moduleToolBizRisk">Κάνε το τεστ έκθεσης →</button>
             </div>
           </article>
 
@@ -2326,6 +2327,21 @@ body.modal-open {
             <div id="riskResult"></div>
             <a class="calc-cta" href="#contact" data-i18n="riskCta">Θέλεις δωρεάν αξιολόγηση των κενών σου; →</a>
             <p class="calc-note" data-i18n="riskNote">Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη μελέτη αναγκών.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-modal-overlay" id="bizRiskModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="bizrisk-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="bizRiskEyebrow">RiskGuard Pro · Γρήγορος έλεγχος</p>
+            <h2 id="bizrisk-title" class="calc-title" data-i18n="bizRiskTitle">Τι κινδυνεύει στην επιχείρησή σου;</h2>
+            <p class="calc-sub" data-i18n="bizRiskSub">6 γρήγορες ερωτήσεις. Καμμία καταχώρηση στοιχείων — μόνο μια καθαρή εικόνα έκθεσης.</p>
+            <div id="bizRiskQuestions"></div>
+            <div id="bizRiskResult"></div>
+            <a class="calc-cta" href="#contact" data-i18n="bizRiskCta">Θέλεις δωρεάν αξιολόγηση 30' για την επιχείρησή σου; →</a>
+            <p class="calc-note" data-i18n="bizRiskNote">Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη ανάλυση κινδύνων.</p>
           </div>
         </div>
       </div>
@@ -2797,6 +2813,12 @@ const copy = {
     moduleToolRisk: "Έλεγξε την έκθεσή σου →",
     moduleToolFamily: "Γιατί μετράει — αναλυτικά →",
     moduleToolBiz: "Τι κινδυνεύει — αναλυτικά →",
+    moduleToolBizRisk: "Κάνε το τεστ έκθεσης →",
+    bizRiskEyebrow: "RiskGuard Pro · Γρήγορος έλεγχος",
+    bizRiskTitle: "Τι κινδυνεύει στην επιχείρησή σου;",
+    bizRiskSub: "6 γρήγορες ερωτήσεις. Καμμία καταχώρηση στοιχείων — μόνο μια καθαρή εικόνα έκθεσης.",
+    bizRiskCta: "Θέλεις δωρεάν αξιολόγηση 30' για την επιχείρησή σου; →",
+    bizRiskNote: "Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη ανάλυση κινδύνων.",
     bizEyebrow: "Για επιχειρήσεις · Τι κινδυνεύει",
     bizTitle: "Έξι κίνδυνοι που σπάνια μπαίνουν στον ισολογισμό.",
     bizSub: "Δεν φαίνονται στα βιβλία — μέχρι τη μέρα που χτυπούν. Να τι κρύβεται κάτω από κάθε υγιή επιχείρηση.",
@@ -3065,6 +3087,12 @@ const copy = {
     moduleToolRisk: "Check your exposure →",
     moduleToolFamily: "Why it matters — in detail →",
     moduleToolBiz: "What's at risk — in detail →",
+    moduleToolBizRisk: "Take the exposure test →",
+    bizRiskEyebrow: "RiskGuard Pro · Quick check",
+    bizRiskTitle: "What's at risk in your business?",
+    bizRiskSub: "6 quick questions. No data entry — just a clear exposure picture.",
+    bizRiskCta: "Want a free 30′ assessment for your business? →",
+    bizRiskNote: "Indicative picture based on your answers — not a substitute for a full risk analysis.",
     bizEyebrow: "For businesses · What's at risk",
     bizTitle: "Six risks that rarely make it onto the balance sheet.",
     bizSub: "They don't show in the books — until the day they strike. Here's what sits beneath every healthy business.",
@@ -3453,6 +3481,7 @@ function openOverlay(id) {
   if (id === "toolModal" && typeof window._refreshCalc === "function") window._refreshCalc();
   if (id === "policyModal" && typeof window._refreshPolicy === "function") window._refreshPolicy();
   if (id === "riskModal" && typeof window._refreshRisk === "function") window._refreshRisk();
+  if (id === "bizRiskModal" && typeof window._refreshBizRisk === "function") window._refreshBizRisk();
 }
 
 function closeOverlay(o) {
@@ -3736,6 +3765,139 @@ if (riskQuestions) {
 
   window._refreshRisk = renderRisk;
   renderRisk();
+}
+
+const bizRiskQuestions = document.getElementById("bizRiskQuestions");
+if (bizRiskQuestions) {
+  const BIZRISK = {
+    el: {
+      questions: [
+        { q: "Αν έλειπε ξαφνικά ο βασικός άνθρωπος-κλειδί, πόσο θα επηρεαζόταν η επιχείρηση;",
+          gap: "Κάλυψη ανθρώπου-κλειδί (key person)",
+          opts: [ { t: "Λίγο — υπάρχει πλάνο", r: 0 }, { t: "Αρκετά", r: 1 }, { t: "Καθοριστικά — χωρίς πλάνο", r: 2 } ] },
+        { q: "Υπάρχει ασφάλιση διακοπής εργασιών ή σχέδιο συνέχειας λειτουργίας;",
+          gap: "Συνέχεια λειτουργίας",
+          opts: [ { t: "Ναι, πλήρως", r: 0 }, { t: "Μερικώς", r: 1 }, { t: "Όχι", r: 2 } ] },
+        { q: "Προσφέρεις ομαδικό πρόγραμμα παροχών (υγεία/ζωή) στο προσωπικό σου;",
+          gap: "Ομαδικές παροχές προσωπικού",
+          opts: [ { t: "Ναι", r: 0 }, { t: "Το σκέφτομαι", r: 1 }, { t: "Όχι", r: 2 } ] },
+        { q: "Αν ένας μεγάλος πελάτης δεν πλήρωνε ή χρεοκοπούσε, τι θα συνέβαινε;",
+          gap: "Ασφάλιση πιστώσεων",
+          opts: [ { t: "Καλυμμένος / πουλάω μετρητοίς", r: 0 }, { t: "Θα πονούσε", r: 1 }, { t: "Σοβαρό πλήγμα", r: 2 } ] },
+        { q: "Πόσο προστατευμένη είναι η επιχείρηση από κυβερνοεπίθεση ή διαρροή δεδομένων (GDPR);",
+          gap: "Cyber & προστασία δεδομένων",
+          opts: [ { t: "Έχουμε κάλυψη & μέτρα", r: 0 }, { t: "Βασικά μόνο", r: 1 }, { t: "Καθόλου", r: 2 } ] },
+        { q: "Ως διοικών, είσαι προστατευμένος για προσωπική ευθύνη από επιχειρηματικές αποφάσεις;",
+          gap: "Ευθύνη διοικούντων (D&O)",
+          opts: [ { t: "Ναι", r: 0 }, { t: "Δεν είμαι σίγουρος", r: 1 }, { t: "Όχι", r: 2 } ] }
+      ],
+      levels: {
+        green: { t: "Σταθερές βάσεις", d: "Η επιχείρηση έχει καλύψει τους βασικούς κινδύνους. Αξίζει μια ετήσια επανεξέταση για να μείνει έτσι." },
+        yellow: { t: "Υπάρχει έκθεση", d: "Κάποιοι κίνδυνοι μένουν ακάλυπτοι — καλό είναι να κλείσουν πριν χτυπήσουν." },
+        red: { t: "Σοβαρή έκθεση", d: "Σημαντικοί κίνδυνοι μένουν ακάλυπτοι και μπορεί να κοστίσουν ακριβά σε μια δύσκολη στιγμή." }
+      },
+      scoreLabel: "Δείκτης έκθεσης",
+      gapsLabel: "Πού κινδυνεύεις πρώτα",
+      noGaps: "Δεν εντοπίστηκαν κρίσιμα κενά — εξαιρετικά."
+    },
+    en: {
+      questions: [
+        { q: "If your key person suddenly disappeared, how much would the business be affected?",
+          gap: "Key person cover",
+          opts: [ { t: "Little — there's a plan", r: 0 }, { t: "Considerably", r: 1 }, { t: "Critically — no plan", r: 2 } ] },
+        { q: "Is there business-interruption insurance or a continuity plan?",
+          gap: "Business continuity",
+          opts: [ { t: "Yes, fully", r: 0 }, { t: "Partially", r: 1 }, { t: "No", r: 2 } ] },
+        { q: "Do you offer a group benefits scheme (health/life) to your staff?",
+          gap: "Employee benefits",
+          opts: [ { t: "Yes", r: 0 }, { t: "Considering it", r: 1 }, { t: "No", r: 2 } ] },
+        { q: "If a large client failed to pay or went bankrupt, what would happen?",
+          gap: "Trade credit insurance",
+          opts: [ { t: "Covered / cash-only", r: 0 }, { t: "It would hurt", r: 1 }, { t: "A serious blow", r: 2 } ] },
+        { q: "How protected is the business from a cyber-attack or data breach (GDPR)?",
+          gap: "Cyber & data protection",
+          opts: [ { t: "Cover & measures in place", r: 0 }, { t: "Basics only", r: 1 }, { t: "Not at all", r: 2 } ] },
+        { q: "As a director, are you protected against personal liability for business decisions?",
+          gap: "Directors' liability (D&O)",
+          opts: [ { t: "Yes", r: 0 }, { t: "Not sure", r: 1 }, { t: "No", r: 2 } ] }
+      ],
+      levels: {
+        green: { t: "Solid foundations", d: "The business has covered the core risks. An annual review keeps it that way." },
+        yellow: { t: "There is exposure", d: "Some risks remain uncovered — best to close them before they strike." },
+        red: { t: "Significant exposure", d: "Major risks remain uncovered and could be costly in a difficult moment." }
+      },
+      scoreLabel: "Exposure index",
+      gapsLabel: "Where you're most at risk",
+      noGaps: "No critical gaps found — excellent."
+    }
+  };
+
+  const bizRiskResult = document.getElementById("bizRiskResult");
+  let bizAnswers = [1, 1, 1, 1, 1, 1];
+
+  function bizLvlColors(level) {
+    if (level === "green") return { c: "#3b6d11", bg: "#eaf3de", bar: "#639922" };
+    if (level === "yellow") return { c: "#854f0b", bg: "#faeeda", bar: "#ba7517" };
+    return { c: "#791f1f", bg: "#fcebeb", bar: "#a32d2d" };
+  }
+
+  function renderBizRisk() {
+    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const d = BIZRISK[lang];
+
+    bizRiskQuestions.innerHTML = d.questions.map(function (q, qi) {
+      const opts = q.opts.map(function (o, oi) {
+        const active = bizAnswers[qi] === oi ? " is-active" : "";
+        return '<button type="button" class="risk-opt' + active + '" data-q="' + qi + '" data-o="' + oi + '">' + o.t + '</button>';
+      }).join("");
+      return '<div class="risk-q"><span class="risk-q-label">' + (qi + 1) + '. ' + q.q + '</span><div class="risk-opts">' + opts + '</div></div>';
+    }).join("");
+
+    let total = 0, maxTotal = 0;
+    const gaps = [];
+    d.questions.forEach(function (q, qi) {
+      const maxR = Math.max.apply(null, q.opts.map(function (o) { return o.r; }));
+      maxTotal += maxR;
+      const r = q.opts[bizAnswers[qi]].r;
+      total += r;
+      if (r >= 2) gaps.push(q.gap);
+    });
+    const pct = maxTotal ? Math.round((total / maxTotal) * 100) : 0;
+    const level = pct < 30 ? "green" : pct <= 60 ? "yellow" : "red";
+    const lv = d.levels[level];
+    const col = bizLvlColors(level);
+
+    let gapsHtml;
+    if (gaps.length) {
+      gapsHtml = '<p style="margin:14px 0 8px;font-size:0.8rem;font-weight:800;color:#17201f;text-transform:uppercase;letter-spacing:0.3px;">' + d.gapsLabel + '</p>'
+        + '<div style="display:flex;flex-direction:column;gap:5px;">'
+        + gaps.map(function (g) {
+            return '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fcebeb;border-radius:7px;"><span style="width:9px;height:9px;border-radius:50%;background:#a32d2d;flex-shrink:0;"></span><span style="flex:1;font-size:0.82rem;color:#17201f;font-weight:600;">' + g + '</span></div>';
+          }).join("")
+        + '</div>';
+    } else {
+      gapsHtml = '<p style="margin:14px 0 0;padding:10px 12px;background:#eaf3de;border-radius:7px;font-size:0.82rem;color:#3b6d11;font-weight:700;">' + d.noGaps + '</p>';
+    }
+
+    bizRiskResult.innerHTML =
+      '<div style="background:' + col.bg + ';border-radius:10px;padding:16px 18px;margin:20px 0 4px;">'
+      + '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;"><span style="font-size:0.74rem;font-weight:800;color:' + col.c + ';text-transform:uppercase;letter-spacing:0.3px;">' + d.scoreLabel + '</span><span style="font-size:1.3rem;font-weight:800;color:' + col.c + ';">' + pct + '%</span></div>'
+      + '<div style="height:8px;border-radius:999px;background:rgba(0,0,0,0.08);overflow:hidden;margin-bottom:12px;"><div style="height:100%;width:' + pct + '%;background:' + col.bar + ';border-radius:999px;transition:width 0.3s ease;"></div></div>'
+      + '<p style="margin:0 0 3px;font-size:1rem;font-weight:800;color:' + col.c + ';">' + lv.t + '</p>'
+      + '<p style="margin:0;font-size:0.85rem;color:#17201f;line-height:1.5;">' + lv.d + '</p>'
+      + gapsHtml
+      + '</div>';
+  }
+
+  bizRiskQuestions.addEventListener("click", function (e) {
+    const btn = e.target.closest(".risk-opt");
+    if (!btn) return;
+    bizAnswers[+btn.dataset.q] = +btn.dataset.o;
+    renderBizRisk();
+  });
+
+  window._refreshBizRisk = renderBizRisk;
+  renderBizRisk();
 }
 
 const revealNodes = document.querySelectorAll(".reveal");
