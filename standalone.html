@@ -2047,7 +2047,7 @@ body.modal-open {
             </div>
           </article>
 
-          <article class="service-card reveal">
+          <article class="service-card has-tools reveal">
             <div class="service-card-top">
               <span class="service-number">02</span>
               <span class="service-tag" data-i18n="moduleTwoTag">Business owners</span>
@@ -2063,7 +2063,9 @@ body.modal-open {
               <li>Έλεγχος πιστοληπτικής ικανότητας</li>
               <li data-i18n="moduleTwoPointD">Ασφάλεια πιστώσεων & εγγυητικές επιστολές</li>
             </ul>
-            <a href="#contact" class="module-link" data-i18n="moduleLink">Συζήτηση για αυτό</a>
+            <div class="module-tools">
+              <button type="button" class="module-tool" data-target="bizModal" data-i18n="moduleToolBiz">Τι κινδυνεύει — αναλυτικά →</button>
+            </div>
           </article>
 
           <article class="service-card reveal">
@@ -2531,6 +2533,71 @@ body.modal-open {
         </div>
       </div>
 
+      <!-- B5 — Business expanded (bizModal) -->
+      <div class="tool-modal-overlay" id="bizModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="biz-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="bizEyebrow">Για επιχειρήσεις · Τι κινδυνεύει</p>
+            <h2 id="biz-title" class="calc-title" data-i18n="bizTitle">Τέσσερις κίνδυνοι που σπάνια μπαίνουν στον ισολογισμό.</h2>
+            <p class="calc-sub" data-i18n="bizSub">Δεν φαίνονται στα βιβλία — μέχρι τη μέρα που χτυπούν. Να τι κρύβεται κάτω από κάθε υγιή επιχείρηση.</p>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="biz1H">1. Ο άνθρωπος-κλειδί που κρατά την επιχείρηση</p>
+              <p class="fam-p" data-i18n="biz1P">Σε κάθε μικρομεσαία επιχείρηση υπάρχουν ένας-δύο άνθρωποι από τους οποίους εξαρτάται δυσανάλογο μέρος του τζίρου — σχέσεις πελατών, τεχνογνωσία, η ίδια η λειτουργία. Αν λείψουν ξαφνικά, τι μένει όρθιο;</p>
+              <div class="fam-rows">
+                <div>
+                  <div class="fam-label"><span data-i18n="biz1Bar1">Ετήσιος τζίρος που εξαρτάται από τον key person</span><span class="v">€450.000</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:100%"></div></div>
+                </div>
+                <div>
+                  <div class="fam-label"><span data-i18n="biz1Bar2">Κάλυψη key person που συναντώ συνήθως</span><span class="v">€0</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:3%"></div></div>
+                </div>
+              </div>
+              <p class="fam-p" data-i18n="biz1Note">Μια ασφάλιση key person δίνει στην επιχείρηση χρόνο και ρευστότητα να σταθεί — να βρει αντικαταστάτη, να κρατήσει πελάτες, να μην καταρρεύσει σε μια νύχτα.</p>
+            </div>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="biz2H">2. Το κόστος να φύγει ένας καλός άνθρωπος</p>
+              <p class="fam-p" data-i18n="biz2P">Η αντικατάσταση ενός έμπειρου στελέχους δεν είναι μόνο μισθός. Είναι recruitment, εκπαίδευση μηνών, χαμένη παραγωγικότητα, γνώση που φεύγει μαζί του. Σύγκρινέ το με το ετήσιο κόστος ενός πακέτου που τον κρατά:</p>
+              <div class="fam-rows">
+                <div>
+                  <div class="fam-label"><span data-i18n="biz2Bar1">Κόστος αντικατάστασης στελέχους (εφάπαξ)</span><span class="v">€45.000</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:100%"></div></div>
+                </div>
+                <div>
+                  <div class="fam-label"><span data-i18n="biz2Bar2">Ετήσιο benefits package που τον κρατά</span><span class="v">€3.500</span></div>
+                  <div class="fam-track"><div class="fam-fill" style="width:8%"></div></div>
+                </div>
+              </div>
+              <p class="fam-p" data-i18n="biz2Note">Το ένα είναι απώλεια που έρχεται απρόσκλητη. Το άλλο, μικρή ετήσια επένδυση που χτίζει αφοσίωση — και κάνει την επιχείρηση εργοδότη που οι καλοί δεν εγκαταλείπουν.</p>
+            </div>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="biz3H">3. Όταν ο πελάτης δεν πληρώνει</p>
+              <p class="fam-p" data-i18n="biz3P">Αν πουλάτε με πίστωση, ένα μέρος του τζίρου σας είναι πάντα «στον αέρα» — ανοιχτές απαιτήσεις που εξαρτώνται από τη φερεγγυότητα τρίτων. Μια κακή χρονιά ενός μεγάλου πελάτη μπορεί να γίνει δική σας κρίση ρευστότητας.</p>
+              <span class="fam-figure">έως 90%</span>
+              <p class="fam-p" data-i18n="biz3Bar1">της ανείσπρακτης απαίτησης αποζημιώνεται από την <strong>ασφάλιση πιστώσεων</strong>, αν ο πελάτης αδυνατεί να πληρώσει. Και κάτι εξίσου πολύτιμο: <strong>συνεχής αξιολόγηση της πιστοληπτικής ικανότητας</strong> των πελατών σας — ξέρετε εκ των προτέρων με ποιον μπαίνετε, πριν δώσετε πίστωση.</p>
+              <p class="fam-p" data-i18n="biz3Note">Πουλάτε με σιγουριά, δίνετε πίστωση σε νέους πελάτες χωρίς φόβο, κοιμάστε ήσυχοι όταν ο μεγαλύτερος πελάτης σας καθυστερεί.</p>
+            </div>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="biz4H">4. Εγγυητικές χωρίς να δεσμεύετε την τράπεζά σας</p>
+              <p class="fam-p" data-i18n="biz4P">Κάθε εγγυητική επιστολή που εκδίδει η τράπεζα δεσμεύει πιστωτικό όριο — όριο που θα μπορούσε να χρηματοδοτεί ανάπτυξη, αγορές, μισθοδοσία. Η εγγυητική μέσω ασφαλιστηρίου το αφήνει ελεύθερο:</p>
+              <div class="fam-goals">
+                <div class="fam-goal"><span class="ico">🏦</span><span class="gname" data-i18n="biz4G1">Τραπεζική εγγυητική</span><span class="gmeta" data-i18n="biz4G1m">Δεσμεύει πιστωτικό όριο & ρευστότητα</span></div>
+                <div class="fam-goal"><span class="ico">🛡️</span><span class="gname" data-i18n="biz4G2">Ασφαλιστική εγγυητική</span><span class="gmeta" data-i18n="biz4G2m">Αφήνει το τραπεζικό όριο ελεύθερο</span></div>
+              </div>
+              <p class="fam-p" data-i18n="biz4Note">Για διαγωνισμούς, συμβάσεις, τελωνεία, εργολαβίες — η ίδια εγγύηση προς τον αντισυμβαλλόμενο, αλλά η ρευστότητά σας μένει εκεί που ανήκει: στην επιχείρηση.</p>
+            </div>
+
+            <a class="calc-cta" href="#contact" data-i18n="bizCta">Ας δούμε ποιοι από αυτούς τους κινδύνους αφορούν εσάς →</a>
+            <p class="calc-note" data-i18n="bizNote">Τα ποσά είναι ενδεικτικά, για κατανόηση της λογικής — όχι προσφορά ή δέσμευση. Κάθε λύση διαμορφώνεται στα δικά σας δεδομένα. Ασφάλιση πιστώσεων & εγγυητικές μέσω Allianz Trade.</p>
+          </div>
+        </div>
+      </div>
+
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-copy section-heading narrow">
           <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
@@ -2710,6 +2777,33 @@ const copy = {
     moduleToolCalc: "Δοκίμασε τον υπολογιστή →",
     moduleToolRisk: "Έλεγξε την έκθεσή σου →",
     moduleToolFamily: "Γιατί μετράει — αναλυτικά →",
+    moduleToolBiz: "Τι κινδυνεύει — αναλυτικά →",
+    bizEyebrow: "Για επιχειρήσεις · Τι κινδυνεύει",
+    bizTitle: "Τέσσερις κίνδυνοι που σπάνια μπαίνουν στον ισολογισμό.",
+    bizSub: "Δεν φαίνονται στα βιβλία — μέχρι τη μέρα που χτυπούν. Να τι κρύβεται κάτω από κάθε υγιή επιχείρηση.",
+    biz1H: "1. Ο άνθρωπος-κλειδί που κρατά την επιχείρηση",
+    biz1P: "Σε κάθε μικρομεσαία επιχείρηση υπάρχουν ένας-δύο άνθρωποι από τους οποίους εξαρτάται δυσανάλογο μέρος του τζίρου — σχέσεις πελατών, τεχνογνωσία, η ίδια η λειτουργία. Αν λείψουν ξαφνικά, τι μένει όρθιο;",
+    biz1Bar1: "Ετήσιος τζίρος που εξαρτάται από τον key person",
+    biz1Bar2: "Κάλυψη key person που συναντώ συνήθως",
+    biz1Note: "Μια ασφάλιση key person δίνει στην επιχείρηση χρόνο και ρευστότητα να σταθεί — να βρει αντικαταστάτη, να κρατήσει πελάτες, να μην καταρρεύσει σε μια νύχτα.",
+    biz2H: "2. Το κόστος να φύγει ένας καλός άνθρωπος",
+    biz2P: "Η αντικατάσταση ενός έμπειρου στελέχους δεν είναι μόνο μισθός. Είναι recruitment, εκπαίδευση μηνών, χαμένη παραγωγικότητα, γνώση που φεύγει μαζί του. Σύγκρινέ το με το ετήσιο κόστος ενός πακέτου που τον κρατά:",
+    biz2Bar1: "Κόστος αντικατάστασης στελέχους (εφάπαξ)",
+    biz2Bar2: "Ετήσιο benefits package που τον κρατά",
+    biz2Note: "Το ένα είναι απώλεια που έρχεται απρόσκλητη. Το άλλο, μικρή ετήσια επένδυση που χτίζει αφοσίωση — και κάνει την επιχείρηση εργοδότη που οι καλοί δεν εγκαταλείπουν.",
+    biz3H: "3. Όταν ο πελάτης δεν πληρώνει",
+    biz3P: "Αν πουλάτε με πίστωση, ένα μέρος του τζίρου σας είναι πάντα «στον αέρα» — ανοιχτές απαιτήσεις που εξαρτώνται από τη φερεγγυότητα τρίτων. Μια κακή χρονιά ενός μεγάλου πελάτη μπορεί να γίνει δική σας κρίση ρευστότητας.",
+    biz3Bar1: "της ανείσπρακτης απαίτησης αποζημιώνεται από την <strong>ασφάλιση πιστώσεων</strong>, αν ο πελάτης αδυνατεί να πληρώσει. Και κάτι εξίσου πολύτιμο: <strong>συνεχής αξιολόγηση της πιστοληπτικής ικανότητας</strong> των πελατών σας — ξέρετε εκ των προτέρων με ποιον μπαίνετε, πριν δώσετε πίστωση.",
+    biz3Note: "Πουλάτε με σιγουριά, δίνετε πίστωση σε νέους πελάτες χωρίς φόβο, κοιμάστε ήσυχοι όταν ο μεγαλύτερος πελάτης σας καθυστερεί.",
+    biz4H: "4. Εγγυητικές χωρίς να δεσμεύετε την τράπεζά σας",
+    biz4P: "Κάθε εγγυητική επιστολή που εκδίδει η τράπεζα δεσμεύει πιστωτικό όριο — όριο που θα μπορούσε να χρηματοδοτεί ανάπτυξη, αγορές, μισθοδοσία. Η εγγυητική μέσω ασφαλιστηρίου το αφήνει ελεύθερο:",
+    biz4G1: "Τραπεζική εγγυητική",
+    biz4G1m: "Δεσμεύει πιστωτικό όριο & ρευστότητα",
+    biz4G2: "Ασφαλιστική εγγυητική",
+    biz4G2m: "Αφήνει το τραπεζικό όριο ελεύθερο",
+    biz4Note: "Για διαγωνισμούς, συμβάσεις, τελωνεία, εργολαβίες — η ίδια εγγύηση προς τον αντισυμβαλλόμενο, αλλά η ρευστότητά σας μένει εκεί που ανήκει: στην επιχείρηση.",
+    bizCta: "Ας δούμε ποιοι από αυτούς τους κινδύνους αφορούν εσάς →",
+    bizNote: "Τα ποσά είναι ενδεικτικά, για κατανόηση της λογικής — όχι προσφορά ή δέσμευση. Κάθε λύση διαμορφώνεται στα δικά σας δεδομένα. Ασφάλιση πιστώσεων & εγγυητικές μέσω Allianz Trade.",
     moduleToolPolicy: "Δες δείγμα ανάλυσης →",
     riskEyebrow: "RiskGuard Family · Γρήγορος έλεγχος",
     riskTitle: "Πόσο εκτεθειμένη είναι η οικογένειά σου;",
@@ -2941,6 +3035,33 @@ const copy = {
     moduleToolCalc: "Try the calculator →",
     moduleToolRisk: "Check your exposure →",
     moduleToolFamily: "Why it matters — in detail →",
+    moduleToolBiz: "What's at risk — in detail →",
+    bizEyebrow: "For businesses · What's at risk",
+    bizTitle: "Four risks that rarely make it onto the balance sheet.",
+    bizSub: "They don't show in the books — until the day they strike. Here's what sits beneath every healthy business.",
+    biz1H: "1. The key person who holds the business together",
+    biz1P: "Every small or mid-sized business has one or two people on whom a disproportionate share of revenue depends — client relationships, know-how, the operation itself. If they're suddenly gone, what stays standing?",
+    biz1Bar1: "Annual revenue dependent on the key person",
+    biz1Bar2: "Key person cover I usually find in place",
+    biz1Note: "Key person insurance gives the business time and liquidity to steady itself — to find a replacement, retain clients, and not collapse overnight.",
+    biz2H: "2. The cost of losing a good person",
+    biz2P: "Replacing an experienced employee isn't just salary. It's recruitment, months of training, lost productivity, knowledge walking out the door. Compare it to the annual cost of a package that keeps them:",
+    biz2Bar1: "Cost of replacing an employee (one-off)",
+    biz2Bar2: "Annual benefits package that retains them",
+    biz2Note: "One is a loss that arrives uninvited. The other, a small annual investment that builds loyalty — and makes the business an employer good people don't leave.",
+    biz3H: "3. When the client doesn't pay",
+    biz3P: "If you sell on credit, part of your revenue is always 'in the air' — open receivables that depend on the solvency of others. One bad year from a major client can become your own liquidity crisis.",
+    biz3Bar1: "of the unpaid receivable is compensated by <strong>trade credit insurance</strong> if the client cannot pay. And something equally valuable: <strong>ongoing creditworthiness assessment</strong> of your clients — you know in advance who you're dealing with, before extending credit.",
+    biz3Note: "You sell with confidence, extend credit to new clients without fear, and sleep easy when your largest client is late.",
+    biz4H: "4. Guarantees without tying up your bank",
+    biz4P: "Every letter of guarantee the bank issues ties up credit capacity — capacity that could fund growth, purchases, payroll. A surety bond through an insurance policy leaves it free:",
+    biz4G1: "Bank guarantee",
+    biz4G1m: "Ties up credit capacity & liquidity",
+    biz4G2: "Insurance surety bond",
+    biz4G2m: "Leaves your bank credit line free",
+    biz4Note: "For tenders, contracts, customs, construction work — the same guarantee to the counterparty, but your liquidity stays where it belongs: in the business.",
+    bizCta: "Let's see which of these risks apply to you →",
+    bizNote: "Amounts are indicative, to convey the logic — not an offer or commitment. Every solution is shaped to your own data. Trade credit insurance & surety bonds via Allianz Trade.",
     moduleToolPolicy: "See a sample analysis →",
     riskEyebrow: "RiskGuard Family · Quick check",
     riskTitle: "How exposed is your family?",
