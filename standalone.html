@@ -1121,6 +1121,92 @@ h2 {
   border-color: var(--petrol);
 }
 
+/* B1 — Case studies modals */
+.cs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+}
+.cs-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px 24px 20px;
+  background: var(--paper);
+}
+.cs-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--petrol);
+  margin: 0 0 10px;
+}
+.cs-story {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+.cs-punch {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  background: var(--petrol);
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+.cs-punch-num {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--gold);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+.cs-punch-text {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.4;
+}
+.cs-cta {
+  display: inline-block;
+  margin-top: 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--petrol);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--gold);
+  padding-bottom: 2px;
+  transition: color 0.18s;
+}
+.cs-cta:hover { color: var(--petrol-deep); }
+.cs-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+/* audience card story button */
+.audience-card .story-btn {
+  margin-top: 18px;
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--petrol);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 1px solid var(--petrol);
+  letter-spacing: 0.01em;
+  transition: opacity 0.18s;
+}
+.audience-card.accent .story-btn {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.audience-card .story-btn:hover { opacity: 0.7; }
+
 /* B4 — Families expanded (familyModal infographics) */
 .fam-block {
   margin-top: 24px;
@@ -1909,6 +1995,7 @@ body.modal-open {
             <p data-i18n="familiesText">
               Κάθε οικογένεια έχει τη δική της εικόνα — υποχρεώσεις, στόχους, ανησυχίες που δεν ειπώθηκαν ποτέ σε κάποιον σύμβουλο. Ξεκινώ από εκεί: τι υπάρχει, τι λείπει, τι έχει προτεραιότητα. Προστασία εισοδήματος, αποταμίευση, συνταξιοδοτικός σχεδιασμός, πλάνο για τα παιδιά — πάντα με βάση την πραγματική σας εικόνα.
             </p>
+            <button type="button" class="story-btn" data-target="casesFamModal" data-i18n="casesFamBtn">Πραγματικές ιστορίες →</button>
           </article>
 
           <article class="audience-card accent">
@@ -1917,6 +2004,7 @@ body.modal-open {
             <p data-i18n="businessText">
               Οι επιχειρηματικοί κίνδυνοι σπάνια φαίνονται έως ότου χτυπήσουν. Χαρτογραφώ αυτό που εκτίθεται — ανθρώπους-κλειδιά, λειτουργική συνέχεια, νομικές υποχρεώσεις, κενά καλύψεων — και βοηθώ να υπάρχει σχέδιο πριν το χρειαστείτε. Employee benefits που κρατούν ανθρώπους, ασφαλίσεις που δουλεύουν όταν μετράει. Συμπεριλαμβάνεται και έλεγχος πιστοληπτικής ικανότητας — για να ξέρετε με ποιους μπαίνετε στον ίδιο χώρο.
             </p>
+            <button type="button" class="story-btn" data-target="casesBizModal" data-i18n="casesBizBtn">Πραγματικές ιστορίες →</button>
           </article>
         </div>
       </section>
@@ -2345,6 +2433,94 @@ body.modal-open {
         </div>
       </div>
 
+      <!-- B1 — Case studies: Families -->
+      <div class="tool-modal-overlay" id="casesFamModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="casesfam-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="casesFamEyebrow">Για οικογένειες · Πραγματικές ιστορίες</p>
+            <h2 id="casesfam-title" class="calc-title" data-i18n="casesFamTitle">Τρεις οικογένειες. Τρεις αριθμοί που δεν ήξεραν.</h2>
+            <p class="calc-sub" data-i18n="casesFamSub">Ανώνυμα παραδείγματα από πραγματικές συναντήσεις. Τα ονόματα δεν υπάρχουν — οι καταστάσεις, ναι.</p>
+
+            <div class="cs-grid">
+              <div class="cs-card">
+                <p class="cs-label" data-i18n="csF1Label">Ζευγάρι · 38 &amp; 35 ετών · 2 παιδιά</p>
+                <p class="cs-story" data-i18n="csF1Story">Νομίζαμε ότι είμαστε καλυμμένοι. Είχαμε ασφάλεια ζωής από τον εργοδότη του ενός, κάτι παλιό στο συρτάρι από πριν παντρευτούμε, και ένα στεγαστικό στο όνομά μας. Όταν τα βάλαμε όλα στο τραπέζι, βγήκε κάτι που δεν το περιμέναμε: το εισόδημά μας — αυτό που πληρώνει το δάνειο, τα παιδιά, τα πάντα — δεν ήταν προστατευμένο πουθενά. Ούτε ένα μήνα. Αλλάξαμε αυτό χωρίς να αλλάξουμε ούτε ένα ευρώ στον συνολικό μας προϋπολογισμό.</p>
+                <div class="cs-punch">
+                  <span class="cs-punch-num" data-i18n="csF1Num">€0</span>
+                  <span class="cs-punch-text" data-i18n="csF1Punch">Αυτό θα έπαιρνε η οικογένεια αν έφευγε ο ένας από τους δύο. Από ασφάλεια εισοδήματος: τίποτα.</span>
+                </div>
+              </div>
+
+              <div class="cs-card">
+                <p class="cs-label" data-i18n="csF2Label">Μονογονεϊκή οικογένεια · 42 ετών · 1 παιδί 10 ετών</p>
+                <p class="cs-story" data-i18n="csF2Story">Τρία συμβόλαια, τρεις εταιρείες, τρεις ετήσιες πληρωμές. Κανένας δεν τα είχε δει ταυτόχρονα. Μερικές καλύψεις επικαλύπτονταν — πλήρωνε δύο φορές για το ίδιο πράγμα. Άλλα, κρίσιμα, έλειπαν τελείως. Ενοποιήσαμε, απλοποιήσαμε, και τα χρήματα που «σώθηκαν» πήγαν σε αποταμίευση για τις σπουδές του παιδιού. Για πρώτη φορά ένιωσε ότι έχει εικόνα — και σχέδιο.</p>
+                <div class="cs-punch">
+                  <span class="cs-punch-num" data-i18n="csF2Num">11 χρόνια</span>
+                  <span class="cs-punch-text" data-i18n="csF2Punch">Γρηγορότερα θα φτάσει στον στόχο για τις σπουδές — μόνο από την ανακατανομή αυτού που ήδη κατέβαλε.</span>
+                </div>
+              </div>
+
+              <div class="cs-card">
+                <p class="cs-label" data-i18n="csF3Label">Ζευγάρι · 51 &amp; 49 ετών · τα παιδιά φύγανε</p>
+                <p class="cs-story" data-i18n="csF3Story">Πίστευαν ότι η σύνταξη ήταν λυμένη. Ο ένας είχε ΙΚΑ, ο άλλος ΕΦΚΑ — «θα βγαίνουμε». Όταν τρέξαμε τους πραγματικούς αριθμούς με τα σημερινά δεδομένα του ΕΦΚΑ, το αποτέλεσμα δεν έκλεινε. Υπήρχε gap — συγκεκριμένο, μετρήσιμο. Ξεκίνησαν σχέδιο αποταμίευσης στοχευμένο σε αυτό ακριβώς το gap. Δεκατέσσερα χρόνια πριν τη σύνταξη — ακόμα υπάρχει χρόνος.</p>
+                <div class="cs-punch">
+                  <span class="cs-punch-num" data-i18n="csF3Num">€340/μήνα</span>
+                  <span class="cs-punch-text" data-i18n="csF3Punch">Τόσο λείπει για να κλείσει το συνταξιοδοτικό κενό. Αριθμός που δεν τον ήξεραν — μέχρι που τον υπολογίσαμε μαζί.</span>
+                </div>
+              </div>
+            </div>
+
+            <a class="cs-cta" href="#contact" data-i18n="casesFamCta">Αναγνωρίζετε κάτι από αυτές τις εικόνες; Μιλήστε μου →</a>
+            <p class="cs-note" data-i18n="casesFamNote">Τα παραδείγματα είναι ανώνυμα και ενδεικτικά. Κάθε περίπτωση έχει τα δικά της δεδομένα.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- B1 — Case studies: Business -->
+      <div class="tool-modal-overlay" id="casesBizModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="casesbiz-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="casesBizEyebrow">Για επιχειρήσεις · Πραγματικές ιστορίες</p>
+            <h2 id="casesbiz-title" class="calc-title" data-i18n="casesBizTitle">Τρεις επιχειρήσεις. Τρεις κίνδυνοι που δεν τους είχαν υπολογίσει.</h2>
+            <p class="calc-sub" data-i18n="casesBizSub">Ανώνυμα παραδείγματα από πραγματικές συναντήσεις. Οι επιχειρηματικοί κίνδυνοι δεν χτυπούν ποτέ την κατάλληλη στιγμή.</p>
+
+            <div class="cs-grid">
+              <div class="cs-card">
+                <p class="cs-label" data-i18n="csB1Label">Εταιρεία παροχής υπηρεσιών · 8 άτομα</p>
+                <p class="cs-story" data-i18n="csB1Story">Ο συνεργάτης που κρατούσε τις σχέσεις με τους μισούς πελάτες αποφάσισε να φύγει. Χωρίς προειδοποίηση, χωρίς μεταβατική περίοδο. Δεν υπήρχε σχέδιο — ούτε key person ασφάλιση, ούτε συμφωνία μη ανταγωνισμού, ούτε δομημένη μεταβίβαση πελατολογίου. Η εταιρεία επέζησε, αλλά χρειάστηκε 18 μήνες για να επανέλθει στο ίδιο επίπεδο. Στη δεύτερη συνάντηση ρωτήσανε: «γιατί δεν μας το είπε κανείς αυτό νωρίτερα;»</p>
+                <div class="cs-punch">
+                  <span class="cs-punch-num" data-i18n="csB1Num">€280.000</span>
+                  <span class="cs-punch-text" data-i18n="csB1Punch">Εκτιμώμενη αξία πελατολογίου που ήταν εκτεθειμένη — χωρίς κανένα δίχτυ ασφαλείας.</span>
+                </div>
+              </div>
+
+              <div class="cs-card">
+                <p class="cs-label" data-i18n="csB2Label">Οικογενειακή επιχείρηση · 15 άτομα</p>
+                <p class="cs-story" data-i18n="csB2Story">Ατύχημα. Ο ιδιοκτήτης εκτός για τέσσερις μήνες. Η επιχείρηση συνέχισε να λειτουργεί χάρη στην οικογένεια που κάλυψε τα κενά — αλλά τα πάγια έτρεχαν κανονικά: μισθοί, ενοίκιο, ασφαλιστικές εισφορές. Δεν υπήρχε ασφάλιση απώλειας εισοδήματος για επιχειρηματίες. Βγήκαν από κει — αλλά με τρύπα στα αποθεματικά που τους πήρε χρόνια να κλείσουν.</p>
+                <div class="cs-punch">
+                  <span class="cs-punch-num" data-i18n="csB2Num">4 μήνες</span>
+                  <span class="cs-punch-text" data-i18n="csB2Punch">Χωρίς εισόδημα για τον ιδιοκτήτη — αλλά με τα πάγια της επιχείρησης να τρέχουν κανονικά κάθε μήνα.</span>
+                </div>
+              </div>
+
+              <div class="cs-card">
+                <p class="cs-label" data-i18n="csB3Label">Εταιρεία τεχνολογίας · 20 άτομα</p>
+                <p class="cs-story" data-i18n="csB3Story">Ο senior developer που είχαν εκπαιδεύσει επί τρία χρόνια πήγε σε ανταγωνιστή. Ο λόγος δεν ήταν ο μισθός — ήταν ένα πακέτο παροχών που δεν μπορούσαν να ταιριάξουν. Ιδιωτική ασφάλιση υγείας, επικουρική σύνταξη, life insurance. Πράγματα που υπάρχουν και για μικρές εταιρείες, αρκεί να τα γνωρίζεις. Μετά από αυτό, φτιάξαμε ένα benefits package προσαρμοσμένο στο μέγεθός τους — και έκτοτε δεν έχουν χάσει άλλο στέλεχος.</p>
+                <div class="cs-punch">
+                  <span class="cs-punch-num" data-i18n="csB3Num">€45.000</span>
+                  <span class="cs-punch-text" data-i18n="csB3Punch">Εκτιμώμενο κόστος αντικατάστασης ενός έμπειρου στελέχους — recruitment, εκπαίδευση, χαμένη παραγωγικότητα.</span>
+                </div>
+              </div>
+            </div>
+
+            <a class="cs-cta" href="#contact" data-i18n="casesBizCta">Αναγνωρίζετε κάτι από αυτές τις εικόνες; Μιλήστε μου →</a>
+            <p class="cs-note" data-i18n="casesBizNote">Τα παραδείγματα είναι ανώνυμα και ενδεικτικά. Κάθε επιχείρηση έχει τα δικά της δεδομένα.</p>
+          </div>
+        </div>
+      </div>
+
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-copy section-heading narrow">
           <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
@@ -2445,10 +2621,46 @@ const copy = {
     familiesTitle: "Financial planning για πραγματικές αποφάσεις ζωής.",
     familiesText:
       "Κάθε οικογένεια έχει τη δική της εικόνα — υποχρεώσεις, στόχους, ανησυχίες που δεν ειπώθηκαν ποτέ σε κάποιον σύμβουλο. Ξεκινώ από εκεί: τι υπάρχει, τι λείπει, τι έχει προτεραιότητα. Προστασία εισοδήματος, αποταμίευση, συνταξιοδοτικός σχεδιασμός, πλάνο για τα παιδιά — πάντα με βάση την πραγματική σας εικόνα.",
+    casesFamBtn: "Πραγματικές ιστορίες →",
+    casesFamEyebrow: "Για οικογένειες · Πραγματικές ιστορίες",
+    casesFamTitle: "Τρεις οικογένειες. Τρεις αριθμοί που δεν ήξεραν.",
+    casesFamSub: "Ανώνυμα παραδείγματα από πραγματικές συναντήσεις. Τα ονόματα δεν υπάρχουν — οι καταστάσεις, ναι.",
+    csF1Label: "Ζευγάρι · 38 & 35 ετών · 2 παιδιά",
+    csF1Story: "Νομίζαμε ότι είμαστε καλυμμένοι. Είχαμε ασφάλεια ζωής από τον εργοδότη του ενός, κάτι παλιό στο συρτάρι από πριν παντρευτούμε, και ένα στεγαστικό στο όνομά μας. Όταν τα βάλαμε όλα στο τραπέζι, βγήκε κάτι που δεν το περιμέναμε: το εισόδημά μας — αυτό που πληρώνει το δάνειο, τα παιδιά, τα πάντα — δεν ήταν προστατευμένο πουθενά. Ούτε ένα μήνα. Αλλάξαμε αυτό χωρίς να αλλάξουμε ούτε ένα ευρώ στον συνολικό μας προϋπολογισμό.",
+    csF1Num: "€0",
+    csF1Punch: "Αυτό θα έπαιρνε η οικογένεια αν έφευγε ο ένας από τους δύο. Από ασφάλεια εισοδήματος: τίποτα.",
+    csF2Label: "Μονογονεϊκή οικογένεια · 42 ετών · 1 παιδί 10 ετών",
+    csF2Story: "Τρία συμβόλαια, τρεις εταιρείες, τρεις ετήσιες πληρωμές. Κανένας δεν τα είχε δει ταυτόχρονα. Μερικές καλύψεις επικαλύπτονταν — πλήρωνε δύο φορές για το ίδιο πράγμα. Άλλα, κρίσιμα, έλειπαν τελείως. Ενοποιήσαμε, απλοποιήσαμε, και τα χρήματα που «σώθηκαν» πήγαν σε αποταμίευση για τις σπουδές του παιδιού. Για πρώτη φορά ένιωσε ότι έχει εικόνα — και σχέδιο.",
+    csF2Num: "11 χρόνια",
+    csF2Punch: "Γρηγορότερα θα φτάσει στον στόχο για τις σπουδές — μόνο από την ανακατανομή αυτού που ήδη κατέβαλε.",
+    csF3Label: "Ζευγάρι · 51 & 49 ετών · τα παιδιά φύγανε",
+    csF3Story: "Πίστευαν ότι η σύνταξη ήταν λυμένη. Ο ένας είχε ΙΚΑ, ο άλλος ΕΦΚΑ — «θα βγαίνουμε». Όταν τρέξαμε τους πραγματικούς αριθμούς με τα σημερινά δεδομένα του ΕΦΚΑ, το αποτέλεσμα δεν έκλεινε. Υπήρχε gap — συγκεκριμένο, μετρήσιμο. Ξεκίνησαν σχέδιο αποταμίευσης στοχευμένο σε αυτό ακριβώς το gap. Δεκατέσσερα χρόνια πριν τη σύνταξη — ακόμα υπάρχει χρόνος.",
+    csF3Num: "€340/μήνα",
+    csF3Punch: "Τόσο λείπει για να κλείσει το συνταξιοδοτικό κενό. Αριθμός που δεν τον ήξεραν — μέχρι που τον υπολογίσαμε μαζί.",
+    casesFamCta: "Αναγνωρίζετε κάτι από αυτές τις εικόνες; Μιλήστε μου →",
+    casesFamNote: "Τα παραδείγματα είναι ανώνυμα και ενδεικτικά. Κάθε περίπτωση έχει τα δικά της δεδομένα.",
     businessKicker: "Για επιχειρήσεις",
     businessTitle: "Risk management για συνέχεια και ανθεκτικότητα.",
     businessText:
       "Οι επιχειρηματικοί κίνδυνοι σπάνια φαίνονται έως ότου χτυπήσουν. Χαρτογραφώ αυτό που εκτίθεται — ανθρώπους-κλειδιά, λειτουργική συνέχεια, νομικές υποχρεώσεις, κενά καλύψεων — και βοηθώ να υπάρχει σχέδιο πριν το χρειαστείτε. Employee benefits που κρατούν ανθρώπους, ασφαλίσεις που δουλεύουν όταν μετράει. Συμπεριλαμβάνεται και έλεγχος πιστοληπτικής ικανότητας — για να ξέρετε με ποιους μπαίνετε στον ίδιο χώρο.",
+    casesBizBtn: "Πραγματικές ιστορίες →",
+    casesBizEyebrow: "Για επιχειρήσεις · Πραγματικές ιστορίες",
+    casesBizTitle: "Τρεις επιχειρήσεις. Τρεις κίνδυνοι που δεν τους είχαν υπολογίσει.",
+    casesBizSub: "Ανώνυμα παραδείγματα από πραγματικές συναντήσεις. Οι επιχειρηματικοί κίνδυνοι δεν χτυπούν ποτέ την κατάλληλη στιγμή.",
+    csB1Label: "Εταιρεία παροχής υπηρεσιών · 8 άτομα",
+    csB1Story: "Ο συνεργάτης που κρατούσε τις σχέσεις με τους μισούς πελάτες αποφάσισε να φύγει. Χωρίς προειδοποίηση, χωρίς μεταβατική περίοδο. Δεν υπήρχε σχέδιο — ούτε key person ασφάλιση, ούτε συμφωνία μη ανταγωνισμού, ούτε δομημένη μεταβίβαση πελατολογίου. Η εταιρεία επέζησε, αλλά χρειάστηκε 18 μήνες για να επανέλθει στο ίδιο επίπεδο. Στη δεύτερη συνάντηση ρωτήσανε: «γιατί δεν μας το είπε κανείς αυτό νωρίτερα;»",
+    csB1Num: "€280.000",
+    csB1Punch: "Εκτιμώμενη αξία πελατολογίου που ήταν εκτεθειμένη — χωρίς κανένα δίχτυ ασφαλείας.",
+    csB2Label: "Οικογενειακή επιχείρηση · 15 άτομα",
+    csB2Story: "Ατύχημα. Ο ιδιοκτήτης εκτός για τέσσερις μήνες. Η επιχείρηση συνέχισε να λειτουργεί χάρη στην οικογένεια που κάλυψε τα κενά — αλλά τα πάγια έτρεχαν κανονικά: μισθοί, ενοίκιο, ασφαλιστικές εισφορές. Δεν υπήρχε ασφάλιση απώλειας εισοδήματος για επιχειρηματίες. Βγήκαν από κει — αλλά με τρύπα στα αποθεματικά που τους πήρε χρόνια να κλείσουν.",
+    csB2Num: "4 μήνες",
+    csB2Punch: "Χωρίς εισόδημα για τον ιδιοκτήτη — αλλά με τα πάγια της επιχείρησης να τρέχουν κανονικά κάθε μήνα.",
+    csB3Label: "Εταιρεία τεχνολογίας · 20 άτομα",
+    csB3Story: "Ο senior developer που είχαν εκπαιδεύσει επί τρία χρόνια πήγε σε ανταγωνιστή. Ο λόγος δεν ήταν ο μισθός — ήταν ένα πακέτο παροχών που δεν μπορούσαν να ταιριάξουν. Ιδιωτική ασφάλιση υγείας, επικουρική σύνταξη, life insurance. Πράγματα που υπάρχουν και για μικρές εταιρείες, αρκεί να τα γνωρίζεις. Μετά από αυτό, φτιάξαμε ένα benefits package προσαρμοσμένο στο μέγεθός τους — και έκτοτε δεν έχουν χάσει άλλο στέλεχος.",
+    csB3Num: "€45.000",
+    csB3Punch: "Εκτιμώμενο κόστος αντικατάστασης ενός έμπειρου στελέχους — recruitment, εκπαίδευση, χαμένη παραγωγικότητα.",
+    casesBizCta: "Αναγνωρίζετε κάτι από αυτές τις εικόνες; Μιλήστε μου →",
+    casesBizNote: "Τα παραδείγματα είναι ανώνυμα και ενδεικτικά. Κάθε επιχείρηση έχει τα δικά της δεδομένα.",
     modulesEyebrow: "Service modules",
     modulesTitle: "Οι υπηρεσίες οργανώνονται γύρω από το τι χρειάζεται να προστατευτεί, να χτιστεί και να μείνει ξεκάθαρο.",
     moduleOneTag: "Individuals & Families",
@@ -2635,10 +2847,46 @@ const copy = {
     familiesTitle: "Financial planning for real-life decisions.",
     familiesText:
       "Every family has its own picture — obligations, goals, worries that were never shared with an advisor. I start there: what is in place, what is missing, what comes first. Income protection, savings, retirement planning, and a plan for the children — always grounded in your real situation.",
+    casesFamBtn: "Real stories →",
+    casesFamEyebrow: "For families · Real stories",
+    casesFamTitle: "Three families. Three numbers they didn't know.",
+    casesFamSub: "Anonymous examples from real meetings. No names — but every situation is real.",
+    csF1Label: "Couple · 38 & 35 · 2 children",
+    csF1Story: "We thought we were covered. We had life insurance through one employer, something old in a drawer from before we married, and a mortgage in our names. When we laid it all on the table, something unexpected came out: our income — the thing that pays the loan, the children, everything — was protected nowhere. Not even for one month. We fixed that without changing a single euro in our overall budget.",
+    csF1Num: "€0",
+    csF1Punch: "What the family would have received if one of them had died. From income protection insurance: nothing.",
+    csF2Label: "Single-parent family · 42 · 1 child aged 10",
+    csF2Story: "Three policies, three companies, three annual payments. Nobody had ever looked at them together. Some coverages overlapped — paying twice for the same thing. Others, critical ones, were missing entirely. We consolidated, simplified, and the money saved went into savings for the child's education. For the first time, she felt she had a clear picture — and a plan.",
+    csF2Num: "11 years",
+    csF2Punch: "Sooner she will reach her savings goal — just by redistributing what she was already paying.",
+    csF3Label: "Couple · 51 & 49 · empty nesters",
+    csF3Story: "They thought retirement was sorted. One had IKA, the other EFKA — 'we'll manage.' When we ran the real numbers against today's EFKA projections, the picture didn't add up. There was a gap — specific, measurable. They started a targeted savings plan aimed at exactly that gap. Fourteen years before retirement — there is still time.",
+    csF3Num: "€340/month",
+    csF3Punch: "The amount missing to close the retirement gap. A number they didn't know — until we calculated it together.",
+    casesFamCta: "Do you recognise something from these pictures? Talk to me →",
+    casesFamNote: "Examples are anonymous and illustrative. Every case has its own data.",
     businessKicker: "For businesses",
     businessTitle: "Risk management for continuity and resilience.",
     businessText:
       "Business risks rarely show themselves until they strike. I map what is exposed — key people, operational continuity, legal obligations, coverage gaps — and help you have a plan before you need one. Employee benefits that retain people, insurance that works when it matters. Includes creditworthiness checks on partners and clients — so you know who you're dealing with.",
+    casesBizBtn: "Real stories →",
+    casesBizEyebrow: "For businesses · Real stories",
+    casesBizTitle: "Three businesses. Three risks they hadn't accounted for.",
+    casesBizSub: "Anonymous examples from real meetings. Business risks never strike at a convenient time.",
+    csB1Label: "Service company · 8 people",
+    csB1Story: "The partner who held the relationships with half the clients decided to leave. No warning, no transition period. There was no plan — no key person insurance, no non-compete agreement, no structured handover of the client book. The company survived, but it took 18 months to get back to the same level. At the second meeting they asked: 'why did nobody tell us this earlier?'",
+    csB1Num: "€280,000",
+    csB1Punch: "Estimated value of the client portfolio that was exposed — with no safety net in place.",
+    csB2Label: "Family business · 15 people",
+    csB2Story: "An accident. The owner out for four months. The business kept running thanks to family members covering the gaps — but the fixed costs ran normally: payroll, rent, social contributions. There was no income-protection insurance for business owners. They got through it — but with a hole in reserves that took years to close.",
+    csB2Num: "4 months",
+    csB2Punch: "No income for the owner — while the business's fixed costs ran normally every single month.",
+    csB3Label: "Technology company · 20 people",
+    csB3Story: "The senior developer they had trained for three years went to a competitor. The reason wasn't salary — it was a benefits package they couldn't match. Private health insurance, supplementary pension, life cover. Things that exist for small companies too, if you know where to look. After that, we built a benefits package scaled to their size — and they haven't lost another key person since.",
+    csB3Num: "€45,000",
+    csB3Punch: "Estimated cost of replacing one experienced employee — recruitment, training, lost productivity.",
+    casesBizCta: "Do you recognise something from these pictures? Talk to me →",
+    casesBizNote: "Examples are anonymous and illustrative. Every business has its own data.",
     modulesEyebrow: "Service modules",
     modulesTitle: "Services organized around what needs to be protected, built, and clarified.",
     moduleOneTag: "Individuals & Families",
@@ -3037,7 +3285,7 @@ function closeOverlay(o) {
   }
 }
 
-document.querySelectorAll(".module-tool").forEach((t) =>
+document.querySelectorAll(".module-tool, .story-btn").forEach((t) =>
   t.addEventListener("click", () => openOverlay(t.dataset.target))
 );
 
