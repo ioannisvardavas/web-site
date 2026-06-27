@@ -567,24 +567,83 @@ h2 {
 
 .panel-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
   min-height: 82px;
   padding: 18px 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.panel-row span {
+.panel-row:hover,
+.panel-row.open {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.panel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.panel-top .lbl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: rgba(255, 255, 255, 0.68);
   font-weight: 900;
+}
+
+.panel-top .lbl::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s ease;
+}
+
+.panel-row.open .panel-top .lbl::before {
+  content: "−";
+  transform: rotate(180deg);
 }
 
 .panel-row strong {
   color: var(--white);
   font-size: 2rem;
+}
+
+.panel-detail {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72) !important;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.25s ease;
+}
+
+.panel-row.open .panel-detail {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 12px;
 }
 
 .steps {
@@ -2120,18 +2179,27 @@ body.modal-open {
         </div>
 
         <div class="intelligence-panel" aria-label="Planning intelligence preview">
-          <div class="panel-row">
-            <span data-i18n="panelOne">Protection clarity</span>
-            <strong>84%</strong>
-          </div>
-          <div class="panel-row">
-            <span data-i18n="panelTwo">Business exposure</span>
-            <strong>7</strong>
-          </div>
-          <div class="panel-row">
-            <span data-i18n="panelThree">Decision scenarios</span>
-            <strong>3</strong>
-          </div>
+          <button type="button" class="panel-row" aria-expanded="false">
+            <span class="panel-top">
+              <span class="lbl" data-i18n="panelOne">Protection clarity</span>
+              <strong>84%</strong>
+            </span>
+            <span class="panel-detail" data-i18n="panelOneDet">Πόσο ξεκάθαρη είναι η εικόνα προστασίας σου, σε ένα score: τι καλύπτεται, τι όχι, τι αλληλεπικαλύπτεται. Όσο πιο ψηλά, τόσο λιγότερες εκπλήξεις τη στιγμή που θα χρειαστεί.</span>
+          </button>
+          <button type="button" class="panel-row" aria-expanded="false">
+            <span class="panel-top">
+              <span class="lbl" data-i18n="panelTwo">Business exposure</span>
+              <strong>7</strong>
+            </span>
+            <span class="panel-detail" data-i18n="panelTwoDet">Πόσα σημεία της επιχείρησης είναι εκτεθειμένα και χρειάζονται προσοχή — από key person και ασφάλιση πιστώσεων μέχρι cyber. Τα βλέπουμε πριν γίνουν πρόβλημα.</span>
+          </button>
+          <button type="button" class="panel-row" aria-expanded="false">
+            <span class="panel-top">
+              <span class="lbl" data-i18n="panelThree">Decision scenarios</span>
+              <strong>3</strong>
+            </span>
+            <span class="panel-detail" data-i18n="panelThreeDet">Εναλλακτικά σενάρια — συντηρητικό, βασικό, δυναμικό — ώστε να συγκρίνεις επιλογές με αριθμούς πριν αποφασίσεις, αντί να μαντεύεις.</span>
+          </button>
         </div>
       </section>
 
@@ -2661,8 +2729,8 @@ body.modal-open {
             <div class="fam-block">
               <p class="fam-h" data-i18n="biz5H">5. Ο αόρατος κίνδυνος: κυβερνοεπίθεση</p>
               <p class="fam-p" data-i18n="biz5P">Οι μικρομεσαίες νομίζουν ότι είναι πολύ μικρές για στόχος. Συμβαίνει το αντίθετο — είναι ο προτιμώμενος στόχος, ακριβώς επειδή έχουν πιο αδύναμη άμυνα. Ransomware που κλειδώνει τα δεδομένα, διαρροή στοιχείων πελατών, διακοπή λειτουργίας, πρόστιμα GDPR.</p>
-              <span class="fam-figure">1 στις 2</span>
-              <p class="fam-p" data-i18n="biz5Bar1">μικρομεσαίες επιχειρήσεις έχουν δεχθεί κάποια μορφή κυβερνοεπίθεσης. Η ασφάλιση <strong>cyber</strong> καλύπτει: αποκατάσταση συστημάτων & δεδομένων, διαχείριση κρίσης, απώλεια εσόδων από διακοπή λειτουργίας, νομική υποστήριξη & πρόστιμα GDPR, ειδοποίηση πελατών.</p>
+              <span class="fam-figure">43%</span>
+              <p class="fam-p" data-i18n="biz5Bar1">των κυβερνοεπιθέσεων στοχεύουν μικρομεσαίες επιχειρήσεις — όχι τους μεγάλους. Η ασφάλιση <strong>cyber</strong> καλύπτει: αποκατάσταση συστημάτων & δεδομένων, διαχείριση κρίσης, απώλεια εσόδων από διακοπή λειτουργίας, νομική υποστήριξη & πρόστιμα GDPR, ειδοποίηση πελατών.</p>
               <p class="fam-p" data-i18n="biz5Note">Δεν χρειάζεται να είστε τεχνολογική εταιρεία για να σας χτυπήσει. Χρειάζεται μόνο έναν υπολογιστή, ένα email, και μια στιγμή απροσεξίας ενός υπαλλήλου.</p>
             </div>
 
@@ -2894,7 +2962,7 @@ const copy = {
     biz4Note: "Για διαγωνισμούς, συμβάσεις, τελωνεία, εργολαβίες — η ίδια εγγύηση προς τον αντισυμβαλλόμενο, αλλά η ρευστότητά σας μένει εκεί που ανήκει: στην επιχείρηση.",
     biz5H: "5. Ο αόρατος κίνδυνος: κυβερνοεπίθεση",
     biz5P: "Οι μικρομεσαίες νομίζουν ότι είναι πολύ μικρές για στόχος. Συμβαίνει το αντίθετο — είναι ο προτιμώμενος στόχος, ακριβώς επειδή έχουν πιο αδύναμη άμυνα. Ransomware που κλειδώνει τα δεδομένα, διαρροή στοιχείων πελατών, διακοπή λειτουργίας, πρόστιμα GDPR.",
-    biz5Bar1: "μικρομεσαίες επιχειρήσεις έχουν δεχθεί κάποια μορφή κυβερνοεπίθεσης. Η ασφάλιση <strong>cyber</strong> καλύπτει: αποκατάσταση συστημάτων & δεδομένων, διαχείριση κρίσης, απώλεια εσόδων από διακοπή λειτουργίας, νομική υποστήριξη & πρόστιμα GDPR, ειδοποίηση πελατών.",
+    biz5Bar1: "των κυβερνοεπιθέσεων στοχεύουν μικρομεσαίες επιχειρήσεις — όχι τους μεγάλους. Η ασφάλιση <strong>cyber</strong> καλύπτει: αποκατάσταση συστημάτων & δεδομένων, διαχείριση κρίσης, απώλεια εσόδων από διακοπή λειτουργίας, νομική υποστήριξη & πρόστιμα GDPR, ειδοποίηση πελατών.",
     biz5Note: "Δεν χρειάζεται να είστε τεχνολογική εταιρεία για να σας χτυπήσει. Χρειάζεται μόνο έναν υπολογιστή, ένα email, και μια στιγμή απροσεξίας ενός υπαλλήλου.",
     biz6H: "6. Η προσωπική ευθύνη όποιου αποφασίζει (D&O)",
     biz6P: "Κάθε απόφαση της διοίκησης μπορεί να αμφισβητηθεί — από εταίρους, εργαζομένους, την εφορία, πιστωτές, ακόμη και μετόχους. Και η ευθύνη δεν σταματά στην επιχείρηση: φτάνει στην <strong>προσωπική περιουσία</strong> του διαχειριστή ή του μέλους ΔΣ.",
@@ -2996,6 +3064,9 @@ const copy = {
     panelOne: "Protection clarity",
     panelTwo: "Business exposure",
     panelThree: "Decision scenarios",
+    panelOneDet: "Πόσο ξεκάθαρη είναι η εικόνα προστασίας σου, σε ένα score: τι καλύπτεται, τι όχι, τι αλληλεπικαλύπτεται. Όσο πιο ψηλά, τόσο λιγότερες εκπλήξεις τη στιγμή που θα χρειαστεί.",
+    panelTwoDet: "Πόσα σημεία της επιχείρησης είναι εκτεθειμένα και χρειάζονται προσοχή — από key person και ασφάλιση πιστώσεων μέχρι cyber. Τα βλέπουμε πριν γίνουν πρόβλημα.",
+    panelThreeDet: "Εναλλακτικά σενάρια — συντηρητικό, βασικό, δυναμικό — ώστε να συγκρίνεις επιλογές με αριθμούς πριν αποφασίσεις, αντί να μαντεύεις.",
     methodEyebrow: "Η μεθοδολογία",
     methodTitle: "Από την εικόνα στο πλάνο.",
     methodIntro:
@@ -3193,7 +3264,7 @@ const copy = {
     biz4Note: "For tenders, contracts, customs, construction work — the same guarantee to the counterparty, but your liquidity stays where it belongs: in the business.",
     biz5H: "5. The invisible risk: cyber attack",
     biz5P: "Small businesses think they're too small to be a target. The opposite is true — they're the preferred target, precisely because their defenses are weaker. Ransomware that locks your data, leaked client records, operational shutdown, GDPR fines.",
-    biz5Bar1: "of small and mid-sized businesses have suffered some form of cyber attack. <strong>Cyber</strong> insurance covers: systems & data recovery, crisis management, lost revenue from downtime, legal support & GDPR fines, client notification.",
+    biz5Bar1: "of cyber attacks target small and mid-sized businesses — not the big players. <strong>Cyber</strong> insurance covers: systems & data recovery, crisis management, lost revenue from downtime, legal support & GDPR fines, client notification.",
     biz5Note: "You don't have to be a tech company to get hit. All it takes is one computer, one email, and a moment's carelessness from an employee.",
     biz6H: "6. The personal liability of whoever decides (D&O)",
     biz6P: "Every management decision can be challenged — by partners, employees, the tax authority, creditors, even shareholders. And the liability doesn't stop at the business: it reaches the <strong>personal assets</strong> of the manager or board member.",
@@ -3295,6 +3366,9 @@ const copy = {
     panelOne: "Protection clarity",
     panelTwo: "Business exposure",
     panelThree: "Decision scenarios",
+    panelOneDet: "How clear your protection picture is, in a single score: what's covered, what isn't, what overlaps. The higher it is, the fewer surprises the moment it matters.",
+    panelTwoDet: "How many points of the business are exposed and need attention — from key person and trade credit to cyber. We spot them before they become a problem.",
+    panelThreeDet: "Alternative scenarios — conservative, base, dynamic — so you compare options with real numbers before deciding, instead of guessing.",
     methodEyebrow: "The method",
     methodTitle: "From clarity to plan.",
     methodIntro:
@@ -3408,6 +3482,15 @@ document.querySelectorAll(".step-head").forEach((head) => {
       article.classList.remove("open");
       head.setAttribute("aria-expanded", "false");
     }
+  });
+});
+
+// Intelligence band: each metric expands a short explainer on click.
+document.querySelectorAll(".panel-row").forEach((row) => {
+  row.addEventListener("click", () => {
+    const open = !row.classList.contains("open");
+    row.classList.toggle("open", open);
+    row.setAttribute("aria-expanded", open ? "true" : "false");
   });
 });
 
