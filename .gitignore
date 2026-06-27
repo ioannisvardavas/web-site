@@ -2,3 +2,6 @@
 deploy/
 .wrangler/
 site.zip
+
+# local Claude settings (machine-specific)
+.claude/settings.local.json
