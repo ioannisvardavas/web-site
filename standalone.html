@@ -599,11 +599,119 @@ h2 {
   background: transparent;
 }
 
-.step span {
+.step-num {
   display: block;
   margin-bottom: 56px;
   color: var(--gold);
   font-weight: 900;
+}
+
+.step-head {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.step-head:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.step-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--petrol-deep);
+}
+
+.step-more::after {
+  content: "⌄";
+  font-size: 1.2em;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.step.open .step-more::after {
+  transform: rotate(180deg);
+}
+
+.step-detail {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
+}
+
+.step.open .step-detail {
+  max-height: 1000px;
+  opacity: 1;
+  margin-top: 18px;
+}
+
+.term {
+  position: relative;
+  color: var(--petrol-deep);
+  font-weight: 600;
+  border-bottom: 1px dashed var(--gold);
+  cursor: help;
+  white-space: nowrap;
+}
+
+.term .tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  max-width: 260px;
+  white-space: normal;
+  background: var(--petrol-deep);
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.term .tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--petrol-deep);
+}
+
+.term:hover .tip,
+.term:focus .tip,
+.term.show .tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 900px) {
+  .term .tip { max-width: 210px; }
 }
 
 .tools-section {
@@ -1467,7 +1575,7 @@ body.modal-open {
     min-height: auto;
   }
 
-  .step span {
+  .step-num {
     margin-bottom: 28px;
   }
 }
@@ -1775,24 +1883,40 @@ body.modal-open {
 
         <div class="steps">
           <article class="step">
-            <span>01</span>
-            <h3 data-i18n="stepOneTitle">Χαρτογράφηση</h3>
-            <p data-i18n="stepOneText">Στόχοι, υποχρεώσεις, κίνδυνοι και υπάρχουσες καλύψεις μπαίνουν σε καθαρή σειρά.</p>
+            <button type="button" class="step-head" aria-expanded="false">
+              <span class="step-num">01</span>
+              <h3 data-i18n="stepOneTitle">Χαρτογράφηση</h3>
+              <p data-i18n="stepOneText">Στόχοι, υποχρεώσεις, κίνδυνοι και υπάρχουσες καλύψεις μπαίνουν σε καθαρή σειρά.</p>
+              <span class="step-more" data-i18n="stepMore">Αναλυτικά</span>
+            </button>
+            <div class="step-detail" data-i18n="stepOneDetail"></div>
           </article>
           <article class="step">
-            <span>02</span>
-            <h3 data-i18n="stepTwoTitle">Ανάλυση</h3>
-            <p data-i18n="stepTwoText">Τα δεδομένα μετατρέπονται σε συγκρίσιμα σενάρια με πρακτικά εργαλεία αξιολόγησης.</p>
+            <button type="button" class="step-head" aria-expanded="false">
+              <span class="step-num">02</span>
+              <h3 data-i18n="stepTwoTitle">Ανάλυση</h3>
+              <p data-i18n="stepTwoText">Τα δεδομένα μετατρέπονται σε συγκρίσιμα σενάρια με πρακτικά εργαλεία αξιολόγησης.</p>
+              <span class="step-more" data-i18n="stepMore">Αναλυτικά</span>
+            </button>
+            <div class="step-detail" data-i18n="stepTwoDetail"></div>
           </article>
           <article class="step">
-            <span>03</span>
-            <h3 data-i18n="stepThreeTitle">Σχέδιο</h3>
-            <p data-i18n="stepThreeText">Δημιουργείται πλάνο προστασίας, επένδυσης και προτεραιοτήτων με ρεαλιστικά βήματα.</p>
+            <button type="button" class="step-head" aria-expanded="false">
+              <span class="step-num">03</span>
+              <h3 data-i18n="stepThreeTitle">Σχέδιο</h3>
+              <p data-i18n="stepThreeText">Δημιουργείται πλάνο προστασίας, επένδυσης και προτεραιοτήτων με ρεαλιστικά βήματα.</p>
+              <span class="step-more" data-i18n="stepMore">Αναλυτικά</span>
+            </button>
+            <div class="step-detail" data-i18n="stepThreeDetail"></div>
           </article>
           <article class="step">
-            <span>04</span>
-            <h3 data-i18n="stepFourTitle">Επανεξέταση</h3>
-            <p data-i18n="stepFourText">Το πλάνο παραμένει ζωντανό καθώς αλλάζει η οικογένεια, η επιχείρηση ή η αγορά.</p>
+            <button type="button" class="step-head" aria-expanded="false">
+              <span class="step-num">04</span>
+              <h3 data-i18n="stepFourTitle">Επανεξέταση</h3>
+              <p data-i18n="stepFourText">Το πλάνο παραμένει ζωντανό καθώς αλλάζει η οικογένεια, η επιχείρηση ή η αγορά.</p>
+              <span class="step-more" data-i18n="stepMore">Αναλυτικά</span>
+            </button>
+            <div class="step-detail" data-i18n="stepFourDetail"></div>
           </article>
         </div>
       </section>
@@ -2181,6 +2305,11 @@ const copy = {
     stepThreeText: "Δημιουργείται πλάνο προστασίας, επένδυσης και προτεραιοτήτων με ρεαλιστικά βήματα.",
     stepFourTitle: "Επανεξέταση",
     stepFourText: "Το πλάνο παραμένει ζωντανό καθώς αλλάζει η οικογένεια, η επιχείρηση ή η αγορά.",
+    stepMore: "Αναλυτικά",
+    stepOneDetail: "Πριν προταθεί οτιδήποτε, χρειάζεται μια ειλικρινής εικόνα. Καταγράφουμε μαζί τους στόχους σας — αυτά που θέλετε να προστατέψετε κι αυτά που θέλετε να χτίσετε — τις υποχρεώσεις σας και κάθε υπάρχουσα κάλυψη: ζωής, υγείας, περιουσίας, σύνταξης. Συχνά εδώ φαίνεται κάτι που δεν περιμένατε: μια κάλυψη που νομίζατε ότι είχατε και δεν ισχύει πια, ή ένα κενό που έμενε στο σκοτάδι για χρόνια. Δεν προχωράμε μέχρι η εικόνα να γίνει καθαρή — και δική σας.",
+    stepTwoDetail: "Η εικόνα χωρίς ανάλυση μένει εντύπωση. Περνάω τα δεδομένα σας από εξειδικευμένα εργαλεία που μετατρέπουν το «νομίζω ότι είμαι καλυμμένος» σε νούμερα: πού υπάρχουν κενά, πού πληρώνετε δύο φορές για το ίδιο πράγμα, και πόσα θα βγάζατε από την τσέπη σας σε ένα πραγματικό περιστατικό. Για να δούμε τι πραγματικά αντέχει το πλάνο σας, δεν βασίζομαι σε αισιόδοξες υποθέσεις αλλά σε στατιστικά μοντέλα <span class='term' tabindex='0' role='button' aria-label='επεξήγηση όρου'>stress test<span class='tip'>Έλεγχος αντοχής σε ακραία αλλά ρεαλιστικά σενάρια — πτώση αγορών, πληθωρισμός, απρόοπτα.</span></span>: χιλιάδες προσομοιώσεις <span class='term' tabindex='0' role='button' aria-label='επεξήγηση όρου'>Monte Carlo<span class='tip'>Χιλιάδες τυχαίες προσομοιώσεις του μέλλοντος για να δούμε το εύρος των πιθανών εκβάσεων, όχι μία μόνο αισιόδοξη πρόβλεψη.</span></span>, <span class='term' tabindex='0' role='button' aria-label='επεξήγηση όρου'>backtesting<span class='tip'>Δοκιμή του πλάνου πάνω σε πραγματικά ιστορικά δεδομένα αγορών και κρίσεων του παρελθόντος.</span></span> πάνω σε πραγματικά ιστορικά δεδομένα αγορών και κρίσεων, και κανόνες <span class='term' tabindex='0' role='button' aria-label='επεξήγηση όρου'>Guyton-Klinger<span class='tip'>Κανόνες (guardrails) που προσαρμόζουν τις αναλήψεις ώστε τα χρήματα να αντέχουν σε κάθε φάση της αγοράς.</span></span> που δείχνουν πότε ένα πλάνο χρειάζεται προσαρμογή. Βλέπετε τα σενάρια —ακόμα και τα δυσάρεστα— με τα μάτια σας. Γι' αυτό οι αποφάσεις που ακολουθούν είναι ήρεμες, όχι βιαστικές.",
+    stepThreeDetail: "Από την ανάλυση προκύπτει ένα γραπτό, ιεραρχημένο πλάνο — όχι μια λίστα προϊόντων. Τι προστατεύεται πρώτα γιατί δεν αντέχει αναβολή, τι χτίζεται σταδιακά, τι μπορεί να περιμένει. Με ρεαλιστικά βήματα, διαφανές κόστος και προτεραιότητες που βγάζουν νόημα για τον δικό σας προϋπολογισμό. Καμμία πίεση για άμεση υπογραφή· καλύτερα μία σωστή απόφαση παρά μία γρήγορη.",
+    stepFourDetail: "Ένα πλάνο που μένει σε ένα συρτάρι γερνάει. Γι' αυτό το παρακολουθούμε με δύο τρόπους: σε τακτικό ετήσιο ραντεβού, αλλά και όποτε αλλάζει κάτι ουσιαστικό — ένα παιδί, ένα σπίτι, μια νέα επιχειρηματική κίνηση, μια στροφή της αγοράς. Έτσι καμμία κάλυψη δεν μένει ξεχασμένη και κάθε ευρώ που διαθέτετε συνεχίζει να δουλεύει για τους στόχους σας. Η σχέση δεν τελειώνει στην υπογραφή — εκεί ξεκινά.",
     toolsEyebrow: "Τα εργαλεία μου",
     toolsTitle: "Συμβουλευτική με δεδομένα, όχι μόνο συζήτηση.",
     toolsText:
@@ -2341,6 +2470,11 @@ const copy = {
     stepThreeText: "A protection, investment, and priorities plan is created with realistic next steps.",
     stepFourTitle: "Review",
     stepFourText: "The plan stays alive as your family, company, or market conditions change.",
+    stepMore: "Details",
+    stepOneDetail: "Before anything is proposed, you need an honest picture. Together we record your goals — what you want to protect and what you want to build — your obligations, and every existing policy: life, health, property, pension. This is often where something unexpected surfaces: a cover you thought you had but no longer holds, or a gap that stayed in the dark for years. We don't move on until the picture is clear — and yours.",
+    stepTwoDetail: "A picture without analysis stays an impression. I run your data through specialised tools that turn 'I think I'm covered' into numbers: where gaps exist, where you pay twice for the same thing, and how much would come out of your own pocket in a real incident. To see what your plan truly withstands, I don't rely on optimistic assumptions but on statistical <span class='term' tabindex='0' role='button' aria-label='term explanation'>stress test<span class='tip'>A resilience check against extreme but realistic scenarios — market falls, inflation, the unexpected.</span></span> models: thousands of <span class='term' tabindex='0' role='button' aria-label='term explanation'>Monte Carlo<span class='tip'>Thousands of random simulations of the future to reveal the range of possible outcomes, not a single optimistic forecast.</span></span> simulations, <span class='term' tabindex='0' role='button' aria-label='term explanation'>backtesting<span class='tip'>Testing the plan against real historical market data and crises of the past.</span></span> against real historical market data and crises, and <span class='term' tabindex='0' role='button' aria-label='term explanation'>Guyton-Klinger<span class='tip'>Rules (guardrails) that adjust withdrawals so your money lasts through every market phase.</span></span> rules that signal when a plan needs adjusting. You see the scenarios — even the unpleasant ones — with your own eyes. That is why the decisions that follow are calm, not rushed.",
+    stepThreeDetail: "From the analysis comes a written, prioritised plan — not a product list. What is protected first because it cannot wait, what is built gradually, what can wait. With realistic steps, transparent cost, and priorities that make sense for your own budget. No pressure to sign immediately; better one right decision than a quick one.",
+    stepFourDetail: "A plan left in a drawer grows old. That is why we monitor it in two ways: at a regular annual meeting, and whenever something essential changes — a child, a home, a new business move, a market shift. So no cover is left forgotten and every euro you commit keeps working for your goals. The relationship does not end at the signature — that is where it begins.",
     toolsEyebrow: "My tools",
     toolsTitle: "Advisory with data, not only conversation.",
     toolsText:
@@ -2414,6 +2548,43 @@ function setLanguage(language) {
 
 languageButtons.forEach((button) => {
   button.addEventListener("click", () => setLanguage(button.dataset.lang));
+});
+
+// Methodology accordion (inline expand)
+document.querySelectorAll(".step-head").forEach((head) => {
+  head.addEventListener("click", () => {
+    const article = head.closest(".step");
+    const detail = article.querySelector(".step-detail");
+    const open = !article.classList.contains("open");
+    if (open) {
+      article.classList.add("open");
+      head.setAttribute("aria-expanded", "true");
+      const onEnd = (e) => {
+        if (e.propertyName === "max-height") {
+          detail.style.overflow = "visible";
+          detail.removeEventListener("transitionend", onEnd);
+        }
+      };
+      detail.addEventListener("transitionend", onEnd);
+    } else {
+      detail.style.overflow = "hidden";
+      article.classList.remove("open");
+      head.setAttribute("aria-expanded", "false");
+    }
+  });
+});
+
+// Term tooltips: tap toggles (mobile), hover handled by CSS; event delegation
+// so it keeps working after language re-render rebuilds the spans.
+document.addEventListener("click", (e) => {
+  const term = e.target.closest(".term");
+  document.querySelectorAll(".term.show").forEach((o) => {
+    if (o !== term) o.classList.remove("show");
+  });
+  if (term) {
+    e.stopPropagation();
+    term.classList.toggle("show");
+  }
 });
 
 const navToggle = document.querySelector(".nav-toggle");
