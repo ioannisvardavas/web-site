@@ -2070,7 +2070,7 @@ body.modal-open {
             </div>
           </article>
 
-          <article class="service-card reveal">
+          <article class="service-card has-tools reveal">
             <div class="service-card-top">
               <span class="service-number">03</span>
               <span class="service-tag" data-i18n="moduleThreeTag">Architecture</span>
@@ -2084,7 +2084,10 @@ body.modal-open {
               <li data-i18n="moduleThreePointB">Investment profile alignment</li>
               <li data-i18n="moduleThreePointC">Long-term review logic</li>
             </ul>
-            <button type="button" class="module-tool" data-target="policyModal" data-i18n="moduleToolPolicy">Δες δείγμα ανάλυσης →</button>
+            <div class="module-tools">
+              <button type="button" class="module-tool" data-target="policyModal" data-i18n="moduleToolPolicy">Δες δείγμα ανάλυσης →</button>
+              <button type="button" class="module-tool alt" data-target="archModal" data-i18n="moduleToolArch">Πριν / μετά — δες τη διαφορά →</button>
+            </div>
           </article>
 
           <article class="service-card service-card-dark reveal">
@@ -2449,6 +2452,52 @@ body.modal-open {
 
             <a class="calc-cta" href="#contact" data-i18n="famCta">Ας βάλουμε τους δικούς σας αριθμούς σε σειρά →</a>
             <p class="calc-note" data-i18n="famNote">Τα ποσά είναι ενδεικτικά, για κατανόηση της λογικής — όχι πρόβλεψη απόδοσης ή προσφορά. Κάθε πλάνο υπολογίζεται στα δικά σας δεδομένα.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- C1 — Architecture: before / after -->
+      <div class="tool-modal-overlay" id="archModal" hidden>
+        <div class="tool-modal" role="dialog" aria-modal="true" aria-labelledby="arch-title">
+          <button type="button" class="tool-modal-x" aria-label="Κλείσιμο">&times;</button>
+          <div class="calc-card">
+            <p class="eyebrow" data-i18n="archEyebrow">Αρχιτεκτονική · Πριν και μετά</p>
+            <h2 id="arch-title" class="calc-title" data-i18n="archTitle">Από διάσπαρτα συμβόλαια σε μία καθαρή εικόνα.</h2>
+            <p class="calc-sub" data-i18n="archSub">Οι περισσότεροι δεν έχουν πρόβλημα έλλειψης συμβολαίων — έχουν πρόβλημα συντονισμού. Διπλά εκεί που δεν χρειάζεται, κενά εκεί που μετράει.</p>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="arch1H">Το «πριν»: τέσσερα συμβόλαια που δεν μιλούν μεταξύ τους</p>
+              <p class="fam-p" data-i18n="arch1P">Μια τυπική εικόνα που συναντώ συχνά. Τίποτα «λάθος» μεμονωμένα — αλλά μαζί αφήνουν χρήματα στο τραπέζι και ρίσκο ακάλυπτο.</p>
+              <div style="display:flex;flex-direction:column;gap:6px;margin:6px 0 4px;">
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#fcebeb;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#a32d2d;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archBad1"><strong>Διπλή ασφάλεια ζωής</strong> — μία από τον εργοδότη, μία παλιά ατομική. Πληρώνεις δύο φορές για θάνατο, αλλά καμμία δεν καλύπτει ανικανότητα.</span></div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#fcebeb;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#a32d2d;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archBad2"><strong>Δύο νοσοκομειακά</strong> σε διαφορετικές εταιρείες — επικαλυπτόμενες παροχές, διπλό ασφάλιστρο.</span></div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#fcebeb;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#a32d2d;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archBad3"><strong>Επένδυση & αποταμίευση ασυντόνιστες</strong> — ένα unit-linked με υψηλές χρεώσεις δίπλα σε έναν λογαριασμό που «κοιμάται», χωρίς κοινό στόχο.</span></div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#fcebeb;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#a32d2d;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archBad4"><strong>Το μεγάλο κενό:</strong> καμμία πραγματική προστασία εισοδήματος και καμμία στοχευμένη πρόβλεψη σύνταξης.</span></div>
+              </div>
+            </div>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="arch2H">Το «μετά»: μία συνεκτική αρχιτεκτονική</p>
+              <p class="fam-p" data-i18n="arch2P">Ίδιος — ή και χαμηλότερος — προϋπολογισμός. Κάθε κομμάτι έχει ρόλο, κανένα δεν επικαλύπτεται, τίποτα κρίσιμο δεν λείπει.</p>
+              <div style="display:flex;flex-direction:column;gap:6px;margin:6px 0 4px;">
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#eaf3de;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#639922;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archGood1"><strong>Μία προστασία εισοδήματος</strong> που καλύπτει θάνατο <em>και</em> ανικανότητα — εκεί που χτυπάει πραγματικά η ζωή.</span></div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#eaf3de;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#639922;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archGood2"><strong>Ένα νοσοκομειακό</strong> σωστού επιπέδου, χωρίς επικάλυψη — η διαφορά του ασφαλίστρου πάει αλλού.</span></div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#eaf3de;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#639922;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archGood3"><strong>Επενδύσεις ευθυγραμμισμένες</strong> με το προφίλ και τον ορίζοντα κάθε στόχου — χαμηλότερο κόστος, ξεκάθαρος σκοπός.</span></div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:#eaf3de;border-radius:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#639922;flex-shrink:0;margin-top:5px;"></span><span style="flex:1;font-size:0.85rem;color:#17201f;line-height:1.45;" data-i18n="archGood4"><strong>Κλεισμένο το κενό</strong> εισοδήματος και σύνταξης — με τα χρήματα που «ελευθερώθηκαν» από τα διπλά.</span></div>
+              </div>
+            </div>
+
+            <div class="fam-block">
+              <p class="fam-h" data-i18n="arch3H">Τι αλλάζει στην πράξη</p>
+              <div class="fam-goals">
+                <div class="fam-goal"><span class="ico">🎯</span><span class="gname" data-i18n="archG1">Καμμία επικάλυψη</span><span class="gmeta" data-i18n="archG1m">Δεν πληρώνεις δύο φορές για το ίδιο</span></div>
+                <div class="fam-goal"><span class="ico">🛡️</span><span class="gname" data-i18n="archG2">Κανένα κρίσιμο κενό</span><span class="gmeta" data-i18n="archG2m">Καλυμμένο εκεί που μετράει</span></div>
+                <div class="fam-goal"><span class="ico">📉</span><span class="gname" data-i18n="archG3">Ίδιο ή χαμηλότερο κόστος</span><span class="gmeta" data-i18n="archG3m">Πλήρης εικόνα, όχι περισσότερα έξοδα</span></div>
+              </div>
+            </div>
+
+            <a class="calc-cta" href="#contact" data-i18n="archCta">Θέλεις να δεις πώς δένει η δική σου εικόνα; →</a>
+            <p class="calc-note" data-i18n="archNote">Ενδεικτικό παράδειγμα για κατανόηση της λογικής — όχι πρόταση προϊόντος. Κάθε αρχιτεκτονική σχεδιάζεται στα δικά σου δεδομένα και υπάρχουσες καλύψεις.</p>
           </div>
         </div>
       </div>
@@ -2854,6 +2903,31 @@ const copy = {
     bizCta: "Ας δούμε ποιοι από αυτούς τους κινδύνους αφορούν εσάς →",
     bizNote: "Τα ποσά είναι ενδεικτικά, για κατανόηση της λογικής — όχι προσφορά ή δέσμευση. Κάθε λύση διαμορφώνεται στα δικά σας δεδομένα. Ασφάλιση πιστώσεων & εγγυητικές μέσω Allianz Trade.",
     moduleToolPolicy: "Δες δείγμα ανάλυσης →",
+    moduleToolArch: "Πριν / μετά — δες τη διαφορά →",
+    archEyebrow: "Αρχιτεκτονική · Πριν και μετά",
+    archTitle: "Από διάσπαρτα συμβόλαια σε μία καθαρή εικόνα.",
+    archSub: "Οι περισσότεροι δεν έχουν πρόβλημα έλλειψης συμβολαίων — έχουν πρόβλημα συντονισμού. Διπλά εκεί που δεν χρειάζεται, κενά εκεί που μετράει.",
+    arch1H: "Το «πριν»: τέσσερα συμβόλαια που δεν μιλούν μεταξύ τους",
+    arch1P: "Μια τυπική εικόνα που συναντώ συχνά. Τίποτα «λάθος» μεμονωμένα — αλλά μαζί αφήνουν χρήματα στο τραπέζι και ρίσκο ακάλυπτο.",
+    archBad1: "<strong>Διπλή ασφάλεια ζωής</strong> — μία από τον εργοδότη, μία παλιά ατομική. Πληρώνεις δύο φορές για θάνατο, αλλά καμμία δεν καλύπτει ανικανότητα.",
+    archBad2: "<strong>Δύο νοσοκομειακά</strong> σε διαφορετικές εταιρείες — επικαλυπτόμενες παροχές, διπλό ασφάλιστρο.",
+    archBad3: "<strong>Επένδυση & αποταμίευση ασυντόνιστες</strong> — ένα unit-linked με υψηλές χρεώσεις δίπλα σε έναν λογαριασμό που «κοιμάται», χωρίς κοινό στόχο.",
+    archBad4: "<strong>Το μεγάλο κενό:</strong> καμμία πραγματική προστασία εισοδήματος και καμμία στοχευμένη πρόβλεψη σύνταξης.",
+    arch2H: "Το «μετά»: μία συνεκτική αρχιτεκτονική",
+    arch2P: "Ίδιος — ή και χαμηλότερος — προϋπολογισμός. Κάθε κομμάτι έχει ρόλο, κανένα δεν επικαλύπτεται, τίποτα κρίσιμο δεν λείπει.",
+    archGood1: "<strong>Μία προστασία εισοδήματος</strong> που καλύπτει θάνατο <em>και</em> ανικανότητα — εκεί που χτυπάει πραγματικά η ζωή.",
+    archGood2: "<strong>Ένα νοσοκομειακό</strong> σωστού επιπέδου, χωρίς επικάλυψη — η διαφορά του ασφαλίστρου πάει αλλού.",
+    archGood3: "<strong>Επενδύσεις ευθυγραμμισμένες</strong> με το προφίλ και τον ορίζοντα κάθε στόχου — χαμηλότερο κόστος, ξεκάθαρος σκοπός.",
+    archGood4: "<strong>Κλεισμένο το κενό</strong> εισοδήματος και σύνταξης — με τα χρήματα που «ελευθερώθηκαν» από τα διπλά.",
+    arch3H: "Τι αλλάζει στην πράξη",
+    archG1: "Καμμία επικάλυψη",
+    archG1m: "Δεν πληρώνεις δύο φορές για το ίδιο",
+    archG2: "Κανένα κρίσιμο κενό",
+    archG2m: "Καλυμμένο εκεί που μετράει",
+    archG3: "Ίδιο ή χαμηλότερο κόστος",
+    archG3m: "Πλήρης εικόνα, όχι περισσότερα έξοδα",
+    archCta: "Θέλεις να δεις πώς δένει η δική σου εικόνα; →",
+    archNote: "Ενδεικτικό παράδειγμα για κατανόηση της λογικής — όχι πρόταση προϊόντος. Κάθε αρχιτεκτονική σχεδιάζεται στα δικά σου δεδομένα και υπάρχουσες καλύψεις.",
     riskEyebrow: "RiskGuard Family · Γρήγορος έλεγχος",
     riskTitle: "Πόσο εκτεθειμένη είναι η οικογένειά σου;",
     riskSub: "6 γρήγορες ερωτήσεις. Καμμία καταχώρηση στοιχείων — μόνο μια καθαρή εικόνα.",
@@ -3128,6 +3202,31 @@ const copy = {
     bizCta: "Let's see which of these risks apply to you →",
     bizNote: "Amounts are indicative, to convey the logic — not an offer or commitment. Every solution is shaped to your own data. Trade credit insurance & surety bonds via Allianz Trade.",
     moduleToolPolicy: "See a sample analysis →",
+    moduleToolArch: "Before / after — see the difference →",
+    archEyebrow: "Architecture · Before and after",
+    archTitle: "From scattered policies to one clear picture.",
+    archSub: "Most people don't have a shortage of policies — they have a coordination problem. Doubled up where it isn't needed, gaps where it counts.",
+    arch1H: "The \"before\": four policies that don't talk to each other",
+    arch1P: "A typical picture I often see. Nothing \"wrong\" in isolation — but together they leave money on the table and risk uncovered.",
+    archBad1: "<strong>Duplicate life cover</strong> — one from the employer, one old individual policy. You pay twice for death, yet neither covers disability.",
+    archBad2: "<strong>Two health plans</strong> with different insurers — overlapping benefits, double premium.",
+    archBad3: "<strong>Investment & savings uncoordinated</strong> — a high-fee unit-linked next to a \"sleeping\" account, with no shared goal.",
+    archBad4: "<strong>The big gap:</strong> no real income protection and no targeted retirement provision.",
+    arch2H: "The \"after\": one coherent architecture",
+    arch2P: "Same — or even lower — budget. Every piece has a role, nothing overlaps, nothing critical is missing.",
+    archGood1: "<strong>One income protection</strong> covering death <em>and</em> disability — where life actually hits.",
+    archGood2: "<strong>One health plan</strong> at the right level, no overlap — the premium difference goes elsewhere.",
+    archGood3: "<strong>Investments aligned</strong> with the profile and horizon of each goal — lower cost, clear purpose.",
+    archGood4: "<strong>The income and retirement gap closed</strong> — with the money freed up from the duplicates.",
+    arch3H: "What changes in practice",
+    archG1: "No overlap",
+    archG1m: "You don't pay twice for the same thing",
+    archG2: "No critical gap",
+    archG2m: "Covered where it counts",
+    archG3: "Same or lower cost",
+    archG3m: "A full picture, not more expense",
+    archCta: "Want to see how your own picture fits together? →",
+    archNote: "Indicative example to illustrate the logic — not a product proposal. Every architecture is designed around your own data and existing cover.",
     riskEyebrow: "RiskGuard Family · Quick check",
     riskTitle: "How exposed is your family?",
     riskSub: "6 quick questions. No data entry — just a clear picture.",
