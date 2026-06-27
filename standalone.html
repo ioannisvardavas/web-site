@@ -1581,6 +1581,16 @@ body.modal-open {
   background: var(--petrol-deep);
 }
 
+.calc-cta.secondary {
+  background: var(--petrol-soft);
+  color: var(--petrol-deep);
+  margin-top: 10px;
+}
+
+.calc-cta.secondary:hover {
+  background: #cfe3df;
+}
+
 @media (max-width: 560px) {
   .calc-totals {
     grid-template-columns: 1fr;
@@ -1987,6 +1997,28 @@ body.modal-open {
 .viber-float:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(0,0,0,.45)}
 .viber-float svg{width:32px;height:32px;fill:#fff}
 @media(max-width:600px){.viber-float{bottom:18px;right:18px;width:54px;height:54px}.viber-float svg{width:28px;height:28px}}
+
+/* C4 — printable business exposure checklist (hidden on screen) */
+.checklist-doc { display: none; }
+.checklist-doc .cl-head { border-bottom: 2px solid #14403a; padding-bottom: 14px; margin-bottom: 22px; }
+.checklist-doc .cl-eyebrow { margin: 0 0 4px; font-size: 11pt; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #14403a; }
+.checklist-doc h1 { margin: 0 0 6px; font-size: 22pt; color: #111; }
+.checklist-doc .cl-sub { margin: 0; font-size: 11pt; color: #444; }
+.checklist-doc .cl-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid #ddd; page-break-inside: avoid; }
+.checklist-doc .cl-box { flex-shrink: 0; width: 20px; height: 20px; border: 2px solid #14403a; border-radius: 4px; margin-top: 2px; }
+.checklist-doc .cl-body { flex: 1; }
+.checklist-doc .cl-body p { margin: 0 0 8px; font-size: 11.5pt; line-height: 1.4; color: #111; }
+.checklist-doc .cl-body .cl-line { display: block; border-bottom: 1px dotted #aaa; height: 16px; }
+.checklist-doc .cl-foot { margin-top: 26px; padding-top: 14px; border-top: 2px solid #14403a; font-size: 10.5pt; color: #333; line-height: 1.6; }
+.checklist-doc .cl-foot strong { color: #14403a; }
+.checklist-doc .cl-note { margin-top: 10px; font-size: 8.5pt; color: #888; line-height: 1.4; }
+
+@media print {
+  body.printing-checklist > *:not(.checklist-doc) { display: none !important; }
+  body.printing-checklist .checklist-doc { display: block !important; }
+  body.printing-checklist .viber-float { display: none !important; }
+  @page { margin: 16mm; }
+}
 </style>
   </head>
   <body>
@@ -2412,6 +2444,7 @@ body.modal-open {
             <div id="bizRiskQuestions"></div>
             <div id="bizRiskResult"></div>
             <a class="calc-cta" href="#contact" data-i18n="bizRiskCta">Θέλεις δωρεάν αξιολόγηση 30' για την επιχείρησή σου; →</a>
+            <button type="button" class="calc-cta secondary" id="printChecklistBtn" data-i18n="bizRiskPrint">Κατέβασε το checklist (PDF) ⬇</button>
             <p class="calc-note" data-i18n="bizRiskNote">Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη ανάλυση κινδύνων.</p>
           </div>
         </div>
@@ -2822,6 +2855,27 @@ body.modal-open {
       <span data-i18n="footerRole">Life, Health, P&C & Investment Architect</span>
     </footer>
 
+    <!-- C4 — printable business exposure checklist -->
+    <div class="checklist-doc" id="bizChecklist" aria-hidden="true">
+      <div class="cl-head">
+        <p class="cl-eyebrow" data-i18n="clEyebrow">Έλεγχος έκθεσης επιχείρησης</p>
+        <h1 data-i18n="clTitle">Εκτίθεται η επιχείρησή σας;</h1>
+        <p class="cl-sub" data-i18n="clSub">Συμπληρώστε τα κουτάκια που σας προβληματίζουν και φέρτε το στη συνάντηση. Έξι σημεία που σπάνια μπαίνουν στον ισολογισμό.</p>
+      </div>
+
+      <div class="cl-item"><span class="cl-box"></span><div class="cl-body"><p data-i18n="cl1"><strong>1. Άνθρωπος-κλειδί (key person).</strong> Αν έλειπε ξαφνικά αυτός που κρατά πελάτες/τεχνογνωσία, τι μένει όρθιο;</p><span class="cl-line"></span></div></div>
+      <div class="cl-item"><span class="cl-box"></span><div class="cl-body"><p data-i18n="cl2"><strong>2. Συνέχεια λειτουργίας.</strong> Υπάρχει ασφάλιση διακοπής εργασιών ή σχέδιο για ζημιά/καταστροφή;</p><span class="cl-line"></span></div></div>
+      <div class="cl-item"><span class="cl-box"></span><div class="cl-body"><p data-i18n="cl3"><strong>3. Ομαδικές παροχές προσωπικού.</strong> Υγεία/ζωή για την ομάδα — κρατούν & προσελκύουν ανθρώπους;</p><span class="cl-line"></span></div></div>
+      <div class="cl-item"><span class="cl-box"></span><div class="cl-body"><p data-i18n="cl4"><strong>4. Ασφάλιση πιστώσεων.</strong> Τι γίνεται αν ένας μεγάλος πελάτης δεν πληρώσει ή χρεοκοπήσει;</p><span class="cl-line"></span></div></div>
+      <div class="cl-item"><span class="cl-box"></span><div class="cl-body"><p data-i18n="cl5"><strong>5. Cyber & δεδομένα (GDPR).</strong> Προστασία από κυβερνοεπίθεση, ransomware, διαρροή στοιχείων πελατών;</p><span class="cl-line"></span></div></div>
+      <div class="cl-item"><span class="cl-box"></span><div class="cl-body"><p data-i18n="cl6"><strong>6. Ευθύνη διοικούντων (D&amp;O).</strong> Είστε προσωπικά προστατευμένος για επιχειρηματικές αποφάσεις;</p><span class="cl-line"></span></div></div>
+
+      <div class="cl-foot">
+        <span data-i18n="clFoot"><strong>Γιάννης Βαρδαβάς</strong>, lutcf — Life, Health, P&amp;C & Investment Architect<br>Τηλ.: +30 698 388 0746 · ioannis.vardavas@gmail.com · vardavas.ioannis-vardavas.workers.dev</span>
+        <p class="cl-note" data-i18n="clNote">Λίστα αυτοελέγχου για κατανόηση — όχι αξιολόγηση ασφαλιστικών αναγκών. Κάθε περίπτωση εξετάζεται με τα δικά της δεδομένα.</p>
+      </div>
+    </div>
+
     <div class="img-lightbox" id="imgLightbox" role="dialog" aria-modal="true" aria-label="Μεγέθυνση εικόνας">
       <button type="button" class="img-lightbox-x" aria-label="Κλείσιμο">&times;</button>
       <img src="" alt="">
@@ -2936,6 +2990,18 @@ const copy = {
     bizRiskSub: "6 γρήγορες ερωτήσεις. Καμμία καταχώρηση στοιχείων — μόνο μια καθαρή εικόνα έκθεσης.",
     bizRiskCta: "Θέλεις δωρεάν αξιολόγηση 30' για την επιχείρησή σου; →",
     bizRiskNote: "Ενδεικτική εικόνα με βάση τις απαντήσεις σου — δεν αντικαθιστά πλήρη ανάλυση κινδύνων.",
+    bizRiskPrint: "Κατέβασε το checklist (PDF) ⬇",
+    clEyebrow: "Έλεγχος έκθεσης επιχείρησης",
+    clTitle: "Εκτίθεται η επιχείρησή σας;",
+    clSub: "Συμπληρώστε τα κουτάκια που σας προβληματίζουν και φέρτε το στη συνάντηση. Έξι σημεία που σπάνια μπαίνουν στον ισολογισμό.",
+    cl1: "<strong>1. Άνθρωπος-κλειδί (key person).</strong> Αν έλειπε ξαφνικά αυτός που κρατά πελάτες/τεχνογνωσία, τι μένει όρθιο;",
+    cl2: "<strong>2. Συνέχεια λειτουργίας.</strong> Υπάρχει ασφάλιση διακοπής εργασιών ή σχέδιο για ζημιά/καταστροφή;",
+    cl3: "<strong>3. Ομαδικές παροχές προσωπικού.</strong> Υγεία/ζωή για την ομάδα — κρατούν & προσελκύουν ανθρώπους;",
+    cl4: "<strong>4. Ασφάλιση πιστώσεων.</strong> Τι γίνεται αν ένας μεγάλος πελάτης δεν πληρώσει ή χρεοκοπήσει;",
+    cl5: "<strong>5. Cyber & δεδομένα (GDPR).</strong> Προστασία από κυβερνοεπίθεση, ransomware, διαρροή στοιχείων πελατών;",
+    cl6: "<strong>6. Ευθύνη διοικούντων (D&O).</strong> Είστε προσωπικά προστατευμένος για επιχειρηματικές αποφάσεις;",
+    clFoot: "<strong>Γιάννης Βαρδαβάς</strong>, lutcf — Life, Health, P&C & Investment Architect<br>Τηλ.: +30 698 388 0746 · ioannis.vardavas@gmail.com · vardavas.ioannis-vardavas.workers.dev",
+    clNote: "Λίστα αυτοελέγχου για κατανόηση — όχι αξιολόγηση ασφαλιστικών αναγκών. Κάθε περίπτωση εξετάζεται με τα δικά της δεδομένα.",
     bizEyebrow: "Για επιχειρήσεις · Τι κινδυνεύει",
     bizTitle: "Έξι κίνδυνοι που σπάνια μπαίνουν στον ισολογισμό.",
     bizSub: "Δεν φαίνονται στα βιβλία — μέχρι τη μέρα που χτυπούν. Να τι κρύβεται κάτω από κάθε υγιή επιχείρηση.",
@@ -3238,6 +3304,18 @@ const copy = {
     bizRiskSub: "6 quick questions. No data entry — just a clear exposure picture.",
     bizRiskCta: "Want a free 30′ assessment for your business? →",
     bizRiskNote: "Indicative picture based on your answers — not a substitute for a full risk analysis.",
+    bizRiskPrint: "Download the checklist (PDF) ⬇",
+    clEyebrow: "Business exposure check",
+    clTitle: "Is your business exposed?",
+    clSub: "Tick the boxes that worry you and bring it to the meeting. Six points that rarely make it onto the balance sheet.",
+    cl1: "<strong>1. Key person.</strong> If the person holding clients/know-how suddenly disappeared, what would stay standing?",
+    cl2: "<strong>2. Business continuity.</strong> Is there business-interruption insurance or a plan for damage/disaster?",
+    cl3: "<strong>3. Employee benefits.</strong> Health/life for the team — do they retain & attract people?",
+    cl4: "<strong>4. Trade credit insurance.</strong> What happens if a large client fails to pay or goes bankrupt?",
+    cl5: "<strong>5. Cyber & data (GDPR).</strong> Protection from cyber-attack, ransomware, client-data breach?",
+    cl6: "<strong>6. Directors' liability (D&O).</strong> Are you personally protected for business decisions?",
+    clFoot: "<strong>Ioannis Vardavas</strong>, LUTCF — Life, Health, P&C & Investment Architect<br>Tel.: +30 698 388 0746 · ioannis.vardavas@gmail.com · vardavas.ioannis-vardavas.workers.dev",
+    clNote: "A self-check list for understanding — not an insurance-needs assessment. Every case is examined on its own data.",
     bizEyebrow: "For businesses · What's at risk",
     bizTitle: "Six risks that rarely make it onto the balance sheet.",
     bizSub: "They don't show in the books — until the day they strike. Here's what sits beneath every healthy business.",
@@ -3493,6 +3571,19 @@ document.querySelectorAll(".panel-row").forEach((row) => {
     row.setAttribute("aria-expanded", open ? "true" : "false");
   });
 });
+
+// C4: printable business checklist — toggle a body class so @media print
+// shows only the checklist, then trigger the browser print/save-as-PDF dialog.
+const printChecklistBtn = document.getElementById("printChecklistBtn");
+if (printChecklistBtn) {
+  printChecklistBtn.addEventListener("click", () => {
+    document.body.classList.add("printing-checklist");
+    window.print();
+  });
+  window.addEventListener("afterprint", () => {
+    document.body.classList.remove("printing-checklist");
+  });
+}
 
 // Term tooltips: tap toggles (mobile), hover handled by CSS; event delegation
 // so it keeps working after language re-render rebuilds the spans.
