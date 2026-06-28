@@ -101,7 +101,8 @@ a {
 
 .brand-logo {
   height: auto;
-  width: 200px;
+  width: 240px;
+  max-width: 100%;
   display: block;
 }
 
@@ -154,6 +155,41 @@ a {
 
 .hero-copy {
   max-width: 720px;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-copy > * {
+  animation: heroFadeUp 640ms ease both;
+}
+
+.hero-copy > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+.hero-copy > *:nth-child(3) {
+  animation-delay: 160ms;
+}
+.hero-copy > *:nth-child(4) {
+  animation-delay: 240ms;
+}
+.hero-copy > *:nth-child(5) {
+  animation-delay: 320ms;
+}
+
+@media (min-width: 641px) {
+  .hero-visual {
+    animation: heroFadeUp 760ms ease both;
+    animation-delay: 200ms;
+  }
 }
 
 .eyebrow,
@@ -213,6 +249,18 @@ h1 {
   border-radius: 999px;
   border: 1px solid transparent;
   font-weight: 800;
+  transition: transform 200ms ease, background 200ms ease,
+    box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(23, 32, 31, 0.14);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .button.primary {
@@ -656,6 +704,8 @@ h2 {
 .step {
   min-height: 260px;
   background: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .step-num {
@@ -667,7 +717,9 @@ h2 {
 
 .step-head {
   all: unset;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   width: 100%;
   cursor: pointer;
 }
@@ -682,7 +734,9 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 18px;
+  margin-top: auto;
+  padding-top: 18px;
+  align-self: flex-start;
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -2029,6 +2083,7 @@ body.modal-open {
 
       <nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="#services" data-i18n="navServices">Υπηρεσίες</a>
+        <a href="#modules" data-i18n="navModules">Τι κάνω</a>
         <a href="#method" data-i18n="navMethod">Μεθοδολογία</a>
         <a href="#about" data-i18n="navAbout">Σχετικά</a>
         <a href="#contact" data-i18n="navContact">Επικοινωνία</a>
@@ -2110,7 +2165,7 @@ body.modal-open {
         </div>
       </section>
 
-      <section class="service-modules" aria-labelledby="modules-title">
+      <section class="service-modules" id="modules" aria-labelledby="modules-title">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="modulesEyebrow">Service modules</p>
           <h2 id="modules-title" data-i18n="modulesTitle">Οι υπηρεσίες οργανώνονται γύρω από το τι χρειάζεται να προστατευτεί, να χτιστεί και να μείνει ξεκάθαρο.</h2>
@@ -2120,16 +2175,16 @@ body.modal-open {
           <article class="service-card has-tools reveal">
             <div class="service-card-top">
               <span class="service-number">01</span>
-              <span class="service-tag" data-i18n="moduleOneTag">Individuals & Families</span>
+              <span class="service-tag" data-i18n="moduleOneTag">Ιδιώτες & Οικογένειες</span>
             </div>
-            <h3 data-i18n="moduleOneTitle">For individuals & families</h3>
+            <h3 data-i18n="moduleOneTitle">Για ιδιώτες & οικογένειες</h3>
             <p data-i18n="moduleOneText">
               Πλήρης αποτύπωση: τι υπάρχει, τι λείπει, τι έχει προτεραιότητα — και πλάνο προστασίας, αποταμίευσης και επένδυσης στα μέτρα σας.
             </p>
             <ul class="module-points">
-              <li data-i18n="moduleOnePointA">Income & family protection</li>
-              <li data-i18n="moduleOnePointB">Retirement and children planning</li>
-              <li data-i18n="moduleOnePointC">Goal-based investment direction</li>
+              <li data-i18n="moduleOnePointA">Προστασία εισοδήματος & οικογένειας</li>
+              <li data-i18n="moduleOnePointB">Σχεδιασμός σύνταξης & παιδιών</li>
+              <li data-i18n="moduleOnePointC">Επενδύσεις με βάση στόχους</li>
             </ul>
             <div class="module-tools">
               <button type="button" class="module-tool" data-target="toolModal" data-i18n="moduleToolCalc">Δοκίμασε τον υπολογιστή →</button>
@@ -2141,16 +2196,16 @@ body.modal-open {
           <article class="service-card has-tools reveal">
             <div class="service-card-top">
               <span class="service-number">02</span>
-              <span class="service-tag" data-i18n="moduleTwoTag">Business owners</span>
+              <span class="service-tag" data-i18n="moduleTwoTag">Επιχειρηματίες</span>
             </div>
-            <h3 data-i18n="moduleTwoTitle">Business risk management</h3>
+            <h3 data-i18n="moduleTwoTitle">Διαχείριση επιχειρηματικού κινδύνου</h3>
             <p data-i18n="moduleTwoText">
               Χαρτογράφηση κινδύνων και κενών: key person, employee benefits, business continuity — με έλεγχο πιστοληπτικής ικανότητας συνεργατών και πελατών.
             </p>
             <ul class="module-points">
-              <li data-i18n="moduleTwoPointA">Key person & continuity risks</li>
-              <li data-i18n="moduleTwoPointB">Employee benefits architecture</li>
-              <li data-i18n="moduleTwoPointC">Coverage gap review</li>
+              <li data-i18n="moduleTwoPointA">Key person & συνέχεια λειτουργίας</li>
+              <li data-i18n="moduleTwoPointB">Αρχιτεκτονική παροχών προσωπικού</li>
+              <li data-i18n="moduleTwoPointC">Έλεγχος κενών κάλυψης</li>
               <li data-i18n="moduleTwoPointCredit">Έλεγχος πιστοληπτικής ικανότητας</li>
               <li data-i18n="moduleTwoPointD">Ασφάλεια πιστώσεων & εγγυητικές επιστολές</li>
               <li data-i18n="moduleTwoPointE">Cyber &amp; ευθύνη διοικούντων (D&amp;O)</li>
@@ -2164,16 +2219,16 @@ body.modal-open {
           <article class="service-card has-tools reveal">
             <div class="service-card-top">
               <span class="service-number">03</span>
-              <span class="service-tag" data-i18n="moduleThreeTag">Architecture</span>
+              <span class="service-tag" data-i18n="moduleThreeTag">Αρχιτεκτονική</span>
             </div>
-            <h3 data-i18n="moduleThreeTitle">Insurance & investment architecture</h3>
+            <h3 data-i18n="moduleThreeTitle">Αρχιτεκτονική ασφάλισης & επενδύσεων</h3>
             <p data-i18n="moduleThreeText">
               Ασφαλίσεις και επενδύσεις σε μία συνεκτική αρχιτεκτονική — χωρίς διπλά και χωρίς κενά εκεί που μετράει.
             </p>
             <ul class="module-points">
-              <li data-i18n="moduleThreePointA">Life, Health, P&C coordination</li>
-              <li data-i18n="moduleThreePointB">Investment profile alignment</li>
-              <li data-i18n="moduleThreePointC">Long-term review logic</li>
+              <li data-i18n="moduleThreePointA">Συντονισμός Ζωής, Υγείας & P&C</li>
+              <li data-i18n="moduleThreePointB">Ευθυγράμμιση επενδυτικού προφίλ</li>
+              <li data-i18n="moduleThreePointC">Λογική μακροχρόνιας επανεξέτασης</li>
             </ul>
             <div class="module-tools">
               <button type="button" class="module-tool" data-target="policyModal" data-i18n="moduleToolPolicy">Δες δείγμα ανάλυσης →</button>
@@ -2184,9 +2239,9 @@ body.modal-open {
           <article class="service-card service-card-dark reveal">
             <div class="service-card-top">
               <span class="service-number">04</span>
-              <span class="service-tag" data-i18n="moduleFourTag">Intelligent tools</span>
+              <span class="service-tag" data-i18n="moduleFourTag">Έξυπνα εργαλεία</span>
             </div>
-            <h3 data-i18n="moduleFourTitle">AI-driven planning tools</h3>
+            <h3 data-i18n="moduleFourTitle">Εργαλεία σχεδιασμού με AI</h3>
             <p data-i18n="moduleFourText">
               Εξειδικευμένες εφαρμογές που μετατρέπουν σύνθετα δεδομένα σε καθαρή εικόνα. Τεχνολογία στην υπηρεσία της κατανόησης — όχι της πώλησης.
             </p>
@@ -2886,6 +2941,7 @@ const copy = {
   el: {
     brand: "Γιάννης Βαρδαβάς, lutcf",
     navServices: "Υπηρεσίες",
+    navModules: "Τι κάνω",
     navMethod: "Μεθοδολογία",
     navAbout: "Σχετικά",
     navContact: "Επικοινωνία",
@@ -2946,34 +3002,34 @@ const copy = {
     csB4Punch: "Το ανείσπρακτο ποσό που έφερε την εταιρεία στα όρια της ρευστότητάς της — από έναν πελάτη που θεωρούσαν «σίγουρο».",
     casesBizCta: "Αναγνωρίζετε κάτι από αυτές τις εικόνες; Μιλήστε μου →",
     casesBizNote: "Τα παραδείγματα είναι ανώνυμα και ενδεικτικά. Κάθε επιχείρηση έχει τα δικά της δεδομένα.",
-    modulesEyebrow: "Service modules",
+    modulesEyebrow: "Πεδία υπηρεσιών",
     modulesTitle: "Οι υπηρεσίες οργανώνονται γύρω από το τι χρειάζεται να προστατευτεί, να χτιστεί και να μείνει ξεκάθαρο.",
-    moduleOneTag: "Individuals & Families",
-    moduleOneTitle: "For individuals & families",
+    moduleOneTag: "Ιδιώτες & Οικογένειες",
+    moduleOneTitle: "Για ιδιώτες & οικογένειες",
     moduleOneText:
       "Πλήρης αποτύπωση: τι υπάρχει, τι λείπει, τι έχει προτεραιότητα — και πλάνο προστασίας, αποταμίευσης και επένδυσης στα μέτρα σας.",
-    moduleOnePointA: "Income & family protection",
-    moduleOnePointB: "Retirement and children planning",
-    moduleOnePointC: "Goal-based investment direction",
-    moduleTwoTag: "Business owners",
-    moduleTwoTitle: "Business risk management",
+    moduleOnePointA: "Προστασία εισοδήματος & οικογένειας",
+    moduleOnePointB: "Σχεδιασμός σύνταξης & παιδιών",
+    moduleOnePointC: "Επενδύσεις με βάση στόχους",
+    moduleTwoTag: "Επιχειρηματίες",
+    moduleTwoTitle: "Διαχείριση επιχειρηματικού κινδύνου",
     moduleTwoText:
       "Χαρτογράφηση κινδύνων και κενών: key person, employee benefits, business continuity, ασφάλεια πιστώσεων και εγγυητικές επιστολές — με έλεγχο πιστοληπτικής ικανότητας συνεργατών και πελατών.",
-    moduleTwoPointA: "Key person & continuity risks",
-    moduleTwoPointB: "Employee benefits architecture",
-    moduleTwoPointC: "Coverage gap review",
+    moduleTwoPointA: "Key person & συνέχεια λειτουργίας",
+    moduleTwoPointB: "Αρχιτεκτονική παροχών προσωπικού",
+    moduleTwoPointC: "Έλεγχος κενών κάλυψης",
     moduleTwoPointCredit: "Έλεγχος πιστοληπτικής ικανότητας",
     moduleTwoPointD: "Ασφάλεια πιστώσεων & εγγυητικές επιστολές",
     moduleTwoPointE: "Cyber & ευθύνη διοικούντων (D&O)",
-    moduleThreeTag: "Architecture",
-    moduleThreeTitle: "Insurance & investment architecture",
+    moduleThreeTag: "Αρχιτεκτονική",
+    moduleThreeTitle: "Αρχιτεκτονική ασφάλισης & επενδύσεων",
     moduleThreeText:
       "Ασφαλίσεις και επενδύσεις σε μία συνεκτική αρχιτεκτονική — χωρίς διπλά και χωρίς κενά εκεί που μετράει.",
-    moduleThreePointA: "Life, Health, P&C coordination",
-    moduleThreePointB: "Investment profile alignment",
-    moduleThreePointC: "Long-term review logic",
-    moduleFourTag: "Intelligent tools",
-    moduleFourTitle: "AI-driven planning tools",
+    moduleThreePointA: "Συντονισμός Ζωής, Υγείας & P&C",
+    moduleThreePointB: "Ευθυγράμμιση επενδυτικού προφίλ",
+    moduleThreePointC: "Λογική μακροχρόνιας επανεξέτασης",
+    moduleFourTag: "Έξυπνα εργαλεία",
+    moduleFourTitle: "Εργαλεία σχεδιασμού με AI",
     moduleFourText:
       "Εξειδικευμένες εφαρμογές που μετατρέπουν σύνθετα δεδομένα σε καθαρή εικόνα. Τεχνολογία στην υπηρεσία της κατανόησης — όχι της πώλησης.",
     toolChipOne: "Needs map",
@@ -3200,6 +3256,7 @@ const copy = {
   en: {
     brand: "Ioannis Vardavas, lutcf",
     navServices: "Services",
+    navModules: "What I do",
     navMethod: "Method",
     navAbout: "About",
     navContact: "Contact",
