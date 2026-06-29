@@ -3031,6 +3031,7 @@ body.modal-open {
           <p data-i18n="contactText">
             Μια πρώτη συζήτηση — χωρίς άγχος, χωρίς έτοιμες απαντήσεις. Βλέπουμε μαζί πού βρίσκεστε και αν μπορώ να βοηθήσω.
           </p>
+          <button type="button" id="shareBtn" class="button secondary" style="margin-top:18px" data-i18n="shareLabel"><svg style="width:18px;height:18px;vertical-align:middle;margin-right:6px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>Μοιραστείτε τη σελίδα</button>
         </div>
         <div class="contact-actions">
           <form
@@ -3084,7 +3085,7 @@ body.modal-open {
 <h3>1. Υπεύθυνος επεξεργασίας</h3>
 <p>Γιάννης Βαρδαβάς, ασφαλιστικός διαμεσολαβητής. Επικοινωνία: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · τηλ. 698 388 0746.</p>
 <h3>2. Ποια δεδομένα συλλέγονται</h3>
-<p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies παρακολούθησης ούτε εργαλεία analytics</strong> και δεν συλλέγει δεδομένα εν αγνοία σας.</p>
+<p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies</strong> και δεν συλλέγει δεδομένα εν αγνοία σας. Για ανώνυμα, συγκεντρωτικά στατιστικά επισκεψιμότητας χρησιμοποιείται το <strong>Cloudflare Web Analytics</strong> — ένα εργαλείο που λειτουργεί <strong>χωρίς cookies</strong> και χωρίς να συλλέγει ή να αποθηκεύει προσωπικά δεδομένα που σας ταυτοποιούν.</p>
 <h3>3. Σκοπός &amp; νομική βάση</h3>
 <p>Τα στοιχεία χρησιμοποιούνται αποκλειστικά για να απαντήσω στο αίτημά σας και να επικοινωνήσω μαζί σας. Νομική βάση είναι η <strong>συγκατάθεσή σας</strong> (άρθρο 6§1α GDPR), την οποία δηλώνετε υποβάλλοντας τη φόρμα.</p>
 <h3>4. Αποδέκτες — τρίτα μέρη</h3>
@@ -3452,6 +3453,7 @@ const copy = {
     formEmailLabel: "Email",
     formMessageLabel: "Μήνυμα",
     formSubmit: "Αποστολή",
+    shareLabel: '<svg style="width:18px;height:18px;vertical-align:middle;margin-right:6px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>Μοιραστείτε τη σελίδα',
     phoneLabel: '<svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>Τηλ. 698 388 0746',
     whatsappLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
     emailLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
@@ -3465,7 +3467,7 @@ const copy = {
     formConsent: 'Έχω διαβάσει και αποδέχομαι την <button type="button" class="legal-link" data-target="privacyModal">Πολιτική Απορρήτου</button> και συναινώ στην επεξεργασία των στοιχείων μου για να μου απαντήσετε.',
     privacyEyebrow: "Νομικά",
     privacyTitle: "Πολιτική Απορρήτου",
-    privacyBody: '<p class="legal-updated">Τελευταία ενημέρωση: Ιούνιος 2026</p><p>Η προστασία των προσωπικών σας δεδομένων είναι σημαντική. Η παρούσα πολιτική εξηγεί ποια δεδομένα συλλέγονται μέσω αυτού του ιστότοπου, για ποιον σκοπό και ποια είναι τα δικαιώματά σας, σύμφωνα με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR — ΕΕ 2016/679).</p><h3>1. Υπεύθυνος επεξεργασίας</h3><p>Γιάννης Βαρδαβάς, ασφαλιστικός διαμεσολαβητής. Επικοινωνία: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · τηλ. 698 388 0746.</p><h3>2. Ποια δεδομένα συλλέγονται</h3><p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies παρακολούθησης ούτε εργαλεία analytics</strong> και δεν συλλέγει δεδομένα εν αγνοία σας.</p><h3>3. Σκοπός &amp; νομική βάση</h3><p>Τα στοιχεία χρησιμοποιούνται αποκλειστικά για να απαντήσω στο αίτημά σας και να επικοινωνήσω μαζί σας. Νομική βάση είναι η <strong>συγκατάθεσή σας</strong> (άρθρο 6§1α GDPR), την οποία δηλώνετε υποβάλλοντας τη φόρμα.</p><h3>4. Αποδέκτες — τρίτα μέρη</h3><p>Για την τεχνική αποστολή της φόρμας χρησιμοποιείται η υπηρεσία <strong>Web3Forms</strong> και για τη φιλοξενία του ιστότοπου η <strong>Cloudflare</strong>. Τα δεδομένα σας δεν πωλούνται και δεν διαβιβάζονται σε τρίτους για σκοπούς marketing.</p><h3>5. Χρόνος διατήρησης</h3><p>Τα στοιχεία διατηρούνται μόνο για όσο διάστημα απαιτείται για την επικοινωνία μας και διαγράφονται όταν δεν είναι πλέον απαραίτητα.</p><h3>6. Τα δικαιώματά σας</h3><p>Έχετε δικαίωμα πρόσβασης, διόρθωσης, διαγραφής, περιορισμού, εναντίωσης και φορητότητας των δεδομένων σας. Για την άσκησή τους επικοινωνήστε στο <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. Έχετε επίσης δικαίωμα καταγγελίας στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Ασφάλεια</h3><p>Λαμβάνονται εύλογα τεχνικά και οργανωτικά μέτρα για την προστασία των δεδομένων σας από μη εξουσιοδοτημένη πρόσβαση ή χρήση.</p><p class="legal-note">Η παρούσα πολιτική ενδέχεται να επικαιροποιείται. Για ασφαλιστικά προϊόντα ισχύουν επιπλέον οι όροι και οι πολιτικές απορρήτου των αντίστοιχων ασφαλιστικών εταιρειών.</p>'
+    privacyBody: '<p class="legal-updated">Τελευταία ενημέρωση: Ιούνιος 2026</p><p>Η προστασία των προσωπικών σας δεδομένων είναι σημαντική. Η παρούσα πολιτική εξηγεί ποια δεδομένα συλλέγονται μέσω αυτού του ιστότοπου, για ποιον σκοπό και ποια είναι τα δικαιώματά σας, σύμφωνα με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR — ΕΕ 2016/679).</p><h3>1. Υπεύθυνος επεξεργασίας</h3><p>Γιάννης Βαρδαβάς, ασφαλιστικός διαμεσολαβητής. Επικοινωνία: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · τηλ. 698 388 0746.</p><h3>2. Ποια δεδομένα συλλέγονται</h3><p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies</strong> και δεν συλλέγει δεδομένα εν αγνοία σας. Για ανώνυμα, συγκεντρωτικά στατιστικά επισκεψιμότητας χρησιμοποιείται το <strong>Cloudflare Web Analytics</strong> — ένα εργαλείο που λειτουργεί <strong>χωρίς cookies</strong> και χωρίς να συλλέγει ή να αποθηκεύει προσωπικά δεδομένα που σας ταυτοποιούν.</p><h3>3. Σκοπός &amp; νομική βάση</h3><p>Τα στοιχεία χρησιμοποιούνται αποκλειστικά για να απαντήσω στο αίτημά σας και να επικοινωνήσω μαζί σας. Νομική βάση είναι η <strong>συγκατάθεσή σας</strong> (άρθρο 6§1α GDPR), την οποία δηλώνετε υποβάλλοντας τη φόρμα.</p><h3>4. Αποδέκτες — τρίτα μέρη</h3><p>Για την τεχνική αποστολή της φόρμας χρησιμοποιείται η υπηρεσία <strong>Web3Forms</strong> και για τη φιλοξενία του ιστότοπου η <strong>Cloudflare</strong>. Τα δεδομένα σας δεν πωλούνται και δεν διαβιβάζονται σε τρίτους για σκοπούς marketing.</p><h3>5. Χρόνος διατήρησης</h3><p>Τα στοιχεία διατηρούνται μόνο για όσο διάστημα απαιτείται για την επικοινωνία μας και διαγράφονται όταν δεν είναι πλέον απαραίτητα.</p><h3>6. Τα δικαιώματά σας</h3><p>Έχετε δικαίωμα πρόσβασης, διόρθωσης, διαγραφής, περιορισμού, εναντίωσης και φορητότητας των δεδομένων σας. Για την άσκησή τους επικοινωνήστε στο <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. Έχετε επίσης δικαίωμα καταγγελίας στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Ασφάλεια</h3><p>Λαμβάνονται εύλογα τεχνικά και οργανωτικά μέτρα για την προστασία των δεδομένων σας από μη εξουσιοδοτημένη πρόσβαση ή χρήση.</p><p class="legal-note">Η παρούσα πολιτική ενδέχεται να επικαιροποιείται. Για ασφαλιστικά προϊόντα ισχύουν επιπλέον οι όροι και οι πολιτικές απορρήτου των αντίστοιχων ασφαλιστικών εταιρειών.</p>'
   },
   en: {
     brand: "Ioannis Vardavas, lutcf",
@@ -3775,6 +3777,7 @@ const copy = {
     formEmailLabel: "Email",
     formMessageLabel: "Message",
     formSubmit: "Send",
+    shareLabel: '<svg style="width:18px;height:18px;vertical-align:middle;margin-right:6px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>Share this page',
     phoneLabel: '<svg style="width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>Tel. +30 698 388 0746',
     whatsappLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
     emailLabel: '<svg style="width:18px;height:18px;vertical-align:middle;fill:currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
@@ -3788,7 +3791,7 @@ const copy = {
     formConsent: 'I have read and accept the <button type="button" class="legal-link" data-target="privacyModal">Privacy Policy</button> and consent to the processing of my details so you can reply to me.',
     privacyEyebrow: "Legal",
     privacyTitle: "Privacy Policy",
-    privacyBody: '<p class="legal-updated">Last updated: June 2026</p><p>Protecting your personal data matters. This policy explains what data is collected through this website, for what purpose, and what your rights are, in accordance with the General Data Protection Regulation (GDPR — EU 2016/679).</p><h3>1. Data controller</h3><p>Ioannis Vardavas, insurance intermediary. Contact: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · tel. +30 698 388 0746.</p><h3>2. What data is collected</h3><p>Only what you enter in the contact form: <strong>your name, email and message</strong>. The website <strong>uses no tracking cookies and no analytics tools</strong> and collects no data without your knowledge.</p><h3>3. Purpose &amp; legal basis</h3><p>Your details are used solely to reply to your request and to contact you. The legal basis is your <strong>consent</strong> (Article 6(1)(a) GDPR), which you provide by submitting the form.</p><h3>4. Recipients — third parties</h3><p>The form is delivered via the <strong>Web3Forms</strong> service and the site is hosted on <strong>Cloudflare</strong>. Your data is not sold and is not shared with third parties for marketing purposes.</p><h3>5. Retention period</h3><p>Your details are kept only for as long as needed for our communication and are deleted once no longer necessary.</p><h3>6. Your rights</h3><p>You have the right to access, rectify, erase, restrict, object to and port your data. To exercise them, contact <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. You also have the right to lodge a complaint with the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Security</h3><p>Reasonable technical and organisational measures are taken to protect your data from unauthorised access or use.</p><p class="legal-note">This policy may be updated. For insurance products, the terms and privacy policies of the respective insurance companies also apply.</p>'
+    privacyBody: '<p class="legal-updated">Last updated: June 2026</p><p>Protecting your personal data matters. This policy explains what data is collected through this website, for what purpose, and what your rights are, in accordance with the General Data Protection Regulation (GDPR — EU 2016/679).</p><h3>1. Data controller</h3><p>Ioannis Vardavas, insurance intermediary. Contact: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · tel. +30 698 388 0746.</p><h3>2. What data is collected</h3><p>Only what you enter in the contact form: <strong>your name, email and message</strong>. The website <strong>uses no cookies</strong> and collects no data without your knowledge. For anonymous, aggregate visitor statistics it uses <strong>Cloudflare Web Analytics</strong> — a tool that works <strong>without cookies</strong> and does not collect or store personal data that identifies you.</p><h3>3. Purpose &amp; legal basis</h3><p>Your details are used solely to reply to your request and to contact you. The legal basis is your <strong>consent</strong> (Article 6(1)(a) GDPR), which you provide by submitting the form.</p><h3>4. Recipients — third parties</h3><p>The form is delivered via the <strong>Web3Forms</strong> service and the site is hosted on <strong>Cloudflare</strong>. Your data is not sold and is not shared with third parties for marketing purposes.</p><h3>5. Retention period</h3><p>Your details are kept only for as long as needed for our communication and are deleted once no longer necessary.</p><h3>6. Your rights</h3><p>You have the right to access, rectify, erase, restrict, object to and port your data. To exercise them, contact <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. You also have the right to lodge a complaint with the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Security</h3><p>Reasonable technical and organisational measures are taken to protect your data from unauthorised access or use.</p><p class="legal-note">This policy may be updated. For insurance products, the terms and privacy policies of the respective insurance companies also apply.</p>'
   }
 };
 
@@ -4048,6 +4051,42 @@ function closeOverlay(o) {
 document.querySelectorAll(".module-tool, .story-btn").forEach((t) =>
   t.addEventListener("click", () => openOverlay(t.dataset.target))
 );
+
+/* Κουμπί κοινοποίησης — native share sheet σε κινητό (Viber/WhatsApp/Messages…),
+   αντιγραφή στο clipboard σε desktop. Στέλνει το link → εμφανίζεται η og κάρτα. */
+const shareBtn = document.getElementById("shareBtn");
+if (shareBtn) {
+  const SHARE_URL = "https://vardavas.ioannis-vardavas.workers.dev";
+  shareBtn.addEventListener("click", async () => {
+    const en = document.documentElement.lang === "en";
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: en
+            ? "Ioannis Vardavas — insurance & investment advisor"
+            : "Γιάννης Βαρδαβάς — ασφαλιστικός & επενδυτικός σύμβουλος",
+          text: en ? "Take a look at my site:" : "Ρίξτε μια ματιά στη σελίδα μου:",
+          url: SHARE_URL,
+        });
+      } catch (err) {
+        /* ο χρήστης ακύρωσε το share — αγνόησέ το */
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(SHARE_URL);
+      const orig = shareBtn.innerHTML;
+      shareBtn.innerHTML = en ? "Link copied ✓" : "Ο σύνδεσμος αντιγράφηκε ✓";
+      shareBtn.disabled = true;
+      setTimeout(() => {
+        shareBtn.innerHTML = orig;
+        shareBtn.disabled = false;
+      }, 2200);
+    } catch (err) {
+      window.prompt(en ? "Copy the link:" : "Αντιγράψτε τον σύνδεσμο:", SHARE_URL);
+    }
+  });
+}
 
 /* Delegated handler for legal links (footer + consent). Survives i18n innerHTML re-render. */
 document.addEventListener("click", (e) => {
