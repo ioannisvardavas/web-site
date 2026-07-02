@@ -5,7 +5,14 @@
       "name": "static",
       "runtimeExecutable": "node",
       "runtimeArgs": [".claude/static-server.js"],
-      "port": 8899
+      "port": 8899,
+      "autoPort": true
+    },
+    {
+      "name": "mobile-sim",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/mobile-server.js"],
+      "port": 8099
     }
   ]
 }

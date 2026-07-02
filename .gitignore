@@ -1,5 +1,5 @@
 *_checkpoint_*.html
-deploy/
+standalone [0-9]*.html
 .wrangler/
 site.zip
 
