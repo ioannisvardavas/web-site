@@ -2,513 +2,562 @@
 <html lang="el">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Το παγωτό των 2 ευρώ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Τι κάνει ο χρόνος στα λεφτά σου</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;900&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
-
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --paper:    #EDF1F2;
-    --card:     #FFFFFF;
-    --ink:      #14212B;
-    --ink-soft: #4E626C;
-    --line:     #D6E0E2;
-    --red:      #E04E29;
-    --gold:     #F2B307;
-    --mint:     #1B9C83;
-    --berry:    #6E4AA6;
-    --shadow:   0 1px 0 rgba(20,33,43,.06), 0 18px 40px -28px rgba(20,33,43,.45);
+:root{
+  --paper:#E9EDF4; --card:#FFFFFF; --ink:#101A2E; --soft:#5A6480; --line:#D2D9E6;
+  --euro:#123FA8; --euro-deep:#0B2464; --gold:#C98209; --gold-text:#8F5B05; --gold-fill:#F0B429;
+  --coral:#C93F32; --coral-text:#A32E23; --teal:#0E6E62; --dot-off:#C3CCDC;
+  --shadow:0 1px 0 rgba(16,26,46,.05), 0 24px 48px -34px rgba(11,36,100,.55);
+  --disp:"Alegreya Sans","Helvetica Neue",Arial,sans-serif;
+  --book:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+    --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+    --coral:#FF7F6B; --coral-text:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+  --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+  --coral:#FF7F6B; --coral-text:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  font-size:17px; line-height:1.45;
+}
+.wrap{width:100%; max-width:620px; flex:1; display:flex; flex-direction:column}
+h1{font-size:clamp(30px,8vw,44px); line-height:1.02; margin:0 0 6px; letter-spacing:-.02em; font-weight:800; padding-right:46px}
+.lede{font-family:var(--book); color:var(--soft); margin:0 0 20px; font-size:clamp(15px,4vw,18px)}
+.kat{font-size:clamp(21px,5.4vw,26px); font-weight:800; margin:2px 0 4px; letter-spacing:-.01em}
+.sub{font-family:var(--book); color:var(--soft); font-size:15px; margin:0 0 16px; line-height:1.35}
+.q{font-family:var(--book); font-size:clamp(17px,4.6vw,20px); margin:0; line-height:1.45}
+.q b{font-weight:600; color:var(--euro)}
+.big{font-size:clamp(38px,11vw,58px); font-weight:800; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.card{background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:14px}
+button{font-family:inherit; font-size:inherit; cursor:pointer; border:none; background:none; color:inherit}
+.btn{display:block; width:100%; padding:16px 20px; border-radius:15px; background:var(--euro);
+  color:#fff; font-weight:800; font-size:19px; box-shadow:0 10px 24px -14px rgba(18,63,168,.9); margin-bottom:14px;
+  text-align:center; text-decoration:none}
+:root:not([data-theme="light"]) .btn{color:#08122A}
+:root[data-theme="dark"] .btn{color:#08122A}
+.btn.ghost{background:transparent; color:var(--soft); border:1.5px solid var(--line); box-shadow:none; font-size:17px}
+.tog{position:fixed; top:10px; right:10px; width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); font-size:16px; z-index:9; box-shadow:var(--shadow)}
+footer{max-width:620px; width:100%; font-family:var(--book); font-size:12.5px; color:var(--soft);
+  line-height:1.5; padding:16px 4px 8px; border-top:1px solid var(--line)}
+footer b{font-weight:600; color:var(--ink)}
 
-    --display: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
-    --book:    "Literata", Georgia, "Times New Roman", serif;
-  }
+/* ---------- ο ολισθητής ---------- */
+.ctrl{margin:4px 0 18px}
+.ctrl-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:6px}
+.ctrl-head span{font-family:var(--book); font-size:15px; color:var(--soft)}
+.ctrl-head output{font-weight:800; font-size:21px; font-variant-numeric:tabular-nums}
+input[type=range]{width:100%; accent-color:var(--euro); height:26px}
+.numin{display:flex; align-items:center; gap:8px; background:var(--paper);
+  border:1.5px solid var(--line); border-radius:13px; padding:4px 14px; margin:2px 0 0}
+.numin input{flex:1; width:100%; border:none; background:transparent; color:var(--ink);
+  font-family:var(--disp); font-weight:800; font-size:24px; padding:8px 0; min-width:0}
+.numin input:focus{outline:none}
+.numin .eur{font-weight:800; font-size:20px; color:var(--soft)}
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper:    #0F191F;
-      --card:     #17242C;
-      --ink:      #E9F1F2;
-      --ink-soft: #9BAFB6;
-      --line:     #26363F;
-      --red:      #FF7A55;
-      --gold:     #FFC93D;
-      --mint:     #45C7AB;
-      --berry:    #AE92E4;
-      --shadow:   0 1px 0 rgba(0,0,0,.4), 0 18px 40px -28px rgba(0,0,0,.9);
-    }
-  }
-  :root[data-theme="dark"] {
-    --paper:    #0F191F;
-    --card:     #17242C;
-    --ink:      #E9F1F2;
-    --ink-soft: #9BAFB6;
-    --line:     #26363F;
-    --red:      #FF7A55;
-    --gold:     #FFC93D;
-    --mint:     #45C7AB;
-    --berry:    #AE92E4;
-    --shadow:   0 1px 0 rgba(0,0,0,.4), 0 18px 40px -28px rgba(0,0,0,.9);
-  }
+/* ---------- μπάρες ---------- */
+.bars{margin:14px 0 0}
+.bar-row{margin-bottom:13px}
+.bar-row:last-child{margin-bottom:0}
+.bar-lab{display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:5px}
+.bar-lab .nm{font-family:var(--book); font-size:15px}
+.bar-lab .vl{font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
+.track{height:14px; border-radius:99px; background:var(--paper); border:1px solid var(--line); overflow:hidden}
+.fill{height:100%; border-radius:99px; background:var(--euro)}
+.fill.gold{background:var(--gold-fill)}
+.fill.coral{background:var(--coral)}
+.fill.teal{background:var(--teal)}
 
-  * { box-sizing: border-box; }
+/* ---------- το γράφημα ---------- */
+.chart{width:100%; height:auto; display:block; margin:6px 0 4px; overflow:visible}
+.chart .grid{stroke:var(--line); stroke-width:1}
+.chart .ln{fill:none; stroke:var(--euro); stroke-width:2.5; stroke-linejoin:round; stroke-linecap:round}
+.chart .dot{fill:var(--coral)}
+.chart .tx{font-family:var(--disp); font-size:11px; fill:var(--soft); font-weight:700}
+.chart .band{fill:var(--teal); opacity:.10}
 
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--book);
-    font-size: 18px;
-    line-height: 1.6;
-    margin: 0;
-    padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 40px) 80px;
-    -webkit-font-smoothing: antialiased;
-  }
+.punch{background:var(--euro-deep); color:#fff; border-radius:20px; padding:22px 20px;
+  margin-bottom:14px; border:1px solid var(--euro)}
+:root:not([data-theme="light"]) .punch{background:#0E1B39}
+:root[data-theme="dark"] .punch{background:#0E1B39}
+.punch h2{margin:0 0 10px; font-size:clamp(21px,5.5vw,26px); font-weight:800; color:#fff}
+.punch .row{border-left:3px solid var(--gold-fill); padding-left:13px; margin-bottom:14px}
+.punch .row:last-of-type{margin-bottom:0}
+.punch .row h3{margin:0 0 2px; font-size:17px; font-weight:800; color:#fff}
+.punch .row p{margin:0; font-family:var(--book); color:#C6D4F2; font-size:15.5px; line-height:1.4}
+.punch .ecb{margin:16px 0 0; padding-top:14px; border-top:1px solid rgba(255,255,255,.16);
+  font-family:var(--book); font-size:15px; color:#C6D4F2; line-height:1.45}
+.punch .ecb b{color:#fff; font-weight:600}
 
-  .wrap {
-    max-width: 980px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(28px, 5vw, 56px);
-  }
-
-  .eyebrow {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: .16em;
-    color: var(--ink-soft);
-    margin: 0;
-  }
-
-  h1 {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: clamp(40px, 8vw, 78px);
-    line-height: .92;
-    letter-spacing: -.02em;
-    margin: 10px 0 0;
-    text-wrap: balance;
-  }
-
-  .lede {
-    font-size: clamp(20px, 3.4vw, 27px);
-    line-height: 1.35;
-    max-width: 20ch;
-    margin: 18px 0 0;
-    color: var(--ink);
-    text-wrap: balance;
-  }
-  .lede b { color: var(--red); font-weight: 500; }
-
-  /* ---------- hero ---------- */
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    align-items: center;
-  }
-  .hero figure { margin: 0; }
-  @media (min-width: 760px) {
-    .hero { grid-template-columns: 1.05fr 1fr; gap: 40px; }
-  }
-
-  /* ---------- scenes ---------- */
-  .scene {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    padding: clamp(20px, 3.5vw, 34px);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(16px, 3vw, 32px);
-    align-items: center;
-  }
-  @media (min-width: 760px) {
-    .scene { grid-template-columns: 1fr 1fr; }
-    .scene.flip .art { order: 2; }
-  }
-
-  .scene h2 {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: clamp(27px, 4.4vw, 40px);
-    line-height: 1.02;
-    letter-spacing: -.015em;
-    margin: 0;
-    text-wrap: balance;
-  }
-  .scene p {
-    margin: 12px 0 0;
-    max-width: 34ch;
-    color: var(--ink-soft);
-  }
-  .scene p strong { color: var(--ink); font-weight: 500; }
-
-  .art { margin: 0; }
-  .art svg { width: 100%; height: auto; display: block; }
-
-  /* svg palette hooks */
-  .s-ink   { fill: var(--ink); }
-  .s-red   { fill: var(--red); }
-  .s-gold  { fill: var(--gold); }
-  .s-mint  { fill: var(--mint); }
-  .s-berry { fill: var(--berry); }
-  .s-card  { fill: var(--card); }
-  .s-line  { fill: var(--line); }
-  .st-ink  { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-  .st-soft { fill: none; stroke: var(--line); stroke-width: 3; stroke-linecap: round; }
-  .svg-label {
-    font-family: var(--display);
-    font-weight: 900;
-    fill: var(--ink);
-  }
-  .svg-cap {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: .1em;
-    fill: var(--ink-soft);
-  }
-  .faded { opacity: .28; }
-
-  /* ---------- calculator ---------- */
-  .calc {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    padding: clamp(20px, 3.5vw, 34px);
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-  .calc h2 {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: clamp(26px, 4vw, 36px);
-    line-height: 1.05;
-    margin: 0;
-    letter-spacing: -.015em;
-  }
-  .readout {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(18px, 4vw, 44px);
-  }
-  .stat { display: flex; flex-direction: column; gap: 4px; }
-  .stat .k {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: .12em;
-    color: var(--ink-soft);
-  }
-  .stat .v {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: clamp(38px, 8vw, 60px);
-    line-height: 1;
-    letter-spacing: -.02em;
-    font-variant-numeric: tabular-nums;
-  }
-  .v.up   { color: var(--red); }
-  .v.down { color: var(--berry); }
-
-  .bar {
-    height: 26px;
-    border-radius: 999px;
-    background: var(--line);
-    overflow: hidden;
-  }
-  .bar > i {
-    display: block;
-    height: 100%;
-    background: var(--mint);
-    border-radius: 999px;
-    transition: width .25s ease;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .bar > i { transition: none; }
-  }
-  .barcap {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--ink-soft);
-    margin: 8px 0 0;
-  }
-
-  label.slider {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--ink-soft);
-  }
-  input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 30px;
-    background: transparent;
-    margin: 0;
-  }
-  input[type="range"]::-webkit-slider-runnable-track {
-    height: 8px; border-radius: 999px; background: var(--line);
-  }
-  input[type="range"]::-moz-range-track {
-    height: 8px; border-radius: 999px; background: var(--line);
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 30px; height: 30px; margin-top: -11px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 3px solid var(--ink);
-    cursor: pointer;
-  }
-  input[type="range"]::-moz-range-thumb {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 3px solid var(--ink);
-    cursor: pointer;
-  }
-  input[type="range"]:focus-visible { outline: 3px solid var(--berry); outline-offset: 6px; border-radius: 999px; }
-
-  /* ---------- takeaway ---------- */
-  .takeaway {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  @media (min-width: 700px) {
-    .takeaway { grid-template-columns: repeat(3, 1fr); }
-  }
-  .tile {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 6px solid var(--mint);
-    border-radius: 14px;
-    padding: 20px 22px;
-  }
-  .tile:nth-child(2) { border-left-color: var(--gold); }
-  .tile:nth-child(3) { border-left-color: var(--red); }
-  .tile h3 {
-    font-family: var(--display);
-    font-weight: 900;
-    font-size: 20px;
-    margin: 0 0 6px;
-    line-height: 1.15;
-  }
-  .tile p { margin: 0; font-size: 16px; color: var(--ink-soft); }
-
-  footer {
-    border-top: 1px solid var(--line);
-    padding-top: 18px;
-    font-size: 14px;
-    color: var(--ink-soft);
-    font-family: var(--display);
-  }
-  footer p { margin: 0 0 6px; }
+.after{display:block; text-decoration:none; color:inherit; margin-top:8px;
+  border-top:1px solid var(--line); padding-top:20px}
+.after h3{margin:0 0 4px; font-size:19px; font-weight:800; color:var(--ink)}
+.after p{margin:0; font-family:var(--book); font-size:14.5px; color:var(--soft); line-height:1.45}
+.after .tag{display:inline-block; font-family:var(--disp); font-size:11.5px; font-weight:800;
+  letter-spacing:.07em; color:var(--gold-text); border:1.5px solid var(--gold-fill);
+  border-radius:99px; padding:3px 10px; margin-bottom:9px}
+@media(min-width:680px){ .card{padding:26px 28px} body{padding-top:26px} }
 </style>
-
 </head>
 <body>
+<button class="tog" id="tog" title="Φωτεινό / σκοτεινό" aria-label="Αλλαγή θέματος">◐</button>
 
 <div class="wrap">
 
-  <header class="hero">
-    <div>
-      <p class="eyebrow">Με απλά λόγια</p>
-      <h1>Το παγωτό των 2 ευρώ</h1>
-      <p class="lede">Τα λεφτά σου μένουν ίδια.<br><b>Το παγωτό ακριβαίνει.</b></p>
+<h1>Τι κάνει ο χρόνος στα λεφτά σου</h1>
+<p class="lede">Ο πληθωρισμός δεν σου παίρνει ευρώ από το χέρι — σου παίρνει αυτά που τα ευρώ
+   αγοράζουν. Παρακάτω δεν υπάρχει παράδειγμα: είναι οι <b>πραγματικές ελληνικές τιμές</b>,
+   1996 έως 2025, όπως τις δημοσιεύει η ΕΛΣΤΑΤ.</p>
+
+<!-- ══════════ 1. ΤΟ ΝΟΥΜΕΡΟ ══════════ -->
+<div class="card">
+  <h2 class="kat">Τριάντα χρόνια ελληνικές τιμές</h2>
+  <p class="sub">Πόσο ανέβηκε το γενικό επίπεδο τιμών από το 1996 ως το 2025.</p>
+  <p class="big" id="polx">—</p>
+  <p class="q" id="poly">—</p>
+</div>
+
+<!-- ══════════ 2. ΤΑ ΛΕΦΤΑ ΣΤΟ ΣΥΡΤΑΡΙ ══════════ -->
+<div class="card">
+  <h2 class="kat">Τα λεφτά που κάθονται</h2>
+  <p class="sub">Χρήματα που έμειναν στην άκρη, χωρίς τόκο και χωρίς επένδυση.
+     Διάλεξε χρονιά και ποσό — και δες τι απόμεινε από αυτά σήμερα.</p>
+
+  <div class="ctrl">
+    <div class="ctrl-head"><span>Τα έβαλες στην άκρη το</span><output id="etosOut">2005</output></div>
+    <input type="range" id="etos" min="1996" max="2024" value="2005" step="1" aria-label="Χρονιά">
+  </div>
+
+  <div class="ctrl">
+    <div class="ctrl-head"><span>Ποσό</span></div>
+    <div class="numin"><input type="number" id="poso" value="100" min="1" max="1000000" step="10" inputmode="numeric" aria-label="Ποσό σε ευρώ"><span class="eur">€</span></div>
+  </div>
+
+  <p class="big" id="apomeine">—</p>
+  <p class="q" id="syrtariTxt">—</p>
+
+  <div class="bars">
+    <div class="bar-row">
+      <div class="bar-lab"><span class="nm">Τι αγόραζαν τότε</span><span class="vl" id="lbTote">—</span></div>
+      <div class="track"><div class="fill" id="barTote" style="width:100%"></div></div>
     </div>
-    <figure class="art">
-      <svg viewBox="0 0 420 230" role="img" aria-label="Ένα κέρμα των 2 ευρώ ίσον ένα παγωτό χωνάκι">
-        <circle class="s-gold" cx="100" cy="120" r="70"/>
-        <circle class="st-ink" cx="100" cy="120" r="70"/>
-        <circle class="st-ink" cx="100" cy="120" r="54" style="stroke-width:2"/>
-        <text class="svg-label" x="100" y="136" text-anchor="middle" font-size="44">2€</text>
-
-        <path class="st-ink" d="M196 110 h38M196 130 h38" style="stroke-width:6"/>
-
-        <circle class="s-red" cx="296" cy="94" r="22"/>
-        <circle class="s-red" cx="324" cy="94" r="22"/>
-        <circle class="s-red" cx="310" cy="74" r="24"/>
-        <path class="s-gold" d="M278 112 L342 112 L310 208 Z"/>
-        <path class="st-ink" d="M278 112 L342 112 L310 208 Z"/>
-        <path class="st-soft" d="M292 132 l12 20M306 128 l12 22"/>
-      </svg>
-    </figure>
-  </header>
-
-  <section class="scene">
-    <figure class="art">
-      <svg viewBox="0 0 420 210" role="img" aria-label="Δύο ευρώ ίσον ένα παγωτό">
-        <circle class="s-gold" cx="80" cy="105" r="46"/>
-        <circle class="st-ink" cx="80" cy="105" r="46"/>
-        <text class="svg-label" x="80" y="118" text-anchor="middle" font-size="30">2€</text>
-        <path class="st-ink" d="M152 96 h40M152 116 h40" style="stroke-width:5"/>
-        <circle class="s-red" cx="288" cy="76" r="19"/>
-        <circle class="s-red" cx="312" cy="76" r="19"/>
-        <circle class="s-red" cx="300" cy="59" r="20"/>
-        <path class="s-gold" d="M273 90 L327 90 L300 175 Z"/>
-        <path class="st-ink" d="M273 90 L327 90 L300 175 Z"/>
-      </svg>
-    </figure>
-    <div>
-      <h2>Σήμερα: 2 ευρώ, ένα παγωτό</h2>
-      <p>Τα λεφτά δεν τρώγονται. Αξίζουν <strong>μόνο για όσα αγοράζουν</strong>.</p>
+    <div class="bar-row">
+      <div class="bar-lab"><span class="nm">Τι αγοράζουν σήμερα</span><span class="vl" id="lbTora">—</span></div>
+      <div class="track"><div class="fill coral" id="barTora" style="width:50%"></div></div>
     </div>
-  </section>
+  </div>
 
-  <section class="scene flip">
-    <figure class="art">
-      <svg viewBox="0 0 420 236" role="img" aria-label="Επτά κέρματα αλλά μόνο δύο παγωτά">
-        <text class="svg-cap" x="8" y="22">ΛΕΦΤΑ ΣΤΙΣ ΤΣΕΠΕΣ</text>
-        <g>
-          <circle class="s-gold" cx="42" cy="64" r="26"/><circle class="st-ink" cx="42" cy="64" r="26" style="stroke-width:2.5"/>
-          <circle class="s-gold" cx="98" cy="64" r="26"/><circle class="st-ink" cx="98" cy="64" r="26" style="stroke-width:2.5"/>
-          <circle class="s-gold" cx="154" cy="64" r="26"/><circle class="st-ink" cx="154" cy="64" r="26" style="stroke-width:2.5"/>
-          <circle class="s-gold" cx="210" cy="64" r="26"/><circle class="st-ink" cx="210" cy="64" r="26" style="stroke-width:2.5"/>
-          <circle class="s-gold" cx="266" cy="64" r="26"/><circle class="st-ink" cx="266" cy="64" r="26" style="stroke-width:2.5"/>
-          <circle class="s-gold" cx="322" cy="64" r="26"/><circle class="st-ink" cx="322" cy="64" r="26" style="stroke-width:2.5"/>
-          <circle class="s-gold" cx="378" cy="64" r="26"/><circle class="st-ink" cx="378" cy="64" r="26" style="stroke-width:2.5"/>
-          </g>
-        <text class="svg-cap" x="8" y="134">ΠΑΓΩΤΑ ΣΤΟ ΨΥΓΕΙΟ</text>
-        <circle class="s-red" cx="35" cy="168" r="11"/><circle class="s-red" cx="49" cy="168" r="11"/><circle class="s-red" cx="42" cy="158" r="12"/><path class="s-gold" d="M26 177 L58 177 L42 227 Z"/><path class="st-ink" d="M26 177 L58 177 L42 227 Z" style="stroke-width:2.5"/>
-        <circle class="s-red" cx="105" cy="168" r="11"/><circle class="s-red" cx="119" cy="168" r="11"/><circle class="s-red" cx="112" cy="158" r="12"/><path class="s-gold" d="M96 177 L128 177 L112 227 Z"/><path class="st-ink" d="M96 177 L128 177 L112 227 Z" style="stroke-width:2.5"/>
-      </svg>
-    </figure>
-    <div>
-      <h2>Πολλά λεφτά, λίγα παγωτά</h2>
-      <p>Όταν τα λεφτά πληθαίνουν πιο γρήγορα από τα πράγματα, <strong>όλοι κυνηγάνε το ίδιο παγωτό</strong>.</p>
-    </div>
-  </section>
+  <p class="sub" style="margin:16px 0 0" id="antistrofo">—</p>
+</div>
 
-  <section class="scene">
-    <figure class="art">
-      <svg viewBox="0 0 420 210" role="img" aria-label="Η τιμή αλλάζει από 2 ευρώ σε 2 ευρώ και 20 λεπτά">
-        <path class="s-line" d="M62 46 H236 V164 H62 L18 105 Z"/>
-        <path class="st-ink" d="M62 46 H236 V164 H62 L18 105 Z"/>
-        <circle class="s-card" cx="56" cy="105" r="11"/>
-        <circle class="st-ink" cx="56" cy="105" r="11" style="stroke-width:2.5"/>
-        <text class="svg-label faded" x="152" y="118" text-anchor="middle" font-size="34">2,00€</text>
-        <path class="st-ink faded" d="M100 108 h104" style="stroke-width:4"/>
-        <path class="st-ink" d="M256 105 h34m-14-13 14 13 -14 13" style="stroke-width:5"/>
-        <text class="svg-label" x="306" y="120" font-size="38" style="fill:var(--red)">2,20€</text>
-      </svg>
-    </figure>
-    <div>
-      <h2>Ο περιπτεράς ανεβάζει την τιμή</h2>
-      <p>Δεν έγινε πιο νόστιμο το παγωτό. Απλώς <strong>το κάθε ευρώ αξίζει λιγότερο</strong>.</p>
-    </div>
-  </section>
+<!-- ══════════ 3. Η ΚΑΜΠΥΛΗ ══════════ -->
+<div class="card">
+  <h2 class="kat">Χρονιά με χρονιά</h2>
+  <p class="sub">Το γενικό επίπεδο τιμών, χρονιά με χρονιά. Κάθε σημείο είναι
+     δημοσιευμένος ετήσιος μέσος δείκτης.</p>
+  <svg class="chart" id="chart" viewBox="0 0 600 240" role="img" aria-label="Ο δείκτης τιμών 1996-2025"></svg>
+  <p class="q" id="kampyli" style="margin-top:10px">—</p>
+</div>
 
-  <section class="scene flip">
-    <figure class="art">
-      <svg viewBox="0 0 420 210" role="img" aria-label="Το ίδιο κέρμα αγοράζει τώρα χωνάκι χωρίς μπάλα">
-        <circle class="s-gold" cx="80" cy="105" r="46"/>
-        <circle class="st-ink" cx="80" cy="105" r="46"/>
-        <text class="svg-label" x="80" y="118" text-anchor="middle" font-size="30">2€</text>
-        <path class="st-ink" d="M152 96 h40M152 116 h40" style="stroke-width:5"/>
-        <circle class="s-red faded" cx="288" cy="76" r="19"/>
-        <circle class="s-red faded" cx="312" cy="76" r="19"/>
-        <circle class="s-red faded" cx="300" cy="59" r="20"/>
-        <path class="s-gold" d="M273 90 L327 90 L300 175 Z"/>
-        <path class="st-ink" d="M273 90 L327 90 L300 175 Z"/>
-        <text class="svg-cap" x="300" y="200" text-anchor="middle">ΧΩΡΙΣ ΤΗΝ ΜΠΑΛΑ</text>
-      </svg>
-    </figure>
-    <div>
-      <h2>Ίδιο κέρμα, λιγότερο παγωτό</h2>
-      <p>Αυτό είναι ο πληθωρισμός: <strong>δεν σου παίρνει λεφτά — σου παίρνει αγοραστική δύναμη</strong>.</p>
-    </div>
-  </section>
+<!-- ══════════ 4. ΟΧΙ ΟΛΑ ΤΟ ΙΔΙΟ ══════════ -->
+<div class="card">
+  <h2 class="kat">Δεν ακριβαίνουν όλα το ίδιο</h2>
+  <p class="sub">Πόσο πολλαπλασιάστηκε η κάθε κατηγορία από το 1996 ως το 2025.</p>
+  <div class="bars" id="kathgories"></div>
+  <p class="sub" style="margin:16px 0 0">Ένα μέσο νούμερο πληθωρισμού κρύβει και το πρώτο και
+     το τελευταίο. Ο δικός σου πληθωρισμός εξαρτάται από το τι αγοράζεις εσύ.</p>
+</div>
 
-  <section class="calc" aria-labelledby="calc-title">
-    <div>
-      <h2 id="calc-title">Λίγο-λίγο, κάθε χρόνο</h2>
-      <p style="margin:10px 0 0;color:var(--ink-soft);max-width:44ch">Με πληθωρισμό <strong style="color:var(--ink);font-weight:500">3% τον χρόνο</strong>, τράβα τον χρόνο και δες τι γίνεται.</p>
-    </div>
+<!-- ══════════ 5. ΤΙ ΣΗΜΑΙΝΕΙ ══════════ -->
+<div class="punch">
+  <h2>Τι σημαίνει στην πράξη</h2>
+  <div class="row">
+    <h3>Ο μισθός</h3>
+    <p>Αν ανέβει λιγότερο από τις τιμές, φτώχυνες — ακόμα κι αν πήρες αύξηση.</p>
+  </div>
+  <div class="row">
+    <h3>Οι οικονομίες</h3>
+    <p>Λεφτά που κάθονται δεν μένουν ίδια. Το κεφάλαιο δείχνει ίδιο· αυτό που αγοράζει μικραίνει κάθε χρόνο.</p>
+  </div>
+  <div class="row">
+    <h3>Η σύνταξη</h3>
+    <p id="syntaxi">—</p>
+  </div>
+  <p class="ecb">Ο στόχος της Ευρωπαϊκής Κεντρικής Τράπεζας είναι πληθωρισμός
+     <b>2% τον χρόνο μεσοπρόθεσμα</b> — όχι μηδέν. Δηλαδή ακόμα και όταν όλα πάνε
+     κατ' ευχήν, τα χρήματα που κάθονται χάνουν αξία. Είναι σχεδιασμένο έτσι.</p>
+</div>
 
-    <label class="slider" for="years">
-      <span>Χρόνια που περνάνε: <b id="yearsOut" style="color:var(--ink);font-size:18px">20</b></span>
-      <input id="years" type="range" min="0" max="40" step="1" value="20" aria-describedby="calc-title">
-    </label>
+<a class="btn ghost" href="index.html">← Πίσω στο ταμπλό</a>
 
-    <div class="readout">
-      <div class="stat">
-        <span class="k">ΤΟ ΠΑΓΩΤΟ</span>
-        <span class="v up" id="priceOut">3,61€</span>
-      </div>
-      <div class="stat">
-        <span class="k">ΤΑ 100€ ΣΤΟ ΣΥΡΤΑΡΙ ΑΓΟΡΑΖΟΥΝ ΟΣΑ</span>
-        <span class="v down" id="powerOut">55€</span>
-      </div>
-    </div>
-
-    <div>
-      <div class="bar"><i id="bar" style="width:55%"></i></div>
-      <p class="barcap">Πράσινο = τι σου μένει από τα 100€ σε πραγματική αξία.</p>
-    </div>
-  </section>
-
-  <section class="takeaway">
-    <div class="tile">
-      <h3>Ο μισθός</h3>
-      <p>Αν ανέβει λιγότερο από τις τιμές, φτώχυνες — ακόμα κι αν πήρες αύξηση.</p>
-    </div>
-    <div class="tile">
-      <h3>Οι οικονομίες</h3>
-      <p>Λεφτά που κάθονται δεν μένουν ίδια. Χάνουν σιωπηλά κάθε χρόνο.</p>
-    </div>
-    <div class="tile">
-      <h3>Ο στόχος</h3>
-      <p>Τα λεφτά σου πρέπει να τρέχουν τουλάχιστον όσο γρήγορα τρέχουν οι τιμές.</p>
-    </div>
-  </section>
-
-  <footer>
-    <p>Ο στόχος της Ευρωπαϊκής Κεντρικής Τράπεζας είναι πληθωρισμός <b>2% τον χρόνο</b> μεσοπρόθεσμα — όχι μηδέν.</p>
-    <p>Τα νούμερα εδώ είναι παράδειγμα με σταθερό 3%, όχι πρόβλεψη.</p>
-  </footer>
+<a class="after" href="poso-ekane.html">
+  <span class="tag">ΑΝ ΘΕΣ ΝΑ ΤΟ ΔΟΚΙΜΑΣΕΙΣ</span>
+  <h3>Πόσο έκανε;</h3>
+  <p>Το ίδιο πράγμα ως παιχνίδι: έξι καλάθια που κάνουν 100 € σήμερα — μάντεψε τι
+     έκαναν τη χρονιά που θα διαλέξεις. Χάνουν όλοι στην πρώτη ερώτηση.</p>
+</a>
 
 </div>
 
+<footer>
+  <b>Πηγή:</b> ΕΛΣΤΑΤ — Δείκτης Τιμών Καταναλωτή &amp; Εναρμονισμένος ΔΤΚ, ετήσιοι μέσοι
+  δείκτες, σειρά 1996–2025. Το «σήμερα» είναι ο ετήσιος μέσος του <b>2025</b>, το τελευταίο
+  πλήρες έτος της σειράς. Κάθε νούμερο σε αυτή τη σελίδα είναι <b>λόγος δύο δημοσιευμένων
+  δεικτών</b> — καμία τιμή δεν είναι εκτίμηση και κανένα ποσοστό δεν είναι πρόβλεψη.
+  Οι κατηγορίες είναι υποδείκτες του ΕνΔΤΚ (διατροφή· ενέργεια· βιομηχανικά αγαθά χωρίς
+  την ενέργεια· υπηρεσίες)· το γενικό επίπεδο είναι ο ΔΤΚ σύνολο. Οι δύο δείκτες έχουν
+  διαφορετικό έτος βάσης, γι' αυτό εδώ δεν συγκρίνονται μεταξύ τους: κάθε πολλαπλασιαστής
+  είναι λόγος <b>του ίδιου</b> δείκτη σε δύο χρονιές, οπότε η βάση δεν παίζει ρόλο.
+  Το μόνο νούμερο που δεν είναι ιστορικό είναι το <b>2%</b> της σύνταξης: είναι ο
+  <b>δηλωμένος στόχος της ΕΚΤ</b>, όχι πρόβλεψη για το μέλλον.
+  <br><br>
+  <b>Τι κρατάει αυτή η σελίδα:</b> μόνο ό,τι έγραψες εσύ, εδώ, σε αυτόν τον υπολογιστή.
+  Καμία σύνδεση, κανένας server, τίποτα δεν φεύγει πουθενά.
+  Σελίδα ενημέρωσης — δεν αποτελεί επενδυτική συμβουλή ή προσφορά.
+</footer>
+
 <script>
-  (function () {
-    var RATE = 0.03, BASE = 2;
-    var years = document.getElementById('years');
-    var yearsOut = document.getElementById('yearsOut');
-    var priceOut = document.getElementById('priceOut');
-    var powerOut = document.getElementById('powerOut');
-    var bar = document.getElementById('bar');
+"use strict";
 
-    function eur(n, dec) {
-      return n.toFixed(dec).replace('.', ',') + '€';
+/* ═══════════ Η ΚΟΙΝΗ ΜΝΗΜΗ ΤΟΥ «ΚΕΡΑΣΜΑΤΟΣ» ═══════════
+   Το ίδιο κομμάτι υπάρχει ΑΥΤΟΥΣΙΟ και στα επτά παιχνίδια, στο «Πόσες μέρες
+   ακόμα μαζί;» και στο ταμπλό.
+   Κρατάει μόνο ό,τι έγραψε ο ίδιος ο παίκτης, σε αυτόν εδώ τον υπολογιστή:
+   τίποτα δεν φεύγει πουθενά, καμία σύνδεση, κανένας server.
+   Αν ο φυλλομετρητής δεν αφήνει αποθήκευση (π.χ. ιδιωτική περιήγηση), το
+   παιχνίδι δουλεύει ΑΚΡΙΒΩΣ το ίδιο — απλώς δεν γεμίζει το ταμπλό.
+
+   ΤΟ ΔΙΑΒΑΤΗΡΙΟ — ό,τι είπε για τον εαυτό του (ηλικία, φύλο, πόσα βάζει,
+   δάνειο) ζει σε ΕΝΑ σημείο, ώστε το επόμενο παιχνίδι να μην το ξαναρωτήσει.
+   Δύο κανόνες, και οι δύο για τον ίδιο λόγο — να μην μπουν στο στόμα του
+   λόγια που δεν είπε:
+     1. Γράφεται ΜΟΝΟ ό,τι άγγιξε ο ίδιος. Μια δική μας προεπιλογή δεν είναι
+        απάντησή του και δεν μπαίνει ποτέ στο διαβατήριο.
+     2. Το διαβατήριο ΦΑΙΝΕΤΑΙ στο ταμπλό, πάντα και πρώτο. Αν δοθεί το κινητό
+        σε δεύτερο άνθρωπο, το πρώτο που βλέπει είναι τι ξέρει η σελίδα για
+        τον προηγούμενο — και δίπλα του το «Καθάρισε».                       */
+const KERASMA = (function(){
+  const P = "KERASMA:v1:";
+  let zei = null;
+  function ok(){
+    if(zei !== null) return zei;
+    try{ localStorage.setItem(P + "dokimi", "1"); localStorage.removeItem(P + "dokimi"); zei = true; }
+    catch(e){ zei = false; }
+    return zei;
+  }
+  function fakelaki(){
+    if(!ok()) return {};
+    try{ return JSON.parse(localStorage.getItem(P + "pass")) || {}; }catch(e){ return {}; }
+  }
+  return {
+    zei: ok,
+    grapse(id, d){
+      if(!ok()) return false;
+      d.v = 1; d.id = id; d.pote = Date.now();
+      try{ localStorage.setItem(P + "p:" + id, JSON.stringify(d)); return true; }catch(e){ return false; }
+    },
+    diavase(id){
+      if(!ok()) return null;
+      try{ return JSON.parse(localStorage.getItem(P + "p:" + id)); }catch(e){ return null; }
+    },
+    svise(id){ if(ok()){ try{ localStorage.removeItem(P + "p:" + id); }catch(e){} } },
+    onoma(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "onoma") || "";
+        localStorage.setItem(P + "onoma", v); return v;
+      }catch(e){ return ""; }
+    },
+    thema(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "thema") || "";
+        localStorage.setItem(P + "thema", v); return v;
+      }catch(e){ return ""; }
+    },
+    apoTamplo(v){
+      if(!ok()) return false;
+      try{
+        if(v === undefined) return localStorage.getItem(P + "tamplo") === "1";
+        localStorage.setItem(P + "tamplo", v ? "1" : "0"); return !!v;
+      }catch(e){ return false; }
+    },
+
+    /* ---------- ΤΟ ΔΙΑΒΑΤΗΡΙΟ ---------- */
+    olo: fakelaki,
+    pass(k){ return fakelaki()[k]; },
+    /* «είπε» — και το όνομα είναι η προδιαγραφή: μπαίνει μόνο ό,τι είπε. */
+    eipe(k, v){
+      if(!ok()) return false;
+      const o = fakelaki();
+      if(v === undefined || v === null || v === "") delete o[k]; else o[k] = v;
+      try{ localStorage.setItem(P + "pass", JSON.stringify(o)); return true; }catch(e){ return false; }
+    },
+    svisePass(){ if(ok()){ try{ localStorage.removeItem(P + "pass"); }catch(e){} } },
+    /* Δένει ένα πεδίο με το διαβατήριο: ανοίγει γεμάτο αν το έχει ήδη πει
+       αλλού, και γράφει πίσω ΜΟΝΟ αν το αγγίξει ο ίδιος.
+       Το κόψιμο στα όρια του πεδίου δεν γυρίζει ποτέ πίσω στο διαβατήριο:
+       αλλιώς το ΠΑΖΑΡΙ, που σταματάει στα 65, θα «διόρθωνε» σιωπηλά έναν
+       68άρη σε 65 — και το επόμενο παιχνίδι θα τον ρωτούσε σαν 65άρη.       */
+    dese(el, k){
+      if(!el) return;
+      const arith = el.type === "range" || el.type === "number";
+      const v = this.pass(k);
+      if(v !== undefined && v !== null && v !== ""){
+        if(arith){
+          const n = Number(v);
+          if(isFinite(n)){
+            const lo = el.min === "" ? -Infinity : Number(el.min);
+            const hi = el.max === "" ?  Infinity : Number(el.max);
+            el.value = Math.min(hi, Math.max(lo, n));
+          }
+        } else el.value = v;
+      }
+      const kata = () => {
+        if(!arith) return this.eipe(k, el.value);
+        const n = Number(el.value);
+        this.eipe(k, el.value === "" || !isFinite(n) ? undefined : n);
+      };
+      el.addEventListener("input", kata);
+      el.addEventListener("change", kata);
     }
+  };
+})();
 
-    function render() {
-      var n = parseInt(years.value, 10);
-      var factor = Math.pow(1 + RATE, n);
-      var power = 100 / factor;
-      yearsOut.textContent = n;
-      priceOut.textContent = eur(BASE * factor, 2);
-      powerOut.textContent = eur(power, 0);
-      bar.style.width = power.toFixed(1) + '%';
+/* Το θέμα ταξιδεύει μαζί με τον παίκτη, όπως στα παιχνίδια. */
+(function(){ const th = KERASMA.thema(); if(th) document.documentElement.setAttribute("data-theme", th); })();
+
+/* ═══════════ ΔΕΔΟΜΕΝΑ — ΕΛΣΤΑΤ, αυτούσια ═══════════ */
+const D = {
+  years:[1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+  dtk:[61.2655,64.6571,67.739,69.5248,71.7157,74.1354,76.826,79.5385,81.8442,84.7456,87.454,89.9858,93.7227,94.8569,99.3274,102.6349,104.176,103.2163,101.8615,100.1037,99.2652,100.3779,101.0054,101.2607,100.0,101.2239,110.9869,114.8321,117.9807,120.9086],
+  food:[42.2833,44.4042,46.5158,47.835,48.9208,51.7217,54.8775,57.4842,58.4217,59.085,61.4275,63.3625,66.3025,67.98,70.0933,73.025,73.9725,74.6392,73.9242,75.2,75.3242,76.4317,77.1258,77.1525,78.1392,79.0917,86.7475,95.3117,97.9517,99.9983],
+  fresh:[43.8958,46.8042,49.3258,50.4917,51.3317,54.78,58.5783,62.3158,60.4833,59.575,60.715,62.0642,64.5333,67.0508,67.1592,69.42,70.4175,71.3258,68.8525,70.0433,69.1317,69.4783,69.9758,71.4033,73.8575,75.2442,82.7958,91.66,94.5567,100.0],
+  energy:[32.8433,31.955,31.0692,30.3067,35.5525,34.9458,34.8533,36.1325,38.4342,43.6592,47.7858,48.8108,55.5417,48.795,63.6108,74.2142,83.5725,88.8767,87.0808,77.4367,73.4117,79.64,82.7358,82.49,74.4342,83.7017,118.0042,102.1483,100.7517,99.9992],
+  goods:[71.6817,75.0592,78.6967,79.65,80.1592,82.5058,84.5575,85.8908,87.9133,90.3933,91.8058,93.8475,95.7333,96.4925,98.2958,98.1483,97.5767,95.8875,94.8858,93.1325,91.8675,89.7667,88.7017,88.3442,87.9733,87.3658,91.7433,97.6408,99.2908,100.0],
+  services:[47.7217,52.0042,55.2858,57.36,58.8242,61.1433,63.875,66.5242,69.0658,71.5533,73.7867,76.4833,79.405,81.9717,84.5142,86.095,85.9483,83.4508,81.7983,81.8275,82.955,83.9508,84.7217,85.8233,84.5875,83.7342,87.4833,91.3917,95.4433,100.0017]
+};
+const TODAY = 2025;
+const ECB = 0.02;          /* ο δηλωμένος στόχος της ΕΚΤ — όχι πρόβλεψη */
+const ETI_SYNTAXIS = 30;   /* πόσα χρόνια μπορεί να κρατήσει μια σύνταξη */
+
+/* ═══════════ Η ΜΗΧΑΝΗ ═══════════
+   Τέσσερις συναρτήσεις, και όλα όσα βλέπει ο αναγνώστης βγαίνουν από αυτές.
+   Καμία δεν κρατάει δικό της νούμερο: όλες διαβάζουν τους δείκτες. */
+function deiktis(kat, etos){
+  const i = D.years.indexOf(etos);
+  return i < 0 ? null : D[kat][i];
+}
+/* Πόσο πολλαπλασιάστηκαν οι τιμές μιας κατηγορίας ανάμεσα σε δύο χρονιές. */
+function pollaplasiastis(kat, apo, eos){
+  const a = deiktis(kat, apo), b = deiktis(kat, eos);
+  return (a === null || b === null || !a) ? null : b / a;
+}
+/* Τι αγοράζουν σήμερα τα «poso» € του έτους «etos», μετρημένα σε ευρώ ΕΚΕΙΝΗΣ
+   της χρονιάς: το ποσό δεν άλλαξε, η αγοραστική του δύναμη άλλαξε. */
+function apomeinan(poso, etos){
+  const p = pollaplasiastis("dtk", etos, TODAY);
+  return p === null ? null : poso / p;
+}
+/* Και το αντίστροφο: πόσα χρειάζεσαι σήμερα για ό,τι έπαιρναν τότε «poso» €. */
+function xreiazesai(poso, etos){
+  const p = pollaplasiastis("dtk", etos, TODAY);
+  return p === null ? null : poso * p;
+}
+/* Μέσος ετήσιος ρυθμός ανάμεσα σε δύο χρονιές (σύνθετος, όχι μέσος όρος). */
+function rythmos(kat, apo, eos){
+  const p = pollaplasiastis(kat, apo, eos);
+  return p === null ? null : Math.pow(p, 1 / (eos - apo)) - 1;
+}
+/* Η μεγαλύτερη πτώση της σειράς: από ποια κορυφή, ως ποιον πάτο, πόσο βαθιά —
+   και πότε ξαναπιάστηκε εκείνη η κορυφή. Δεν γράφουμε χρονιές: τις βρίσκουμε.
+   Αν αύριο μπει νέα χρονιά στα δεδομένα, η πρόταση διορθώνεται μόνη της. */
+function ptwsi(kat){
+  const v = D[kat], ys = D.years;
+  let kor = 0, pat = 0, vathos = 0, trexon = 0;
+  for(let i = 1; i < v.length; i++){
+    if(v[i] > v[trexon]) trexon = i;
+    const d = 1 - v[i] / v[trexon];
+    if(d > vathos){ vathos = d; kor = trexon; pat = i; }
+  }
+  if(!vathos) return null;
+  let anak = -1;
+  for(let i = pat + 1; i < v.length; i++) if(v[i] >= v[kor]){ anak = i; break; }
+  return { korifi: ys[kor], patos: ys[pat], vathos: vathos,
+           anaktisi: anak < 0 ? null : ys[anak],
+           eti: anak < 0 ? null : ys[anak] - ys[kor] };
+}
+/* Η μεγαλύτερη άνοδος μέσα σε έναν μόνο χρόνο. */
+function megistiAnodos(kat){
+  const v = D[kat], ys = D.years;
+  let imax = 1, meg = -Infinity;
+  for(let i = 1; i < v.length; i++){
+    const a = v[i] / v[i - 1] - 1;
+    if(a > meg){ meg = a; imax = i; }
+  }
+  return { apo: ys[imax - 1], eos: ys[imax], pososto: meg };
+}
+
+/* ═══════════ ΒΟΗΘΗΤΙΚΑ ═══════════ */
+const $ = id => document.getElementById(id);
+const e0 = n => Math.round(n).toLocaleString("el-GR");
+const e2 = n => n.toLocaleString("el-GR", {minimumFractionDigits:2, maximumFractionDigits:2});
+const pc = n => (n * 100).toLocaleString("el-GR", {minimumFractionDigits:1, maximumFractionDigits:1}) + "%";
+const x2 = n => "×" + n.toLocaleString("el-GR", {minimumFractionDigits:2, maximumFractionDigits:2});
+
+$("tog").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const neo = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", neo);
+  KERASMA.thema(neo);
+};
+
+/* ─────────── 1. Το νούμερο ─────────── */
+(function(){
+  const ARXI = D.years[0];
+  const p = pollaplasiastis("dtk", ARXI, TODAY);
+  $("polx").textContent = x2(p);
+  $("poly").innerHTML =
+    "Ό,τι έκανε <b>100 €</b> το " + ARXI + " κάνει σήμερα <b>" + e0(xreiazesai(100, ARXI)) + " €</b>. " +
+    "Ο μισθός που δεν ακολούθησε αυτή τη γραμμή δεν έμεινε ίδιος — μίκρυνε. " +
+    "Μέσος ρυθμός: <b>" + pc(rythmos("dtk", ARXI, TODAY)) + " τον χρόνο</b>.";
+})();
+
+/* ─────────── 2. Τα λεφτά στο συρτάρι ─────────── */
+function syrtari(){
+  const etos = Number($("etos").value);
+  const poso = Math.max(1, Number($("poso").value) || 0);
+  $("etosOut").textContent = etos;
+
+  const menoun = apomeinan(poso, etos);
+  const xania = poso - menoun;
+  const meros = menoun / poso;
+
+  $("apomeine").textContent = e0(menoun) + " €";
+  $("syrtariTxt").innerHTML =
+    "Τα <b>" + e0(poso) + " €</b> που έμειναν στην άκρη το <b>" + etos + "</b> είναι ακόμα " +
+    e0(poso) + " €. Αγοράζουν όμως όσα αγόραζαν τότε <b>" + e0(menoun) + " €</b> — " +
+    "ο χρόνος πήρε <b>" + e0(xania) + " €</b>, δηλαδή το " + pc(1 - meros) + " της αξίας τους.";
+
+  $("lbTote").textContent = e0(poso) + " €";
+  $("lbTora").textContent = e0(menoun) + " €";
+  $("barTora").style.width = (meros * 100).toFixed(1) + "%";
+
+  $("antistrofo").innerHTML =
+    "Και από την ανάποδη: για να αγοράσεις σήμερα ό,τι έπαιρναν τότε " + e0(poso) + " €, " +
+    "χρειάζεσαι <b>" + e0(xreiazesai(poso, etos)) + " €</b>.";
+}
+$("etos").addEventListener("input", syrtari);
+$("poso").addEventListener("input", syrtari);
+/* Το ποσό είναι το ίδιο με το «συρτάρι» του «Πόσο έκανε;» — αν το είπε εκεί,
+   δεν το ξαναρωτάμε εδώ. */
+KERASMA.dese($("poso"), "syrtari");
+syrtari();
+
+/* ─────────── 3. Η καμπύλη ─────────── */
+(function(){
+  const W = 600, H = 240, L = 10, R = 10, T = 14, B = 26;
+  const v = D.dtk, ys = D.years;
+  const lo = Math.min.apply(null, v) * 0.97, hi = Math.max.apply(null, v) * 1.03;
+  const X = i => L + (W - L - R) * i / (v.length - 1);
+  const Y = n => T + (H - T - B) * (1 - (n - lo) / (hi - lo));
+
+  const pt  = ptwsi("dtk");
+  const an  = megistiAnodos("dtk");
+
+  let d = "";
+  for(let i = 0; i < v.length; i++) d += (i ? " L" : "M") + X(i).toFixed(1) + " " + Y(v[i]).toFixed(1);
+
+  let g = "";
+  const shma = [ys[0]];
+  if(pt){
+    const iK = ys.indexOf(pt.korifi), iP = ys.indexOf(pt.patos);
+    const iA = pt.anaktisi ? ys.indexOf(pt.anaktisi) : iP;
+    g += '<rect class="band" x="' + X(iK).toFixed(1) + '" y="' + T + '" width="' +
+         (X(iA) - X(iK)).toFixed(1) + '" height="' + (H - T - B) + '" />';
+    shma.push(pt.korifi, pt.patos);
+    if(pt.anaktisi) shma.push(pt.anaktisi);
+  }
+  shma.push(ys[ys.length - 1]);
+  g += '<line class="grid" x1="' + L + '" y1="' + (H - B) + '" x2="' + (W - R) + '" y2="' + (H - B) + '"/>';
+  g += '<path class="ln" d="' + d + '"/>';
+  shma.forEach(function(y){
+    const i = ys.indexOf(y);
+    const an1 = i === 0 ? "start" : (i === ys.length - 1 ? "end" : "middle");
+    g += '<text class="tx" x="' + X(i).toFixed(1) + '" y="' + (H - 6) + '" text-anchor="' + an1 + '">' + y + '</text>';
+  });
+  if(pt){
+    [pt.korifi, pt.patos].forEach(function(y){
+      const i = ys.indexOf(y);
+      g += '<circle class="dot" cx="' + X(i).toFixed(1) + '" cy="' + Y(v[i]).toFixed(1) + '" r="4"/>';
+    });
+  }
+  $("chart").innerHTML = g;
+
+  let txt = "";
+  if(pt){
+    txt += "Δεν ανεβαίνουν πάντα: από το <b>" + pt.korifi + "</b> ως το <b>" + pt.patos +
+           "</b> οι τιμές στην Ελλάδα <b>έπεσαν</b> " + pc(pt.vathos) + ".";
+    if(pt.anaktisi){
+      txt += " Και χρειάστηκαν <b>" + pt.eti + " χρόνια</b> — ως το " + pt.anaktisi +
+             " — για να ξαναφτάσουν εκεί που ήταν.";
     }
+    txt += " ";
+  }
+  txt += "Μετά, μέσα σε έναν μόνο χρόνο (" + an.apo + " προς " + an.eos + "), ανέβηκαν <b>" +
+         pc(an.pososto) + "</b>. Ο μέσος όρος μιας εικοσαετίας κρύβει και τα δύο.";
+  $("kampyli").innerHTML = txt;
+})();
 
-    years.addEventListener('input', render);
-    render();
-  })();
+/* ─────────── 4. Οι κατηγορίες ─────────── */
+(function(){
+  const KAT = [
+    {k:"energy",   nm:"Ρεύμα, καύσιμα, θέρμανση", cls:"coral"},
+    {k:"food",     nm:"Τρόφιμα",                  cls:"gold"},
+    {k:"services", nm:"Υπηρεσίες",                cls:""},
+    {k:"goods",    nm:"Βιομηχανικά αγαθά",        cls:"teal"}
+  ];
+  const ARXI = D.years[0];
+  const rows = KAT.map(function(c){
+    return {nm:c.nm, cls:c.cls, p:pollaplasiastis(c.k, ARXI, TODAY)};
+  }).sort(function(a, b){ return b.p - a.p; });
+  const meg = rows[0].p;
+  $("kathgories").innerHTML = rows.map(function(r){
+    return '<div class="bar-row">' +
+      '<div class="bar-lab"><span class="nm">' + r.nm + '</span><span class="vl">' + x2(r.p) + '</span></div>' +
+      '<div class="track"><div class="fill ' + r.cls + '" style="width:' + (r.p / meg * 100).toFixed(1) + '%"></div></div>' +
+      '</div>';
+  }).join("");
+})();
+
+/* ─────────── 5. Η σύνταξη ─────────── */
+(function(){
+  const meros = 1 / Math.pow(1 + ECB, ETI_SYNTAXIS);
+  $("syntaxi").innerHTML =
+    "Μια σύνταξη μπορεί να κρατήσει " + ETI_SYNTAXIS + " χρόνια. Ακόμα κι αν ο πληθωρισμός " +
+    "μείνει στο 2% που στοχεύει η ΕΚΤ, το ίδιο ποσό στο τέλος αγοράζει <b>" + pc(1 - meros) +
+    " λιγότερα</b> απ' ό,τι στην αρχή. Το ποσό δεν μειώθηκε — η αγοραστική του δύναμη μειώθηκε.";
+})();
 </script>
-
 </body>
 </html>
