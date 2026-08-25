@@ -94,6 +94,26 @@ input[type=range]{width:100%; accent-color:var(--euro); height:26px}
 .chart .dot{fill:var(--coral)}
 .chart .tx{font-family:var(--disp); font-size:11px; fill:var(--soft); font-weight:700}
 .chart .band{fill:var(--teal); opacity:.10}
+.chart .hit{fill:transparent}
+.chart .hln{stroke:var(--soft); stroke-width:1; stroke-dasharray:3 3; opacity:.7}
+.chart .hdot{fill:var(--card); stroke:var(--euro); stroke-width:3}
+.chart-wrap{position:relative}
+.chart-wrap .chart{touch-action:pan-y}
+.tip{
+  position:absolute; left:0; top:0; z-index:5; pointer-events:none;
+  transform:translate(-50%,-100%); margin-top:-14px;
+  background:var(--card); color:var(--ink); border:1px solid var(--line);
+  border-radius:10px; padding:8px 11px; box-shadow:var(--shadow);
+  font-family:var(--disp); font-size:.82rem; line-height:1.45; white-space:nowrap;
+  opacity:0; transition:opacity .12s ease;
+}
+.tip.on{opacity:1}
+.tip b{display:block; font-size:1.02rem; font-weight:800; margin-bottom:2px}
+.tip .up{color:var(--coral-text); font-weight:800}
+.tip .dn{color:var(--teal); font-weight:800}
+.tip .eu{color:var(--euro); font-weight:800}
+.tip .hint{color:var(--soft)}
+@media (max-width:560px){ .tip{font-size:.76rem; padding:7px 9px} }
 
 .punch{background:var(--euro-deep); color:#fff; border-radius:20px; padding:22px 20px;
   margin-bottom:14px; border:1px solid var(--euro)}
@@ -174,7 +194,11 @@ input[type=range]{width:100%; accent-color:var(--euro); height:26px}
   <h2 class="kat">Χρονιά με χρονιά</h2>
   <p class="sub">Το γενικό επίπεδο τιμών, χρονιά με χρονιά. Κάθε σημείο είναι
      δημοσιευμένος ετήσιος μέσος δείκτης.</p>
-  <svg class="chart" id="chart" viewBox="0 0 600 240" role="img" aria-label="Ο δείκτης τιμών 1996-2025"></svg>
+  <div class="chart-wrap">
+    <svg class="chart" id="chart" viewBox="0 0 600 240" role="img" aria-label="Ο δείκτης τιμών 1996-2025"></svg>
+    <div class="tip" id="tip" role="status" aria-live="polite"></div>
+  </div>
+  <p class="sub" id="tipHint" style="margin:2px 0 0; font-size:.8rem">Πέρνα το δάχτυλο ή τον δείκτη πάνω από την καμπύλη για να δεις κάθε χρονιά ξεχωριστά.</p>
   <p class="q" id="kampyli" style="margin-top:10px">—</p>
 </div>
 
@@ -512,6 +536,10 @@ syrtari();
       g += '<circle class="dot" cx="' + X(i).toFixed(1) + '" cy="' + Y(v[i]).toFixed(1) + '" r="4"/>';
     });
   }
+  g += '<g id="hov" style="display:none">' +
+       '<line class="hln" y1="' + T + '" y2="' + (H - B) + '"/>' +
+       '<circle class="hdot" r="5"/></g>';
+  g += '<rect class="hit" x="0" y="0" width="' + W + '" height="' + H + '"/>';
   $("chart").innerHTML = g;
 
   let txt = "";
@@ -527,6 +555,71 @@ syrtari();
   txt += "Μετά, μέσα σε έναν μόνο χρόνο (" + an.apo + " προς " + an.eos + "), ανέβηκαν <b>" +
          pc(an.pososto) + "</b>. Ο μέσος όρος μιας εικοσαετίας κρύβει και τα δύο.";
   $("kampyli").innerHTML = txt;
+
+  /* ─── Η ταμπελίτσα: κάθε χρονιά ξεχωριστά ───
+     Κανένα νούμερο δεν γράφεται εδώ — όλα βγαίνουν από τη μηχανή (pollaplasiastis),
+     όπως και το υπόλοιπο κείμενο της σελίδας. */
+  const svg = $("chart"), tip = $("tip"), hov = $("hov");
+  const hln = hov.querySelector(".hln"), hdot = hov.querySelector(".hdot");
+  const ETOS0 = ys[0];
+  let deigma = -1;
+
+  function keimeno(i){
+    const y = ys[i];
+    let h = "<b>" + y + "</b>";
+    if(i > 0){
+      const met = pollaplasiastis("dtk", ys[i - 1], y) - 1;
+      const kl = met >= 0 ? "up" : "dn";
+      const sm = met >= 0 ? "+" : "\u2212";
+      h += '<span class="' + kl + '">' + sm + pc(Math.abs(met)) + "</span> "
+         + '<span class="hint">από το ' + ys[i - 1] + "</span><br>";
+    } else {
+      h += '<span class="hint">η αφετηρία της σειράς</span><br>';
+    }
+    const p = pollaplasiastis("dtk", ETOS0, y);
+    h += '<span class="hint">100 € του ' + ETOS0 + ' \u2192 </span><span class="eu">'
+       + e0(100 * p) + " €</span>";
+    return h;
+  }
+
+  function deixe(i){
+    if(i === deigma) return;
+    deigma = i;
+    const cx = X(i), cy = Y(v[i]);
+    hln.setAttribute("x1", cx.toFixed(1)); hln.setAttribute("x2", cx.toFixed(1));
+    hdot.setAttribute("cx", cx.toFixed(1)); hdot.setAttribute("cy", cy.toFixed(1));
+    hov.style.display = "";
+    tip.innerHTML = keimeno(i);
+    const r = svg.getBoundingClientRect();
+    /* από συντεταγμένες του σχεδίου (600×240) σε εικονοστοιχεία της οθόνης */
+    const px = cx / W * r.width, py = cy / H * r.height;
+    const miso = tip.offsetWidth / 2;
+    tip.style.left = Math.max(miso + 2, Math.min(r.width - miso - 2, px)) + "px";
+    tip.style.top  = py + "px";
+    tip.classList.add("on");
+  }
+
+  function sbise(){
+    deigma = -1; hov.style.display = "none"; tip.classList.remove("on");
+  }
+
+  function apoX(clientX){
+    const r = svg.getBoundingClientRect();
+    if(!r.width) return 0;
+    const xv = (clientX - r.left) / r.width * W;          /* πίσω στο 0..600 */
+    const t  = (xv - L) / (W - L - R) * (v.length - 1);   /* πίσω στον δείκτη */
+    return Math.max(0, Math.min(v.length - 1, Math.round(t)));
+  }
+
+  svg.addEventListener("pointermove", function(e){ deixe(apoX(e.clientX)); });
+  svg.addEventListener("pointerdown", function(e){ deixe(apoX(e.clientX)); });
+  svg.addEventListener("pointerleave", sbise);
+  svg.addEventListener("pointercancel", sbise);
+  /* στο κινητό: το άγγιγμα αλλού στη σελίδα σβήνει την ταμπελίτσα */
+  document.addEventListener("pointerdown", function(e){
+    if(!svg.contains(e.target)) sbise();
+  }, true);
+  addEventListener("resize", sbise);
 })();
 
 /* ─────────── 4. Οι κατηγορίες ─────────── */

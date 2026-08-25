@@ -65,12 +65,10 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 80px;
-}
-
-main > section {
-  scroll-snap-align: start;
+  /* ΟΧΙ scroll-snap εδώ: οι ενότητες είναι ψηλότερες από την οθόνη, οπότε το
+     snap πάλευε με το smooth scroll — κλείδωνε σε λάθος σημείο και έτρεμε.
+     scroll-padding-top = ύψος του κολλητού header (102.7px) + λίγη ανάσα. */
+  scroll-padding-top: 112px;
 }
 
 body {
@@ -2493,11 +2491,11 @@ body.modal-open {
 
       <section class="philosophy-band" aria-label="Φιλοσοφία συμβουλευτικής">
         <div class="philosophy-inner reveal">
-          <p class="philosophy-label">Πριν οτιδήποτε άλλο</p>
-          <p class="philosophy-text">
+          <p class="philosophy-label" data-i18n="philosophyLabel">Πριν οτιδήποτε άλλο</p>
+          <p class="philosophy-text" data-i18n="philosophyText">
             Κάθε συζήτηση ξεκινά από αυτό που ήδη έχετε. Υπάρχουσες ασφαλίσεις, συμβόλαια, καλύψεις — αναλύονται λεπτομερώς, κατανοούνται και λαμβάνονται πλήρως υπόψιν σε κάθε πρόταση. Δεν αντικαθιστώ αυτό που δουλεύει. Δεν προτείνω κάτι που δεν χρειάζεται. Αν η καλύτερη σύσταση είναι να μην αλλάξει τίποτα, αυτό λέω.
           </p>
-          <p class="philosophy-credo">«Καλύτερα καμμία πώληση παρά μία λάθος πώληση.»</p>
+          <p class="philosophy-credo" data-i18n="philosophyCredo">«Καλύτερα καμμία πώληση παρά μία λάθος πώληση.»</p>
         </div>
       </section>
 
@@ -3398,6 +3396,9 @@ const copy = {
   el: {
     brand: "Γιάννης Βαρδαβάς, lutcf",
     navServices: "Υπηρεσίες",
+    philosophyLabel: "Πριν οτιδήποτε άλλο",
+    philosophyText: "Κάθε συζήτηση ξεκινά από αυτό που ήδη έχετε. Υπάρχουσες ασφαλίσεις, συμβόλαια, καλύψεις — αναλύονται λεπτομερώς, κατανοούνται και λαμβάνονται πλήρως υπόψιν σε κάθε πρόταση. Δεν αντικαθιστώ αυτό που δουλεύει. Δεν προτείνω κάτι που δεν χρειάζεται. Αν η καλύτερη σύσταση είναι να μην αλλάξει τίποτα, αυτό λέω.",
+    philosophyCredo: "«Καλύτερα καμμία πώληση παρά μία λάθος πώληση.»",
     navModules: "Τι κάνω",
     navMethod: "Μεθοδολογία",
     navAbout: "Σχετικά",
@@ -3745,6 +3746,9 @@ const copy = {
   en: {
     brand: "Ioannis Vardavas, lutcf",
     navServices: "Services",
+    philosophyLabel: "Before anything else",
+    philosophyText: "Every conversation starts from what you already have. Existing policies, contracts and cover are analysed in detail, understood, and fully taken into account in every proposal. I do not replace what works. I do not propose what is not needed. If the best recommendation is to change nothing, that is what I say.",
+    philosophyCredo: "\u201cBetter no sale than the wrong sale.\u201d",
     navModules: "What I do",
     navMethod: "Method",
     navAbout: "About",
@@ -4795,7 +4799,10 @@ if ("IntersectionObserver" in window) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-        } else {
+        } else if (entry.boundingClientRect.top > 0) {
+          /* Ξε-αποκαλύπτουμε ΜΟΝΟ όσα ξαναβρέθηκαν κάτω από την οθόνη, ώστε το
+             animation να ξαναπαίζει όταν ανεβοκατεβαίνεις. Αν σβήναμε και όσα
+             βγήκαν από πάνω, κάθε κάρτα στο όριο τρεμόσβηνε. */
           entry.target.classList.remove("is-visible");
         }
       });
