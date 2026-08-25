@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Θα σου φτάσουν;</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF4; --card:#FFFFFF; --ink:#101A2E; --soft:#5A6480; --line:#D2D9E6;
+  --euro:#123FA8; --euro-deep:#0B2464; --gold:#C98209; --gold-text:#8F5B05; --gold-fill:#F0B429;
+  --coral:#C93F32; --teal:#0E6E62; --dot-off:#C3CCDC;
+  --shadow:0 1px 0 rgba(16,26,46,.05), 0 24px 48px -34px rgba(11,36,100,.55);
+  --disp:"Alegreya Sans","Helvetica Neue",Arial,sans-serif;
+  --book:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+    --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+    --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+  --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+  --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  font-size:17px; line-height:1.45;
+}
+.wrap{width:100%; max-width:620px; flex:1; display:flex; flex-direction:column}
+
+/* ---------- τυπογραφία ---------- */
+h1{font-size:clamp(30px,8vw,44px); line-height:1.02; margin:0 0 6px; letter-spacing:-.02em; font-weight:800}
+.lede{font-family:var(--book); color:var(--soft); margin:0 0 20px; font-size:clamp(15px,4vw,18px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  font-size:17px; line-height:1.45;
+}
+.wrap{width:100%; max-width:620px; flex:1; display:flex; flex-direction:column}
+
+/* ---------- τυπογραφία ---------- */
+h1{font-size:clamp(30px,8vw,44px); line-height:1.02; margin:0 0 6px; letter-spacing:-.02em; font-weight:800}
+.lede{font-family:var(--book); color:var(--soft); margin:0 0 20px; font-size:clamp(15px,4vw,18px)}
+.big{font-size:clamp(38px,11vw,62px); font-weight:800; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.mono{font-variant-numeric:tabular-nums}
+.kat{font-size:clamp(21px,5.4vw,26px); font-weight:800; margin:2px 0 4px; letter-spacing:-.01em}
+.sub{font-family:var(--book); color:var(--soft); font-size:15px; margin:0 0 18px; line-height:1.35}
+.q{font-family:var(--book); font-size:clamp(17px,4.6vw,20px); margin:0 0 4px}
+.q b{font-weight:600; color:var(--euro)}
+
+/* ---------- κάρτα ---------- */
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:14px;
+}
+.scr{display:none} .scr.on{display:block; animation:in .28s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- κουμπιά ---------- */
+button{font-family:inherit; font-size:inherit; cursor:pointer; border:none; background:none; color:inherit}
+.btn{
+  display:block; width:100%; padding:17px 20px; border-radius:15px;
+  background:var(--euro); color:#fff; font-weight:800; font-size:19px;
+  box-shadow:0 10px 24px -14px rgba(18,63,168,.9); margin-bottom:14px;
+}
+:root:not([data-theme="light"]) .btn{color:#08122A}
+:root[data-theme="dark"] .btn{color:#08122A}
+.btn.ghost{background:transparent; color:var(--soft); border:1.5px solid var(--line); box-shadow:none; font-size:17px}
+.btn:disabled{opacity:.45}
+
+/* ---------- πρόοδος ---------- */
+.prog{display:flex; gap:6px; margin:0 4px 12px}
+.pip{flex:1; height:5px; border-radius:99px; background:var(--line)}
+.pip.done{background:var(--teal)} .pip.now{background:var(--euro)}
+
+/* ---------- σλάιντερ ---------- */
+.guess{text-align:center; margin:10px 0 2px}
+.guess .big{color:var(--euro)}
+.unit{font-size:20px; font-weight:700; color:var(--soft); margin-left:6px}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:44px;
+  background:transparent; margin:0; display:block;
+}
+input[type=range]::-webkit-slider-runnable-track{height:12px; border-radius:99px; background:var(--line)}
+input[type=range]::-moz-range-track{height:12px; border-radius:99px; background:var(--line)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:40px; height:40px; border-radius:50%;
+  background:var(--euro); border:4px solid var(--card); margin-top:-14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.28);
+}
+input[type=range]::-moz-range-thumb{
+  width:34px; height:34px; border-radius:50%; background:var(--euro);
+  border:4px solid var(--card); box-shadow:0 3px 12px rgba(0,0,0,.28);
+}
+.nudge{display:flex; align-items:center; gap:10px; margin-top:2px}
+.nudge button{
+  width:52px; height:44px; border-radius:12px; border:1.5px solid var(--line);
+  background:var(--card); font-size:22px; font-weight:800; color:var(--soft); flex:none;
+}
+.nudge .track{flex:1}
+.ends{display:flex; justify-content:space-between; font-size:13px; color:var(--soft); margin-top:-2px}
+.set{margin:0 0 16px}
+.set:last-child{margin-bottom:0}
+.set label{display:block; font-family:var(--book); font-size:15px; color:var(--soft); margin-bottom:2px}
+.set .v{font-size:26px; font-weight:800; font-variant-numeric:tabular-nums}
+
+/* ---------- ΤΟ ΓΡΑΦΗΜΑ ΤΩΝ ΔΙΑΔΡΟΜΩΝ ---------- */
+.chart{width:100%; height:auto; display:block; margin:6px 0 10px}
+.pth{fill:none; stroke:var(--dot-off); stroke-width:1.2; opacity:.75}
+.pth.bad{stroke:var(--coral); stroke-width:2.6; opacity:1}
+.pth.mid{stroke:var(--euro); stroke-width:2.6; opacity:1}
+.pth.good{stroke:var(--teal); stroke-width:2.6; opacity:1}
+.pth.avg{stroke:var(--gold-fill); stroke-width:2.4; stroke-dasharray:6 5; opacity:1}
+.leg{display:flex; flex-wrap:wrap; gap:6px 14px; font-family:var(--book); font-size:13px; color:var(--soft)}
+.leg span{display:flex; align-items:center; gap:6px}
+.leg i{width:16px; height:3px; border-radius:2px; display:block}
+
+/* ---------- αποτέλεσμα ---------- */
+.tbl{width:100%; border-collapse:collapse; font-size:15px}
+.tbl td{padding:8px 2px; border-bottom:1px solid var(--line); vertical-align:baseline}
+.tbl td:last-child{text-align:right; font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .nm{font-family:var(--book); color:var(--soft); font-size:13.5px; display:block}
+.punch{background:var(--euro-deep); color:#fff; border-radius:20px; padding:22px 20px; margin-bottom:14px}
+.punch h2{margin:0 0 6px; font-size:clamp(20px,5.2vw,25px); font-weight:800; color:#fff}
+.punch p{margin:0; font-family:var(--book); font-size:16px; line-height:1.4; color:#C9D6F5}
+.punch b{color:#fff}
+:root[data-theme="dark"] .punch{background:#0E1B39}
+.warn{
+  border:1.5px solid var(--coral); border-radius:14px; padding:14px 15px; margin:0 0 14px;
+  font-family:var(--book); font-size:14.5px; line-height:1.45; color:var(--ink);
+}
+.warn b{font-weight:600; color:var(--coral-text, var(--coral))}
+
+/* ---------- υποσέλιδο ---------- */
+footer{
+  max-width:620px; width:100%; font-family:var(--book); font-size:12.5px;
+  color:var(--soft); line-height:1.5; padding:16px 4px 8px; border-top:1px solid var(--line);
+}
+footer b{font-weight:600; color:var(--ink)}
+.tog{position:fixed; top:10px; right:10px; width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); font-size:16px; z-index:9; box-shadow:var(--shadow)}
+@media(min-width:680px){ .card{padding:26px 28px} body{padding-top:26px} }
+.tog.back{
+  left:10px; right:auto; text-decoration:none; font-weight:800; font-size:19px;
+  align-items:center; justify-content:center; padding-bottom:2px;
+}
+body.hasback{padding-top:58px}
+@media(min-width:680px){ body.hasback{padding-top:26px} }
+
+/* ══════════ ΤΟ ΠΑΡΑΘΥΡΟ ΤΗΣ ΕΞΗΓΗΣΗΣ ══════════
+   Μπήκε 25/8/2026, ρητό αίτημα Γιάννη: «κανείς δεν μπορεί να τα μαντέψει όλα
+   αυτά». Δεν είναι διακοσμητικό — είναι η απάντηση στο «πώς βγήκαν αυτά;» που
+   έρχεται ΠΑΝΤΑ, και που ως τώρα έπρεπε να την πει ο σύμβουλος από μνήμης.  */
+.info{
+  position:fixed; top:10px; right:56px; width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); font-size:17px; font-weight:800;
+  color:var(--euro); z-index:9; box-shadow:var(--shadow); font-family:var(--book);
+}
+.modal{
+  position:fixed; inset:0; z-index:50; display:none;
+  background:rgba(8,14,28,.62); backdrop-filter:blur(3px);
+  padding:14px; overflow-y:auto; -webkit-overflow-scrolling:touch;
+}
+.modal.on{display:block; animation:in .2s ease}
+.modal .box{
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  max-width:620px; margin:0 auto; padding:22px 20px 20px; box-shadow:var(--shadow);
+}
+.modal h2{font-size:clamp(21px,5.4vw,26px); font-weight:800; margin:0 0 4px; letter-spacing:-.01em}
+.modal h3{
+  font-size:16.5px; font-weight:800; margin:22px 0 6px; color:var(--euro);
+  border-top:1px solid var(--line); padding-top:16px;
+}
+.modal h3:first-of-type{border-top:none; padding-top:0; margin-top:14px}
+.modal p{font-family:var(--book); font-size:15.5px; line-height:1.5; margin:0 0 9px}
+.modal p b{font-weight:600; color:var(--ink)}
+.modal .kl{
+  display:flex; justify-content:space-between; gap:10px; font-family:var(--book);
+  font-size:15px; padding:7px 0; border-bottom:1px solid var(--line);
+}
+.modal .kl:last-child{border-bottom:none}
+.modal .kl b{font-family:var(--disp); font-weight:800; white-space:nowrap}
+.modal .kl.bad b{color:var(--coral)} .modal .kl.good b{color:var(--teal)}
+.modal .grid{display:grid; grid-template-columns:1fr 1fr; gap:0 14px}
+@media(max-width:520px){ .modal .grid{grid-template-columns:1fr} }
+.modal .vs{
+  display:grid; grid-template-columns:1fr auto auto; gap:6px 10px; align-items:baseline;
+  font-family:var(--book); font-size:14.5px; margin:8px 0 0;
+}
+.modal .vs .h{font-family:var(--disp); font-weight:800; font-size:13.5px; color:var(--soft)}
+.modal .vs .a{color:var(--coral); font-weight:700; text-align:right; white-space:nowrap}
+.modal .vs .b{color:var(--teal);  font-weight:700; text-align:right; white-space:nowrap}
+.modal .shut{margin-top:20px}
+.modal .locked{
+  font-family:var(--book); font-size:15px; color:var(--soft); border-left:3px solid var(--gold-fill);
+  padding-left:13px; margin:10px 0 0;
+}
+</style>
+</head>
+<body>
+<button class="tog" id="tog" title="Φωτεινό / σκοτεινό" aria-label="Αλλαγή θέματος">◐</button>
+<button class="info" id="info" title="Πώς βγαίνουν αυτά τα νούμερα;"
+        aria-label="Πώς βγαίνουν αυτά τα νούμερα">&#8505;</button>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-tit">
+  <div class="box">
+    <h2 id="m-tit">Πώς βγαίνουν αυτά τα νούμερα</h2>
+    <p class="sub" style="margin:0">Τίποτα δεν είναι προσομοίωση και τίποτα δεν είναι
+       πρόβλεψη. Είναι πραγματικές χρονιές, με πραγματική σειρά.</p>
+    <div id="m-body"></div>
+    <button class="btn shut" id="m-shut">Κατάλαβα</button>
+  </div>
+</div>
+<a class="tog back" id="toTamploTop" href="index.html"
+   title="Πίσω στο ταμπλό" aria-label="Πίσω στο ταμπλό" style="display:none">←</a>
+
+<div class="wrap">
+
+<!-- ══════════ ΑΡΧΗ ══════════ -->
+<section class="scr on" id="s-start">
+  <h1>Θα σου φτάσουν;</h1>
+  <p class="lede">Σταματάς να δουλεύεις. Έχεις ένα ποσό και τραβάς κάθε μήνα.
+     Ίδια λεφτά, ίδια αγορά — αλλάζει <b>μόνο η χρονιά που ξεκίνησες</b>.
+     Και αυτό αλλάζει τα πάντα.</p>
+
+  <div class="card">
+    <svg class="chart" id="art" viewBox="0 0 300 150" role="img"
+         aria-label="Δύο διαδρομές από το ίδιο ποσό: η μία τελειώνει, η άλλη τριπλασιάζεται"></svg>
+    <p class="q" style="margin:0">Δεν είναι προσομοίωση και δεν είναι πρόβλεψη.
+      Είναι <b>21 πραγματικές αφετηρίες</b> — 21 άνθρωποι που θα μπορούσαν να είχαν
+      σταματήσει να δουλεύουν σε 21 διαφορετικές χρονιές, με τα ίδια ακριβώς λεφτά.</p>
+  </div>
+
+  <button class="btn" id="go">Βάλε τα νούμερά σου</button>
+</section>
+
+<!-- ══════════ ΡΥΘΜΙΣΕΙΣ ══════════ -->
+<section class="scr" id="s-set">
+  <h2 class="kat">Τα δικά σου νούμερα</h2>
+  <p class="sub">Ό,τι βάλεις εδώ το θυμάται το ταμπλό — δεν θα σε ξαναρωτήσει.</p>
+
+  <div class="card">
+    <div class="set">
+      <label>Ηλικία που σταματάς να δουλεύεις</label>
+      <div class="v"><span id="l-age">67</span> χρονών</div>
+      <input type="range" id="r-age" min="55" max="75" step="1" value="67" aria-label="Ηλικία">
+    </div>
+    <div class="set">
+      <label>Τι έχεις μαζέψει ως τότε</label>
+      <div class="v"><span id="l-kef">300.000</span> €</div>
+      <input type="range" id="r-kef" min="50000" max="1000000" step="10000" value="300000" aria-label="Κεφάλαιο">
+    </div>
+    <div class="set">
+      <label>Τι τραβάς κάθε μήνα — σε <b>σημερινά</b> ευρώ</label>
+      <div class="v"><span id="l-min">1.000</span> €</div>
+      <input type="range" id="r-min" min="200" max="5000" step="50" value="1000" aria-label="Ανάληψη τον μήνα">
+    </div>
+    <p class="sub" style="margin:14px 0 0" id="l-pos">—</p>
+  </div>
+
+  <button class="btn" id="toPlay">Για δες τι έγινε στ' αλήθεια</button>
+</section>
+
+<!-- ══════════ ΠΑΙΧΝΙΔΙ ══════════ -->
+<section class="scr" id="s-play">
+  <div class="prog" id="prog"></div>
+
+  <div class="card">
+    <p class="q" id="q">—</p>
+    <p class="sub" id="qsub" style="margin:6px 0 0">—</p>
+  </div>
+
+  <div class="card" id="askcard">
+    <div class="guess"><span class="big" id="gv">0</span><span class="unit" id="gu"></span></div>
+    <div class="nudge">
+      <button id="mn" aria-label="Λιγότερο">−</button>
+      <div class="track"><input type="range" id="sl" min="0" max="21" step="1" value="10" aria-label="Η εκτίμησή σου"></div>
+      <button id="pl" aria-label="Περισσότερο">+</button>
+    </div>
+    <div class="ends"><span id="e-lo">—</span><span id="e-hi">—</span></div>
+  </div>
+
+  <button class="btn" id="lock">Κλείδωσε την απάντηση</button>
+
+  <div id="rev" style="display:none">
+    <div class="card">
+      <h2 class="kat" id="r-tit">—</h2>
+      <p class="q" id="r-ex">—</p>
+    </div>
+    <button class="btn" id="next">Επόμενο</button>
+  </div>
+</section>
+
+<!-- ══════════ ΟΙ 21 ΔΙΑΔΡΟΜΕΣ ══════════ -->
+<section class="scr" id="s-all">
+  <h2 class="kat">Οι <span id="a-n">21</span> διαδρομές, όλες μαζί</h2>
+  <p class="sub">Ίδιο ποσό, ίδια ανάληψη, ίδιος δείκτης. Αλλάζει μόνο η χρονιά που ξεκίνησες.
+     Οι διαδρομές είναι σε <b>σημερινά ευρώ</b> — καθαρές από πληθωρισμό.</p>
+
+  <div class="card">
+    <svg class="chart" id="paths" viewBox="0 0 320 200" role="img"
+         aria-label="Οι διαδρομές του κεφαλαίου από κάθε πιθανή αφετηρία"></svg>
+    <div class="leg">
+      <span><i style="background:var(--coral)"></i> η χειρότερη</span>
+      <span><i style="background:var(--euro)"></i> η μεσαία</span>
+      <span><i style="background:var(--teal)"></i> η καλύτερη</span>
+      <span><i style="background:var(--gold-fill)"></i> αυτό που λέει η μελέτη</span>
+    </div>
+  </div>
+
+  <button class="btn" id="toEnd">Τι σημαίνει αυτό</button>
+</section>
+
+<!-- ══════════ ΤΕΛΟΣ ══════════ -->
+<section class="scr" id="s-end">
+  <div class="punch">
+    <h2>Σε μία γραμμή</h2>
+    <p>Το ποσό δεν είναι το ερώτημα. <b>Η σειρά είναι.</b>
+       Δύο άνθρωποι με τα ίδια ακριβώς λεφτά, που σταμάτησαν να δουλεύουν
+       με ένα χρόνο διαφορά, δεν είχαν την ίδια ζωή.</p>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Σκορ: <span class="mono" id="score">0</span> στα 400</h2>
+    <p class="sub" id="rank">—</p>
+    <table class="tbl" id="recap"></table>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Τα δικά σου νούμερα</h2>
+    <p class="sub" style="margin:0 0 10px">Όλα τα ποσά σε <b>σημερινά ευρώ</b>,
+       σε σημερινή αγοραστική αξία.</p>
+    <table class="tbl" id="mine"></table>
+  </div>
+
+  <p class="warn" id="warn">—</p>
+
+  <a class="btn ghost" id="toTamplo" href="index.html"
+     style="display:none; text-align:center; text-decoration:none">← Πίσω στο ταμπλό</a>
+  <button class="btn ghost" id="again">Δώσ' το στον επόμενο</button>
+</section>
+
+</div>
+
+<footer>
+  <b>🔴 ΟΛΑ ΤΑ ΕΠΕΝΔΥΤΙΚΑ ΠΡΟΪΟΝΤΑ ΕΧΟΥΝ ΚΟΣΤΟΣ ΔΙΑΧΕΙΡΙΣΗΣ ΚΑΙ ΕΞΟΔΑ.</b>
+  Τα νούμερα αυτής της σελίδας είναι <b>καθαρές αποδόσεις δείκτη, χωρίς κανένα κόστος
+  και χωρίς φόρους</b>. Το πραγματικό αποτέλεσμα κάθε πραγματικού προϊόντος
+  <b>θα είναι μικρότερο από το αναγραφόμενο</b> — και όσο μεγαλύτερη η διάρκεια,
+  τόσο μεγαλύτερη η διαφορά. Κανένα νούμερο εδώ δεν είναι προσφορά ή πρόβλεψη απόδοσης.
+  <br><br>
+  <b>Πηγή:</b> ετήσιες αποδόσεις μετοχών σε ευρώ, <b>με τα μερίσματα</b> (MSCI World,
+  μετατροπή σε ευρώ) και ετήσιος πληθωρισμός ευρωζώνης (HICP) από την
+  <b>Area-Wide Model Database</b> — İpek &amp; Kısacıkoğlu (2026),
+  <i>European Economic Review</i> 181, 105179. Σειρά <b id="f-span">—</b>,
+  <b id="f-n">—</b> χρονιές. Κανένα νούμερο δεν πληκτρολογήθηκε: αντλείται με
+  <span class="mono">εργαλεία/άντληση_αποδόσεων.py</span> και ελέγχεται τιμή προς τιμή
+  από <span class="mono">εργαλεία/έλεγχος_διαδρομών.py</span>.
+  <br><br>
+  <b>Τι ΔΕΝ είναι:</b> δεν είναι προσομοίωση και δεν είναι πρόβλεψη. Είναι
+  <b id="f-w">—</b> πραγματικές αφετηρίες που επικαλύπτονται μεταξύ τους —
+  <b>όχι χίλιες ανεξάρτητες προσομοιώσεις</b>. Το δείγμα είναι μικρό και το λέμε.
+  <br><br>
+  <b>Είναι η ακραία εκδοχή:</b> υποθέτει <b>100% μετοχές</b> για 30 χρόνια.
+  Κανένας στα 67 δεν είναι έτσι τοποθετημένος. Ομόλογα και ρευστό <b>δεν μπαίνουν
+  επίτηδες</b>: το 1975–2025 είναι η μεγαλύτερη ανοδική αγορά ομολόγων της ιστορίας
+  (επιτόκια από πάνω από 10% στο μηδέν), και θα έδειχνε ότι «τα ομόλογα δεν σκάνε
+  ποτέ» — ιστορικό ατύχημα, όχι αλήθεια.
+  <br><br>
+  <b>🟢 ΟΛΑ ΤΑ ΠΟΣΑ ΕΙΝΑΙ ΣΕ ΣΗΜΕΡΙΝΑ ΕΥΡΩ.</b> Κανένα νούμερο αυτής της σελίδας
+  δεν είναι «ευρώ του 30ού έτους». Η ανάληψη ανεβαίνει κάθε χρόνο με τον πληθωρισμό
+  ώστε να αγοράζει πάντα τα ίδια πράγματα, και ό,τι μένει στο τέλος μετριέται σε
+  αγοραστική αξία της χρονιάς που σταμάτησε ο καθένας. <b>Και ο αποπληθωρισμός γίνεται
+  με τον πληθωρισμό της ίδιας σειράς, όχι με μέσο όρο:</b> ο σωρευτικός πληθωρισμός των
+  30 ετών πάει από ×1,75 (αφετηρία 1992) ως ×4,15 (αφετηρία 1975) — ένας κοινός μέσος
+  θα έκρυβε ακριβώς τη διαφορά που είναι το μάθημα του παιχνιδιού.
+  <br><br>
+  <b>Πώς μετριέται:</b> η ανάληψη γίνεται στην <b>αρχή</b> κάθε χρονιάς — πρώτα τρώει,
+  μετά αποδίδει· η συντηρητική εκδοχή, γιατί έτσι ζει ένας συνταξιούχος.
+  «Αυτό που λέει η μελέτη» = η ίδια διαδρομή με <b>σταθερή</b> τη μέση απόδοση και τον
+  μέσο πληθωρισμό όλης της περιόδου (γεωμετρικοί μέσοι: <b id="f-g">—</b> ονομαστικά,
+  <b id="f-gr">—</b> πάνω από τον πληθωρισμό) — ακριβώς ο υπολογισμός που βλέπει ο
+  πελάτης σε κάθε πρόταση.
+  <br><br>
+  Παιχνίδι ενημέρωσης — δεν αποτελεί επενδυτική συμβουλή, ασφαλιστική πρόταση ή προσφορά.
+  <b>Οι αποδόσεις του παρελθόντος δεν εγγυώνται μελλοντικές αποδόσεις.</b>
+</footer>
+<script>
+"use strict";
+
+/* ═══════════ Η ΚΟΙΝΗ ΜΝΗΜΗ ΤΟΥ «ΚΕΡΑΣΜΑΤΟΣ» ═══════════
+   Το ίδιο κομμάτι υπάρχει ΑΥΤΟΥΣΙΟ και στα επτά παιχνίδια, στο «Πόσες μέρες
+   ακόμα μαζί;» και στο ταμπλό.
+   Κρατάει μόνο ό,τι έγραψε ο ίδιος ο παίκτης, σε αυτόν εδώ τον υπολογιστή:
+   τίποτα δεν φεύγει πουθενά, καμία σύνδεση, κανένας server.
+   Αν ο φυλλομετρητής δεν αφήνει αποθήκευση (π.χ. ιδιωτική περιήγηση), το
+   παιχνίδι δουλεύει ΑΚΡΙΒΩΣ το ίδιο — απλώς δεν γεμίζει το ταμπλό.
+
+   ΤΟ ΔΙΑΒΑΤΗΡΙΟ — ό,τι είπε για τον εαυτό του (ηλικία, φύλο, πόσα βάζει,
+   δάνειο) ζει σε ΕΝΑ σημείο, ώστε το επόμενο παιχνίδι να μην το ξαναρωτήσει.
+   Δύο κανόνες, και οι δύο για τον ίδιο λόγο — να μην μπουν στο στόμα του
+   λόγια που δεν είπε:
+     1. Γράφεται ΜΟΝΟ ό,τι άγγιξε ο ίδιος. Μια δική μας προεπιλογή δεν είναι
+        απάντησή του και δεν μπαίνει ποτέ στο διαβατήριο.
+     2. Το διαβατήριο ΦΑΙΝΕΤΑΙ στο ταμπλό, πάντα και πρώτο. Αν δοθεί το κινητό
+        σε δεύτερο άνθρωπο, το πρώτο που βλέπει είναι τι ξέρει η σελίδα για
+        τον προηγούμενο — και δίπλα του το «Καθάρισε».                       */
+const KERASMA = (function(){
+  const P = "KERASMA:v1:";
+  let zei = null;
+  function ok(){
+    if(zei !== null) return zei;
+    try{ localStorage.setItem(P + "dokimi", "1"); localStorage.removeItem(P + "dokimi"); zei = true; }
+    catch(e){ zei = false; }
+    return zei;
+  }
+  function fakelaki(){
+    if(!ok()) return {};
+    try{ return JSON.parse(localStorage.getItem(P + "pass")) || {}; }catch(e){ return {}; }
+  }
+  return {
+    zei: ok,
+    grapse(id, d){
+      if(!ok()) return false;
+      d.v = 1; d.id = id; d.pote = Date.now();
+      try{ localStorage.setItem(P + "p:" + id, JSON.stringify(d)); return true; }catch(e){ return false; }
+    },
+    diavase(id){
+      if(!ok()) return null;
+      try{ return JSON.parse(localStorage.getItem(P + "p:" + id)); }catch(e){ return null; }
+    },
+    svise(id){ if(ok()){ try{ localStorage.removeItem(P + "p:" + id); }catch(e){} } },
+    onoma(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "onoma") || "";
+        localStorage.setItem(P + "onoma", v); return v;
+      }catch(e){ return ""; }
+    },
+    thema(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "thema") || "";
+        localStorage.setItem(P + "thema", v); return v;
+      }catch(e){ return ""; }
+    },
+    apoTamplo(v){
+      if(!ok()) return false;
+      try{
+        if(v === undefined) return localStorage.getItem(P + "tamplo") === "1";
+        localStorage.setItem(P + "tamplo", v ? "1" : "0"); return !!v;
+      }catch(e){ return false; }
+    },
+
+    /* ---------- ΤΟ ΔΙΑΒΑΤΗΡΙΟ ---------- */
+    olo: fakelaki,
+    pass(k){ return fakelaki()[k]; },
+    /* «είπε» — και το όνομα είναι η προδιαγραφή: μπαίνει μόνο ό,τι είπε. */
+    eipe(k, v){
+      if(!ok()) return false;
+      const o = fakelaki();
+      if(v === undefined || v === null || v === "") delete o[k]; else o[k] = v;
+      try{ localStorage.setItem(P + "pass", JSON.stringify(o)); return true; }catch(e){ return false; }
+    },
+    svisePass(){ if(ok()){ try{ localStorage.removeItem(P + "pass"); }catch(e){} } },
+    /* Δένει ένα πεδίο με το διαβατήριο: ανοίγει γεμάτο αν το έχει ήδη πει
+       αλλού, και γράφει πίσω ΜΟΝΟ αν το αγγίξει ο ίδιος.
+       Το κόψιμο στα όρια του πεδίου δεν γυρίζει ποτέ πίσω στο διαβατήριο:
+       αλλιώς το ΠΑΖΑΡΙ, που σταματάει στα 65, θα «διόρθωνε» σιωπηλά έναν
+       68άρη σε 65 — και το επόμενο παιχνίδι θα τον ρωτούσε σαν 65άρη.       */
+    dese(el, k){
+      if(!el) return;
+      const arith = el.type === "range" || el.type === "number";
+      const v = this.pass(k);
+      if(v !== undefined && v !== null && v !== ""){
+        if(arith){
+          const n = Number(v);
+          if(isFinite(n)){
+            const lo = el.min === "" ? -Infinity : Number(el.min);
+            const hi = el.max === "" ?  Infinity : Number(el.max);
+            el.value = Math.min(hi, Math.max(lo, n));
+          }
+        } else el.value = v;
+      }
+      const kata = () => {
+        if(!arith) return this.eipe(k, el.value);
+        const n = Number(el.value);
+        this.eipe(k, el.value === "" || !isFinite(n) ? undefined : n);
+      };
+      el.addEventListener("input", kata);
+      el.addEventListener("change", kata);
+    }
+  };
+})();
+
+(function(){ const th = KERASMA.thema(); if(th) document.documentElement.setAttribute("data-theme", th); })();
+
+/* ═══════════ ΔΕΔΟΜΕΝΑ — ΑΡΧΗ ═══════════
+   ΜΗΝ ΤΑ ΑΓΓΙΞΕΙΣ ΜΕ ΤΟ ΧΕΡΙ. Γράφονται από:
+       python3 εργαλεία/ενσωμάτωση_διαδρομών.py
+   και ελέγχονται τιμή προς τιμή από:
+       python3 εργαλεία/έλεγχος_διαδρομών.py --σπάσε
+
+   Πηγή: Area-Wide Model Database — İpek & Kısacıkoğlu (2026), European Economic Review 181, 105179 (HICP ευρωζώνης) · MSCI World, ετήσιες αποδόσεις, μετατροπή σε ευρώ
+   Μέσω: NESTOR/data/series_annual.csv (παράγεται από build_series.py)
+   Αποτύπωμα πηγής: d4cb94ef6b371897b76fd61953f5cd84
+   Αντλήθηκε: 2026-08-24 · 51 χρονιές, 1975–2025
+
+   ΔΕΝ περιλαμβάνει: κόστος διαχείρισης, έξοδα προϊόντος και φόρους — το πραγματικό αποτέλεσμα είναι ΜΙΚΡΟΤΕΡΟ                          */
+const D = {
+  apo: 1975, ews: 2025,
+  eti: Array.from({length: 51}, (_, k) => 1975 + k),
+  /* ετήσια απόδοση μετοχών σε ευρώ, ΜΕ μερίσματα */
+  met: [0.460898, 0.151894, -0.179087, 0.036561, 0.113275, 0.348775, 0.156097, 0.239171, 0.442077, 0.257032, 0.122551, 0.177065, -0.132774, 0.370537, 0.142232, -0.271246, -0.174435, 0.043131, 0.329526, -0.046666, 0.129668, 0.190437, 0.31405, 0.181145, 0.450536, -0.062877, -0.118385, -0.323499, 0.105162, 0.06355, 0.264304, 0.075793, -0.024842, -0.372742, 0.255873, 0.205352, -0.024106, 0.135619, 0.212153, 0.191562, 0.105147, 0.110286, 0.07581, -0.043702, 0.301553, 0.061055, 0.319625, -0.130321, 0.194978, 0.306131, 0.070642],
+  /* ετήσιος πληθωρισμός ευρωζώνης (HICP) */
+  plith: [0.09792, 0.096292, 0.099712, 0.076344, 0.086059, 0.112537, 0.112881, 0.099024, 0.077873, 0.063117, 0.050248, 0.025408, 0.023269, 0.026552, 0.039244, 0.040637, 0.043156, 0.037717, 0.033826, 0.028319, 0.025876, 0.023004, 0.017043, 0.012267, 0.011698, 0.021923, 0.024228, 0.022689, 0.021209, 0.021776, 0.021986, 0.022104, 0.021713, 0.033574, 0.003293, 0.016102, 0.027193, 0.025027, 0.013546, 0.004285, 0.001887, 0.002275, 0.015382, 0.017532, 0.011942, 0.002521, 0.025876, 0.083996, 0.054269, 0.023654, 0.021296]
+};
+/* ═══════════ ΔΕΔΟΜΕΝΑ — ΤΕΛΟΣ ═══════════ */
+
+/* ═══════════ Η ΜΗΧΑΝΗ ═══════════
+   Ό,τι βλέπει ο παίκτης βγαίνει ΑΠΟ ΕΔΩ. Η ίδια μηχανή είναι ξαναγραμμένη,
+   ανεξάρτητα, μέσα στο «εργαλεία/έλεγχος_διαδρομών.py» και οι δύο συγκρίνονται
+   διαδρομή προς διαδρομή — αν αποκλίνουν, ο έλεγχος σκάει.
+
+   Τρεις παραδοχές, και οι τρεις δηλωμένες στο υποσέλιδο:
+     1. Η ανάληψη γίνεται στην ΑΡΧΗ της χρονιάς (πρώτα τρώει, μετά αποδίδει) —
+        η συντηρητική εκδοχή, γιατί έτσι ζει ένας συνταξιούχος.
+     2. Η ανάληψη ανεβαίνει με τον πληθωρισμό ΤΗΣ ΙΔΙΑΣ σειράς, όχι με δικό
+        μας νούμερο. Αλλιώς θα βάζαμε εμείς έναν πληθωρισμό της αρεσκείας μας.
+     3. ΟΛΑ ΤΑ ΠΟΣΑ ΕΙΝΑΙ ΣΕ ΣΗΜΕΡΙΝΑ ΕΥΡΩ (25/8/2026 — διόρθωση).
+
+   ΓΙΑΤΙ ΑΛΛΑΞΕ: ως τις 24/8 η μηχανή έδειχνε ΟΝΟΜΑΣΤΙΚΑ ευρώ του 30ού έτους.
+   Με 300.000 € και 1.000 €/μήνα η μεσαία διαδρομή έγραφε 928.415 € — ποσό που
+   δεν σημαίνει τίποτα, γιατί τα ευρώ εκείνης της χρονιάς αγοράζουν το ένα
+   τρίτο των σημερινών. Ο Γιάννης το είδε και είπε ότι δεν καθόταν. Είχε δίκιο.
+
+   ΠΩΣ ΓΙΝΕΤΑΙ ΤΩΡΑ — και γιατί ΟΧΙ με έναν μέσο πληθωρισμό: κάθε διαδρομή
+   αποπληθωρίζεται με ΤΟΝ ΔΙΚΟ ΤΗΣ πληθωρισμό, της ίδιας σειράς. Ο σωρευτικός
+   πληθωρισμός των 30 ετών πάει από ×1,75 (αφετηρία 1992) ως ×4,15 (αφετηρία
+   1975)· ένας κοινός μέσος θα έκρυβε ακριβώς αυτή τη διαφορά — που ΕΙΝΑΙ το
+   μάθημα του παιχνιδιού. Ο ίδιος κανόνας ισχύει ήδη για την ανάληψη.
+
+   Η ΠΡΑΞΗ: αντί να ανεβάζουμε την ανάληψη με τον πληθωρισμό και να διαιρούμε
+   στο τέλος, η ανάληψη ΜΕΝΕΙ σταθερή (κρατάει την αγοραστική της αξία) και η
+   απόδοση μπαίνει καθαρή από πληθωρισμό: (1+μετοχές)/(1+πληθωρισμός)−1.
+   Είναι αλγεβρικά η ΙΔΙΑ πράξη — μετρήθηκε, διαφορά 5e−15 — αλλά λέγεται
+   σωστά, και η χρονιά που τελειώνουν τα λεφτά βγαίνει ολόιδια.        */
+const XRONIA = 30;
+
+function dromos(i0, kef, etAn, r, p){
+  let v = kef;
+  for(let k = 0; k < XRONIA; k++){
+    v -= etAn;                       /* σταθερή σε ΣΗΜΕΡΙΝΑ ευρώ */
+    if(v <= 0) return {eskase: D.eti[i0] + k, telos: 0, kampyli: null};
+    v *= (1 + (r === undefined ? D.met[i0 + k] : r)) /
+         (1 + (p === undefined ? D.plith[i0 + k] : p));
+  }
+  return {eskase: null, telos: v};
+}
+
+/* Ίδια μηχανή, αλλά κρατάει και την καμπύλη — για το γράφημα. */
+function kampyli(i0, kef, etAn, r, p){
+  let v = kef;
+  const σ = [v];
+  for(let k = 0; k < XRONIA; k++){
+    v -= etAn;
+    if(v <= 0){ σ.push(0); return σ; }
+    v *= (1 + (r === undefined ? D.met[i0 + k] : r)) /
+         (1 + (p === undefined ? D.plith[i0 + k] : p));
+    σ.push(v);
+  }
+  return σ;
+}
+
+/* Ίδια μηχανή ξανά, αλλά κρατάει ΚΑΙ τι έγινε την κάθε χρονιά: πόσα είχε
+   μπαίνοντας (μετά την ανάληψη) και πόσα βγαίνοντας. Χρειάζεται για την
+   εξήγηση — χωρίς αυτό, το «γιατί» θα ήταν λόγια αντί για νούμερα.
+   Οι τιμές της ΟΦΕΙΛΟΥΝ να συμπίπτουν με της kampyli· το ελέγχει ο φρουρός. */
+function poreia(i0, kef, etAn){
+  const σ = []; let v = kef;
+  for(let k = 0; k < XRONIA; k++){
+    const meta_analipsi = v - etAn;
+    const et = D.eti[i0 + k], r = D.met[i0 + k], p = D.plith[i0 + k];
+    if(meta_analipsi <= 0){ σ.push({etos: et, r: r, p: p, pre: 0, v: 0, eskase: true}); return σ; }
+    v = meta_analipsi * (1 + r) / (1 + p);
+    σ.push({etos: et, r: r, p: p, pre: meta_analipsi, v: v, eskase: false});
+  }
+  return σ;
+}
+
+/* Γεωμετρικοί μέσοι — «αυτό που λέει η μελέτη». Με λογαρίθμους, γιατί το
+   γινόμενο 51 παραγόντων ξεφεύγει εύκολα σε ακρίβεια. */
+const geo = a => Math.exp(a.reduce((s, x) => s + Math.log(1 + x), 0) / a.length) - 1;
+const G = geo(D.met), P = geo(D.plith);
+/* Η μέση απόδοση ΠΑΝΩ ΑΠΟ ΤΟΝ ΠΛΗΘΩΡΙΣΜΟ — αυτή είναι που μετράει, τώρα που
+   όλα λέγονται σε σημερινά ευρώ. Το 9,59% ονομαστικό είναι 5,66% πραγματικό. */
+const Gr = (1 + G) / (1 + P) - 1;
+const W = D.eti.length - XRONIA;      /* πόσες αφετηρίες χωράνε */
+
+/* Η σειρά κατάταξης. ΔΕΝ αρκεί το τελικό ποσό: όταν πολλές διαδρομές
+   τελειώνουν στο μηδέν, είναι όλες ισόπαλες στο μηδέν — και «η χειρότερη»
+   θα έβγαινε στην τύχη.
+   Χειρότερη είναι αυτή που κράτησε τα ΛΙΓΟΤΕΡΑ ΧΡΟΝΙΑ, όχι αυτή με την
+   παλαιότερη χρονολογία: κάποιος που έμεινε χωρίς λεφτά 16 χρόνια αφότου
+   σταμάτησε να δουλεύει είναι χειρότερα από κάποιον που άντεξε 27.       */
+const zisan = x => x.eskase === null ? 9999 : x.eskase - x.etos;
+const seira = (a, b) => (a.telos - b.telos) || (zisan(a) - zisan(b));
+
+/* ═══════════ ΚΑΤΑΣΤΑΣΗ ═══════════ */
+let AGE = 67, KEF = 300000, MIN = 1000;
+let i = 0, score = 0, locked = false;
+let Y = null;                          /* τα υπολογισμένα, μετά τις ρυθμίσεις */
+const res = [];
+
+const $ = id => document.getElementById(id);
+const fmt  = n => Math.round(n).toLocaleString("el-GR");
+const evro = n => fmt(n) + " €";
+
+$("tog").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const neo = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", neo);
+  KERASMA.thema(neo);
+};
+
+const show = id => {
+  document.querySelectorAll(".scr").forEach(s => s.classList.toggle("on", s.id === id));
+  scrollTo({top:0, behavior:"instant"});
+};
+
+/* ═══════════ ΤΑ ΝΟΥΜΕΡΑ ΤΟΥ ΠΑΙΚΤΗ ═══════════ */
+function ypologise(){
+  const et = MIN * 12;
+  const dr = [];
+  for(let k = 0; k < W; k++) dr.push(Object.assign({etos: D.eti[k], i: k}, dromos(k, KEF, et)));
+  const tax = dr.slice().sort(seira);
+  Y = {
+    et: et,
+    dr: dr,
+    meleti: dromos(0, KEF, et, G, P).telos,
+    bad: tax[0], mid: tax[Math.floor(tax.length / 2)], good: tax[tax.length - 1],
+    eskasan: dr.filter(x => x.eskase !== null).length
+  };
+  Y.piano = dr.filter(x => x.telos >= Y.meleti).length;
+}
+
+/* ═══════════ ΟΙ ΤΕΣΣΕΡΙΣ ΚΑΡΤΕΣ ═══════════
+   Πρώτη μπαίνει αυτή που τη χάνουν όλοι — και τη χάνουν προς τη ΒΟΛΙΚΗ μεριά:
+   όλοι υποθέτουν ότι το νούμερο της μελέτης είναι το συνηθισμένο αποτέλεσμα. */
+const KARTES = [
+{
+  q: () => `Η μελέτη λέει ότι μετά από 30 χρόνια θα σου μένουν <b>${evro(Y.meleti)}</b> — σε σημερινά ευρώ.`,
+  sub: () => `Αυτό βγαίνει με σταθερή τη μέση απόδοση όλης της περιόδου (${(G*100).toFixed(2).replace(".", ",")}% τον χρόνο, δηλαδή <b>${(Gr*100).toFixed(2).replace(".", ",")}% πάνω από τον πληθωρισμό</b>) — έτσι ακριβώς γίνεται κάθε υπολογισμός που έχεις δει. Από τις ${W} πραγματικές αφετηρίες, <b>σε πόσες θα το είχες φτάσει;</b>`,
+  lo: 0, hi: () => W, step: 1, unit: () => `στις ${W}`,
+  real: () => Y.piano,
+  vath: (you, real) => Math.max(0, Math.round(100 - Math.abs(you - real) * 12)),
+  tit: () => `${Y.piano} στις ${W}`,
+  ex: () => `Το νούμερο της μελέτης δεν είναι το συνηθισμένο αποτέλεσμα — είναι από τα
+     <b>καλύτερα</b> που συνέβησαν ποτέ. Οι υπόλοιπες ${W - Y.piano} αφετηρίες βγήκαν
+     <b>χειρότερα</b>, και κάποιες πολύ χειρότερα.`
+},
+{
+  q: () => `Ίδια λεφτά, ίδια ανάληψη. Σε πόσες από τις ${W} αφετηρίες <b>τελείωσαν εντελώς</b> τα λεφτά μέσα στα 30 χρόνια;`,
+  sub: () => `Δηλαδή έφτασε η στιγμή που δεν υπήρχε τίποτα να τραβήξει — και ζούσε ακόμα.`,
+  lo: 0, hi: () => W, step: 1, unit: () => `στις ${W}`,
+  real: () => Y.eskasan,
+  vath: (you, real) => Math.max(0, Math.round(100 - Math.abs(you - real) * 12)),
+  tit: () => Y.eskasan === 0 ? "Σε καμία — αλλά κοίτα πόσο κόντεψε"
+                             : `${Y.eskasan} στις ${W}`,
+  ex: () => Y.eskasan === 0
+      ? `Με αυτά τα νούμερα δεν τελείωσαν πουθενά. Η χειρότερη όμως κατέληξε στα
+         <b>${evro(Y.bad.telos)}</b> — έναντι ${evro(Y.meleti)} που έλεγε η μελέτη.`
+      : `${Y.eskasan} άνθρωποι με τα ίδια ακριβώς λεφτά. Στη χειρότερη, τα λεφτά
+         τελείωσαν το <b>${Y.bad.eskase}</b> — δηλαδή στα
+         <b>${AGE + (Y.bad.eskase - Y.bad.etos)}</b> του.`
+},
+{
+  q: () => `Βάλε τις ${W} διαδρομές στη σειρά και πάρε τη <b>μεσαία</b>. Πόσα σου έμειναν στα 30 χρόνια, <b>σε σημερινά ευρώ</b>;`,
+  sub: () => `Η μεσαία: οι μισές πήγαν καλύτερα, οι μισές χειρότερα. Η πιο τίμια «τυπική» εκδοχή.`,
+  lo: 0, hi: () => Math.max(Y.meleti * 1.2, 10000), step: null, unit: () => "€",
+  real: () => Y.mid.telos,
+  vath: (you, real) => real > 0
+      ? Math.max(0, Math.round(100 - Math.abs(you - real) / real * 150))
+      : Math.max(0, Math.round(100 - you / Math.max(Y.meleti, 1) * 300)),
+  tit: () => evro(Y.mid.telos),
+  ex: () => `Ξεκίνησε το <b>${Y.mid.etos}</b>. Η μελέτη έλεγε ${evro(Y.meleti)} —
+     η μεσαία πραγματική διαδρομή έβγαλε <b>${evro(Y.mid.telos)}</b>.`
+},
+{
+  q: () => `Και στην <b>καλύτερη</b> από τις ${W};`,
+  sub: () => `Ίδιο ποσό, ίδια ανάληψη. Άλλη χρονιά έναρξης — αυτό είναι όλο.`,
+  lo: 0, hi: () => Math.max(Y.good.telos * 1.15, 20000), step: null, unit: () => "€",
+  real: () => Y.good.telos,
+  vath: (you, real) => real > 0
+      ? Math.max(0, Math.round(100 - Math.abs(you - real) / real * 150))
+      : 100,
+  tit: () => evro(Y.good.telos),
+  ex: () => `Ξεκίνησε το <b>${Y.good.etos}</b>, ενώ ο χειρότερος ξεκίνησε το
+     <b>${Y.bad.etos}</b>. Δύο άνθρωποι με τα ίδια λεφτά, ${Math.abs(Y.good.etos - Y.bad.etos)}
+     χρόνια διαφορά στη χρονιά που σταμάτησαν να δουλεύουν — και
+     <b>${Y.bad.telos > 0 ? "×" + (Y.good.telos / Y.bad.telos).toFixed(1).replace(".", ",") + " διαφορά" : "ο ένας έμεινε χωρίς τίποτα"}</b>.`
+}
+];
+
+/* ═══════════ ΡΥΘΜΙΣΕΙΣ ═══════════ */
+const paintSet = () => {
+  AGE = +$("r-age").value; KEF = +$("r-kef").value; MIN = +$("r-min").value;
+  $("l-age").textContent = AGE;
+  $("l-kef").textContent = fmt(KEF);
+  $("l-min").textContent = fmt(MIN);
+  const pos = MIN * 12 / KEF;
+  $("l-pos").innerHTML = `Τραβάς <b>${evro(MIN*12)}</b> τον χρόνο — δηλαδή
+     <b>${(pos*100).toFixed(1).replace(".", ",")}%</b> του κεφαλαίου τον πρώτο χρόνο.
+     Η διαδρομή κρατάει <b>30 χρόνια</b>, ως τα ${AGE + XRONIA} σου.
+     <br><br><b>Όλα τα ποσά είναι σε σημερινά ευρώ.</b> Η ανάληψη ανεβαίνει κάθε
+     χρόνο με τον πληθωρισμό, ώστε να αγοράζει πάντα τα ίδια πράγματα — και ό,τι
+     μένει στο τέλος μετριέται σε <b>σημερινή αγοραστική αξία</b>, όχι σε ευρώ
+     του ${AGE + XRONIA}ού σου έτους.`;
+};
+["r-age","r-kef","r-min"].forEach(id => $(id).addEventListener("input", paintSet));
+
+/* ---- το διαβατήριο: τρία νούμερα, τα δύο τα ξέρει ήδη από το ΧΙΛΙΟΙ ---- */
+KERASMA.dese($("r-age"), "syntaxi");
+KERASMA.dese($("r-kef"), "kefalaio_syntaxis");
+KERASMA.dese($("r-min"), "thelei");
+paintSet();
+
+$("go").onclick     = () => show("s-set");
+$("toPlay").onclick = () => {
+  ypologise();
+  i = 0; score = 0; res.length = 0;
+  show("s-play"); render();
+};
+
+/* ═══════════ ΤΟ ΠΑΙΧΝΙΔΙ ═══════════ */
+const sl = $("sl");
+function paint(){
+  const c = KARTES[i], v = +sl.value;
+  $("gv").textContent = c.unit() === "€" ? fmt(v) : v;
+  $("gu").textContent = c.unit();
+}
+sl.addEventListener("input", paint);
+$("mn").onclick = () => { sl.stepDown(); paint(); };
+$("pl").onclick = () => { sl.stepUp();   paint(); };
+
+function render(){
+  const c = KARTES[i];
+  $("q").innerHTML = c.q();
+  $("qsub").innerHTML = c.sub();
+  const hi = c.hi();
+  sl.min = c.lo; sl.max = Math.round(hi);
+  sl.step = c.step || Math.max(1, Math.round(hi / 200 / 500) * 500 || 500);
+  sl.value = Math.round(hi / 2 / sl.step) * sl.step;
+  $("e-lo").textContent = c.unit() === "€" ? evro(c.lo) : c.lo;
+  $("e-hi").textContent = c.unit() === "€" ? evro(hi) : Math.round(hi);
+  $("askcard").style.display = ""; $("lock").style.display = "";
+  $("rev").style.display = "none";
+  locked = false;
+  paint();
+  $("prog").innerHTML = KARTES.map((_, k) =>
+    `<span class="pip ${k === i ? "now" : res[k] ? "done" : ""}"></span>`).join("");
+}
+
+$("lock").onclick = () => {
+  if(locked) return;
+  locked = true;
+  const c = KARTES[i], you = +sl.value, real = c.real();
+  const p = c.vath(you, real);
+  score += p;
+  res[i] = {
+    nm: c.unit() === "€" ? "Πόσα έμειναν" : "Πόσες αφετηρίες",
+    you: c.unit() === "€" ? evro(you) : you + " " + c.unit(),
+    real: c.unit() === "€" ? evro(real) : real + " " + c.unit(),
+    p: p, tit: c.tit()
+  };
+  $("r-tit").textContent = c.tit();
+  $("r-ex").innerHTML = c.ex() + ` <span style="color:var(--soft)">(+${p})</span>`;
+  $("askcard").style.display = "none"; $("lock").style.display = "none";
+  $("rev").style.display = "";
+  $("prog").children[i].className = "pip done";
+};
+
+$("next").onclick = () => {
+  if(!locked) return;
+  locked = false;
+  i++;
+  if(i < KARTES.length){ render(); scrollTo({top:0, behavior:"smooth"}); }
+  else { zwgrafiseOles(); show("s-all"); }
+};
+
+/* ═══════════ ΤΟ ΓΡΑΦΗΜΑ ═══════════ */
+function grammi(σ, ymax, w, h, padL, padT, padB){
+  return σ.map((v, k) =>
+    (padL + (w - 2*padL) * k / XRONIA).toFixed(1) + "," +
+    (h - padB - (h - padT - padB) * Math.min(1, v / ymax)).toFixed(1)).join(" ");
+}
+
+function zwgrafiseOles(){
+  const w = 320, h = 200, padL = 10, padT = 10, padB = 24;
+  const oles = Y.dr.map(x => kampyli(x.i, KEF, Y.et));
+  const mel  = kampyli(0, KEF, Y.et, G, P);
+  const ymax = Math.max(...oles.map(σ => Math.max(...σ)), Math.max(...mel));
+
+  let s = "";
+  /* γραμμή του μηδενός: εκεί που τελειώνουν τα λεφτά */
+  s += `<line x1="${padL}" y1="${h-padB}" x2="${w-padL}" y2="${h-padB}" stroke="var(--line)" stroke-width="1.5"/>`;
+  oles.forEach((σ, k) => {
+    const x = Y.dr[k];
+    const κλ = x === Y.bad ? "bad" : x === Y.mid ? "mid" : x === Y.good ? "good" : "";
+    if(!κλ) s += `<polyline class="pth" points="${grammi(σ, ymax, w, h, padL, padT, padB)}"/>`;
+  });
+  s += `<polyline class="pth avg" points="${grammi(mel, ymax, w, h, padL, padT, padB)}"/>`;
+  [["bad", Y.bad], ["mid", Y.mid], ["good", Y.good]].forEach(([κλ, x]) => {
+    s += `<polyline class="pth ${κλ}" points="${grammi(oles[Y.dr.indexOf(x)], ymax, w, h, padL, padT, padB)}"/>`;
+  });
+  s += `<text x="${padL}" y="${h-8}" font-family="var(--book)" font-size="10.5" fill="var(--soft)">η χρονιά που σταμάτησε</text>`;
+  s += `<text x="${w-padL}" y="${h-8}" text-anchor="end" font-family="var(--book)" font-size="10.5" fill="var(--soft)">+30 χρόνια</text>`;
+  $("paths").innerHTML = s;
+  $("a-n").textContent = W;
+}
+
+/* ═══════════ ΤΟ ΠΑΡΑΘΥΡΟ ΤΗΣ ΕΞΗΓΗΣΗΣ ═══════════
+   ΚΑΝΕΝΑ νούμερο δεν είναι γραμμένο εδώ μέσα: όλα βγαίνουν από τη μηχανή, με
+   τα νούμερα που έβαλε ο ΙΔΙΟΣ. Αν βάλει 500.000 € αντί για 300.000, αλλάζει
+   και ποια χρονιά ήταν η καλύτερη — και το παράθυρο το λέει σωστά.
+
+   ΤΙ ΚΡΥΒΕΤΑΙ ΚΑΙ ΓΙΑΤΙ: όσο δεν έχουν απαντηθεί και οι τέσσερις κάρτες, το
+   παράθυρο δείχνει ΜΟΝΟ τη μέθοδο (τι έτη, γιατί τόσες αφετηρίες). Τα νούμερα
+   είναι οι απαντήσεις του παιχνιδιού — αν φαίνονταν από την αρχή, το ℹ︎ θα
+   ήταν το κλειδί της λύσης.                                                */
+const teleiwsan = () => res.filter(Boolean).length === KARTES.length;
+
+function ftiaxeInfo(){
+  if(!Y) ypologise();
+  const τελ = D.eti[W - 1] + XRONIA;
+  let s = "";
+
+  s += `<h3>Τι έτη χρησιμοποιεί</h3>
+    <p><b>${D.apo} – ${D.ews}. ${D.eti.length} πραγματικές χρονιές.</b> Τι έκανε η παγκόσμια
+       χρηματιστηριακή αγορά σε ευρώ, με τα μερίσματα μέσα, και τι έκανε ο πληθωρισμός
+       της ευρωζώνης — χρονιά με χρονιά. Τίποτα φτιαχτό, καμία προσομοίωση.</p>`;
+
+  s += `<h3>Γιατί ${W} άνθρωποι και όχι ${D.eti.length}</h3>
+    <p>Κάθε διαδρομή κρατάει <b>${XRONIA} χρόνια</b>. Άρα:</p>
+    <p>· Όποιος σταμάτησε το <b>${D.apo}</b>, τον παρακολουθούμε ως το ${D.apo + XRONIA}. ✅<br>
+       · Όποιος σταμάτησε το <b>${D.eti[W - 1]}</b>, ως το ${τελ}. ✅ — ο τελευταίος που χωράει ολόκληρος.<br>
+       · Όποιος σταμάτησε το ${D.eti[W - 1] + 1} θα χρειαζόταν το ${τελ + 1}, που δεν έχει γίνει ακόμα. ❌</p>
+    <p><b>${D.apo} ως ${D.eti[W - 1]} = ${W} άνθρωποι.</b> Αυτό είναι όλο.</p>`;
+
+  s += `<h3>Τι είναι η χρονολογία που βλέπεις</h3>
+    <p>Δεν είναι ποσό και δεν είναι απόδοση. Είναι <b>η χρονιά που σταμάτησε να δουλεύει</b>
+       ο συγκεκριμένος άνθρωπος. Όλοι τους ξεκίνησαν με τα ίδια ακριβώς λεφτά
+       (<b>${evro(KEF)}</b>) και τραβούσαν τα ίδια ακριβώς (<b>${evro(MIN)}</b> τον μήνα).
+       Άλλαξε <b>μόνο η χρονιά</b>.</p>`;
+
+  if(!teleiwsan()){
+    s += `<p class="locked">Τα υπόλοιπα — ποια χρονιά ήταν η καλύτερη, ποια η χειρότερη και
+       γιατί — <b>εμφανίζονται εδώ μόλις απαντήσεις και τις τέσσερις ερωτήσεις</b>.
+       Είναι οι απαντήσεις του παιχνιδιού· δεν έχει νόημα να τις διαβάσεις πρώτα.</p>`;
+    $("m-body").innerHTML = s;
+    return;
+  }
+
+  /* ---- ο καλύτερος και ο χειρότερος, με τις δικές του παραμέτρους ---- */
+  const πκ = poreia(Y.good.i, KEF, Y.et), πχ = poreia(Y.bad.i, KEF, Y.et);
+  const απ = x => (x * 100).toFixed(1).replace(".", ",") + "%";
+  s += `<h3>Το ζουμί — ${Math.abs(Y.good.etos - Y.bad.etos)} χρόνια διαφορά</h3>
+    <p>Ίδια λεφτά, ίδια αγορά. Άλλαξε μόνο η χρονιά που βγήκαν στη σύνταξη.</p>
+    <div class="vs">
+      <span class="h"></span><span class="h a">${Y.bad.etos}</span><span class="h b">${Y.good.etos}</span>
+      <span>1η χρονιά του — η αγορά</span>
+        <span class="a">${απ(πχ[0].r)}</span><span class="b">${απ(πκ[0].r)}</span>
+      <span>2η χρονιά του — η αγορά</span>
+        <span class="a">${πχ[1] ? απ(πχ[1].r) : "—"}</span><span class="b">${πκ[1] ? απ(πκ[1].r) : "—"}</span>
+      <span>Του έμειναν μετά από 2 χρόνια</span>
+        <span class="a">${πχ[1] ? evro(πχ[1].v) : "0 €"}</span><span class="b">${πκ[1] ? evro(πκ[1].v) : "0 €"}</span>
+      <span><b>Στο τέλος</b></span>
+        <span class="a">${Y.bad.eskase ? "τελείωσαν " + Y.bad.eskase : evro(Y.bad.telos)}</span>
+        <span class="b">${evro(Y.good.telos)}</span>
+    </div>`;
+
+  /* ---- ΓΙΑΤΙ: η ίδια καλή χρονιά, άλλο κεφάλαιο από κάτω ---- */
+  const κοινες = [];
+  πχ.forEach((x, k) => {
+    if(x.eskase) return;
+    const j = πκ.findIndex(z => z.etos === x.etos && !z.eskase);
+    if(j >= 0) κοινες.push({k: k, j: j, r: x.r, etos: x.etos});
+  });
+  const καλη = κοινες.slice().sort((a, b) => b.r - a.r)[0];
+  if(καλη && καλη.r > 0){
+    const α = πχ[καλη.k], β = πκ[καλη.j];
+    s += `<h3>Γιατί συμβαίνει αυτό</h3>
+      <p>Πρόσεξε το πιο σημαντικό: <b>και οι δύο έζησαν την ίδια καλή χρονιά, το
+         ${καλη.etos} (${απ(καλη.r)}).</b></p>
+      <p>· Ο άνθρωπος του <b>${Y.bad.etos}</b> την έζησε έχοντας <b>${evro(α.pre)}</b>
+           → βγήκε με ${evro(α.v)}.<br>
+         · Ο άνθρωπος του <b>${Y.good.etos}</b> την έζησε έχοντας <b>${evro(β.pre)}</b>
+           → βγήκε με ${evro(β.v)}.</p>
+      <p><b>Ίδια αγορά, άλλο αποτέλεσμα.</b> Γιατί ο πρώτος είχε ήδη ξεπουλήσει κεφάλαιο
+         για να ζήσει, όσο η αγορά κατέβαινε. Όταν ήρθε το ράλι, δεν του είχε μείνει
+         αρκετό για να το εκμεταλλευτεί.</p>
+      <p><b>Όταν τραβάς λεφτά, δεν σε ενδιαφέρει η μέση απόδοση — σε ενδιαφέρει με ποια
+         σειρά ήρθαν οι κακές χρονιές.</b> Μια κακή αρχή δεν διορθώνεται ποτέ.</p>`;
+  }
+
+  /* ---- και οι 21, με τη σειρά ---- */
+  s += `<h3>Και οι ${W}, με τη σειρά</h3><div class="grid">`;
+  Y.dr.forEach(x => {
+    const κλ = x === Y.bad ? " bad" : x === Y.good ? " good" : "";
+    s += `<div class="kl${κλ}"><span>${x.etos}</span><b>${x.eskase
+      ? "τελείωσαν " + x.eskase : evro(x.telos)}</b></div>`;
+  });
+  s += `</div>
+    <p style="margin-top:12px">Όλα σε <b>σημερινά ευρώ</b>. Και «η μελέτη» υποσχόταν
+       <b>${evro(Y.meleti)}</b> — <b>μόνο ${Y.piano} στους ${W} το έφτασαν.</b></p>`;
+
+  $("m-body").innerHTML = s;
+}
+
+const anoixeInfo = () => { ftiaxeInfo(); $("modal").classList.add("on"); };
+const kleiseInfo = () => $("modal").classList.remove("on");
+$("info").onclick  = anoixeInfo;
+$("m-shut").onclick = kleiseInfo;
+/* Κλείνει και με κλικ έξω από το κουτί, και με Esc — σε κινητό το «έξω» είναι
+   ο πιο φυσικός τρόπος και δεν πρέπει να παγιδεύει τον παίκτη. */
+$("modal").addEventListener("click", e => { if(e.target === $("modal")) kleiseInfo(); });
+addEventListener("keydown", e => { if(e.key === "Escape") kleiseInfo(); });
+
+$("toEnd").onclick = () => telos();
+
+/* ═══════════ ΤΟ ΤΕΛΟΣ ═══════════ */
+function telos(){
+  $("score").textContent = score;
+  $("rank").textContent =
+    score >= 320 ? "εντυπωσιακό — ξέρεις ήδη τι κάνει η σειρά"
+  : score >= 200 ? "καλύτερα από τους περισσότερους"
+  : score >= 100 ? "όπως όλοι μας"
+  :                "όπως όλοι μας — και πάντα προς τη βολική μεριά";
+  $("recap").innerHTML = res.map(r =>
+    `<tr><td>${r.nm}<span class="nm">είπες ${r.you} · ήταν ${r.real}</span></td>
+         <td>+${r.p}</td></tr>`).join("");
+
+  const dika = [
+    {nm:"Σταματάει στα · κεφάλαιο", tim: AGE + " χρονών · " + evro(KEF)},
+    {nm:"Τραβάει τον μήνα", tim: evro(MIN)},
+    {nm:"Τι λέει η μελέτη στα 30 χρόνια", tim: evro(Y.meleti)},
+    {nm:"Η μεσαία πραγματική διαδρομή", tim: evro(Y.mid.telos) + " (ξεκίνησε το " + Y.mid.etos + ")"},
+    {nm:"Η χειρότερη", tim: Y.bad.eskase
+        ? "τελείωσαν το " + Y.bad.eskase + " (στα " + (AGE + (Y.bad.eskase - Y.bad.etos)) + " του)"
+        : evro(Y.bad.telos)},
+    {nm:"Αφετηρίες όπου τελείωσαν τα λεφτά", tim: Y.eskasan + " στις " + W}
+  ];
+  $("mine").innerHTML = dika.map(x =>
+    `<tr><td>${x.nm}</td><td>${x.tim}</td></tr>`).join("");
+
+  $("warn").innerHTML = `<b>Και όλα αυτά είναι η αισιόδοξη εκδοχή.</b>
+     Δεν έχει αφαιρεθεί <b>κανένα κόστος διαχείρισης, κανένα έξοδο προϊόντος και
+     κανένας φόρος</b>. Κάθε πραγματικό προϊόν έχει και τα τρία — άρα το πραγματικό
+     αποτέλεσμα είναι <b>μικρότερο από αυτό που βλέπεις εδώ</b>.`;
+
+  KERASMA.grapse("ftanoun", {
+    nm: "Θα σου φτάσουν;", skor: score, sto: KARTES.length * 100,
+    seires: res.map(r => ({nm:r.nm, you:r.you, real:r.real, p:r.p})),
+    dika: dika,
+    mathima: "Το ποσό δεν είναι το ερώτημα — η σειρά είναι."
+  });
+  show("s-end");
+}
+
+$("again").onclick = () => show("s-start");
+
+/* ═══════════ Η ΕΙΚΟΝΑ ΤΗΣ ΑΡΧΗΣ ═══════════
+   Δύο πραγματικές διαδρομές με τα προεπιλεγμένα νούμερα — η χειρότερη και η
+   καλύτερη. Δεν είναι σχέδιο: είναι ήδη το ίδιο αποτέλεσμα της μηχανής. */
+(function(){
+  const et = 1000 * 12, kef = 300000;
+  const dr = [];
+  for(let k = 0; k < W; k++) dr.push(Object.assign({i:k}, dromos(k, kef, et)));
+  const tax = dr.slice().sort(seira);
+  const kb = tax[0], kk = tax[tax.length - 1];
+  const σb = kampyli(kb.i, kef, et), σg = kampyli(kk.i, kef, et);
+  const ymax = Math.max(...σg);
+  const w = 300, h = 150, padL = 8, padT = 8, padB = 22;
+  $("art").innerHTML =
+    `<line x1="${padL}" y1="${h-padB}" x2="${w-padL}" y2="${h-padB}" stroke="var(--line)" stroke-width="1.5"/>
+     <polyline class="pth good" points="${grammi(σg, ymax, w, h, padL, padT, padB)}"/>
+     <polyline class="pth bad"  points="${grammi(σb, ymax, w, h, padL, padT, padB)}"/>
+     <text x="${padL}" y="${h-6}" font-family="var(--book)" font-size="10.5" fill="var(--soft)">ίδια λεφτά, άλλη χρονιά έναρξης</text>`;
+})();
+
+/* ---- υποσέλιδο ---- */
+$("f-span").textContent = D.apo + "–" + D.ews;
+$("f-n").textContent    = D.eti.length;
+$("f-w").textContent    = W;
+$("f-g").textContent    = (G*100).toFixed(2).replace(".", ",") + "%";
+$("f-gr").textContent   = (Gr*100).toFixed(2).replace(".", ",") + "%";
+
+/* ---- ο δρόμος της επιστροφής ---- */
+if(KERASMA.apoTamplo() || /ΤΑΜΠΛΟ/.test(decodeURIComponent(document.referrer || ""))){
+  $("toTamplo").style.display = "block";
+  $("toTamploTop").style.display = "flex";
+  document.body.classList.add("hasback");
+}
+</script>
+</body>
+</html>

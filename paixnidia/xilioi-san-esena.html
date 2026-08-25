@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Χίλιοι σαν εσένα</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF4; --card:#FFFFFF; --ink:#101A2E; --soft:#5A6480; --line:#D2D9E6;
+  --euro:#123FA8; --euro-deep:#0B2464; --gold:#C98209; --gold-text:#8F5B05; --gold-fill:#F0B429;
+  --coral:#C93F32; --teal:#0E6E62; --dot-off:#C3CCDC;
+  --shadow:0 1px 0 rgba(16,26,46,.05), 0 24px 48px -34px rgba(11,36,100,.55);
+  --disp:"Alegreya Sans","Helvetica Neue",Arial,sans-serif;
+  --book:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+    --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+    --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+  --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+  --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  font-size:17px; line-height:1.45;
+}
+.wrap{width:100%; max-width:620px; flex:1; display:flex; flex-direction:column}
+
+/* ---------- τυπογραφία ---------- */
+h1{font-size:clamp(30px,8vw,44px); line-height:1.02; margin:0 0 6px; letter-spacing:-.02em; font-weight:800}
+.lede{font-family:var(--book); color:var(--soft); margin:0 0 20px; font-size:clamp(15px,4vw,18px)}
+.big{font-size:clamp(44px,13vw,72px); font-weight:800; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.mono{font-variant-numeric:tabular-nums}
+.kat{font-size:clamp(21px,5.4vw,26px); font-weight:800; margin:2px 0 4px; letter-spacing:-.01em}
+.sub{font-family:var(--book); color:var(--soft); font-size:15px; margin:0 0 18px; line-height:1.35}
+.q{font-family:var(--book); font-size:clamp(17px,4.6vw,20px); margin:0 0 4px}
+.q b{font-weight:600; color:var(--euro)}
+
+/* ---------- κάρτα ---------- */
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:14px;
+}
+.scr{display:none} .scr.on{display:block; animation:in .28s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- κουμπιά ---------- */
+button{font-family:inherit; font-size:inherit; cursor:pointer; border:none; background:none; color:inherit}
+.btn{
+  display:block; width:100%; padding:17px 20px; border-radius:15px;
+  background:var(--euro); color:#fff; font-weight:800; font-size:19px;
+  box-shadow:0 10px 24px -14px rgba(18,63,168,.9); margin-bottom:14px;
+}
+:root:not([data-theme="light"]) .btn{color:#08122A}
+:root[data-theme="dark"] .btn{color:#08122A}
+.btn.ghost{background:transparent; color:var(--soft); border:1.5px solid var(--line); box-shadow:none; font-size:17px}
+.pick{display:flex; gap:9px; flex-wrap:wrap}
+.pick button{
+  flex:1 1 0; min-width:120px; padding:14px 10px; border-radius:13px; border:1.5px solid var(--line);
+  background:var(--card); font-weight:700; color:var(--soft); font-size:17px;
+}
+.pick button[aria-pressed="true"]{border-color:var(--euro); background:var(--euro); color:#fff}
+:root:not([data-theme="light"]) .pick button[aria-pressed="true"]{color:#08122A}
+:root[data-theme="dark"] .pick button[aria-pressed="true"]{color:#08122A}
+
+/* ---------- πρόοδος ---------- */
+.prog{display:flex; gap:6px; margin:0 4px 12px}
+.pip{flex:1; height:5px; border-radius:99px; background:var(--line)}
+.pip.done{background:var(--teal)} .pip.now{background:var(--euro)}
+
+/* ---------- σλάιντερ ---------- */
+.guess{text-align:center; margin:10px 0 2px}
+.guess .big{color:var(--euro)}
+.unit{font-size:22px; font-weight:700; color:var(--soft); margin-left:6px}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:44px;
+  background:transparent; margin:0; display:block;
+}
+input[type=range]::-webkit-slider-runnable-track{height:12px; border-radius:99px; background:var(--line)}
+input[type=range]::-moz-range-track{height:12px; border-radius:99px; background:var(--line)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:40px; height:40px; border-radius:50%;
+  background:var(--euro); border:4px solid var(--card); margin-top:-14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.28);
+}
+input[type=range]::-moz-range-thumb{
+  width:34px; height:34px; border-radius:50%; background:var(--euro);
+  border:4px solid var(--card); box-shadow:0 3px 12px rgba(0,0,0,.28);
+}
+.nudge{display:flex; align-items:center; gap:10px; margin-top:2px}
+.nudge button{
+  width:52px; height:44px; border-radius:12px; border:1.5px solid var(--line);
+  background:var(--card); font-size:22px; font-weight:800; color:var(--soft); flex:none;
+}
+.nudge .track{flex:1}
+.ends{display:flex; justify-content:space-between; font-size:13px; color:var(--soft); margin-top:-2px}
+
+/* ---------- ΤΟ ΠΛΕΓΜΑ ΤΩΝ ΧΙΛΙΩΝ ---------- */
+/* 40 στήλες × 25 γραμμές = 1.000 κουκκίδες. Δεν είναι 1.000 στοιχεία HTML:
+   είναι τρεις στρώσεις με το ίδιο μοτίβο, κομμένες με clip-path — αλλιώς
+   το σύρσιμο του σλάιντερ θα κόλλαγε σε κινητό. */
+.grid{
+  position:relative; width:100%; aspect-ratio:40/25; margin:4px 0 10px;
+  --cols:40; --rows:25; --full:0; --rem:0; --full2:0; --rem2:0;
+}
+.gl{
+  position:absolute; inset:0;
+  background-image:radial-gradient(circle at center, currentColor 34%, transparent 37%);
+  background-size:calc(100%/var(--cols)) calc(100%/var(--rows));
+}
+.gl-off{color:var(--dot-off)}
+.gl-on{
+  color:var(--euro);
+  clip-path:inset(0 0 calc(100% - var(--full)*100%/var(--rows)) 0);
+  transition:clip-path .16s linear;
+}
+.gl-on2{
+  color:var(--euro);
+  clip-path:inset(calc(var(--full)*100%/var(--rows))
+                  calc(100% - var(--rem)*100%/var(--cols))
+                  calc(100% - (var(--full) + 1)*100%/var(--rows))
+                  0);
+  transition:clip-path .16s linear;
+}
+.grid.revealed .gl-on, .grid.revealed .gl-on2{color:var(--gold-fill); transition:clip-path .5s cubic-bezier(.2,.8,.3,1)}
+/* η γραμμή που δείχνει πού ήταν η εκτίμηση */
+.mark{
+  position:absolute; left:0; right:0; height:0; display:none;
+  border-top:2.5px dashed var(--coral);
+  top:calc(var(--my)*100%/var(--rows));
+  transition:top .5s cubic-bezier(.2,.8,.3,1);
+}
+.mark span{
+  position:absolute; right:0; top:-11px; background:var(--card); color:var(--coral);
+  font-size:12.5px; font-weight:800; padding:1px 7px; border-radius:7px; border:1.5px solid var(--coral);
+  white-space:nowrap;
+}
+.grid.revealed .mark{display:block}
+.legend{display:flex; gap:16px; justify-content:center; font-size:13.5px; color:var(--soft); margin:-2px 0 12px; flex-wrap:wrap}
+.legend i{display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:-1px}
+
+/* ---------- αποκάλυψη ---------- */
+.duel{display:flex; gap:10px; margin:14px 0 0}
+.duel div{
+  flex:1; text-align:center; border:1px solid var(--line); border-radius:13px; padding:10px 6px;
+  background:var(--paper);
+}
+.duel span{display:block; font-size:13.5px; color:var(--soft); font-family:var(--book)}
+.duel b{font-size:clamp(26px,7vw,34px); font-weight:800; font-variant-numeric:tabular-nums; line-height:1.1}
+.duel .real b{color:var(--gold-text)}
+.verdict{
+  font-family:var(--book); font-size:17px; line-height:1.4; margin:14px 0 0;
+  padding:14px 16px; border-radius:13px; background:var(--paper); border:1px solid var(--line);
+}
+.verdict b{font-weight:600}
+.pts{float:right; font-family:var(--disp); font-weight:800; color:var(--teal); font-size:18px; margin-left:10px}
+
+/* ---------- τελικά ---------- */
+.total{text-align:center; padding:6px 0 2px}
+.total .big{color:var(--gold-text)}
+.tbl{width:100%; border-collapse:collapse; margin:14px 0 4px; font-size:15px}
+.tbl td{padding:9px 2px; border-bottom:1px solid var(--line); vertical-align:baseline}
+.tbl td:last-child{text-align:right; font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .nm{font-family:var(--book); color:var(--soft); font-size:14px; display:block}
+.punch{
+  background:var(--euro-deep); color:#fff; border-radius:18px; padding:22px 20px;
+  margin-bottom:14px; border:1px solid var(--euro);
+}
+:root:not([data-theme="light"]) .punch{background:#0E1B39}
+.punch h2{margin:0 0 4px; font-size:clamp(21px,5.5vw,26px); font-weight:800; color:#fff}
+.punch p{font-family:var(--book); margin:8px 0 0; color:#C6D4F2; font-size:16px; line-height:1.42}
+.punch .big{color:var(--gold-fill); margin:10px 0 2px}
+.numin{
+  display:flex; align-items:center; gap:8px; background:var(--paper);
+  border:1.5px solid var(--line); border-radius:13px; padding:6px 14px; margin:8px 0 4px;
+}
+.numin input{
+  flex:1; width:100%; border:none; background:transparent; color:var(--ink);
+  font-family:var(--disp); font-weight:800; font-size:30px; padding:8px 0;
+  font-variant-numeric:tabular-nums; -moz-appearance:textfield; min-width:0;
+}
+.numin input::-webkit-outer-spin-button,.numin input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.numin input:focus{outline:none}
+.numin span{font-size:20px; font-weight:700; color:var(--soft); white-space:nowrap}
+.two{display:flex; gap:10px; flex-wrap:wrap}
+.two>div{flex:1 1 46%; min-width:150px}
+.two .sub{margin:0 0 2px}
+
+/* ---------- η χώρα ---------- */
+.country{display:flex; gap:12px; margin:12px 0 2px}
+.country > div{flex:1; text-align:center; border:1px solid var(--line); border-radius:14px; padding:14px 8px; background:var(--paper)}
+.country .yr{font-family:var(--book); font-size:14px; color:var(--soft); display:block; margin-bottom:2px}
+.country .n{font-size:clamp(30px,8vw,40px); font-weight:800; font-variant-numeric:tabular-nums; line-height:1}
+.country .of{font-size:12.5px; color:var(--soft); display:block; margin-top:3px; font-family:var(--book)}
+.country .now .n{color:var(--euro)} .country .then .n{color:var(--gold-text)}
+
+/* ---------- υποσέλιδο ---------- */
+footer{
+  max-width:620px; width:100%; font-family:var(--book); font-size:12.5px;
+  color:var(--soft); line-height:1.5; padding:16px 4px 8px; border-top:1px solid var(--line);
+}
+footer b{font-weight:600; color:var(--ink)}
+.tog{position:fixed; top:10px; right:10px; width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); font-size:16px; z-index:9; box-shadow:var(--shadow)}
+@media(min-width:680px){ .card{padding:26px 28px} body{padding-top:26px} }
+.tog.back{
+  left:10px; right:auto; text-decoration:none; font-weight:800; font-size:19px;
+  align-items:center; justify-content:center; padding-bottom:2px;
+}
+/* Όταν φαίνεται ο δρόμος πίσω, η σελίδα κατεβαίνει: αλλιώς σε κινητό το
+   σημαδάκι κάθεται ΠΑΝΩ στον τίτλο («←λιοι σαν εσένα»). Σε μεγάλη οθόνη το
+   περιεχόμενο είναι κεντραρισμένο και δεν ακουμπάει — μένει όπως ήταν. */
+body.hasback{padding-top:58px}
+@media(min-width:680px){ body.hasback{padding-top:26px} }
+</style>
+</head>
+<body>
+<button class="tog" id="tog" title="Φωτεινό / σκοτεινό" aria-label="Αλλαγή θέματος">◐</button>
+<a class="tog back" id="toTamploTop" href="index.html"
+   title="Πίσω στο ταμπλό" aria-label="Πίσω στο ταμπλό" style="display:none">←</a>
+
+<div class="wrap">
+
+<!-- ══════════ ΑΡΧΗ ══════════ -->
+<section class="scr on" id="s-start">
+  <h1>Χίλιοι σαν εσένα</h1>
+  <p class="lede">Χίλιοι άνθρωποι στην ηλικία σου, σήμερα, στην Ελλάδα. Πόσοι θα είναι εδώ σε τριάντα χρόνια; Χάνουν όλοι — και προς την ίδια μεριά.</p>
+
+  <div class="card">
+    <div class="grid" id="art-grid" style="--full:16; --rem:0">
+      <div class="gl gl-off"></div>
+      <div class="gl gl-on"></div>
+      <div class="gl gl-on2"></div>
+    </div>
+    <p class="q" style="margin-bottom:16px">Κάθε κουκκίδα είναι ένας άνθρωπος. Χίλιες κουκκίδες.</p>
+
+    <p class="sub" style="margin-bottom:8px"><b>Πόσων χρονών είσαι;</b></p>
+    <div class="guess" style="margin:0 0 2px"><span class="big mono" id="av">45</span><span class="unit">χρονών</span></div>
+    <div class="nudge">
+      <button id="amn" aria-label="Μικρότερη ηλικία">−</button>
+      <div class="track"><input type="range" id="asl" min="25" max="70" step="1" value="45" aria-label="Η ηλικία σου"></div>
+      <button id="apl" aria-label="Μεγαλύτερη ηλικία">+</button>
+    </div>
+    <div class="ends" style="margin-bottom:16px"><span>25</span><span>70</span></div>
+
+    <p class="sub" style="margin-bottom:8px"><b>Άντρας ή γυναίκα;</b> Η διαφορά είναι μεγάλη — γι' αυτό ρωτάμε.</p>
+    <div class="pick" id="sexpick">
+      <button data-s="M" aria-pressed="true">Άντρας</button>
+      <button data-s="F" aria-pressed="false">Γυναίκα</button>
+    </div>
+  </div>
+
+  <button class="btn" id="go">Ξεκίνα</button>
+</section>
+
+<!-- ══════════ ΠΑΙΧΝΙΔΙ ══════════ -->
+<section class="scr" id="s-play">
+  <div class="prog" id="prog"></div>
+  <div class="card">
+    <h2 class="kat" id="kat">—</h2>
+    <p class="sub" id="sub">—</p>
+
+    <div class="grid" id="grid">
+      <div class="gl gl-off"></div>
+      <div class="gl gl-on"></div>
+      <div class="gl gl-on2"></div>
+      <div class="mark" id="mark"><span id="mark-lab">είπες</span></div>
+    </div>
+    <p class="legend" id="legend"><span><i style="background:var(--dot-off)"></i>έχουν φύγει</span><span><i id="leg-on" style="background:var(--euro)"></i>ζουν ακόμα</span></p>
+
+    <p class="q" id="q">—</p>
+
+    <div id="ask">
+      <div class="guess"><span class="big mono" id="gv">500</span><span class="unit" id="gu">στους 1.000</span></div>
+      <div class="nudge">
+        <button id="mn" aria-label="Λιγότερο">−</button>
+        <div class="track"><input type="range" id="sl" min="0" max="1000" step="5" value="500" aria-label="Η εκτίμησή σου"></div>
+        <button id="pl" aria-label="Περισσότερο">+</button>
+      </div>
+      <div class="ends"><span id="e0">0</span><span id="e1">1.000</span></div>
+    </div>
+
+    <div id="rev" style="display:none">
+      <div class="duel">
+        <div><span>Είπες</span><b class="mono" id="d-you">—</b></div>
+        <div class="real"><span>Είναι</span><b class="mono" id="d-real">—</b></div>
+      </div>
+      <p class="verdict"><span class="pts" id="pts">+0</span><span id="vtext">—</span></p>
+    </div>
+  </div>
+  <button class="btn" id="lock">Κλείδωσε</button>
+  <button class="btn" id="next" style="display:none">Επόμενο</button>
+</section>
+
+<!-- ══════════ Η ΚΑΡΤΑ ΧΩΡΙΣ ΣΚΟΡ ══════════ -->
+<section class="scr" id="s-plan">
+  <div class="card">
+    <h2 class="kat">Και τώρα χωρίς σκορ</h2>
+    <p class="sub">Η τελευταία κάρτα δεν βαθμολογείται. Είναι η μόνη με δικά σου νούμερα — και δεν τα ξέρω εγώ.</p>
+    <div class="two">
+      <div>
+        <p class="sub"><b>Σταματάω να δουλεύω στα</b></p>
+        <div class="numin"><input type="number" id="ret" value="67" min="50" max="85" step="1" inputmode="numeric"><span>χρονών</span></div>
+      </div>
+      <div>
+        <p class="sub"><b>Θέλω τον μήνα</b></p>
+        <div class="numin"><input type="number" id="pm" value="1200" min="100" max="100000" step="100" inputmode="numeric"><span>€</span></div>
+      </div>
+    </div>
+    <p class="sub" style="margin:14px 0 0">Όχι τι θα πάρεις από το κράτος. Τι θέλεις να μπαίνει στον λογαριασμό, όλα μαζί.</p>
+  </div>
+  <button class="btn" id="pgo">Δες πόσα χρόνια είναι</button>
+</section>
+
+<!-- ══════════ ΤΕΛΟΣ ══════════ -->
+<section class="scr" id="s-end">
+  <div class="punch">
+    <h2>Οι μισοί σαν εσένα ζουν ως τα <span id="e-med">—</span></h2>
+    <p>Αν σταματήσεις στα <b id="e-ret">67</b>, η σύνταξη πρέπει να κρατήσει</p>
+    <div class="big mono" id="e-years">— χρόνια</div>
+    <p>Και δεν είναι το χειρότερο σενάριο: <b id="e-q4">ένας στους τέσσερις</b> σαν εσένα φτάνει τα
+       <b id="e-p75">—</b> — <b id="e-years75">—</b> χρόνια σύνταξη.</p>
+    <p style="margin-top:14px">Στα <b id="e-pm">—</b> € τον μήνα που ζήτησες, αυτά τα <b id="e-years2">—</b> χρόνια θέλουν</p>
+    <div class="big mono" id="e-cost">—</div>
+    <p>σε σημερινά ευρώ, <b>χωρίς πληθωρισμό</b> — δηλαδή το πραγματικό νούμερο είναι μεγαλύτερο.</p>
+  </div>
+
+  <div class="card">
+    <div class="total">
+      <p class="sub" style="margin:0">Το σκορ σου</p>
+      <div class="big mono" id="score">0</div>
+      <p class="sub" style="margin:2px 0 0">στα 400 · <span id="rank">—</span></p>
+    </div>
+    <table class="tbl" id="recap"></table>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Και δεν είσαι μόνος σου</h2>
+    <p class="sub">Σε κάθε 1.000 Έλληνες, πόσοι είναι πάνω από 65:</p>
+    <div class="country">
+      <div class="now"><span class="yr">σήμερα</span><div class="n mono" id="c-now">—</div><span class="of">στους 1.000</span></div>
+      <div class="then"><span class="yr">το 2050</span><div class="n mono" id="c-2050">—</div><span class="of">στους 1.000</span></div>
+    </div>
+    <p class="q" style="margin-top:14px">Το 2005 ήταν <b id="c-2005">—</b>. Και για κάθε έναν πάνω από 65,
+      τα άτομα σε ηλικία εργασίας πέφτουν από <b id="c-dep-now">—</b> σήμερα σε <b id="c-dep-2050">—</b> το 2050.</p>
+    <p class="sub" style="margin:10px 0 0">Δεν είναι πρόβλεψη γραφείου — είναι οι άνθρωποι που έχουν ήδη γεννηθεί.</p>
+  </div>
+
+  <div class="card">
+    <p class="q" style="margin:0"><b>Τι δείχνει το παιχνίδι:</b> ο κίνδυνος δεν είναι να φύγεις νωρίς.
+      Είναι να μείνεις πολύ — και να τελειώσουν τα λεφτά πριν από σένα.</p>
+  </div>
+
+  <a class="btn ghost" id="toTamplo" href="index.html"
+     style="display:none; text-align:center; text-decoration:none">← Πίσω στο ταμπλό</a>
+  <button class="btn ghost" id="again">Δώσ' το στον επόμενο</button>
+</section>
+
+</div>
+
+<footer>
+  <b>Πηγή:</b> Eurostat. Οι κουκκίδες βγαίνουν από τον <b>πίνακα ζωής της Ελλάδας</b>
+  (<span class="mono">demo_mlifetable</span>, έτος <b id="f-year">—</b>): πόσοι από 100.000 γεννημένους
+  ζουν ακόμα σε κάθε ηλικία, χωριστά για άντρες και γυναίκες. Τα νούμερα της χώρας από
+  <span class="mono">demo_pjanind</span> (2005, 2025) και <span class="mono">proj_23ndbi</span> —
+  προβολή <b>EUROPOP2023, βασικό σενάριο</b> για το 2050.
+  <b>Κανένα νούμερο δεν είναι εκτίμηση δική μας</b>: κάθε τιμή είναι λόγος δύο δημοσιευμένων μεγεθών.
+  <b>Προσοχή στη σωστή ανάγνωση:</b> ο πίνακας ζωής υποθέτει ότι η θνησιμότητα μένει
+  <b>παγωμένη</b> στα σημερινά επίπεδα για πάντα. Επειδή στην πραγματικότητα βελτιώνεται,
+  οι αριθμοί που βλέπεις είναι <b>ο συντηρητικός πάτος</b> — όχι η αισιόδοξη εκδοχή.
+  Ο «δείκτης εξάρτησης» μετράει <b>άτομα σε ηλικία εργασίας (15–64)</b>, όχι εργαζόμενους.
+  Η τελευταία κάρτα είναι απλή αριθμητική σε σημερινά ευρώ, χωρίς πληθωρισμό και χωρίς απόδοση.
+  Παιχνίδι ενημέρωσης — δεν αποτελεί επενδυτική συμβουλή, ασφαλιστική πρόταση ή προσφορά.
+</footer>
+
+<script>
+"use strict";
+
+/* ═══════════ Η ΚΟΙΝΗ ΜΝΗΜΗ ΤΟΥ «ΚΕΡΑΣΜΑΤΟΣ» ═══════════
+   Το ίδιο κομμάτι υπάρχει ΑΥΤΟΥΣΙΟ και στα επτά παιχνίδια, στο «Πόσες μέρες
+   ακόμα μαζί;» και στο ταμπλό.
+   Κρατάει μόνο ό,τι έγραψε ο ίδιος ο παίκτης, σε αυτόν εδώ τον υπολογιστή:
+   τίποτα δεν φεύγει πουθενά, καμία σύνδεση, κανένας server.
+   Αν ο φυλλομετρητής δεν αφήνει αποθήκευση (π.χ. ιδιωτική περιήγηση), το
+   παιχνίδι δουλεύει ΑΚΡΙΒΩΣ το ίδιο — απλώς δεν γεμίζει το ταμπλό.
+
+   ΤΟ ΔΙΑΒΑΤΗΡΙΟ — ό,τι είπε για τον εαυτό του (ηλικία, φύλο, πόσα βάζει,
+   δάνειο) ζει σε ΕΝΑ σημείο, ώστε το επόμενο παιχνίδι να μην το ξαναρωτήσει.
+   Δύο κανόνες, και οι δύο για τον ίδιο λόγο — να μην μπουν στο στόμα του
+   λόγια που δεν είπε:
+     1. Γράφεται ΜΟΝΟ ό,τι άγγιξε ο ίδιος. Μια δική μας προεπιλογή δεν είναι
+        απάντησή του και δεν μπαίνει ποτέ στο διαβατήριο.
+     2. Το διαβατήριο ΦΑΙΝΕΤΑΙ στο ταμπλό, πάντα και πρώτο. Αν δοθεί το κινητό
+        σε δεύτερο άνθρωπο, το πρώτο που βλέπει είναι τι ξέρει η σελίδα για
+        τον προηγούμενο — και δίπλα του το «Καθάρισε».                       */
+const KERASMA = (function(){
+  const P = "KERASMA:v1:";
+  let zei = null;
+  function ok(){
+    if(zei !== null) return zei;
+    try{ localStorage.setItem(P + "dokimi", "1"); localStorage.removeItem(P + "dokimi"); zei = true; }
+    catch(e){ zei = false; }
+    return zei;
+  }
+  function fakelaki(){
+    if(!ok()) return {};
+    try{ return JSON.parse(localStorage.getItem(P + "pass")) || {}; }catch(e){ return {}; }
+  }
+  return {
+    zei: ok,
+    grapse(id, d){
+      if(!ok()) return false;
+      d.v = 1; d.id = id; d.pote = Date.now();
+      try{ localStorage.setItem(P + "p:" + id, JSON.stringify(d)); return true; }catch(e){ return false; }
+    },
+    diavase(id){
+      if(!ok()) return null;
+      try{ return JSON.parse(localStorage.getItem(P + "p:" + id)); }catch(e){ return null; }
+    },
+    svise(id){ if(ok()){ try{ localStorage.removeItem(P + "p:" + id); }catch(e){} } },
+    onoma(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "onoma") || "";
+        localStorage.setItem(P + "onoma", v); return v;
+      }catch(e){ return ""; }
+    },
+    thema(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "thema") || "";
+        localStorage.setItem(P + "thema", v); return v;
+      }catch(e){ return ""; }
+    },
+    apoTamplo(v){
+      if(!ok()) return false;
+      try{
+        if(v === undefined) return localStorage.getItem(P + "tamplo") === "1";
+        localStorage.setItem(P + "tamplo", v ? "1" : "0"); return !!v;
+      }catch(e){ return false; }
+    },
+
+    /* ---------- ΤΟ ΔΙΑΒΑΤΗΡΙΟ ---------- */
+    olo: fakelaki,
+    pass(k){ return fakelaki()[k]; },
+    /* «είπε» — και το όνομα είναι η προδιαγραφή: μπαίνει μόνο ό,τι είπε. */
+    eipe(k, v){
+      if(!ok()) return false;
+      const o = fakelaki();
+      if(v === undefined || v === null || v === "") delete o[k]; else o[k] = v;
+      try{ localStorage.setItem(P + "pass", JSON.stringify(o)); return true; }catch(e){ return false; }
+    },
+    svisePass(){ if(ok()){ try{ localStorage.removeItem(P + "pass"); }catch(e){} } },
+    /* Δένει ένα πεδίο με το διαβατήριο: ανοίγει γεμάτο αν το έχει ήδη πει
+       αλλού, και γράφει πίσω ΜΟΝΟ αν το αγγίξει ο ίδιος.
+       Το κόψιμο στα όρια του πεδίου δεν γυρίζει ποτέ πίσω στο διαβατήριο:
+       αλλιώς το ΠΑΖΑΡΙ, που σταματάει στα 65, θα «διόρθωνε» σιωπηλά έναν
+       68άρη σε 65 — και το επόμενο παιχνίδι θα τον ρωτούσε σαν 65άρη.       */
+    dese(el, k){
+      if(!el) return;
+      const arith = el.type === "range" || el.type === "number";
+      const v = this.pass(k);
+      if(v !== undefined && v !== null && v !== ""){
+        if(arith){
+          const n = Number(v);
+          if(isFinite(n)){
+            const lo = el.min === "" ? -Infinity : Number(el.min);
+            const hi = el.max === "" ?  Infinity : Number(el.max);
+            el.value = Math.min(hi, Math.max(lo, n));
+          }
+        } else el.value = v;
+      }
+      const kata = () => {
+        if(!arith) return this.eipe(k, el.value);
+        const n = Number(el.value);
+        this.eipe(k, el.value === "" || !isFinite(n) ? undefined : n);
+      };
+      el.addEventListener("input", kata);
+      el.addEventListener("change", kata);
+    }
+  };
+})();
+
+/* Το φωτεινό/σκοτεινό ταξιδεύει μαζί με τον παίκτη: αν το γύρισε στο ταμπλό,
+   δεν έχει νόημα να ανοίγει το επόμενο παιχνίδι στο άλλο θέμα. */
+(function(){ const th = KERASMA.thema(); if(th) document.documentElement.setAttribute("data-theme", th); })();
+
+/* ═══════════ ΔΕΔΟΜΕΝΑ — ΑΡΧΗ ═══════════
+   ΜΗΝ ΤΑ ΑΓΓΙΞΕΙΣ ΜΕ ΤΟ ΧΕΡΙ. Γράφονται από:
+       python3 εργαλεία/ενσωμάτωση_δεδομένων.py
+   και ελέγχονται τιμή προς τιμή από:
+       python3 εργαλεία/έλεγχος_χιλίων.py
+
+   surv[φύλο][ηλικία] = πόσοι από 100.000 γεννημένους ζουν ακόμα σε αυτή την
+   ηλικία, κατά τον πίνακα ζωής της Ελλάδας. Θέση 0 = γέννηση, θέση 95 = «95+».
+   Πηγή: Eurostat demo_mlifetable, έτος 2024.        */
+const D = {
+  etos: 2024,
+  surv: {
+    M: [100000,99598,99565,99558,99546,99534,99527,99523,99519,99514,99512,99508,99504,99496,99482,99469,99454,99425,99391,99348,99292,99235,99187,99134,99083,99051,98968,98922,98867,98808,98754,98682,98619,98549,98484,98398,98326,98252,98162,98066,97957,97855,97732,97606,97459,97260,97092,96879,96644,96415,96157,95852,95493,95148,94760,94296,93787,93194,92600,91912,91175,90344,89502,88659,87612,86549,85415,84077,82733,81258,79661,77934,76118,74227,72300,70317,68126,65791,63191,60357,57582,54478,51509,48359,44681,40914,37300,33537,29645,25814,22090,18590,15400,12487,9873,7718],
+    F: [100000,99683,99662,99651,99639,99634,99624,99622,99620,99615,99611,99611,99604,99598,99592,99585,99570,99563,99551,99542,99538,99522,99514,99497,99483,99475,99459,99436,99400,99386,99364,99336,99316,99278,99258,99226,99201,99167,99098,99049,98986,98924,98861,98793,98709,98617,98541,98434,98316,98192,98070,97917,97729,97543,97327,97110,96891,96599,96284,95930,95590,95175,94758,94271,93798,93304,92732,92117,91364,90583,89699,88818,87845,86796,85604,84250,82798,81200,79352,77326,75036,72394,69508,66516,62771,58850,54691,50238,45345,40324,35288,30295,25526,20930,16835,13248]
+  },
+  /* Η χώρα: p65 = % πάνω από 65 · dep = 65+ ανά 100 άτομα 15–64 · med = διάμεση ηλικία.
+     Πηγή: Eurostat demo_pjanind (2005, 2025) και
+     proj_23ndbi (EUROPOP2023, baseline) για το 2050. */
+  xora: {
+    past:  {p65:18.3, dep:27.4, med:39.2},
+    now:   {p65:23.7, dep:37.4, med:47.2},
+    f2050: {p65:35.5, dep:67.9, med:51.8}
+  }
+};
+/* ═══════════ ΔΕΔΟΜΕΝΑ — ΤΕΛΟΣ ═══════════ */
+
+/* ═══════════ Η ΜΗΧΑΝΗ ═══════════
+   Τέσσερις συναρτήσεις, καμία άλλη πηγή αλήθειας. Ο έλεγχος τις τραβάει
+   ΑΥΤΟΥΣΙΕΣ από αυτό εδώ το αρχείο — δεν υπάρχει δεύτερο αντίγραφο.
+   Στρογγυλοποίηση: μισό προς τα πάνω (Math.round), και ο έλεγχος κάνει
+   το ίδιο με floor(x+0.5) — όχι το banker's rounding της Python.        */
+function zoun(f, a, x){            /* από 1.000 στην ηλικία a, πόσοι ζουν στα x */
+  return Math.round(1000 * D.surv[f][x] / D.surv[f][a]);
+}
+function ilikiaPou(f, a, klasma){  /* σε ποια ηλικία μένει το klasma των a */
+  const stoxos = D.surv[f][a] * klasma;
+  for(let x = a; x < D.surv[f].length; x++) if(D.surv[f][x] <= stoxos) return x;
+  return D.surv[f].length - 1;
+}
+function misoi(f, a){ return ilikiaPou(f, a, 0.5);  }
+function enasStous4(f, a){ return ilikiaPou(f, a, 0.25); }
+
+/* ═══════════ ΟΙ ΚΑΡΤΕΣ ═══════════ */
+const CARDS = [
+  { typ:"n", x:80, nm:"Πρώτη στάση: τα 80",
+    sub:"Χίλιοι άνθρωποι στην ηλικία σου, σήμερα. Προχωράμε τον χρόνο μπροστά." },
+  { typ:"n", x:90, nm:"Τα 90",
+    sub:"Δέκα χρόνια παραπάνω. Εδώ χάνουν σχεδόν όλοι — και πάντα προς τα κάτω." },
+  { typ:"n", x:95, nm:"Τα 95",
+    sub:"Η ηλικία που κανείς δεν βάζει στους λογαριασμούς του." },
+  { typ:"a", nm:"Και το αντίστροφο",
+    sub:"Τώρα δεν μετράμε ανθρώπους. Μετράμε χρόνια — και είναι η ερώτηση που μετράει." }
+];
+
+/* ═══════════ ΚΑΤΑΣΤΑΣΗ ═══════════ */
+let sex = "M", age = 45, i = 0, score = 0, locked = false;
+const res = [];
+const $ = id => document.getElementById(id);
+const fmt = n => n.toLocaleString("el-GR", {maximumFractionDigits:0});
+const fmt1 = n => n.toLocaleString("el-GR", {minimumFractionDigits:1, maximumFractionDigits:1});
+
+/* ---- θέμα ---- */
+$("tog").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const neo = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", neo);
+  KERASMA.thema(neo);
+};
+
+/* ---- πλέγμα ---- */
+const COLS = 40, ROWS = 25;
+function drawGrid(el, n){
+  n = Math.max(0, Math.min(1000, n));
+  const full = Math.floor(n / COLS), rem = n % COLS;
+  el.style.setProperty("--full", full);
+  el.style.setProperty("--rem", rem);
+}
+
+/* ---- αρχική οθόνη ---- */
+const asl = $("asl");
+const paintAge = () => { age = +asl.value; $("av").textContent = age; };
+asl.addEventListener("input", paintAge);
+$("amn").onclick = () => { asl.stepDown(); paintAge(); };
+$("apl").onclick = () => { asl.stepUp();   paintAge(); };
+$("sexpick").onclick = e => {
+  const b = e.target.closest("button"); if(!b) return;
+  sex = b.dataset.s;
+  [...$("sexpick").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  KERASMA.eipe("fylo", sex);
+};
+drawGrid($("art-grid"), 640);
+
+/* ---- το διαβατήριο: ηλικία, φύλο, και τα δύο νούμερα του σχεδίου ---- */
+KERASMA.dese(asl, "ilikia");
+paintAge();
+{
+  const fy = KERASMA.pass("fylo");
+  if(fy === "M" || fy === "F"){
+    sex = fy;
+    [...$("sexpick").children].forEach(x => x.setAttribute("aria-pressed", x.dataset.s === fy));
+  }
+}
+KERASMA.dese($("ret"), "syntaxi");
+KERASMA.dese($("pm"),  "thelei");
+
+/* ---- πλοήγηση ---- */
+const show = id => {
+  document.querySelectorAll(".scr").forEach(s => s.classList.toggle("on", s.id === id));
+  scrollTo({top:0, behavior:"instant"});
+};
+$("go").onclick = () => { i = 0; score = 0; res.length = 0; show("s-play"); render(); };
+
+/* ---- σλάιντερ παιχνιδιού ---- */
+const sl = $("sl"), grid = $("grid");
+function paint(){
+  const c = CARDS[i], v = +sl.value;
+  if(c.typ === "n"){
+    $("gv").textContent = fmt(v);
+    drawGrid(grid, v);
+  } else {
+    $("gv").textContent = v;
+    drawGrid(grid, zoun(sex, age, v));
+  }
+}
+sl.addEventListener("input", paint);
+$("mn").onclick = () => { sl.stepDown(); paint(); };
+$("pl").onclick = () => { sl.stepUp();   paint(); };
+
+function render(){
+  const c = CARDS[i];
+  $("prog").innerHTML = CARDS.map((_, n) =>
+    `<div class="pip ${n < i ? "done" : n === i ? "now" : ""}"></div>`).join("");
+  $("kat").textContent = c.nm;
+  $("sub").textContent = c.sub;
+  grid.classList.remove("revealed");
+  $("leg-on").style.background = "var(--euro)";
+  /* Η κάθε κάρτα ΣΒΗΝΕΙ ρητά ό,τι άφησε η προηγούμενη — δεν κληρονομεί τίποτα.
+     Στο ΠΑΖΑΡΙ το ίδιο ακριβώς μοτίβο είχε αφήσει τις μπάρες με τα πλάτη της
+     προηγούμενης κάρτας: ο παίκτης έβλεπε σωστό νούμερο δίπλα σε λάθος εικόνα. */
+  $("mark").style.display = "none";
+  $("mark-lab").textContent = "είπες";
+  grid.style.setProperty("--my", 0);
+
+  if(c.typ === "n"){
+    $("q").innerHTML = `Από <b>1.000</b> ανθρώπους σαν εσένα,
+      <b>${age}</b> χρονών σήμερα — πόσοι θα ζουν ακόμα στα <b>${c.x}</b>;`;
+    sl.min = 0; sl.max = 1000; sl.step = 5; sl.value = 500;
+    $("gu").textContent = "στους 1.000";
+    $("e0").textContent = "0"; $("e1").textContent = "1.000";
+    $("legend").style.visibility = "visible";
+  } else {
+    $("q").innerHTML = `Σε ποια <b>ηλικία</b> θα έχουν φύγει οι <b>μισοί</b> από τους 1.000;
+      Σύρε — και δες τις κουκκίδες να σβήνουν.`;
+    sl.min = age + 1; sl.max = 95; sl.step = 1;
+    sl.value = Math.min(95, age + 25);
+    $("gu").textContent = "χρονών";
+    $("e0").textContent = age + 1; $("e1").textContent = "95";
+    $("legend").style.visibility = "visible";
+  }
+  paint();
+  $("ask").style.display = ""; $("rev").style.display = "none";
+  $("lock").style.display = ""; $("next").style.display = "none";
+  locked = false;
+}
+
+$("lock").onclick = () => {
+  if(locked) return; locked = true;
+  const c = CARDS[i], you = +sl.value;
+  let real, p, vtext, dyou, dreal, markN;
+
+  if(c.typ === "n"){
+    real = zoun(sex, age, c.x);
+    p = Math.max(0, Math.round(100 - Math.abs(you - real) / 4));
+    dyou = fmt(you); dreal = fmt(real);
+    markN = you;
+    drawGrid(grid, real);
+    /* «X στους 100 άντρες» / «X στις 100 γυναίκες» — η πτώση αλλάζει με το φύλο.
+       Ακέραιος, όχι δεκαδικός: «35,8 άνθρωποι» δεν λέγεται μπροστά σε κανέναν. */
+    const stous = sex === "M" ? "στους 100 άντρες" : "στις 100 γυναίκες";
+    const ana100 = Math.round(real / 10);
+    vtext = you < real
+      ? `Είναι <b>${fmt(real)}</b> — είπες ${fmt(real - you)} λιγότερους.
+         Περίπου <b>${ana100}</b> ${stous} της ηλικίας σου είναι ακόμα εδώ στα ${c.x}.`
+      : `Είναι <b>${fmt(real)}</b> — είπες ${fmt(you - real)} περισσότερους.
+         Σπάνιο: σχεδόν όλοι πέφτουν από κάτω, όχι από πάνω.`;
+  } else {
+    real = misoi(sex, age);
+    p = Math.max(0, Math.round(100 - Math.abs(you - real) * 12));
+    dyou = you + " ετών"; dreal = real + " ετών";
+    markN = null;
+    drawGrid(grid, zoun(sex, age, real));
+    const diff = real - you;
+    vtext = diff > 0
+      ? `Είναι τα <b>${real}</b> — ${diff} χρόνια αργότερα απ' ό,τι είπες.
+         Και «μισοί» σημαίνει ότι <b>ο ένας στους δύο ζει και πιο πέρα</b>.`
+      : diff < 0
+      ? `Είναι τα <b>${real}</b> — ${-diff} χρόνια νωρίτερα απ' ό,τι είπες.`
+      : `Ακριβώς: τα <b>${real}</b>. Και ο ένας στους δύο ζει και πιο πέρα.`;
+  }
+
+  score += p;
+  res.push({nm:c.nm, you:dyou, real:dreal, p});
+
+  grid.classList.add("revealed");
+  $("leg-on").style.background = "var(--gold-fill)";
+  if(markN !== null){
+    grid.style.setProperty("--my", markN / COLS);
+    $("mark-lab").textContent = "είπες " + fmt(markN);
+    $("mark").style.display = "";
+  } else {
+    $("mark").style.display = "none";
+  }
+
+  $("d-you").textContent = dyou;
+  $("d-real").textContent = dreal;
+  $("pts").textContent = "+" + p;
+  $("vtext").innerHTML = vtext;
+  $("ask").style.display = "none"; $("rev").style.display = "";
+  $("lock").style.display = "none"; $("next").style.display = "";
+};
+
+$("next").onclick = () => {
+  /* Χωρίς αυτόν τον φρουρό, ένα βιαστικό διπλό χτύπημα σε κινητό προσπερνάει
+     ολόκληρη κάρτα — και ο παίκτης δεν καταλαβαίνει καν ότι την έχασε.
+     Το «Επόμενο» δουλεύει ΜΟΝΟ όταν η τρέχουσα κάρτα έχει αποκαλυφθεί. */
+  if(!locked) return;
+  locked = false;
+  i++;
+  if(i < CARDS.length){ render(); scrollTo({top:0, behavior:"smooth"}); }
+  else {
+    /* Αν έχει ήδη πει πότε σταματάει, δεν του το ξαναγράφουμε από πάνω —
+       μόνο το ανεβάζουμε αν είναι πριν από τη σημερινή του ηλικία. */
+    const sy = KERASMA.pass("syntaxi");
+    $("ret").value = isFinite(sy) ? Math.max(age + 1, Math.min(85, Math.round(sy)))
+                                  : Math.max(age + 1, 67);
+    show("s-plan");
+  }
+};
+
+/* ---- η κάρτα χωρίς σκορ ---- */
+$("pgo").onclick = () => {
+  let r = Math.round(+$("ret").value), m = Math.round(+$("pm").value);
+  if(!isFinite(r) || r < age + 1 || r > 85){ r = Math.max(age + 1, 67); $("ret").value = r; }
+  if(!isFinite(m) || m < 100){ m = 1200; $("pm").value = m; }
+
+  const med = misoi(sex, age), p75 = enasStous4(sex, age);
+  const yrs = Math.max(0, med - r), yrs75 = Math.max(0, p75 - r);
+
+  $("e-med").textContent   = med;
+  $("e-ret").textContent   = r;
+  $("e-years").textContent = yrs + (yrs === 1 ? " χρόνο" : " χρόνια");
+  $("e-years2").textContent = yrs;
+  $("e-p75").textContent   = p75;
+  $("e-years75").textContent = yrs75;
+  $("e-pm").textContent    = fmt(m);
+  $("e-cost").textContent  = fmt(m * 12 * yrs) + " €";
+
+  $("score").textContent = score;
+  $("rank").textContent =
+    score >= 320 ? "εντυπωσιακό — ξέρεις τι σε περιμένει"
+  : score >= 200 ? "καλύτερα από τους περισσότερους"
+  : score >= 100 ? "όπως όλοι μας"
+  :                "όπως όλοι μας — και πάντα προς τα κάτω";
+  $("recap").innerHTML = res.map(x =>
+    `<tr><td>${x.nm}<span class="nm">είπες ${x.you} · ήταν ${x.real}</span></td>
+         <td>+${x.p}</td></tr>`).join("");
+
+  const X = D.xora;
+  $("c-now").textContent  = Math.round(X.now.p65 * 10);
+  $("c-2050").textContent = Math.round(X.f2050.p65 * 10);
+  $("c-2005").textContent = Math.round(X.past.p65 * 10);
+  $("c-dep-now").textContent  = fmt1(100 / X.now.dep).replace(".", ",");
+  $("c-dep-2050").textContent = fmt1(100 / X.f2050.dep).replace(".", ",");
+
+  KERASMA.grapse("xilioi", {
+    nm: "Χίλιοι σαν εσένα", skor: score, sto: 400,
+    seires: res.map(x => ({nm:x.nm, you:x.you, real:x.real, p:x.p})),
+    dika: [
+      {nm:"Ηλικία & φύλο", tim: age + " ετών · " + (sex === "M" ? "άντρας" : "γυναίκα")},
+      {nm:"Σταματάει να δουλεύει στα", tim: r + " χρονών"},
+      {nm:"Θέλει τον μήνα", tim: fmt(m) + " €"},
+      {nm:"Χρόνια που πρέπει να κρατήσει η σύνταξη", tim: yrs + " χρόνια"},
+      {nm:"Σύνολο, σε σημερινά ευρώ", tim: fmt(m * 12 * yrs) + " €"}
+    ],
+    mathima: "Ο κίνδυνος δεν είναι να φύγεις νωρίς — είναι να μείνεις πολύ."
+  });
+  show("s-end");
+};
+
+$("again").onclick = () => show("s-start");
+
+/* ---- ο δρόμος της επιστροφής: φαίνεται ΜΟΝΟ αν ο παίκτης ήρθε από το ταμπλό,
+        αλλιώς το παιχνίδι θα έδειχνε κουμπί προς αρχείο που μπορεί να μην υπάρχει ---- */
+/* Δύο ενδείξεις ότι ο παίκτης ήρθε από το ταμπλό: το σημάδι στη μνήμη, ή η
+   σελίδα από την οποία ήρθε. Η δεύτερη πιάνει και την περίπτωση που ο
+   φυλλομετρητής δεν αφήνει αποθήκευση. Αν δεν ισχύει καμία, ο δρόμος πίσω
+   ΔΕΝ δείχνεται: όποιος έλαβε σκέτο το ένα αρχείο θα πατούσε σε κενό. */
+if(KERASMA.apoTamplo() || /ΤΑΜΠΛΟ/.test(decodeURIComponent(document.referrer || ""))){
+  $("toTamplo").style.display = "block";
+  $("toTamploTop").style.display = "flex";
+  document.body.classList.add("hasback");
+}
+
+/* ---- υποσέλιδο ---- */
+$("f-year").textContent = D.etos;
+</script>
+</body>
+</html>

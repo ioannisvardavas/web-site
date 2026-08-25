@@ -10,6 +10,7 @@ const TYPES = { ".html": "text/html", ".png": "image/png", ".jpg": "image/jpeg",
 http.createServer((req, res) => {
   let rel = decodeURIComponent(req.url.split("?")[0]);
   if (rel === "/") rel = "/standalone.html";
+  else if (rel.endsWith("/")) rel += "index.html";
   const file = path.join(ROOT, rel);
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
   fs.readFile(file, (err, data) => {

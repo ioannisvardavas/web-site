@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Το κέρασμα — το ταμπλό</title>
+<meta name="description" content="Επτά σύντομα παιχνίδια για τα λεφτά, τον χρόνο και τον κίνδυνο. Χωρίς παρουσίαση, χωρίς εγγραφή.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Το κέρασμα — επτά σύντομα παιχνίδια">
+<meta property="og:description" content="Τρία λεπτά το καθένα. Τα νούμερα είναι αληθινά, από ΕΛΣΤΑΤ, Eurostat και ΕΚΤ.">
+<meta property="og:url" content="https://vardavas-site.pages.dev/paixnidia/">
+<meta property="og:image" content="https://vardavas-site.pages.dev/og-image-v2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vardavas-site.pages.dev/og-image-v2.png">
+<link rel="canonical" href="https://vardavas-site.pages.dev/paixnidia/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF4; --card:#FFFFFF; --ink:#101A2E; --soft:#5A6480; --line:#D2D9E6;
+  --euro:#123FA8; --euro-deep:#0B2464; --gold:#C98209; --gold-text:#8F5B05; --gold-fill:#F0B429;
+  --coral:#C93F32; --coral-text:#A32E23; --teal:#0E6E62; --dot-off:#C3CCDC;
+  --shadow:0 1px 0 rgba(16,26,46,.05), 0 24px 48px -34px rgba(11,36,100,.55);
+  --disp:"Alegreya Sans","Helvetica Neue",Arial,sans-serif;
+  --book:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+    --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+    --coral:#FF7F6B; --coral-text:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+  --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+  --coral:#FF7F6B; --coral-text:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  font-size:17px; line-height:1.45;
+}
+.wrap{width:100%; max-width:620px; flex:1; display:flex; flex-direction:column}
+h1{font-size:clamp(30px,8vw,44px); line-height:1.02; margin:0 0 6px; letter-spacing:-.02em; font-weight:800}
+.lede{font-family:var(--book); color:var(--soft); margin:0 0 20px; font-size:clamp(15px,4vw,18px)}
+.kat{font-size:clamp(21px,5.4vw,26px); font-weight:800; margin:2px 0 4px; letter-spacing:-.01em}
+.sub{font-family:var(--book); color:var(--soft); font-size:15px; margin:0 0 16px; line-height:1.35}
+.q{font-family:var(--book); font-size:clamp(17px,4.6vw,20px); margin:0}
+.q b{font-weight:600; color:var(--euro)}
+.big{font-size:clamp(34px,10vw,52px); font-weight:800; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.mono{font-variant-numeric:tabular-nums}
+.card{background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:14px}
+button{font-family:inherit; font-size:inherit; cursor:pointer; border:none; background:none; color:inherit}
+.btn{display:block; width:100%; padding:16px 20px; border-radius:15px; background:var(--euro);
+  color:#fff; font-weight:800; font-size:19px; box-shadow:0 10px 24px -14px rgba(18,63,168,.9); margin-bottom:14px}
+:root:not([data-theme="light"]) .btn{color:#08122A}
+:root[data-theme="dark"] .btn{color:#08122A}
+.btn.ghost{background:transparent; color:var(--soft); border:1.5px solid var(--line); box-shadow:none; font-size:17px}
+
+/* ---------- τα κέρματα ---------- */
+.coins{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px}
+@media(max-width:430px){ .coins{grid-template-columns:1fr} }
+/* Μονός αριθμός κερμάτων: το τελευταίο πιάνει ολόκληρη τη γραμμή, αλλιώς
+   κάθεται μισό και μοιάζει με λάθος. */
+.coin:last-child:nth-child(odd){grid-column:1 / -1}
+.coin{
+  display:flex; gap:13px; align-items:flex-start; text-align:left; text-decoration:none; color:inherit;
+  background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px 15px;
+  box-shadow:var(--shadow); width:100%; font-family:inherit; font-size:inherit;
+}
+.coin .disc{
+  flex:none; width:52px; height:52px; border-radius:50%; background:var(--paper);
+  border:2px solid var(--dot-off); display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:15px; color:var(--soft); font-variant-numeric:tabular-nums;
+}
+.coin.done .disc{background:var(--gold-fill); border-color:var(--gold-fill); color:#3A2600}
+.coin .nm{font-weight:800; font-size:18px; line-height:1.15; display:block; margin-bottom:3px}
+.coin .hk{font-family:var(--book); font-size:14px; color:var(--soft); line-height:1.3; display:block}
+.coin .st{font-size:13.5px; font-weight:700; color:var(--soft); display:block; margin-top:7px}
+.coin.done .st{color:var(--teal)}
+
+/* ---------- ο φάκελος ---------- */
+.fold{border-left:3px solid var(--gold-fill); padding-left:14px; margin:0 0 20px}
+.fold:last-child{margin-bottom:0}
+.fold h3{margin:0 0 2px; font-size:19px; font-weight:800}
+.fold .mth{font-family:var(--book); font-size:15.5px; color:var(--ink); margin:0 0 10px; line-height:1.35}
+.tbl{width:100%; border-collapse:collapse; font-size:15px}
+.tbl td{padding:7px 2px; border-bottom:1px solid var(--line); vertical-align:baseline}
+.tbl td:last-child{text-align:right; font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .nm{font-family:var(--book); color:var(--soft); font-size:13.5px; display:block}
+.sk{font-size:13.5px; color:var(--soft); margin:8px 0 0; font-family:var(--book)}
+.punch{background:var(--euro-deep); color:#fff; border-radius:18px; padding:22px 20px;
+  margin-bottom:14px; border:1px solid var(--euro)}
+:root:not([data-theme="light"]) .punch{background:#0E1B39}
+.punch h2{margin:0 0 4px; font-size:clamp(21px,5.5vw,26px); font-weight:800; color:#fff}
+.punch p{font-family:var(--book); margin:8px 0 0; color:#C6D4F2; font-size:16px; line-height:1.42}
+.numin{display:flex; align-items:center; gap:8px; background:var(--paper);
+  border:1.5px solid var(--line); border-radius:13px; padding:4px 14px; margin:6px 0 0}
+.numin input{flex:1; width:100%; border:none; background:transparent; color:var(--ink);
+  font-family:var(--disp); font-weight:800; font-size:24px; padding:8px 0; min-width:0}
+.numin input:focus{outline:none}
+.note{font-family:var(--book); font-size:14px; color:var(--coral-text); margin:10px 0 0; line-height:1.35}
+.next{font-family:var(--book); font-size:14.5px; color:var(--soft); line-height:1.45;
+  margin:-2px 0 16px; padding:12px 14px; border:1px dashed var(--line); border-radius:13px}
+.next b{font-family:var(--disp); font-weight:800; color:var(--ink)}
+/* ══ Ο ΗΣΥΧΟΣ ΣΥΝΔΕΣΜΟΣ — ΔΕΝ ΕΙΝΑΙ ΚΕΡΜΑ ══
+   Δεν είναι παιχνίδι, δεν σκοράρει, δεν μπαίνει στον φάκελο. Αν έμοιαζε με
+   κέρμα θα διαβαζόταν ως παιχνίδι — και θα έχανε ακριβώς αυτό που το κάνει
+   να δουλεύει. Γι' αυτό κάθεται ΜΕΤΑ τον φάκελο, χωρίς δίσκο και χωρίς σκορ. */
+.after{
+  display:block; text-decoration:none; color:inherit; margin-top:22px;
+  border-top:1px solid var(--line); padding-top:20px;
+}
+.after h3{margin:0 0 4px; font-size:19px; font-weight:800; color:var(--ink)}
+.after p{margin:0; font-family:var(--book); font-size:14.5px; color:var(--soft); line-height:1.45}
+.after .tag{
+  display:inline-block; font-family:var(--disp); font-size:11.5px; font-weight:800;
+  letter-spacing:.07em; color:var(--gold-text); border:1.5px solid var(--gold-fill);
+  border-radius:99px; padding:3px 10px; margin-bottom:9px;
+}
+footer{max-width:620px; width:100%; font-family:var(--book); font-size:12.5px; color:var(--soft);
+  line-height:1.5; padding:16px 4px 8px; border-top:1px solid var(--line)}
+footer b{font-weight:600; color:var(--ink)}
+.tog{position:fixed; top:10px; right:10px; width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); font-size:16px; z-index:9; box-shadow:var(--shadow)}
+@media(min-width:680px){ .card{padding:26px 28px} body{padding-top:26px} }
+@media print{
+  .tog, .coins, .btn, .noprint{display:none !important}
+  body{background:#fff; padding:0} .card{box-shadow:none; border-color:#ccc; break-inside:avoid}
+  .punch{background:#fff !important; color:#000; border:1px solid #999}
+  .punch h2{color:#000} .punch p{color:#333}
+}
+</style>
+</head>
+<body>
+<button class="tog" id="tog" title="Φωτεινό / σκοτεινό" aria-label="Αλλαγή θέματος">◐</button>
+
+<div class="wrap">
+
+<a class="noprint" href="/" style="display:inline-block; margin-bottom:18px; font-family:var(--disp); font-size:.86rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--soft); text-decoration:none">← Γιάννης Βαρδαβάς</a>
+
+<h1>Το κέρασμα</h1>
+<p class="lede">Επτά σύντομα παιχνίδια — τα έξι μόνος σου, το έβδομο <b>με δεύτερο άνθρωπο</b>. Παίζονται το καθένα μόνο του —
+   ή όλα μαζί από εδώ, οπότε στο τέλος βγαίνει <b>ο Φάκελος</b> με τα δικά του νούμερα.</p>
+
+<div class="card noprint">
+  <h2 class="kat">Με ποιον παίζεις;</h2>
+  <p class="sub" style="margin-bottom:0">Μόνο για να γράφει σωστά ο φάκελος. Μένει σε αυτόν τον υπολογιστή.</p>
+  <div class="numin"><input type="text" id="onoma" placeholder="όνομα (προαιρετικό)" autocomplete="off" maxlength="24"></div>
+  <p class="note" id="astorage" style="display:none">Ο φυλλομετρητής δεν αφήνει αποθήκευση εδώ —
+     τα παιχνίδια παίζονται κανονικά, αλλά ο φάκελος δεν θα γεμίσει.</p>
+</div>
+
+<div class="card noprint" id="pass" style="display:none">
+  <h2 class="kat">Τι ξέρει η σελίδα γι' αυτόν</h2>
+  <p class="sub" style="margin-bottom:12px">Μόνο όσα είπε <b>ο ίδιος</b>. Τα ξαναβρίσκει έτοιμα
+     σε κάθε παιχνίδι — δεν τα ξαναρωτάει. Πριν δώσεις το κινητό σε άλλον, καθάρισέ τα.</p>
+  <div id="passbody"></div>
+  <button class="btn ghost noprint" id="clear" style="margin-top:16px">Καθάρισε — έρχεται ο επόμενος</button>
+</div>
+
+<div class="coins" id="coins"></div>
+<p class="next noprint" id="next" style="display:none"></p>
+
+<div id="folder"></div>
+
+<button class="btn noprint" id="print" style="display:none">Τύπωσε ή στείλε τον φάκελο</button>
+
+<a class="after noprint" href="poses-fores-akoma.html">
+  <span class="tag">ΑΦΟΥ ΚΛΕΙΣΕΙ ΤΟ ΚΙΝΗΤΟ</span>
+  <h3>Πόσες μέρες ακόμα μαζί;</h3>
+  <p>Δεν είναι παιχνίδι, δεν έχει σκορ και δεν πουλάει τίποτα. Μία αφαίρεση που
+     κανείς δεν κάνει: πόσες μέρες σου μένουν με τον άνθρωπο που σκέφτεσαι τώρα.</p>
+</a>
+
+</div>
+
+<footer>
+  <b>Τα νούμερα κάθε παιχνιδιού βγαίνουν από την πηγή του:</b> ΕΛΣΤΑΤ (ΔΤΚ &amp; ΕνΔΤΚ),
+  Eurostat (πίνακας ζωής, EUROPOP2023 · θνησιμότητα EUROPOP2025 στο «Πόσες φορές ακόμα;»),
+  ΕΚΤ — ECB Data Portal (EURO STOXX 50), MSCI World μέσω Area-Wide Model Database,
+  τα δώδεκα διλήμματα των Kahneman/Tversky, και ισχύοντα τιμολόγια ασφαλιστικής εταιρείας. Το κάθε παιχνίδι γράφει στο υποσέλιδό του τι
+  ακριβώς περιλαμβάνει και τι <b>δεν</b> περιλαμβάνει — διάβασέ το πριν το πεις σε άλλον.
+  <br><br>
+  <b>Τι κρατάει αυτή η σελίδα:</b> μόνο ό,τι έγραψε ο ίδιος ο παίκτης, εδώ, σε αυτόν
+  τον υπολογιστή. Καμία σύνδεση, κανένας server, τίποτα δεν φεύγει πουθενά.
+  Το «Καθάρισε» τα σβήνει όλα.
+  <br><br>
+  Παιχνίδια ενημέρωσης — δεν αποτελούν επενδυτική συμβουλή, ασφαλιστική πρόταση ή προσφορά.
+  <b>Οι αποδόσεις του παρελθόντος δεν εγγυώνται μελλοντικές αποδόσεις.</b>
+</footer>
+
+<script>
+"use strict";
+
+/* ═══════════ Η ΚΟΙΝΗ ΜΝΗΜΗ ΤΟΥ «ΚΕΡΑΣΜΑΤΟΣ» ═══════════
+   Το ίδιο κομμάτι υπάρχει ΑΥΤΟΥΣΙΟ και στα επτά παιχνίδια, στο «Πόσες μέρες
+   ακόμα μαζί;» και στο ταμπλό.
+   Κρατάει μόνο ό,τι έγραψε ο ίδιος ο παίκτης, σε αυτόν εδώ τον υπολογιστή:
+   τίποτα δεν φεύγει πουθενά, καμία σύνδεση, κανένας server.
+   Αν ο φυλλομετρητής δεν αφήνει αποθήκευση (π.χ. ιδιωτική περιήγηση), το
+   παιχνίδι δουλεύει ΑΚΡΙΒΩΣ το ίδιο — απλώς δεν γεμίζει το ταμπλό.
+
+   ΤΟ ΔΙΑΒΑΤΗΡΙΟ — ό,τι είπε για τον εαυτό του (ηλικία, φύλο, πόσα βάζει,
+   δάνειο) ζει σε ΕΝΑ σημείο, ώστε το επόμενο παιχνίδι να μην το ξαναρωτήσει.
+   Δύο κανόνες, και οι δύο για τον ίδιο λόγο — να μην μπουν στο στόμα του
+   λόγια που δεν είπε:
+     1. Γράφεται ΜΟΝΟ ό,τι άγγιξε ο ίδιος. Μια δική μας προεπιλογή δεν είναι
+        απάντησή του και δεν μπαίνει ποτέ στο διαβατήριο.
+     2. Το διαβατήριο ΦΑΙΝΕΤΑΙ στο ταμπλό, πάντα και πρώτο. Αν δοθεί το κινητό
+        σε δεύτερο άνθρωπο, το πρώτο που βλέπει είναι τι ξέρει η σελίδα για
+        τον προηγούμενο — και δίπλα του το «Καθάρισε».                       */
+const KERASMA = (function(){
+  const P = "KERASMA:v1:";
+  let zei = null;
+  function ok(){
+    if(zei !== null) return zei;
+    try{ localStorage.setItem(P + "dokimi", "1"); localStorage.removeItem(P + "dokimi"); zei = true; }
+    catch(e){ zei = false; }
+    return zei;
+  }
+  function fakelaki(){
+    if(!ok()) return {};
+    try{ return JSON.parse(localStorage.getItem(P + "pass")) || {}; }catch(e){ return {}; }
+  }
+  return {
+    zei: ok,
+    grapse(id, d){
+      if(!ok()) return false;
+      d.v = 1; d.id = id; d.pote = Date.now();
+      try{ localStorage.setItem(P + "p:" + id, JSON.stringify(d)); return true; }catch(e){ return false; }
+    },
+    diavase(id){
+      if(!ok()) return null;
+      try{ return JSON.parse(localStorage.getItem(P + "p:" + id)); }catch(e){ return null; }
+    },
+    svise(id){ if(ok()){ try{ localStorage.removeItem(P + "p:" + id); }catch(e){} } },
+    onoma(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "onoma") || "";
+        localStorage.setItem(P + "onoma", v); return v;
+      }catch(e){ return ""; }
+    },
+    thema(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "thema") || "";
+        localStorage.setItem(P + "thema", v); return v;
+      }catch(e){ return ""; }
+    },
+    apoTamplo(v){
+      if(!ok()) return false;
+      try{
+        if(v === undefined) return localStorage.getItem(P + "tamplo") === "1";
+        localStorage.setItem(P + "tamplo", v ? "1" : "0"); return !!v;
+      }catch(e){ return false; }
+    },
+
+    /* ---------- ΤΟ ΔΙΑΒΑΤΗΡΙΟ ---------- */
+    olo: fakelaki,
+    pass(k){ return fakelaki()[k]; },
+    /* «είπε» — και το όνομα είναι η προδιαγραφή: μπαίνει μόνο ό,τι είπε. */
+    eipe(k, v){
+      if(!ok()) return false;
+      const o = fakelaki();
+      if(v === undefined || v === null || v === "") delete o[k]; else o[k] = v;
+      try{ localStorage.setItem(P + "pass", JSON.stringify(o)); return true; }catch(e){ return false; }
+    },
+    svisePass(){ if(ok()){ try{ localStorage.removeItem(P + "pass"); }catch(e){} } },
+    /* Δένει ένα πεδίο με το διαβατήριο: ανοίγει γεμάτο αν το έχει ήδη πει
+       αλλού, και γράφει πίσω ΜΟΝΟ αν το αγγίξει ο ίδιος.
+       Το κόψιμο στα όρια του πεδίου δεν γυρίζει ποτέ πίσω στο διαβατήριο:
+       αλλιώς το ΠΑΖΑΡΙ, που σταματάει στα 65, θα «διόρθωνε» σιωπηλά έναν
+       68άρη σε 65 — και το επόμενο παιχνίδι θα τον ρωτούσε σαν 65άρη.       */
+    dese(el, k){
+      if(!el) return;
+      const arith = el.type === "range" || el.type === "number";
+      const v = this.pass(k);
+      if(v !== undefined && v !== null && v !== ""){
+        if(arith){
+          const n = Number(v);
+          if(isFinite(n)){
+            const lo = el.min === "" ? -Infinity : Number(el.min);
+            const hi = el.max === "" ?  Infinity : Number(el.max);
+            el.value = Math.min(hi, Math.max(lo, n));
+          }
+        } else el.value = v;
+      }
+      const kata = () => {
+        if(!arith) return this.eipe(k, el.value);
+        const n = Number(el.value);
+        this.eipe(k, el.value === "" || !isFinite(n) ? undefined : n);
+      };
+      el.addEventListener("input", kata);
+      el.addEventListener("change", kata);
+    }
+  };
+})();
+
+/* Το φωτεινό/σκοτεινό ταξιδεύει μαζί με τον παίκτη: αν το γύρισε στο ταμπλό,
+   δεν έχει νόημα να ανοίγει το επόμενο παιχνίδι στο άλλο θέμα. */
+(function(){ const th = KERASMA.thema(); if(th) document.documentElement.setAttribute("data-theme", th); })();
+
+/* ═══════════ ΤΑ ΤΟΥΒΛΑ ═══════════
+   Η σειρά είναι η αφήγηση: τα λεφτά λιώνουν → η αγορά δουλεύει αλλά αργά →
+   θα ζήσεις πολύ → και στο μεταξύ κάποιος πρέπει να είναι καλυμμένος.
+   Το πέμπτο μπαίνει ΤΕΛΕΥΤΑΙΟ επίτηδες: τα τέσσερα πρώτα μιλάνε για τα δικά
+   του λεφτά· αυτό δεν ρωτάει τίποτα δικό του και δεν πουλάει τίποτα. Είναι
+   το χαρτί για τον δύσπιστο που «τα λεφτά μου είναι ασφαλή στην τράπεζα».  */
+const PAIXNIDIA = [
+  { id:"posoekane", disc:"€",     arxeio:"poso-ekane.html",
+    nm:"Πόσο έκανε;",           hk:"Μάντεψε τις τιμές του παρελθόντος. Τα λεφτά στο συρτάρι δεν κάθονται — λιώνουν." },
+  { id:"panwkatw",  disc:"↑↓",    arxeio:"pano-i-kato.html",
+    nm:"Πάνω ή κάτω;",          hk:"39 χρονιές αγοράς. Πόσες πάνω, τι κόστισε η χειρότερη, πόσο κράτησε η επιστροφή." },
+  { id:"xilioi",    disc:"1.000", arxeio:"xilioi-san-esena.html",
+    nm:"Χίλιοι σαν εσένα",      hk:"Από 1.000 στην ηλικία σου, πόσοι φτάνουν τα 80, τα 90, τα 95." },
+  { id:"ftanoun",   disc:"30",    arxeio:"tha-sou-ftasoun.html",
+    nm:"Θα σου φτάσουν;",       hk:"Σταματάς να δουλεύεις και τραβάς κάθε μήνα. 21 πραγματικές αφετηρίες, 21 άλλα τέλη." },
+  { id:"pazari",    disc:"365",   arxeio:"kostos-imeras.html",
+    nm:"Το παζάρι της ημέρας",  hk:"Τι κοστίζει, ανά ημέρα, να μη μείνει η οικογένεια με το δάνειο." },
+  { id:"mythos",    disc:"1%",    arxeio:"mythos-i-alitheia.html",
+    nm:"Μύθος ή αλήθεια;",      hk:"Οκτώ δηλώσεις για το ποιος φτιάχνει τα ευρώ. Οι μισές είναι λάθη που «τα ξέρουν όλοι»." },
+  /* Το μόνο κέρμα που θέλει ΔΥΟ ανθρώπους. Δεν παίζεται μόνος του — και δεν
+     γράφει τίποτα στο διαβατήριο, γιατί οι απαντήσεις είναι δύο ανθρώπων. */
+  { id:"logia",     disc:"2",     arxeio:"logia-i-enstikto.html",
+    nm:"Λόγια εναντίον Ενστίκτου", hk:"Για δύο. Ο καθένας λέει τι θα έκανε — και μαντεύει τι είπε ο άλλος." }
+];
+
+const $ = id => document.getElementById(id);
+
+$("tog").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const neo = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", neo);
+  KERASMA.thema(neo);
+};
+
+/* ---- το όνομα ---- */
+const onomaEl = $("onoma");
+onomaEl.value = KERASMA.onoma();
+onomaEl.addEventListener("input", () => { KERASMA.onoma(onomaEl.value.trim()); zwgrafise(); });
+if(!KERASMA.zei()) $("astorage").style.display = "";
+
+/* ---- τα κέρματα ---- */
+function kerma(p, d){
+  const done = !!d;
+  const st = !done ? "δεν παίχτηκε ακόμα"
+    : (d.skor === null || d.skor === undefined) ? "✓ παίχτηκε"
+    : `✓ παίχτηκε · ${d.skor}${d.sto ? "/" + d.sto : ""}`;
+  return `<a class="coin ${done ? "done" : ""}" href="${p.arxeio}" data-id="${p.id}">
+    <span class="disc">${p.disc}</span>
+    <span><span class="nm">${p.nm}</span><span class="hk">${p.hk}</span><span class="st">${st}</span></span>
+  </a>`;
+}
+
+/* ---- ο φάκελος ---- */
+function fakelos(paigmena){
+  const on = KERASMA.onoma();
+  const titlos = on ? `Ο φάκελος: ${on}` : "Ο Φάκελος";
+  let html = `<div class="punch">
+      <h2>${titlos}</h2>
+      <p>Ό,τι είπε ο ίδιος και ό,τι έδειξαν τα νούμερα — από
+         <b>${paigmena.length}</b> ${paigmena.length === 1 ? "παιχνίδι" : "παιχνίδια"}.
+         Καμία πρόβλεψη: μόνο τι έχει ήδη συμβεί και τι δήλωσε ο ίδιος.</p>
+    </div><div class="card">`;
+
+  paigmena.forEach(d => {
+    html += `<div class="fold"><h3>${d.nm}</h3>`;
+    if(d.mathima) html += `<p class="mth">${d.mathima}</p>`;
+    const γρ = [];
+    (d.dika || []).forEach(x => γρ.push(`<tr><td>${x.nm}</td><td>${x.tim}</td></tr>`));
+    (d.seires || []).forEach(x => γρ.push(
+      `<tr><td>${x.nm}<span class="nm">είπε ${x.you} · ήταν ${x.real}</span></td>
+           <td>${x.p === null || x.p === undefined ? "—" : "+" + x.p}</td></tr>`));
+    if(γρ.length) html += `<table class="tbl">${γρ.join("")}</table>`;
+    if(d.skor !== null && d.skor !== undefined)
+      html += `<p class="sk">Σκορ: <b>${d.skor}${d.sto ? " στα " + d.sto : ""}</b></p>`;
+    html += `</div>`;
+  });
+
+  const meSkor = paigmena.filter(d => typeof d.skor === "number");
+  if(meSkor.length){
+    const s = meSkor.reduce((a,b) => a + b.skor, 0);
+    const sto = meSkor.reduce((a,b) => a + (b.sto || 0), 0);
+    html += `<div class="fold" style="border-color:var(--euro)">
+      <h3>Συνολικό σκορ</h3>
+      <p class="mth"><span class="big mono">${s}</span> στα ${sto} —
+         και το σκορ είναι το λιγότερο σημαντικό εδώ μέσα.</p></div>`;
+  }
+  return html + `</div>`;
+}
+
+/* ═══════════ ΤΟ ΔΙΑΒΑΤΗΡΙΟ, ΟΡΑΤΟ ═══════════
+   Ό,τι είπε ο ίδιος, γραμμένο με ανθρώπινα λόγια. Δεν είναι διακόσμηση:
+   είναι η μόνη προστασία απέναντι στο «έπαιξε ο Νίκος, δίνω το κινητό στη
+   Μαρία, και η Μαρία βλέπει τα νούμερα του Νίκου προσυμπληρωμένα».        */
+const evro  = n => Number(n).toLocaleString("el-GR", {maximumFractionDigits:0}) + " €";
+const evro2 = n => Number(n).toLocaleString("el-GR",
+                     {minimumFractionDigits:2, maximumFractionDigits:2}) + " €";
+
+const DIAVATIRIO = [
+  {k:"ilikia",    nm:"Ηλικία",                    pes: v => v + " ετών"},
+  {k:"fylo",      nm:"Άντρας ή γυναίκα",          pes: v => v === "M" ? "άντρας" : "γυναίκα"},
+  {k:"syntaxi",   nm:"Σταματάει να δουλεύει στα", pes: v => v + " χρονών"},
+  {k:"thelei",    nm:"Θέλει τον μήνα, μετά",      pes: evro},
+  {k:"kefalaio_syntaxis", nm:"Έχει μαζέψει για τότε", pes: evro},
+  {k:"vazei",     nm:"Βάζει στην άκρη τον μήνα",  pes: evro},
+  {k:"orizontas", nm:"Για πόσα χρόνια",           pes: v => v + " χρόνια"},
+  {k:"syrtari",   nm:"Είχε αφήσει στην άκρη",     pes: evro},
+  {k:"kefalaio",  nm:"Κεφάλαιο δανείου",          pes: evro},
+  {k:"diarkeia",  nm:"Διάρκεια δανείου",          pes: v => v + " χρόνια"}
+];
+const HMERA = {k:"καφές", t:"τσιγάρα ή ποτό", f:"φαγητό έξω", s:"συνδρομές", o:"κάτι άλλο"};
+
+function diavatirioGram(){
+  const o = KERASMA.olo(), γρ = [];
+  DIAVATIRIO.forEach(d => {
+    const v = o[d.k];
+    if(v === undefined || v === null || v === "") return;
+    γρ.push(`<tr><td>${d.nm}</td><td>${d.pes(v)}</td></tr>`);
+  });
+  const meri = Object.keys(HMERA).filter(k => +o["hmera_" + k] > 0);
+  if(meri.length){
+    const s = meri.reduce((a,k) => a + +o["hmera_" + k], 0);
+    γρ.push(`<tr><td>Δίνει την ημέρα στα καθημερινά<span class="nm">${
+      meri.map(k => HMERA[k] + " " + evro2(o["hmera_" + k])).join(" · ")
+    }</span></td><td>${evro2(s)}</td></tr>`);
+  }
+  return γρ;
+}
+
+/* ═══════════ Η ΠΡΟΤΑΣΗ ΓΙΑ ΤΟ ΕΠΟΜΕΝΟ ═══════════
+   Πρόταση, ΟΧΙ ράγα: κανένα κέρμα δεν κλειδώνει ποτέ. Ποιον έχει απέναντι
+   το ξέρει ο άνθρωπος που κρατάει το κινητό, όχι ένας κανόνας εδώ μέσα.   */
+const META = {
+  posoekane: ["panwkatw", "μόλις είδε τι έπαθαν τα λεφτά στο συρτάρι — τώρα η άλλη πλευρά."],
+  panwkatw:  ["xilioi",   "ξέρει πια τι κάνει η αγορά — μένει το «για πόσα χρόνια πρέπει να κρατήσουν»."],
+  xilioi:    ["ftanoun",  "ξέρει πια πόσα χρόνια πρέπει να κρατήσουν — τώρα αν κρατάνε."],
+  ftanoun:   ["pazari",   "είδε τι γίνεται αν ζήσει πολύ — τώρα τι γίνεται αν λείψει νωρίς."],
+  pazari:    ["posoekane","είδε τι κοστίζει η προστασία — τώρα τι κοστίζει το να μη γίνει τίποτα."],
+  mythos:    ["posoekane","κατάλαβε πώς φτιάχνονται τα λεφτά — τώρα τι τους συμβαίνει όσο κάθονται."],
+  logia:     ["xilioi",   "είδαν πόσο διαφορετικά σκέφτονται οι δυο τους — τώρα για πόσα χρόνια πρέπει να συμφωνήσουν."]
+};
+
+function protasi(δ, paigmena){
+  /* Ο κανόνας που είχε συμφωνηθεί μαζί με τον κατάλογο: ποτέ πάνω από δύο
+     παιχνίδια σε μία συνάντηση. Στο τρίτο, από κέρασμα γίνεται παρουσίαση. */
+  if(paigmena.length >= 2)
+    return `<b>Φτάνει για σήμερα.</b> Δύο παιχνίδια σε μία συνάντηση είναι το όριο —
+            στο τρίτο, από κέρασμα γίνεται παρουσίαση, και ο άλλος το καταλαβαίνει.
+            Άνοιξε τον Φάκελο και κλείσε ραντεβού.`;
+
+  let id, giati;
+  if(paigmena.length === 1){
+    const m = META[paigmena[0].id];
+    if(m && !δ[m[0]]){ id = m[0]; giati = m[1]; }
+  } else {
+    const hl = KERASMA.pass("ilikia");
+    if(isFinite(hl) && hl >= 40 && hl <= 55){
+      id = "xilioi";
+      giati = "είναι 40–55: η διαδρομή του οικογενειάρχη ξεκινάει από εδώ.";
+    } else {
+      id = "posoekane";
+      giati = "ανοίγει με οποιονδήποτε, και δεν του ζητάει τίποτα δικό του για να παίξει.";
+    }
+  }
+  if(!id) return "";
+  const p = PAIXNIDIA.find(x => x.id === id);
+  /* Η αιτιολογία πάει σε δική της γραμμή: με παύλα θα διαβαζόταν δύο παύλες
+     στην ίδια πρόταση, και σε κινητό γίνεται χυλός. */
+  return `<b>Πρότεινε μετά: ${p.nm}</b><br>${giati}
+          <i>Πρόταση, όχι κανόνας: ποιον έχεις απέναντι το ξέρεις εσύ.</i>`;
+}
+
+function zwgrafise(){
+  const δ = {};
+  PAIXNIDIA.forEach(p => δ[p.id] = KERASMA.diavase(p.id));
+  $("coins").innerHTML = PAIXNIDIA.map(p => kerma(p, δ[p.id])).join("");
+
+  /* Ο φάκελος μπαίνει με τη σειρά της αφήγησης, όχι με τη σειρά που έπαιξε —
+     αλλιώς δύο διαφορετικοί παίκτες διαβάζουν δύο διαφορετικές ιστορίες. */
+  const paigmena = PAIXNIDIA.map(p => δ[p.id]).filter(Boolean);
+
+  /* ---- η κάρτα: φαίνεται αν υπάρχει ΟΤΙΔΗΠΟΤΕ να καθαριστεί ---- */
+  const γρ = diavatirioGram();
+  if(γρ.length || paigmena.length){
+    $("passbody").innerHTML = γρ.length
+      ? `<table class="tbl">${γρ.join("")}</table>`
+      : `<p class="sub" style="margin:0">Δεν έχει πει ακόμα τίποτα δικό του —
+         μόνο έπαιξε. Το «Καθάρισε» σβήνει και τα παιχνίδια.</p>`;
+    $("pass").style.display = "";
+  } else {
+    $("pass").style.display = "none";
+  }
+
+  /* ---- η πρόταση για το επόμενο κέρμα ---- */
+  const pr = protasi(δ, paigmena);
+  $("next").innerHTML = pr;
+  $("next").style.display = pr ? "" : "none";
+
+  if(paigmena.length){
+    $("folder").innerHTML = fakelos(paigmena);
+    $("print").style.display = "";
+  } else {
+    $("folder").innerHTML = `<div class="card"><h2 class="kat">Ο Φάκελος</h2>
+      <p class="q">Άδειος ακόμα. Διάλεξε ένα κέρμα από πάνω και παίξτε —
+      ό,τι απαντήσει θα γραφτεί εδώ, μαζί με τα δικά του νούμερα.</p></div>`;
+    $("print").style.display = "none";
+  }
+}
+
+/* Το κλικ στο κέρμα αφήνει σημάδι ότι ήρθε από εδώ: μόνο τότε δείχνει το
+   παιχνίδι το κουμπί της επιστροφής. Αλλιώς, όποιος ανοίξει σκέτο το παιχνίδι
+   θα έβλεπε κουμπί προς αρχείο που ίσως δεν το έχει καν. */
+$("coins").addEventListener("click", e => {
+  if(e.target.closest(".coin")) KERASMA.apoTamplo(true);
+});
+
+$("print").onclick = () => window.print();
+
+$("clear").onclick = () => {
+  if(!confirm("Να σβηστούν όλα, για να παίξει καθαρά ο επόμενος;")) return;
+  PAIXNIDIA.forEach(p => KERASMA.svise(p.id));
+  KERASMA.svisePass();
+  KERASMA.onoma("");
+  KERASMA.apoTamplo(false);
+  onomaEl.value = "";
+  zwgrafise();
+  scrollTo({top:0, behavior:"smooth"});
+};
+
+zwgrafise();
+</script>
+</body>
+</html>

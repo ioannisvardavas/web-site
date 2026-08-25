@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Μύθος ή αλήθεια;</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF4; --card:#FFFFFF; --ink:#101A2E; --soft:#5A6480; --line:#D2D9E6;
+  --euro:#123FA8; --euro-deep:#0B2464; --gold:#C98209; --gold-text:#8F5B05; --gold-fill:#F0B429;
+  --coral:#C93F32; --teal:#0E6E62; --dot-off:#C3CCDC;
+  --shadow:0 1px 0 rgba(16,26,46,.05), 0 24px 48px -34px rgba(11,36,100,.55);
+  --disp:"Alegreya Sans","Helvetica Neue",Arial,sans-serif;
+  --book:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+    --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+    --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+  --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+  --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  font-size:17px; line-height:1.45;
+}
+.wrap{width:100%; max-width:620px; flex:1; display:flex; flex-direction:column}
+
+/* ---------- τυπογραφία ---------- */
+h1{font-size:clamp(30px,8vw,44px); line-height:1.02; margin:0 0 6px; letter-spacing:-.02em; font-weight:800}
+.lede{font-family:var(--book); color:var(--soft); margin:0 0 20px; font-size:clamp(15px,4vw,18px)}
+.big{font-size:clamp(44px,13vw,72px); font-weight:800; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.mono{font-variant-numeric:tabular-nums}
+.kat{font-size:clamp(21px,5.4vw,26px); font-weight:800; margin:2px 0 4px; letter-spacing:-.01em}
+.sub{font-family:var(--book); color:var(--soft); font-size:15px; margin:0 0 18px; line-height:1.35}
+.q{font-family:var(--book); font-size:clamp(17px,4.6vw,20px); margin:0 0 4px}
+.q b{font-weight:600; color:var(--euro)}
+
+/* ---------- κάρτα ---------- */
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:14px;
+}
+.scr{display:none} .scr.on{display:block; animation:in .28s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- κουμπιά ---------- */
+button{font-family:inherit; font-size:inherit; cursor:pointer; border:none; background:none; color:inherit}
+.btn{
+  display:block; width:100%; padding:17px 20px; border-radius:15px;
+  background:var(--euro); color:#fff; font-weight:800; font-size:19px;
+  box-shadow:0 10px 24px -14px rgba(18,63,168,.9); margin-bottom:14px;
+}
+:root:not([data-theme="light"]) .btn{color:#08122A}
+:root[data-theme="dark"] .btn{color:#08122A}
+.btn.ghost{background:transparent; color:var(--soft); border:1.5px solid var(--line); box-shadow:none; font-size:17px}
+
+/* ---------- πρόοδος ---------- */
+.prog{display:flex; gap:5px; margin:0 4px 12px}
+.pip{flex:1; height:5px; border-radius:99px; background:var(--line)}
+.pip.done{background:var(--teal)} .pip.now{background:var(--euro)}
+.pip.miss{background:var(--coral)}
+
+/* ══════════ Η ΚΑΡΤΑ ΠΟΥ ΣΕΡΝΕΤΑΙ ══════════
+   Τα δύο κουμπιά είναι η ΚΥΡΙΑ οδός και δουλεύουν πάντα· το σύρσιμο είναι
+   επιπλέον, για το κινητό. Ποτέ μόνο σύρσιμο: μπροστά σε άνθρωπο που δεν το
+   περιμένει, μια κάρτα που δεν λέει πώς απαντιέται είναι νεκρός χρόνος.      */
+.swipe{
+  position:relative; touch-action:pan-y; user-select:none; -webkit-user-select:none;
+  transition:transform .0s;
+}
+.swipe.snap{transition:transform .22s cubic-bezier(.2,.7,.3,1)}
+.swipe .stamp{
+  position:absolute; top:14px; font-size:26px; font-weight:800; letter-spacing:.04em;
+  padding:6px 14px; border-radius:11px; border:3px solid currentColor; opacity:0;
+  pointer-events:none; transition:opacity .12s;
+}
+.swipe .stamp.m{left:14px; color:var(--coral); transform:rotate(-9deg)}
+.swipe .stamp.a{right:14px; color:var(--teal); transform:rotate(9deg)}
+
+.dhl{font-family:var(--book); font-size:clamp(19px,5.2vw,24px); line-height:1.35; margin:0}
+.dhl b{font-weight:600}
+.art{width:100%; height:auto; display:block; margin:0 0 16px}
+
+.two{display:flex; gap:10px; margin-bottom:14px}
+.two button{
+  flex:1; padding:17px 8px; border-radius:15px; font-weight:800; font-size:19px;
+  border:2px solid currentColor; background:var(--card);
+}
+.two .m{color:var(--coral)} .two .a{color:var(--teal)}
+.hint{font-family:var(--book); font-size:13.5px; color:var(--soft); text-align:center;
+  margin:-6px 0 14px}
+
+/* ---------- η αποκάλυψη ---------- */
+.verdict{display:flex; align-items:center; gap:12px; margin:0 0 10px}
+.verdict .tag{
+  font-size:22px; font-weight:800; letter-spacing:.03em; padding:7px 15px;
+  border-radius:12px; border:3px solid currentColor; flex:none;
+}
+.verdict .tag.m{color:var(--coral)} .verdict .tag.a{color:var(--teal)}
+.verdict .ok{font-weight:800; font-size:16px}
+.verdict .ok.yes{color:var(--teal)} .verdict .ok.no{color:var(--coral)}
+.ex{font-family:var(--book); font-size:16px; line-height:1.45; margin:0}
+.ex b{font-weight:600; color:var(--ink)}
+.src{font-family:var(--book); font-size:13px; color:var(--soft); margin:10px 0 0; line-height:1.4}
+
+/* ---------- πίνακας ανασκόπησης ---------- */
+.tbl{width:100%; border-collapse:collapse; font-size:15px}
+.tbl td{padding:8px 2px; border-bottom:1px solid var(--line); vertical-align:baseline}
+.tbl td:last-child{text-align:right; font-weight:800; white-space:nowrap}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .nm{font-family:var(--book); color:var(--soft); font-size:13.5px; display:block}
+.punch{
+  background:var(--euro-deep); color:#fff; border-radius:20px; padding:22px 20px; margin-bottom:14px;
+}
+.punch h2{margin:0 0 6px; font-size:clamp(20px,5.2vw,25px); font-weight:800; color:#fff}
+.punch p{margin:0; font-family:var(--book); font-size:16px; line-height:1.4; color:#C9D6F5}
+:root[data-theme="dark"] .punch{background:#0E1B39}
+
+/* ---------- υποσέλιδο ---------- */
+footer{
+  max-width:620px; width:100%; font-family:var(--book); font-size:12.5px;
+  color:var(--soft); line-height:1.5; padding:16px 4px 8px; border-top:1px solid var(--line);
+}
+footer b{font-weight:600; color:var(--ink)}
+.tog{position:fixed; top:10px; right:10px; width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); font-size:16px; z-index:9; box-shadow:var(--shadow)}
+@media(min-width:680px){ .card{padding:26px 28px} body{padding-top:26px} }
+.tog.back{
+  left:10px; right:auto; text-decoration:none; font-weight:800; font-size:19px;
+  align-items:center; justify-content:center; padding-bottom:2px;
+}
+body.hasback{padding-top:58px}
+@media(min-width:680px){ body.hasback{padding-top:26px} }
+</style>
+</head>
+<body>
+<button class="tog" id="tog" title="Φωτεινό / σκοτεινό" aria-label="Αλλαγή θέματος">◐</button>
+<a class="tog back" id="toTamploTop" href="index.html"
+   title="Πίσω στο ταμπλό" aria-label="Πίσω στο ταμπλό" style="display:none">←</a>
+
+<div class="wrap">
+
+<!-- ══════════ ΑΡΧΗ ══════════ -->
+<section class="scr on" id="s-start">
+  <h1>Μύθος ή αλήθεια;</h1>
+  <p class="lede">Οκτώ δηλώσεις για το ποιος φτιάχνει τα ευρώ. Οι μισές είναι πράγματα που «τα ξέρουν όλοι» — και είναι λάθος. Χάνουν σχεδόν όλοι στην πρώτη.</p>
+
+  <div class="card">
+    <svg class="art" viewBox="0 0 300 128" role="img" aria-label="Το δάνειο και το χρήμα γεννιούνται την ίδια στιγμή">
+      <rect x="6" y="26" width="128" height="58" rx="12" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+      <text x="70" y="50" text-anchor="middle" font-family="var(--book)" font-size="11.5" fill="var(--soft)">στον λογαριασμό σου</text>
+      <text x="70" y="72" text-anchor="middle" font-family="var(--disp)" font-size="21" font-weight="800" fill="var(--teal)">+100.000</text>
+      <rect x="166" y="26" width="128" height="58" rx="12" fill="none" stroke="var(--coral)" stroke-width="2.5"/>
+      <text x="230" y="50" text-anchor="middle" font-family="var(--book)" font-size="11.5" fill="var(--soft)">χρωστάς στην τράπεζα</text>
+      <text x="230" y="72" text-anchor="middle" font-family="var(--disp)" font-size="21" font-weight="800" fill="var(--coral)">−100.000</text>
+      <path d="M134 55 H166" stroke="var(--line)" stroke-width="2.5"/>
+      <path d="M40 96 H260" stroke="var(--euro)" stroke-width="2" stroke-dasharray="5 5"/>
+      <text x="150" y="118" text-anchor="middle" font-family="var(--disp)" font-size="13.5" font-weight="800" fill="var(--euro)">την ίδια στιγμή</text>
+      <text x="150" y="18" text-anchor="middle" font-family="var(--book)" font-size="12" fill="var(--soft)">δεν ψάχνει τα λεφτά κανενός — γράφει έναν αριθμό</text>
+    </svg>
+    <p class="q" style="margin:0">Δεν πουλάει τίποτα αυτό το παιχνίδι. Δείχνει μόνο ποιος ξέρει
+      τι γίνεται πραγματικά — και ποιος επαναλαμβάνει το σχολικό βιβλίο.</p>
+  </div>
+
+  <button class="btn" id="go">Ξεκίνα</button>
+</section>
+
+<!-- ══════════ ΠΑΙΧΝΙΔΙ ══════════ -->
+<section class="scr" id="s-play">
+  <div class="prog" id="prog"></div>
+
+  <div class="card swipe" id="swipe">
+    <span class="stamp m" id="st-m">ΜΥΘΟΣ</span>
+    <span class="stamp a" id="st-a">ΑΛΗΘΕΙΑ</span>
+    <div id="art"></div>
+    <p class="dhl" id="dhl">—</p>
+  </div>
+
+  <div id="ask">
+    <div class="two">
+      <button class="m" data-v="Μ">ΜΥΘΟΣ</button>
+      <button class="a" data-v="Α">ΑΛΗΘΕΙΑ</button>
+    </div>
+    <p class="hint">…ή σύρε την κάρτα: αριστερά μύθος, δεξιά αλήθεια.</p>
+  </div>
+
+  <div id="rev" style="display:none">
+    <div class="card">
+      <div class="verdict">
+        <span class="tag" id="tag">—</span>
+        <span class="ok" id="ok">—</span>
+      </div>
+      <p class="ex" id="ex">—</p>
+      <p class="src" id="src"></p>
+    </div>
+    <button class="btn" id="next">Επόμενο</button>
+  </div>
+</section>
+
+<!-- ══════════ ΤΕΛΟΣ ══════════ -->
+<section class="scr" id="s-end">
+  <div class="punch">
+    <h2>Σε μία γραμμή</h2>
+    <p>Τα δάνεια δεν έρχονται από τις καταθέσεις. <b>Τα δάνεια φτιάχνουν τις καταθέσεις.</b></p>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Σκορ: <span class="mono" id="score">0</span> στα 400</h2>
+    <p class="sub" id="rank">—</p>
+    <table class="tbl" id="recap"></table>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Τι να κρατήσεις</h2>
+    <p class="q"><b>Το χρήμα είναι εμπιστοσύνη.</b> Δεν υπάρχει υπόγειο με χρυσό —
+      υπάρχει ένα λογιστικό βιβλίο και η πεποίθηση ότι θα σε πληρώσουν.</p>
+    <p class="q"><b>Το 1% δεν είναι κρουνός.</b> Ο κρουνός είναι το επιτόκιο της ΕΚΤ
+      και τα δικά της κεφάλαια που βάζει η τράπεζα σε κάθε δάνειο.</p>
+    <p class="q" style="margin-bottom:0"><b>Αν κάποιος σου πει το αντίθετο, δεν κάνεις εσύ λάθος.</b>
+      Ο «πολλαπλασιαστής καταθέσεων» διδάσκεται ακόμα — αλλά οι ίδιες οι κεντρικές
+      τράπεζες γράφουν ότι η σειρά είναι αντίστροφη.</p>
+  </div>
+
+  <a class="btn ghost" id="toTamplo" href="index.html"
+     style="display:none; text-align:center; text-decoration:none">← Πίσω στο ταμπλό</a>
+  <button class="btn ghost" id="again">Δώσ' το στον επόμενο</button>
+</section>
+
+</div>
+
+<footer>
+  <b>Πηγή:</b> οι ίδιες οι κεντρικές τράπεζες — <b>Bank of England</b>, «Money creation in the
+  modern economy» (Quarterly Bulletin 2014 Q1), <b>Deutsche Bundesbank</b>, Monthly Report
+  Απρίλιος 2017, και δημοσιεύσεις της <b>ΕΚΤ</b>. Γράφουν ρητά ότι η σειρά είναι αντίστροφη
+  από το σχολικό βιβλίο: <b>πρώτα το δάνειο, μετά τα αποθεματικά.</b>
+  <br><br>
+  <b>Οι κανόνες με ημερομηνία:</b> ελάχιστα αποθεματικά ΕΚΤ <b>1%</b> από <b>18.1.2012</b>
+  (πριν ήταν 2%), σε καταθέσεις &amp; ομόλογα έως 2 έτη — 0% σε δεσμευμένα πάνω από 2 έτη·
+  εφάπαξ απαλλαγή 100.000 € ανά τράπεζα· <b>μηδενικός τόκος</b> σε αυτά τα αποθεματικά από
+  <b>20.9.2023</b>· τήρηση κατά <b>μέσο όρο</b> περιόδου ~6 εβδομάδων, όχι κάθε μέρα.
+  Κεφαλαιακές &amp; εποπτικές απαιτήσεις από τους ευρωπαϊκούς κανονισμούς <b>CRR/CRD</b>.
+  Εγγύηση καταθέσεων <b>100.000 € ανά καταθέτη, ανά τράπεζα</b>.
+  <br><br>
+  <b>Τι ΔΕΝ είναι ακριβές νούμερο:</b> το «χιλιάδες φορές περισσότερα αποθεματικά» είναι
+  <b>τάξη μεγέθους</b> της πλεονάζουσας ρευστότητας του ευρωσυστήματος, όχι τιμή ημέρας.
+  Λέγεται ως τάξη μεγέθους και πουθενά ως ποσό.
+  <br><br>
+  Παιχνίδι ενημέρωσης — δεν αποτελεί επενδυτική συμβουλή, ασφαλιστική πρόταση ή προσφορά.
+</footer>
+<script>
+"use strict";
+
+/* ═══════════ Η ΚΟΙΝΗ ΜΝΗΜΗ ΤΟΥ «ΚΕΡΑΣΜΑΤΟΣ» ═══════════
+   Το ίδιο κομμάτι υπάρχει ΑΥΤΟΥΣΙΟ και στα επτά παιχνίδια, στο «Πόσες μέρες
+   ακόμα μαζί;» και στο ταμπλό.
+   Κρατάει μόνο ό,τι έγραψε ο ίδιος ο παίκτης, σε αυτόν εδώ τον υπολογιστή:
+   τίποτα δεν φεύγει πουθενά, καμία σύνδεση, κανένας server.
+   Αν ο φυλλομετρητής δεν αφήνει αποθήκευση (π.χ. ιδιωτική περιήγηση), το
+   παιχνίδι δουλεύει ΑΚΡΙΒΩΣ το ίδιο — απλώς δεν γεμίζει το ταμπλό.
+
+   ΤΟ ΔΙΑΒΑΤΗΡΙΟ — ό,τι είπε για τον εαυτό του (ηλικία, φύλο, πόσα βάζει,
+   δάνειο) ζει σε ΕΝΑ σημείο, ώστε το επόμενο παιχνίδι να μην το ξαναρωτήσει.
+   Δύο κανόνες, και οι δύο για τον ίδιο λόγο — να μην μπουν στο στόμα του
+   λόγια που δεν είπε:
+     1. Γράφεται ΜΟΝΟ ό,τι άγγιξε ο ίδιος. Μια δική μας προεπιλογή δεν είναι
+        απάντησή του και δεν μπαίνει ποτέ στο διαβατήριο.
+     2. Το διαβατήριο ΦΑΙΝΕΤΑΙ στο ταμπλό, πάντα και πρώτο. Αν δοθεί το κινητό
+        σε δεύτερο άνθρωπο, το πρώτο που βλέπει είναι τι ξέρει η σελίδα για
+        τον προηγούμενο — και δίπλα του το «Καθάρισε».                       */
+const KERASMA = (function(){
+  const P = "KERASMA:v1:";
+  let zei = null;
+  function ok(){
+    if(zei !== null) return zei;
+    try{ localStorage.setItem(P + "dokimi", "1"); localStorage.removeItem(P + "dokimi"); zei = true; }
+    catch(e){ zei = false; }
+    return zei;
+  }
+  function fakelaki(){
+    if(!ok()) return {};
+    try{ return JSON.parse(localStorage.getItem(P + "pass")) || {}; }catch(e){ return {}; }
+  }
+  return {
+    zei: ok,
+    grapse(id, d){
+      if(!ok()) return false;
+      d.v = 1; d.id = id; d.pote = Date.now();
+      try{ localStorage.setItem(P + "p:" + id, JSON.stringify(d)); return true; }catch(e){ return false; }
+    },
+    diavase(id){
+      if(!ok()) return null;
+      try{ return JSON.parse(localStorage.getItem(P + "p:" + id)); }catch(e){ return null; }
+    },
+    svise(id){ if(ok()){ try{ localStorage.removeItem(P + "p:" + id); }catch(e){} } },
+    onoma(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "onoma") || "";
+        localStorage.setItem(P + "onoma", v); return v;
+      }catch(e){ return ""; }
+    },
+    thema(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "thema") || "";
+        localStorage.setItem(P + "thema", v); return v;
+      }catch(e){ return ""; }
+    },
+    apoTamplo(v){
+      if(!ok()) return false;
+      try{
+        if(v === undefined) return localStorage.getItem(P + "tamplo") === "1";
+        localStorage.setItem(P + "tamplo", v ? "1" : "0"); return !!v;
+      }catch(e){ return false; }
+    },
+
+    /* ---------- ΤΟ ΔΙΑΒΑΤΗΡΙΟ ---------- */
+    olo: fakelaki,
+    pass(k){ return fakelaki()[k]; },
+    /* «είπε» — και το όνομα είναι η προδιαγραφή: μπαίνει μόνο ό,τι είπε. */
+    eipe(k, v){
+      if(!ok()) return false;
+      const o = fakelaki();
+      if(v === undefined || v === null || v === "") delete o[k]; else o[k] = v;
+      try{ localStorage.setItem(P + "pass", JSON.stringify(o)); return true; }catch(e){ return false; }
+    },
+    svisePass(){ if(ok()){ try{ localStorage.removeItem(P + "pass"); }catch(e){} } },
+    /* Δένει ένα πεδίο με το διαβατήριο: ανοίγει γεμάτο αν το έχει ήδη πει
+       αλλού, και γράφει πίσω ΜΟΝΟ αν το αγγίξει ο ίδιος.
+       Το κόψιμο στα όρια του πεδίου δεν γυρίζει ποτέ πίσω στο διαβατήριο:
+       αλλιώς το ΠΑΖΑΡΙ, που σταματάει στα 65, θα «διόρθωνε» σιωπηλά έναν
+       68άρη σε 65 — και το επόμενο παιχνίδι θα τον ρωτούσε σαν 65άρη.       */
+    dese(el, k){
+      if(!el) return;
+      const arith = el.type === "range" || el.type === "number";
+      const v = this.pass(k);
+      if(v !== undefined && v !== null && v !== ""){
+        if(arith){
+          const n = Number(v);
+          if(isFinite(n)){
+            const lo = el.min === "" ? -Infinity : Number(el.min);
+            const hi = el.max === "" ?  Infinity : Number(el.max);
+            el.value = Math.min(hi, Math.max(lo, n));
+          }
+        } else el.value = v;
+      }
+      const kata = () => {
+        if(!arith) return this.eipe(k, el.value);
+        const n = Number(el.value);
+        this.eipe(k, el.value === "" || !isFinite(n) ? undefined : n);
+      };
+      el.addEventListener("input", kata);
+      el.addEventListener("change", kata);
+    }
+  };
+})();
+
+/* Το φωτεινό/σκοτεινό ταξιδεύει μαζί με τον παίκτη: αν το γύρισε στο ταμπλό,
+   δεν έχει νόημα να ανοίγει το επόμενο παιχνίδι στο άλλο θέμα. */
+(function(){ const th = KERASMA.thema(); if(th) document.documentElement.setAttribute("data-theme", th); })();
+
+/* ═══════════ ΤΑ ΣΧΗΜΑΤΑ ═══════════
+   Κάθε δήλωση έχει το δικό της σχήμα, γιατί η εικόνα διαβάζεται πριν από το
+   κείμενο. Κρατιούνται σκόπιμα φτωχά: μία ιδέα το καθένα, τίποτα διακοσμητικό. */
+const SV = (μέσα, ύψος) =>
+  `<svg class="art" viewBox="0 0 300 ${ύψος||110}" role="img" aria-hidden="true">${μέσα}</svg>`;
+
+/* 100 κουκκίδες, η μία χρυσή: το «ένα ευρώ στα εκατό», σε μέγεθος που φαίνεται. */
+function ekato(){
+  let s = "";
+  for(let i = 0; i < 100; i++){
+    const x = 14 + (i % 20) * 14.2, y = 30 + Math.floor(i / 20) * 14.5;
+    s += `<circle cx="${x.toFixed(1)}" cy="${y}" r="4.6" fill="${i === 0 ? "var(--gold-fill)" : "var(--dot-off)"}"/>`;
+  }
+  return s;
+}
+
+/* ═══════════ ΟΙ ΟΚΤΩ ΔΗΛΩΣΕΙΣ ═══════════
+   Η σειρά δεν είναι τυχαία: πρώτη μπαίνει αυτή που τη χάνουν σχεδόν όλοι.
+   Ο κανόνας του «Κεράσματος» είναι ότι χάνουν όλοι στην πρώτη ερώτηση —
+   παιχνίδι όπου ο σύμβουλος ξέρει και ο άλλος όχι, σκοτώνει το ραντεβού.   */
+const CARDS = [
+{ v:"Μ",
+  d:`Όταν η τράπεζα σου δίνει δάνειο, <b>σου δανείζει τα λεφτά που έχουν καταθέσει άλλοι πελάτες.</b>`,
+  tit:"Δανείζουν τα λεφτά σου",
+  ex:`Δεν ψάχνει τα λεφτά κανενός. <b>Πληκτρολογεί</b> 100.000 € στον λογαριασμό σου και
+      ταυτόχρονα γράφει ότι της χρωστάς 100.000 €. Το δάνειο και το χρήμα
+      <b>γεννιούνται την ίδια στιγμή</b>.`,
+  src:`Bank of England 2014 · Bundesbank 2017 — και οι δύο το γράφουν ρητά.`,
+  art: SV(`<circle cx="42" cy="42" r="24" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <text x="42" y="49" text-anchor="middle" font-family="var(--disp)" font-size="17" font-weight="800" fill="var(--soft)">100</text>
+   <path d="M70 42 H104" stroke="var(--soft)" stroke-width="2.5"/><path d="M96 36 l8 6 -8 6" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <circle cx="130" cy="42" r="24" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <text x="130" y="49" text-anchor="middle" font-family="var(--disp)" font-size="17" font-weight="800" fill="var(--soft)">99</text>
+   <path d="M158 42 H192" stroke="var(--soft)" stroke-width="2.5"/><path d="M184 36 l8 6 -8 6" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <circle cx="218" cy="42" r="24" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <text x="218" y="49" text-anchor="middle" font-family="var(--disp)" font-size="17" font-weight="800" fill="var(--soft)">98</text>
+   <path d="M14 82 L268 6" stroke="var(--coral)" stroke-width="5" stroke-linecap="round"/>
+   <text x="150" y="102" text-anchor="middle" font-family="var(--book)" font-size="12.5" fill="var(--soft)">η αλυσίδα του σχολικού βιβλίου</text>`)
+},
+{ v:"Μ",
+  d:`Τα περισσότερα ευρώ που κυκλοφορούν σήμερα <b>τα έχει τυπώσει η ΕΚΤ.</b>`,
+  tit:"Τα τυπώνει η ΕΚΤ",
+  ex:`Τα χαρτονομίσματα είναι το μικρό κομμάτι. Τα <b>περισσότερα ευρώ είναι αριθμοί σε
+      λογαριασμούς</b>, και τους φτιάχνουν οι εμπορικές τράπεζες κάθε φορά που δίνουν δάνειο.`,
+  src:``,
+  art: SV(`<rect x="16" y="46" width="56" height="34" rx="5" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <rect x="22" y="40" width="56" height="34" rx="5" fill="var(--card)" stroke="var(--soft)" stroke-width="2.5"/>
+   <text x="50" y="62" text-anchor="middle" font-family="var(--disp)" font-size="15" font-weight="800" fill="var(--soft)">€</text>
+   <text x="50" y="98" text-anchor="middle" font-family="var(--book)" font-size="12" fill="var(--soft)">χαρτονομίσματα</text>
+   <rect x="118" y="16" width="166" height="64" rx="10" fill="none" stroke="var(--euro)" stroke-width="2.5"/>
+   <text x="201" y="45" text-anchor="middle" font-family="var(--disp)" font-size="17" font-weight="800" fill="var(--euro)">αριθμοί σε</text>
+   <text x="201" y="67" text-anchor="middle" font-family="var(--disp)" font-size="17" font-weight="800" fill="var(--euro)">λογαριασμούς</text>
+   <text x="201" y="98" text-anchor="middle" font-family="var(--book)" font-size="12" fill="var(--soft)">τα φτιάχνουν οι τράπεζες</text>`)
+},
+{ v:"Α",
+  d:`Για κάθε <b>100 €</b> κατάθεση, η τράπεζα πρέπει να έχει <b>1 €</b> παρκαρισμένο στην ΕΚΤ.`,
+  tit:"Ένα ευρώ στα εκατό",
+  ex:`Αυτό είναι όλο το περίφημο «κλασματικό αποθεματικό»: <b>1%</b>, από τις
+      <b>18 Ιανουαρίου 2012</b> — πριν ήταν 2%.`,
+  src:`Κανόνας ελάχιστων αποθεματικών ΕΚΤ. Ισχύει σε καταθέσεις &amp; ομόλογα έως 2 έτη· 0% σε δεσμευμένα πάνω από 2 έτη.`,
+  art: SV(ekato() + `<text x="150" y="102" text-anchor="middle" font-family="var(--book)" font-size="12.5" fill="var(--soft)">εκατό ευρώ κατάθεση — <tspan fill="var(--gold-text)" font-weight="700">ένα</tspan> στην ΕΚΤ</text>`)
+},
+{ v:"Μ",
+  d:`Αυτό το 1% είναι <b>ο κρουνός</b>: περιορίζει το πόσα δάνεια μπορεί να δώσει η τράπεζα.`,
+  tit:"Το 1% δεν είναι φρένο",
+  ex:`Οι τράπεζες της ευρωζώνης έχουν σήμερα <b>χιλιάδες φορές περισσότερα</b> αποθεματικά
+      απ' όσα τους ζητάει ο κανόνας. Κι αν λείψουν, τα <b>δανείζονται</b> — από άλλη τράπεζα
+      ή από την ίδια την ΕΚΤ, με ενέχυρο. Ο κρουνός είναι <b>το επιτόκιο</b> και
+      <b>τα κεφάλαια</b> της τράπεζας.`,
+  src:`«Χιλιάδες φορές» = τάξη μεγέθους της πλεονάζουσας ρευστότητας, όχι τιμή ημέρας.`,
+  art: SV(`<text x="16" y="26" font-family="var(--book)" font-size="12" fill="var(--soft)">όσα ζητάει ο κανόνας</text>
+   <rect x="16" y="32" width="9" height="16" rx="3" fill="var(--gold-fill)"/>
+   <text x="16" y="72" font-family="var(--book)" font-size="12" fill="var(--soft)">όσα έχουν</text>
+   <rect x="16" y="78" width="268" height="16" rx="5" fill="var(--euro)"/>`, 104)
+},
+{ v:"Α",
+  d:`Όταν ξεπληρώνεις το δάνειό σου, <b>αυτά τα ευρώ εξαφανίζονται.</b>`,
+  tit:"Σβήνονται όπως γεννήθηκαν",
+  ex:`Το χρέος και το χρήμα γεννήθηκαν μαζί — και σβήνονται μαζί. Γι' αυτό, όταν
+      ξεπληρώνονται περισσότερα δάνεια απ' όσα δίνονται, <b>το χρήμα στην οικονομία λιγοστεύει</b>.`,
+  src:``,
+  art: SV(`<circle cx="52" cy="46" r="26" fill="none" stroke="var(--euro)" stroke-width="3"/>
+   <text x="52" y="55" text-anchor="middle" font-family="var(--disp)" font-size="24" font-weight="800" fill="var(--euro)">€</text>
+   <circle cx="150" cy="46" r="26" fill="none" stroke="var(--euro)" stroke-width="3" opacity=".45"/>
+   <text x="150" y="55" text-anchor="middle" font-family="var(--disp)" font-size="24" font-weight="800" fill="var(--euro)" opacity=".45">€</text>
+   <circle cx="248" cy="46" r="26" fill="none" stroke="var(--line)" stroke-width="3" stroke-dasharray="4 6"/>
+   <text x="150" y="98" text-anchor="middle" font-family="var(--book)" font-size="12.5" fill="var(--soft)">η δόση πληρώνεται — το ευρώ σβήνει</text>`)
+},
+{ v:"Μ",
+  d:`Τα «αποθεματικά» των τραπεζών είναι λεφτά που <b>μπορείς να τραβήξεις εσύ από το ΑΤΜ.</b>`,
+  tit:"Δύο όροφοι χρήματος",
+  ex:`Πάνω παίζουν <b>οι τράπεζες με την ΕΚΤ</b>. Κάτω παίζουμε <b>εμείς με τις τράπεζες</b>.
+      Τα αποθεματικά ζουν <b>μόνο στον πάνω όροφο</b> — δεν τα αγγίζεις ποτέ.`,
+  src:``,
+  art: SV(`<rect x="16" y="12" width="268" height="38" rx="9" fill="none" stroke="var(--euro)" stroke-width="2.5"/>
+   <text x="150" y="36" text-anchor="middle" font-family="var(--disp)" font-size="14.5" font-weight="800" fill="var(--euro)">τράπεζες ↔ ΕΚΤ · εδώ ζουν τα αποθεματικά</text>
+   <path d="M16 58 H284" stroke="var(--line)" stroke-width="3"/>
+   <rect x="16" y="66" width="268" height="38" rx="9" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <text x="150" y="90" text-anchor="middle" font-family="var(--disp)" font-size="14.5" font-weight="800" fill="var(--soft)">εμείς ↔ τράπεζες · εδώ ζει ο λογαριασμός σου</text>`, 112)
+},
+{ v:"Μ",
+  d:`Αν όλοι οι πελάτες ζητήσουν τα μετρητά τους την ίδια μέρα, <b>η τράπεζα τα έχει.</b>`,
+  tit:"Καμία τράπεζα δεν αντέχει πανικό",
+  ex:`Δεν φτάνουν πουθενά, σε καμία τράπεζα του κόσμου. Γι' αυτό ακριβώς υπάρχει
+      <b>εγγύηση καταθέσεων 100.000 € ανά καταθέτη, ανά τράπεζα</b> — και υποχρέωση να
+      αντέχουν <b>30 μέρες</b> μαζικών αναλήψεων χωρίς βοήθεια.`,
+  src:`Εγγύηση καταθέσεων &amp; δείκτης κάλυψης ρευστότητας — ευρωπαϊκοί κανόνες.`,
+  art: SV(`<g fill="var(--soft)"><circle cx="26" cy="34" r="7"/><rect x="19" y="44" width="14" height="20" rx="6"/>
+   <circle cx="52" cy="34" r="7"/><rect x="45" y="44" width="14" height="20" rx="6"/>
+   <circle cx="78" cy="34" r="7"/><rect x="71" y="44" width="14" height="20" rx="6"/>
+   <circle cx="104" cy="34" r="7"/><rect x="97" y="44" width="14" height="20" rx="6"/>
+   <circle cx="130" cy="34" r="7"/><rect x="123" y="44" width="14" height="20" rx="6"/></g>
+   <path d="M150 46 H176" stroke="var(--coral)" stroke-width="2.5"/><path d="M168 40 l8 6 -8 6" fill="none" stroke="var(--coral)" stroke-width="2.5"/>
+   <rect x="186" y="24" width="98" height="46" rx="9" fill="none" stroke="var(--coral)" stroke-width="2.5"/>
+   <text x="235" y="53" text-anchor="middle" font-family="var(--disp)" font-size="19" font-weight="800" fill="var(--coral)">ταμείο</text>
+   <text x="150" y="96" text-anchor="middle" font-family="var(--book)" font-size="12.5" fill="var(--soft)">γι' αυτό υπάρχει η εγγύηση των 100.000 €</text>`)
+},
+{ v:"Α",
+  d:`Ο «πολλαπλασιαστής καταθέσεων» — η αλυσίδα της πρώτης κάρτας —
+     <b>διδάσκεται ακόμα σήμερα σε σχολεία και πανεπιστήμια.</b>`,
+  tit:"Δεν κάνεις εσύ λάθος",
+  ex:`Διδάσκεται ακόμα. Και οι ίδιες οι κεντρικές τράπεζες γράφουν ότι η σειρά είναι
+      <b>αντίστροφη</b>: πρώτα το δάνειο, μετά τα αποθεματικά. Αν κάποιος σου πει το
+      αντίθετο, <b>δεν είσαι εσύ που κάνεις λάθος</b>.`,
+  src:`Bank of England, Quarterly Bulletin 2014 Q1 · Deutsche Bundesbank, Monthly Report 4/2017.`,
+  art: SV(`<rect x="16" y="12" width="268" height="72" rx="8" fill="none" stroke="var(--soft)" stroke-width="2.5"/>
+   <text x="150" y="42" text-anchor="middle" font-family="var(--book)" font-size="15" fill="var(--soft)">κατάθεση → δάνειο → κατάθεση…</text>
+   <text x="150" y="66" text-anchor="middle" font-family="var(--book)" font-size="13" font-style="italic" fill="var(--soft)">«ο πολλαπλασιαστής καταθέσεων»</text>
+   <text x="150" y="102" text-anchor="middle" font-family="var(--book)" font-size="12.5" fill="var(--coral)">στα βιβλία · όχι στα βιβλία των κεντρικών τραπεζών</text>`)
+}
+];
+
+const ΜΟΝΑΔΑ = 50;                       /* 8 δηλώσεις × 50 = 400, όπως τα άλλα */
+
+/* ═══════════ ΚΑΤΑΣΤΑΣΗ ═══════════ */
+let i = 0, score = 0, locked = false;
+const res = [];
+const $ = id => document.getElementById(id);
+const λέξη = v => v === "Μ" ? "ΜΥΘΟΣ" : "ΑΛΗΘΕΙΑ";
+
+/* ---- θέμα ---- */
+$("tog").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const neo = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", neo);
+  KERASMA.thema(neo);
+};
+
+/* ---- πλοήγηση ---- */
+const show = id => {
+  document.querySelectorAll(".scr").forEach(s => s.classList.toggle("on", s.id === id));
+  scrollTo({top:0, behavior:"instant"});
+};
+$("go").onclick = () => { i = 0; score = 0; res.length = 0; show("s-play"); render(); };
+
+/* ---- η κάρτα ---- */
+function render(){
+  const c = CARDS[i];
+  $("art").innerHTML = c.art;
+  $("dhl").innerHTML = c.d;
+  $("ask").style.display = ""; $("rev").style.display = "none";
+  locked = false;
+  θέση(0);
+  $("prog").innerHTML = CARDS.map((_, k) => {
+    const r = res[k];
+    const κλ = k === i ? "now" : r ? (r.p ? "done" : "miss") : "";
+    return `<span class="pip ${κλ}"></span>`;
+  }).join("");
+}
+
+/* ---- η απάντηση ---- */
+function apantise(v){
+  if(locked) return;
+  locked = true;
+  const c = CARDS[i], swsto = v === c.v, p = swsto ? ΜΟΝΑΔΑ : 0;
+  score += p;
+  res[i] = {nm:c.tit, you:λέξη(v), real:λέξη(c.v), p:p};
+
+  $("tag").textContent = λέξη(c.v);
+  $("tag").className = "tag " + (c.v === "Μ" ? "m" : "a");
+  $("ok").textContent = swsto ? "✓ το βρήκες" : "✗ όπως σχεδόν όλοι";
+  $("ok").className = "ok " + (swsto ? "yes" : "no");
+  $("ex").innerHTML = c.ex;
+  $("src").innerHTML = c.src || "";
+  $("src").style.display = c.src ? "" : "none";
+  $("ask").style.display = "none"; $("rev").style.display = "";
+  θέση(0);
+
+  $("prog").children[i].className = "pip " + (p ? "done" : "miss");
+}
+
+document.querySelectorAll(".two button").forEach(b => b.onclick = () => apantise(b.dataset.v));
+
+$("next").onclick = () => {
+  /* Χωρίς αυτόν τον φρουρό, ένα βιαστικό διπλό χτύπημα σε κινητό προσπερνάει
+     ολόκληρη κάρτα — και ο παίκτης δεν καταλαβαίνει καν ότι την έχασε. */
+  if(!locked) return;
+  locked = false;
+  i++;
+  if(i < CARDS.length){ render(); scrollTo({top:0, behavior:"smooth"}); }
+  else telos();
+};
+
+/* ═══════════ ΤΟ ΣΥΡΣΙΜΟ ═══════════
+   Επιπλέον οδός, ποτέ η μοναδική: τα δύο κουμπιά μένουν πάντα εκεί. Αν το
+   σύρσιμο δεν πιάσει (ποντίκι, παλιός φυλλομετρητής, γάντια), το παιχνίδι
+   παίζεται ακέραιο — απλώς με το δάχτυλο στο κουμπί.                        */
+const sw = $("swipe");
+const ΟΡΙΟ = 84;
+let x0 = null, dx = 0;
+
+function θέση(d){
+  dx = d;
+  sw.style.transform = d ? `translateX(${d}px) rotate(${d / 26}deg)` : "";
+  $("st-m").style.opacity = d < -18 ? Math.min(1, -d / ΟΡΙΟ) : 0;
+  $("st-a").style.opacity = d >  18 ? Math.min(1,  d / ΟΡΙΟ) : 0;
+}
+
+sw.addEventListener("pointerdown", e => {
+  if(locked) return;
+  x0 = e.clientX; sw.classList.remove("snap");
+  /* Αν ο φυλλομετρητής αρνηθεί το «κράτημα» του δαχτύλου, το σύρσιμο απλώς
+     γίνεται λιγότερο ομαλό — δεν επιτρέπεται να ρίξει ολόκληρη την κάρτα. */
+  try{ sw.setPointerCapture(e.pointerId); }catch(err){}
+});
+sw.addEventListener("pointermove", e => {
+  if(x0 === null) return;
+  θέση(e.clientX - x0);
+});
+function afise(){
+  if(x0 === null) return;
+  const d = dx;
+  x0 = null;
+  sw.classList.add("snap");
+  θέση(0);
+  if(Math.abs(d) >= ΟΡΙΟ) apantise(d > 0 ? "Α" : "Μ");
+}
+sw.addEventListener("pointerup", afise);
+sw.addEventListener("pointercancel", afise);
+
+/* ═══════════ ΤΟ ΤΕΛΟΣ ═══════════ */
+function telos(){
+  $("score").textContent = score;
+  $("rank").textContent =
+    score >= 350 ? "εντυπωσιακό — ξέρεις πράγματα που δεν ξέρει ο υπάλληλος στο κατάστημα"
+  : score >= 250 ? "καλύτερα από τους περισσότερους"
+  : score >= 150 ? "όπως όλοι μας — το σχολικό βιβλίο κρατάει γερά"
+  :                "όπως όλοι μας — και δεν φταις εσύ, έτσι το διδάσκουν";
+  $("recap").innerHTML = res.map(r =>
+    `<tr><td>${r.nm}<span class="nm">είπες ${r.you} · ήταν ${r.real}</span></td>
+         <td>+${r.p}</td></tr>`).join("");
+
+  /* Δεν ρωτάει τίποτα δικό του — άρα δεν γράφει τίποτα στο διαβατήριο.
+     Στον φάκελο μπαίνει μόνο τι απάντησε και τι ίσχυε.                      */
+  KERASMA.grapse("mythos", {
+    nm: "Μύθος ή αλήθεια;", skor: score, sto: CARDS.length * ΜΟΝΑΔΑ,
+    seires: res.map(r => ({nm:r.nm, you:r.you, real:r.real, p:r.p})),
+    dika: [],
+    mathima: "Τα δάνεια δεν έρχονται από τις καταθέσεις — οι καταθέσεις έρχονται από τα δάνεια."
+  });
+  show("s-end");
+}
+
+$("again").onclick = () => show("s-start");
+
+/* ---- ο δρόμος της επιστροφής: φαίνεται ΜΟΝΟ αν ο παίκτης ήρθε από το ταμπλό,
+        αλλιώς το παιχνίδι θα έδειχνε κουμπί προς αρχείο που μπορεί να μην υπάρχει ---- */
+/* Δύο ενδείξεις ότι ο παίκτης ήρθε από το ταμπλό: το σημάδι στη μνήμη, ή η
+   σελίδα από την οποία ήρθε. Η δεύτερη πιάνει και την περίπτωση που ο
+   φυλλομετρητής δεν αφήνει αποθήκευση. Αν δεν ισχύει καμία, ο δρόμος πίσω
+   ΔΕΝ δείχνεται: όποιος έλαβε σκέτο το ένα αρχείο θα πατούσε σε κενό. */
+if(KERASMA.apoTamplo() || /ΤΑΜΠΛΟ/.test(decodeURIComponent(document.referrer || ""))){
+  $("toTamplo").style.display = "block";
+  $("toTamploTop").style.display = "flex";
+  document.body.classList.add("hasback");
+}
+</script>
+</body>
+</html>

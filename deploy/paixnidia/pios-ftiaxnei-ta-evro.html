@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<title>Ποιος φτιάχνει τα ευρώ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+  :root{
+    --paper:#E9EDF4;
+    --card:#FFFFFF;
+    --ink:#101A2E;
+    --soft:#5A6480;
+    --line:#D2D9E6;
+    --euro:#123FA8;
+    --euro-deep:#0B2464;
+    --gold:#C98209;
+    --gold-fill:#F0B429;
+    --coral:#C93F32;
+    --teal:#0E6E62;
+    --shadow:0 1px 0 rgba(16,26,46,.05), 0 24px 48px -34px rgba(11,36,100,.55);
+
+    --disp:"Alegreya Sans","Helvetica Neue",Arial,sans-serif;
+    --book:"Source Serif 4",Georgia,"Times New Roman",serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0B1220;
+      --card:#141D2F;
+      --ink:#E8EDF7;
+      --soft:#97A3BC;
+      --line:#25324B;
+      --euro:#7BA4FF;
+      --euro-deep:#0E1B39;
+      --gold:#FFC44D;
+      --gold-fill:#FFC44D;
+      --coral:#FF7F6B;
+      --teal:#3CC9B2;
+      --shadow:0 1px 0 rgba(0,0,0,.5), 0 24px 48px -34px rgba(0,0,0,.95);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0B1220;
+    --card:#141D2F;
+    --ink:#E8EDF7;
+    --soft:#97A3BC;
+    --line:#25324B;
+    --euro:#7BA4FF;
+    --euro-deep:#0E1B39;
+    --gold:#FFC44D;
+    --gold-fill:#FFC44D;
+    --coral:#FF7F6B;
+    --teal:#3CC9B2;
+    --shadow:0 1px 0 rgba(0,0,0,.5), 0 24px 48px -34px rgba(0,0,0,.95);
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--book);
+    font-size:19px;
+    line-height:1.55;
+    padding:clamp(18px,4vw,52px) clamp(14px,4vw,40px) 90px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:1000px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:clamp(26px,4.5vw,52px);
+  }
+
+  .eyebrow{
+    font-family:var(--disp);
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--soft);
+    margin:0;
+  }
+
+  h1{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(42px,8.4vw,86px);
+    line-height:.93;
+    letter-spacing:-.015em;
+    margin:0;
+    text-wrap:balance;
+  }
+  h2{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(28px,4.6vw,44px);
+    line-height:1;
+    letter-spacing:-.01em;
+    margin:0;
+    text-wrap:balance;
+  }
+  h3{
+    font-family:var(--disp);
+    font-weight:800;
+    font-size:20px;
+    line-height:1.15;
+    margin:0;
+  }
+  p{margin:0;max-width:62ch}
+  .big{font-size:clamp(20px,2.9vw,26px);line-height:1.35;max-width:26ch;text-wrap:balance}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--euro-deep);
+    color:#F4F7FF;
+    border-radius:26px;
+    padding:clamp(26px,5vw,56px);
+    display:grid;
+    grid-template-columns:1fr;
+    gap:30px;
+    align-items:center;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 1px, transparent 1px 13px);
+    pointer-events:none;
+  }
+  .hero > *{position:relative;z-index:1}
+  .hero .eyebrow{color:#F0B429}
+  .hero h1{margin-top:12px}
+  .hero p{color:#C6D2EE;margin-top:18px}
+  .hero .big b{color:#F0B429;font-weight:600}
+  @media (min-width:820px){
+    .hero{grid-template-columns:1.02fr .98fr;gap:44px}
+  }
+
+  /* ---------- scenes ---------- */
+  .scene{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:clamp(22px,3.6vw,40px);
+    box-shadow:var(--shadow);
+    display:grid;
+    gap:26px;
+    align-items:center;
+    grid-template-columns:1fr;
+  }
+  @media (min-width:860px){
+    .scene.split{grid-template-columns:.86fr 1.14fr}
+    .scene.split.flip .txt{order:2}
+    .scene.split.flip figure{order:1}
+  }
+  .txt{display:flex;flex-direction:column;gap:14px}
+  figure{margin:0}
+  svg{display:block;width:100%;height:auto}
+
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--disp);
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:5px 11px;
+    border-radius:999px;
+    width:fit-content;
+  }
+  .tag.no{background:color-mix(in srgb,var(--coral) 14%,transparent);color:var(--coral)}
+  .tag.yes{background:color-mix(in srgb,var(--teal) 15%,transparent);color:var(--teal)}
+  .tag.rule{background:color-mix(in srgb,var(--euro) 14%,transparent);color:var(--euro)}
+
+  .note{
+    font-size:16px;
+    color:var(--soft);
+    border-left:3px solid var(--line);
+    padding-left:14px;
+    max-width:56ch;
+  }
+
+  /* ---------- fact strip ---------- */
+  .facts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:14px;
+  }
+  .fact{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px 18px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .fact .n{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:38px;
+    line-height:1;
+    letter-spacing:-.02em;
+    color:var(--euro);
+    font-variant-numeric:tabular-nums;
+  }
+  .fact .l{font-size:16px;line-height:1.35;color:var(--soft)}
+
+  /* ---------- brakes ---------- */
+  .brakes{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+    gap:16px;
+  }
+  .brake{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .brake svg{width:56px;height:56px}
+  .brake p{font-size:16.5px;color:var(--soft);max-width:none}
+
+  /* ---------- you ---------- */
+  .you{display:grid;gap:16px;grid-template-columns:1fr}
+  @media (min-width:760px){.you{grid-template-columns:repeat(3,1fr)}}
+  .you .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .you .card p{font-size:16.5px;color:var(--soft);max-width:none}
+
+  /* ---------- closing ---------- */
+  .closing{
+    background:var(--euro-deep);
+    color:#F4F7FF;
+    border-radius:26px;
+    padding:clamp(26px,5vw,52px);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    box-shadow:var(--shadow);
+  }
+  .closing .eyebrow{color:#F0B429}
+  .closing .line{
+    font-family:var(--disp);
+    font-weight:800;
+    font-size:clamp(24px,4vw,38px);
+    line-height:1.15;
+    max-width:22ch;
+    text-wrap:balance;
+  }
+  .closing .line em{color:#F0B429;font-style:normal}
+  .closing p{color:#C6D2EE;font-size:17px}
+
+  footer{
+    color:var(--soft);
+    font-size:15px;
+    line-height:1.5;
+    max-width:70ch;
+  }
+  footer b{color:var(--ink);font-weight:600}
+
+  /* ---------- motion ---------- */
+  .js-anim .rise{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .js-anim .rise.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .rise{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Κλασματικά αποθεματικά &amp; ΕΚΤ</p>
+      <h1>Ποιος φτιάχνει<br>τα ευρώ;</h1>
+      <p class="big">Όχι η ΕΚΤ. Τα περισσότερα ευρώ τα φτιάχνει <b>μια τράπεζα, τη στιγμή που δίνει ένα δάνειο</b>.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 420 300" role="img" aria-label="Λογαριασμός που από 0 ευρώ δείχνει ξαφνικά 100.000 ευρώ">
+        <rect x="16" y="34" width="388" height="232" rx="18" fill="#0A1B44" stroke="#2A4A96"/>
+        <rect x="16" y="34" width="388" height="46" rx="18" fill="#123FA8"/>
+        <rect x="16" y="66" width="388" height="14" fill="#123FA8"/>
+        <circle cx="44" cy="57" r="8" fill="#F0B429"/>
+        <text x="64" y="63" font-family="Alegreya Sans, sans-serif" font-size="17" font-weight="800" fill="#DCE6FF">ΛΟΓΑΡΙΑΣΜΟΣ ΜΑΡΙΑΣ</text>
+        <text x="44" y="118" font-family="Alegreya Sans, sans-serif" font-size="14" font-weight="700" fill="#8FA6DC" letter-spacing="2">ΥΠΟΛΟΙΠΟ</text>
+        <text x="44" y="185" font-family="Alegreya Sans, sans-serif" font-size="60" font-weight="900" fill="#F0B429">100.000 €</text>
+        <rect x="44" y="205" width="150" height="3" rx="1.5" fill="#2A4A96"/>
+        <text x="44" y="236" font-family="Source Serif 4, serif" font-size="17" fill="#C6D2EE">νέο χρήμα, μόλις τώρα</text>
+        <g opacity=".9">
+          <circle cx="330" cy="140" r="26" fill="none" stroke="#F0B429" stroke-width="3"/>
+          <text x="330" y="150" text-anchor="middle" font-family="Alegreya Sans, sans-serif" font-size="30" font-weight="900" fill="#F0B429">€</text>
+          <path d="M330 96 L330 82 M366 118 L379 111 M366 162 L379 169" stroke="#F0B429" stroke-width="3" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </figure>
+  </header>
+
+  <!-- ================= ΜΥΘΟΣ ================= -->
+  <section class="scene split rise">
+    <div class="txt">
+      <span class="tag no">Ο μύθος</span>
+      <h2>«Δανείζουν τα λεφτά σου»</h2>
+      <p>Το σχολικό βιβλίο λέει: βάζεις 100 €, η τράπεζα κρατά λίγα και δανείζει τα υπόλοιπα. Ο επόμενος τα καταθέτει, ξαναδανείζονται, και το χρήμα πολλαπλασιάζεται.</p>
+      <p class="note">Ωραία ιστορία. Απλώς δεν είναι έτσι που γίνεται.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 560 300" role="img" aria-label="Αλυσίδα από όλο και μικρότερα ποσά, σφραγισμένη ως μύθος">
+        <g font-family="Alegreya Sans, sans-serif" font-weight="900" text-anchor="middle">
+          <rect x="18" y="30" width="104" height="104" rx="14" fill="var(--euro)" opacity=".16"/>
+          <text x="70" y="90" font-size="28" fill="var(--euro)">100 €</text>
+
+          <path d="M132 82 L160 82" stroke="var(--soft)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M152 75 L162 82 L152 89" fill="none" stroke="var(--soft)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <rect x="172" y="42" width="90" height="80" rx="13" fill="var(--euro)" opacity=".13"/>
+          <text x="217" y="90" font-size="24" fill="var(--euro)">99 €</text>
+
+          <path d="M272 82 L300 82" stroke="var(--soft)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M292 75 L302 82 L292 89" fill="none" stroke="var(--soft)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <rect x="312" y="54" width="74" height="58" rx="11" fill="var(--euro)" opacity=".1"/>
+          <text x="349" y="91" font-size="20" fill="var(--euro)">98 €</text>
+
+          <path d="M396 82 L420 82" stroke="var(--soft)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M412 75 L422 82 L412 89" fill="none" stroke="var(--soft)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <rect x="432" y="62" width="56" height="42" rx="9" fill="var(--euro)" opacity=".08"/>
+          <text x="460" y="90" font-size="16" fill="var(--euro)">97 €</text>
+
+          <text x="522" y="90" font-size="26" fill="var(--soft)">…</text>
+
+          <text x="280" y="172" font-size="17" font-weight="700" fill="var(--soft)">…και έτσι, λέει, βγαίνουν 10.000 € από τα 100 €.</text>
+        </g>
+        <g transform="rotate(-5 280 240)">
+          <rect x="132" y="204" width="296" height="72" rx="11" fill="none" stroke="var(--coral)" stroke-width="5"/>
+          <text x="280" y="256" text-anchor="middle" font-family="Alegreya Sans, sans-serif" font-size="46" font-weight="900" fill="var(--coral)" letter-spacing="5">ΜΥΘΟΣ</text>
+        </g>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ================= ΑΛΗΘΕΙΑ ================= -->
+  <section class="scene split flip rise">
+    <div class="txt">
+      <span class="tag yes">Τι γίνεται στ' αλήθεια</span>
+      <h2>Γράφουν έναν αριθμό</h2>
+      <p>Η τράπεζα δεν ψάχνει τα λεφτά κάποιου άλλου. Πληκτρολογεί <b>100.000 €</b> στον λογαριασμό σου και ταυτόχρονα γράφει ότι της χρωστάς <b>100.000 €</b>.</p>
+      <p>Το δάνειο και το χρήμα γεννιούνται <b>την ίδια στιγμή</b>. Όταν το ξεπληρώνεις, αυτά τα ευρώ σβήνονται.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 560 250" role="img" aria-label="Ισολογισμός τράπεζας: το δάνειο και η κατάθεση δημιουργούνται ταυτόχρονα">
+        <rect x="14" y="16" width="532" height="218" rx="16" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <line x1="280" y1="16" x2="280" y2="234" stroke="var(--line)" stroke-width="2"/>
+        <line x1="14" y1="66" x2="546" y2="66" stroke="var(--line)" stroke-width="2"/>
+
+        <text x="40" y="48" font-family="Alegreya Sans, sans-serif" font-size="14" font-weight="800" letter-spacing="2" fill="var(--soft)">ΤΙ ΕΧΕΙ Η ΤΡΑΠΕΖΑ</text>
+        <text x="306" y="48" font-family="Alegreya Sans, sans-serif" font-size="14" font-weight="800" letter-spacing="2" fill="var(--soft)">ΤΙ ΧΡΩΣΤΑΕΙ Η ΤΡΑΠΕΖΑ</text>
+
+        <rect x="40" y="92" width="212" height="112" rx="13" fill="var(--teal)" opacity=".14"/>
+        <text x="60" y="130" font-family="Alegreya Sans, sans-serif" font-size="18" font-weight="800" fill="var(--teal)">Το δάνειό σου</text>
+        <text x="60" y="176" font-family="Alegreya Sans, sans-serif" font-size="34" font-weight="900" fill="var(--teal)">100.000 €</text>
+
+        <rect x="308" y="92" width="212" height="112" rx="13" fill="var(--gold-fill)" opacity=".2"/>
+        <text x="328" y="130" font-family="Alegreya Sans, sans-serif" font-size="18" font-weight="800" fill="var(--gold)">Η κατάθεσή σου</text>
+        <text x="328" y="176" font-family="Alegreya Sans, sans-serif" font-size="34" font-weight="900" fill="var(--gold)">100.000 €</text>
+
+        <g>
+          <path d="M258 148 L302 148" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="280" cy="148" r="17" fill="var(--card)" stroke="var(--ink)" stroke-width="3"/>
+          <text x="280" y="155" text-anchor="middle" font-family="Alegreya Sans, sans-serif" font-size="17" font-weight="900" fill="var(--ink)">=</text>
+        </g>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ================= ΔΥΟ ΟΡΟΦΟΙ ================= -->
+  <section class="scene rise">
+    <div class="txt">
+      <span class="tag rule">Το κλειδί</span>
+      <h2>Υπάρχουν δύο όροφοι χρήματος</h2>
+      <p>Πάνω παίζουν οι τράπεζες με την ΕΚΤ. Κάτω παίζουμε εμείς με τις τράπεζες. Τα «αποθεματικά» ζουν <b>μόνο στον πάνω όροφο</b> — εσύ δεν τα αγγίζεις ποτέ.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 620 320" role="img" aria-label="Πάνω όροφος: ΕΚΤ και τράπεζες με αποθεματικά. Κάτω όροφος: τράπεζες και πολίτες με καταθέσεις.">
+        <!-- upper -->
+        <rect x="10" y="10" width="600" height="132" rx="16" fill="var(--euro)" opacity=".1"/>
+        <text x="30" y="36" font-family="Alegreya Sans, sans-serif" font-size="13" font-weight="800" letter-spacing="2" fill="var(--euro)">ΠΑΝΩ ΟΡΟΦΟΣ — ΑΠΟΘΕΜΑΤΙΚΑ</text>
+        <rect x="30" y="50" width="150" height="72" rx="12" fill="var(--euro)"/>
+        <text x="105" y="94" text-anchor="middle" font-family="Alegreya Sans, sans-serif" font-size="26" font-weight="900" fill="#FFFFFF">ΕΚΤ</text>
+        <g font-family="Alegreya Sans, sans-serif" font-weight="800" font-size="15" text-anchor="middle">
+          <rect x="228" y="58" width="106" height="56" rx="10" fill="var(--card)" stroke="var(--euro)" stroke-width="2"/>
+          <text x="281" y="92" fill="var(--euro)">Τράπεζα Α</text>
+          <rect x="352" y="58" width="106" height="56" rx="10" fill="var(--card)" stroke="var(--euro)" stroke-width="2"/>
+          <text x="405" y="92" fill="var(--euro)">Τράπεζα Β</text>
+          <rect x="476" y="58" width="106" height="56" rx="10" fill="var(--card)" stroke="var(--euro)" stroke-width="2"/>
+          <text x="529" y="92" fill="var(--euro)">Τράπεζα Γ</text>
+        </g>
+        <path d="M188 86 L220 86" stroke="var(--euro)" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- divider -->
+        <line x1="10" y1="160" x2="610" y2="160" stroke="var(--line)" stroke-width="3" stroke-dasharray="10 9"/>
+        <text x="316" y="153" text-anchor="middle" font-family="Alegreya Sans, sans-serif" font-size="13" font-weight="800" letter-spacing="1.5" fill="var(--soft)">ΔΕΝ ΠΕΡΝΑΕΙ ΚΑΤΩ — ΕΚΤΟΣ ΑΝ ΓΙΝΕΙ ΧΑΡΤΟΝΟΜΙΣΜΑ</text>
+
+        <!-- lower -->
+        <rect x="10" y="178" width="600" height="132" rx="16" fill="var(--gold-fill)" opacity=".16"/>
+        <text x="30" y="204" font-family="Alegreya Sans, sans-serif" font-size="13" font-weight="800" letter-spacing="2" fill="var(--gold)">ΚΑΤΩ ΟΡΟΦΟΣ — ΚΑΤΑΘΕΣΕΙΣ</text>
+        <g font-family="Alegreya Sans, sans-serif" font-weight="800" font-size="15" text-anchor="middle">
+          <rect x="30" y="222" width="106" height="56" rx="10" fill="var(--card)" stroke="var(--gold)" stroke-width="2"/>
+          <text x="83" y="256" fill="var(--gold)">Τράπεζες</text>
+        </g>
+        <path d="M144 250 L182 250" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/>
+        <g fill="var(--gold)">
+          <g transform="translate(200,214)"><circle cx="18" cy="16" r="13"/><path d="M0 62 a18 22 0 0 1 36 0 z"/></g>
+          <g transform="translate(268,214)" opacity=".85"><circle cx="18" cy="16" r="13"/><path d="M0 62 a18 22 0 0 1 36 0 z"/></g>
+          <g transform="translate(336,214)" opacity=".7"><circle cx="18" cy="16" r="13"/><path d="M0 62 a18 22 0 0 1 36 0 z"/></g>
+        </g>
+        <text x="424" y="246" font-family="Source Serif 4, serif" font-size="17" fill="var(--ink)">εσύ, εγώ, οι πελάτες</text>
+        <text x="424" y="270" font-family="Source Serif 4, serif" font-size="15" fill="var(--soft)">νούμερα σε μια οθόνη</text>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ================= Ο ΚΑΝΟΝΑΣ 1% ================= -->
+  <section class="scene split rise">
+    <div class="txt">
+      <span class="tag rule">Ο κανόνας της ΕΚΤ</span>
+      <h2>Ένα ευρώ στα εκατό</h2>
+      <p>Για κάθε 100 € κατάθεση, η τράπεζα πρέπει να έχει <b>1 €</b> παρκαρισμένο στην ΕΚΤ. Αυτό είναι όλο το περίφημο «κλασματικό αποθεματικό».</p>
+      <p class="note">Ήταν 2% και έπεσε στο 1% τον Ιανουάριο του 2012.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 420 420" role="img" aria-label="Πλέγμα 100 τετραγώνων όπου μόνο ένα είναι το υποχρεωτικό αποθεματικό">
+  <g font-family="Alegreya Sans, sans-serif" font-weight="900">
+    <rect x="20" y="18" width="30" height="30" rx="6" fill="var(--gold-fill)"/>
+    <text x="62" y="41" font-size="19" fill="var(--gold)">1 € στην ΕΚΤ</text>
+    <rect x="20" y="62" width="30" height="30" rx="6" fill="var(--euro)" opacity=".18"/>
+    <text x="62" y="85" font-size="19" fill="var(--soft)">99 € ελεύθερα στην τράπεζα</text>
+  </g>
+  <g fill="var(--euro)" opacity=".18">
+    <rect x="73" y="126" width="22" height="22" rx="5"/>
+    <rect x="101" y="126" width="22" height="22" rx="5"/>
+    <rect x="129" y="126" width="22" height="22" rx="5"/>
+    <rect x="157" y="126" width="22" height="22" rx="5"/>
+    <rect x="185" y="126" width="22" height="22" rx="5"/>
+    <rect x="213" y="126" width="22" height="22" rx="5"/>
+    <rect x="241" y="126" width="22" height="22" rx="5"/>
+    <rect x="269" y="126" width="22" height="22" rx="5"/>
+    <rect x="297" y="126" width="22" height="22" rx="5"/>
+    <rect x="73" y="154" width="22" height="22" rx="5"/>
+    <rect x="101" y="154" width="22" height="22" rx="5"/>
+    <rect x="129" y="154" width="22" height="22" rx="5"/>
+    <rect x="157" y="154" width="22" height="22" rx="5"/>
+    <rect x="185" y="154" width="22" height="22" rx="5"/>
+    <rect x="213" y="154" width="22" height="22" rx="5"/>
+    <rect x="241" y="154" width="22" height="22" rx="5"/>
+    <rect x="269" y="154" width="22" height="22" rx="5"/>
+    <rect x="297" y="154" width="22" height="22" rx="5"/>
+    <rect x="325" y="154" width="22" height="22" rx="5"/>
+    <rect x="73" y="182" width="22" height="22" rx="5"/>
+    <rect x="101" y="182" width="22" height="22" rx="5"/>
+    <rect x="129" y="182" width="22" height="22" rx="5"/>
+    <rect x="157" y="182" width="22" height="22" rx="5"/>
+    <rect x="185" y="182" width="22" height="22" rx="5"/>
+    <rect x="213" y="182" width="22" height="22" rx="5"/>
+    <rect x="241" y="182" width="22" height="22" rx="5"/>
+    <rect x="269" y="182" width="22" height="22" rx="5"/>
+    <rect x="297" y="182" width="22" height="22" rx="5"/>
+    <rect x="325" y="182" width="22" height="22" rx="5"/>
+    <rect x="73" y="210" width="22" height="22" rx="5"/>
+    <rect x="101" y="210" width="22" height="22" rx="5"/>
+    <rect x="129" y="210" width="22" height="22" rx="5"/>
+    <rect x="157" y="210" width="22" height="22" rx="5"/>
+    <rect x="185" y="210" width="22" height="22" rx="5"/>
+    <rect x="213" y="210" width="22" height="22" rx="5"/>
+    <rect x="241" y="210" width="22" height="22" rx="5"/>
+    <rect x="269" y="210" width="22" height="22" rx="5"/>
+    <rect x="297" y="210" width="22" height="22" rx="5"/>
+    <rect x="325" y="210" width="22" height="22" rx="5"/>
+    <rect x="73" y="238" width="22" height="22" rx="5"/>
+    <rect x="101" y="238" width="22" height="22" rx="5"/>
+    <rect x="129" y="238" width="22" height="22" rx="5"/>
+    <rect x="157" y="238" width="22" height="22" rx="5"/>
+    <rect x="185" y="238" width="22" height="22" rx="5"/>
+    <rect x="213" y="238" width="22" height="22" rx="5"/>
+    <rect x="241" y="238" width="22" height="22" rx="5"/>
+    <rect x="269" y="238" width="22" height="22" rx="5"/>
+    <rect x="297" y="238" width="22" height="22" rx="5"/>
+    <rect x="325" y="238" width="22" height="22" rx="5"/>
+    <rect x="73" y="266" width="22" height="22" rx="5"/>
+    <rect x="101" y="266" width="22" height="22" rx="5"/>
+    <rect x="129" y="266" width="22" height="22" rx="5"/>
+    <rect x="157" y="266" width="22" height="22" rx="5"/>
+    <rect x="185" y="266" width="22" height="22" rx="5"/>
+    <rect x="213" y="266" width="22" height="22" rx="5"/>
+    <rect x="241" y="266" width="22" height="22" rx="5"/>
+    <rect x="269" y="266" width="22" height="22" rx="5"/>
+    <rect x="297" y="266" width="22" height="22" rx="5"/>
+    <rect x="325" y="266" width="22" height="22" rx="5"/>
+    <rect x="73" y="294" width="22" height="22" rx="5"/>
+    <rect x="101" y="294" width="22" height="22" rx="5"/>
+    <rect x="129" y="294" width="22" height="22" rx="5"/>
+    <rect x="157" y="294" width="22" height="22" rx="5"/>
+    <rect x="185" y="294" width="22" height="22" rx="5"/>
+    <rect x="213" y="294" width="22" height="22" rx="5"/>
+    <rect x="241" y="294" width="22" height="22" rx="5"/>
+    <rect x="269" y="294" width="22" height="22" rx="5"/>
+    <rect x="297" y="294" width="22" height="22" rx="5"/>
+    <rect x="325" y="294" width="22" height="22" rx="5"/>
+    <rect x="73" y="322" width="22" height="22" rx="5"/>
+    <rect x="101" y="322" width="22" height="22" rx="5"/>
+    <rect x="129" y="322" width="22" height="22" rx="5"/>
+    <rect x="157" y="322" width="22" height="22" rx="5"/>
+    <rect x="185" y="322" width="22" height="22" rx="5"/>
+    <rect x="213" y="322" width="22" height="22" rx="5"/>
+    <rect x="241" y="322" width="22" height="22" rx="5"/>
+    <rect x="269" y="322" width="22" height="22" rx="5"/>
+    <rect x="297" y="322" width="22" height="22" rx="5"/>
+    <rect x="325" y="322" width="22" height="22" rx="5"/>
+    <rect x="73" y="350" width="22" height="22" rx="5"/>
+    <rect x="101" y="350" width="22" height="22" rx="5"/>
+    <rect x="129" y="350" width="22" height="22" rx="5"/>
+    <rect x="157" y="350" width="22" height="22" rx="5"/>
+    <rect x="185" y="350" width="22" height="22" rx="5"/>
+    <rect x="213" y="350" width="22" height="22" rx="5"/>
+    <rect x="241" y="350" width="22" height="22" rx="5"/>
+    <rect x="269" y="350" width="22" height="22" rx="5"/>
+    <rect x="297" y="350" width="22" height="22" rx="5"/>
+    <rect x="325" y="350" width="22" height="22" rx="5"/>
+    <rect x="73" y="378" width="22" height="22" rx="5"/>
+    <rect x="101" y="378" width="22" height="22" rx="5"/>
+    <rect x="129" y="378" width="22" height="22" rx="5"/>
+    <rect x="157" y="378" width="22" height="22" rx="5"/>
+    <rect x="185" y="378" width="22" height="22" rx="5"/>
+    <rect x="213" y="378" width="22" height="22" rx="5"/>
+    <rect x="241" y="378" width="22" height="22" rx="5"/>
+    <rect x="269" y="378" width="22" height="22" rx="5"/>
+    <rect x="297" y="378" width="22" height="22" rx="5"/>
+    <rect x="325" y="378" width="22" height="22" rx="5"/>
+  </g>
+  <rect x="325" y="126" width="22" height="22" rx="5" fill="var(--gold-fill)"/>
+</svg>
+    </figure>
+  </section>
+
+  <div class="facts rise">
+    <div class="fact"><span class="n">1%</span><span class="l">σε καταθέσεις &amp; ομόλογα έως 2 έτη</span></div>
+    <div class="fact"><span class="n">0%</span><span class="l">σε λεφτά δεσμευμένα πάνω από 2 έτη</span></div>
+    <div class="fact"><span class="n">0%</span><span class="l">τόκος σε αυτά τα αποθεματικά, από τον Σεπτ. 2023</span></div>
+    <div class="fact"><span class="n">6</span><span class="l">εβδομάδες περίπου: μετράει ο μέσος όρος, όχι η κάθε μέρα</span></div>
+  </div>
+
+  <!-- ================= ΔΕΝ ΕΙΝΑΙ ΦΡΕΝΟ ================= -->
+  <section class="scene split flip rise">
+    <div class="txt">
+      <span class="tag no">Η παγίδα</span>
+      <h2>Το 1% δεν είναι φρένο</h2>
+      <p>Οι τράπεζες της ευρωζώνης έχουν σήμερα <b>χιλιάδες φορές</b> περισσότερα αποθεματικά απ' όσα τους ζητάει ο κανόνας — υπόλειμμα από τα χρόνια που η ΕΚΤ αγόραζε ομόλογα.</p>
+      <p>Και αν λείψουν, τα δανείζονται: από άλλη τράπεζα ή από την ίδια την ΕΚΤ, δίνοντας ενέχυρο.</p>
+    </div>
+    <figure>
+      <svg viewBox="0 0 560 260" role="img" aria-label="Σύγκριση: ελάχιστο απαιτούμενο αποθεματικό ελάχιστο, πραγματικά αποθεματικά τεράστια">
+        <g font-family="Alegreya Sans, sans-serif">
+          <text x="20" y="40" font-size="15" font-weight="800" letter-spacing="1.5" fill="var(--soft)">ΤΙ ΖΗΤΑΕΙ Ο ΚΑΝΟΝΑΣ</text>
+          <rect x="20" y="56" width="16" height="34" rx="5" fill="var(--euro)"/>
+          <text x="50" y="82" font-size="20" font-weight="900" fill="var(--euro)">λίγα δισ. €</text>
+
+          <text x="20" y="146" font-size="15" font-weight="800" letter-spacing="1.5" fill="var(--soft)">ΤΙ ΕΧΟΥΝ ΠΡΑΓΜΑΤΙΚΑ</text>
+          <rect x="20" y="162" width="520" height="34" rx="7" fill="var(--gold-fill)"/>
+          <text x="20" y="230" font-size="30" font-weight="900" fill="var(--gold)">πάνω από 2 τρισ. €</text>
+        </g>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ================= ΤΑ ΑΛΗΘΙΝΑ ΦΡΕΝΑ ================= -->
+  <section class="txt rise" style="gap:10px">
+    <span class="tag yes">Τότε τι τις σταματάει;</span>
+    <h2>Τέσσερα αληθινά φρένα</h2>
+  </section>
+
+  <div class="brakes rise">
+    <div class="brake">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 6 L54 15 V32 c0 14-10 22-22 26 C22 54 10 46 10 32 V15 Z" fill="var(--teal)" opacity=".16"/>
+        <path d="M32 6 L54 15 V32 c0 14-10 22-22 26 C22 54 10 46 10 32 V15 Z" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M22 32 l7 8 14-16" fill="none" stroke="var(--teal)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Δικά τους λεφτά στο τραπέζι</h3>
+      <p>Για κάθε δάνειο, η τράπεζα πρέπει να έχει δικά της κεφάλαια. Αυτό — όχι το 1% — είναι το πραγματικό όριο.</p>
+    </div>
+    <div class="brake">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 8 C32 8 48 26 48 38 a16 16 0 0 1-32 0 C16 26 32 8 32 8 Z" fill="var(--euro)" opacity=".16"/>
+        <path d="M32 8 C32 8 48 26 48 38 a16 16 0 0 1-32 0 C16 26 32 8 32 8 Z" fill="none" stroke="var(--euro)" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M24 38 a8 8 0 0 0 8 8" fill="none" stroke="var(--euro)" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <h3>Μαξιλάρι για 30 μέρες</h3>
+      <p>Πρέπει να αντέχουν έναν μήνα μαζικών αναλήψεων χωρίς να ζητήσουν βοήθεια.</p>
+    </div>
+    <div class="brake">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="22" fill="var(--gold-fill)" opacity=".2"/>
+        <circle cx="32" cy="32" r="22" fill="none" stroke="var(--gold)" stroke-width="3"/>
+        <path d="M32 32 L44 22" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="32" cy="32" r="4" fill="var(--gold)"/>
+        <path d="M32 6 v5 M58 32 h-5 M32 58 v-5 M6 32 h5" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h3>Το επιτόκιο της ΕΚΤ</h3>
+      <p>Αυτό είναι το πραγματικό τιμόνι: ακριβό χρήμα, λιγότερα δάνεια. Φθηνό χρήμα, περισσότερα.</p>
+    </div>
+    <div class="brake">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="26" cy="22" r="10" fill="var(--coral)" opacity=".18"/>
+        <circle cx="26" cy="22" r="10" fill="none" stroke="var(--coral)" stroke-width="3"/>
+        <path d="M8 54 a18 20 0 0 1 36 0" fill="none" stroke="var(--coral)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M40 34 l6 6 12-14" fill="none" stroke="var(--coral)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Κάποιος να μπορεί να πληρώσει</h3>
+      <p>Χωρίς πελάτη που θέλει δάνειο και μπορεί να το εξυπηρετήσει, δεν γεννιέται ούτε ένα ευρώ.</p>
+    </div>
+  </div>
+
+  <!-- ================= ΓΙΑ ΣΕΝΑ ================= -->
+  <section class="txt rise" style="gap:10px">
+    <span class="tag rule">Τι σημαίνει πρακτικά</span>
+    <h2>Τρία πράγματα που αξίζει να κρατήσεις</h2>
+  </section>
+
+  <div class="you rise">
+    <div class="card">
+      <h3>Το χρήμα είναι εμπιστοσύνη</h3>
+      <p>Δεν υπάρχει υπόγειο με χρυσό. Υπάρχει ένα λογιστικό βιβλίο και η πεποίθηση ότι θα σε πληρώσουν.</p>
+    </div>
+    <div class="card">
+      <h3>Καμία τράπεζα δεν αντέχει πανικό</h3>
+      <p>Αν όλοι ζητήσουν μετρητά την ίδια μέρα, δεν φτάνουν πουθενά. Γι' αυτό υπάρχει εγγύηση καταθέσεων <b>100.000 € ανά καταθέτη, ανά τράπεζα</b>.</p>
+    </div>
+    <div class="card">
+      <h3>Περισσότερα δάνεια, περισσότερο χρήμα</h3>
+      <p>Και περισσότερο χρήμα που κυνηγά τα ίδια αγαθά σημαίνει πληθωρισμό. Γι' αυτό η ΕΚΤ κοιτάζει το επιτόκιο, όχι το 1%.</p>
+    </div>
+  </div>
+
+  <!-- ================= ΚΛΕΙΣΙΜΟ ================= -->
+  <section class="closing rise">
+    <p class="eyebrow">Σε μία γραμμή</p>
+    <p class="line">Τα δάνεια δεν έρχονται από τις καταθέσεις. <em>Τα δάνεια φτιάχνουν τις καταθέσεις.</em></p>
+    <p>Το «κλασματικό αποθεματικό» του 1% είναι λογιστικός κανόνας, όχι κρουνός. Ο κρουνός είναι το επιτόκιο και τα κεφάλαια των τραπεζών.</p>
+  </section>
+
+  <footer class="rise">
+    <p><b>Η μία ένσταση, τίμια:</b> ο «πολλαπλασιαστής καταθέσεων» διδάσκεται ακόμη σε σχολεία και πανεπιστήμια. Οι ίδιες οι κεντρικές τράπεζες (Bank of England 2014, Bundesbank 2017, δημοσιεύσεις ΕΚΤ) γράφουν ρητά ότι η σειρά είναι αντίστροφη: πρώτα το δάνειο, μετά τα αποθεματικά. Αν κάποιος σου πει το αντίθετο, δεν είσαι εσύ που κάνεις λάθος.</p>
+    <p style="margin-top:12px">Κανόνες: ελάχιστα αποθεματικά ΕΚΤ 1% από 18.1.2012 (πριν 2%), με εφάπαξ απαλλαγή 100.000 € ανά τράπεζα και μηδενικό τόκο από 20.9.2023 · κεφαλαιακές &amp; εποπτικές απαιτήσεις από τους ευρωπαϊκούς κανονισμούς CRR/CRD · εγγύηση καταθέσεων 100.000 € ανά καταθέτη ανά τράπεζα. Το «πάνω από 2 τρισ. €» είναι τάξη μεγέθους πλεονάζουσας ρευστότητας ευρωσυστήματος το 2025, όχι ακριβές νούμερο ημέρας.</p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.rise');
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    document.documentElement.classList.add('js-anim');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Λόγια εναντίον Ενστίκτου</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF4; --card:#FFFFFF; --ink:#101A2E; --soft:#5A6480; --line:#D2D9E6;
+  --euro:#123FA8; --euro-deep:#0B2464; --gold:#C98209; --gold-text:#8F5B05; --gold-fill:#F0B429;
+  --coral:#C93F32; --teal:#0E6E62; --dot-off:#C3CCDC;
+  --shadow:0 1px 0 rgba(16,26,46,.05), 0 24px 48px -34px rgba(11,36,100,.55);
+  --disp:"Alegreya Sans","Helvetica Neue",Arial,sans-serif;
+  --book:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+    --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+    --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B1220; --card:#141D2F; --ink:#E8EDF7; --soft:#97A3BC; --line:#25324B;
+  --euro:#7BA4FF; --euro-deep:#0E1B39; --gold:#FFC44D; --gold-text:#FFC44D; --gold-fill:#FFC44D;
+  --coral:#FF7F6B; --teal:#3CC9B2; --dot-off:#2E3B55;
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 24px 48px -34px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+  padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  font-size:17px; line-height:1.45;
+}
+.wrap{width:100%; max-width:620px; flex:1; display:flex; flex-direction:column}
+
+/* ---------- τυπογραφία ---------- */
+h1{font-size:clamp(30px,8vw,44px); line-height:1.02; margin:0 0 6px; letter-spacing:-.02em; font-weight:800}
+.lede{font-family:var(--book); color:var(--soft); margin:0 0 20px; font-size:clamp(15px,4vw,18px)}
+.big{font-size:clamp(44px,13vw,72px); font-weight:800; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums}
+.mono{font-variant-numeric:tabular-nums}
+.kat{font-size:clamp(21px,5.4vw,26px); font-weight:800; margin:2px 0 4px; letter-spacing:-.01em}
+.sub{font-family:var(--book); color:var(--soft); font-size:15px; margin:0 0 18px; line-height:1.35}
+.q{font-family:var(--book); font-size:clamp(17px,4.6vw,20px); margin:0 0 4px}
+.q b{font-weight:600; color:var(--euro)}
+
+/* ---------- κάρτα ---------- */
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:14px;
+}
+.scr{display:none} .scr.on{display:block; animation:in .28s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- κουμπιά ---------- */
+button{font-family:inherit; font-size:inherit; cursor:pointer; border:none; background:none; color:inherit}
+.btn{
+  display:block; width:100%; padding:17px 20px; border-radius:15px;
+  background:var(--euro); color:#fff; font-weight:800; font-size:19px;
+  box-shadow:0 10px 24px -14px rgba(18,63,168,.9); margin-bottom:14px;
+}
+:root:not([data-theme="light"]) .btn{color:#08122A}
+:root[data-theme="dark"] .btn{color:#08122A}
+.btn.ghost{background:transparent; color:var(--soft); border:1.5px solid var(--line); box-shadow:none; font-size:17px}
+
+/* ---------- πρόοδος ---------- */
+.prog{display:flex; gap:5px; margin:0 4px 12px}
+.pip{flex:1; height:5px; border-radius:99px; background:var(--line)}
+.pip.done{background:var(--teal)} .pip.now{background:var(--euro)}
+.pip.miss{background:var(--coral)}
+
+/* ══════════ Η ΚΑΡΤΑ ΠΟΥ ΣΕΡΝΕΤΑΙ ══════════
+   Τα δύο κουμπιά είναι η ΚΥΡΙΑ οδός και δουλεύουν πάντα· το σύρσιμο είναι
+   επιπλέον, για το κινητό. Ποτέ μόνο σύρσιμο: μπροστά σε άνθρωπο που δεν το
+   περιμένει, μια κάρτα που δεν λέει πώς απαντιέται είναι νεκρός χρόνος.      */
+.swipe{
+  position:relative; touch-action:pan-y; user-select:none; -webkit-user-select:none;
+  transition:transform .0s;
+}
+.swipe.snap{transition:transform .22s cubic-bezier(.2,.7,.3,1)}
+.swipe .stamp{
+  position:absolute; top:14px; font-size:26px; font-weight:800; letter-spacing:.04em;
+  padding:6px 14px; border-radius:11px; border:3px solid currentColor; opacity:0;
+  pointer-events:none; transition:opacity .12s;
+}
+.swipe .stamp.m{left:14px; color:var(--coral); transform:rotate(-9deg)}
+.swipe .stamp.a{right:14px; color:var(--teal); transform:rotate(9deg)}
+
+.dhl{font-family:var(--book); font-size:clamp(19px,5.2vw,24px); line-height:1.35; margin:0}
+.dhl b{font-weight:600}
+.art{width:100%; height:auto; display:block; margin:0 0 16px}
+
+.two{display:flex; gap:10px; margin-bottom:14px}
+.two button{
+  flex:1; padding:17px 8px; border-radius:15px; font-weight:800; font-size:19px;
+  border:2px solid currentColor; background:var(--card);
+}
+.two .m{color:var(--coral)} .two .a{color:var(--teal)}
+.hint{font-family:var(--book); font-size:13.5px; color:var(--soft); text-align:center;
+  margin:-6px 0 14px}
+
+/* ---------- η αποκάλυψη ---------- */
+.verdict{display:flex; align-items:center; gap:12px; margin:0 0 10px}
+.verdict .tag{
+  font-size:22px; font-weight:800; letter-spacing:.03em; padding:7px 15px;
+  border-radius:12px; border:3px solid currentColor; flex:none;
+}
+.verdict .tag.m{color:var(--coral)} .verdict .tag.a{color:var(--teal)}
+.verdict .ok{font-weight:800; font-size:16px}
+.verdict .ok.yes{color:var(--teal)} .verdict .ok.no{color:var(--coral)}
+.ex{font-family:var(--book); font-size:16px; line-height:1.45; margin:0}
+.ex b{font-weight:600; color:var(--ink)}
+.src{font-family:var(--book); font-size:13px; color:var(--soft); margin:10px 0 0; line-height:1.4}
+
+/* ---------- πίνακας ανασκόπησης ---------- */
+.tbl{width:100%; border-collapse:collapse; font-size:15px}
+.tbl td{padding:8px 2px; border-bottom:1px solid var(--line); vertical-align:baseline}
+.tbl td:last-child{text-align:right; font-weight:800; white-space:nowrap}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .nm{font-family:var(--book); color:var(--soft); font-size:13.5px; display:block}
+.punch{
+  background:var(--euro-deep); color:#fff; border-radius:20px; padding:22px 20px; margin-bottom:14px;
+}
+.punch h2{margin:0 0 6px; font-size:clamp(20px,5.2vw,25px); font-weight:800; color:#fff}
+.punch p{margin:0; font-family:var(--book); font-size:16px; line-height:1.4; color:#C9D6F5}
+:root[data-theme="dark"] .punch{background:#0E1B39}
+
+/* ---------- υποσέλιδο ---------- */
+footer{
+  max-width:620px; width:100%; font-family:var(--book); font-size:12.5px;
+  color:var(--soft); line-height:1.5; padding:16px 4px 8px; border-top:1px solid var(--line);
+}
+footer b{font-weight:600; color:var(--ink)}
+.tog{position:fixed; top:10px; right:10px; width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card); font-size:16px; z-index:9; box-shadow:var(--shadow)}
+@media(min-width:680px){ .card{padding:26px 28px} body{padding-top:26px} }
+.tog.back{
+  left:10px; right:auto; text-decoration:none; font-weight:800; font-size:19px;
+  align-items:center; justify-content:center; padding-bottom:2px;
+}
+body.hasback{padding-top:58px}
+@media(min-width:680px){ body.hasback{padding-top:26px} }
+
+/* ══════════ ΤΟ ΠΑΙΧΝΙΔΙ ΤΩΝ ΔΥΟ ══════════ */
+.who{
+  display:inline-block; font-weight:800; font-size:13px; letter-spacing:.06em;
+  padding:5px 12px; border-radius:99px; border:2px solid currentColor; margin:0 0 12px;
+}
+.who.a{color:var(--euro)} .who.b{color:var(--gold-text)}
+.opts button{
+  display:block; width:100%; text-align:left; padding:15px 16px; border-radius:14px;
+  border:1.5px solid var(--line); background:var(--card); margin-bottom:10px;
+  font-family:var(--book); font-size:16px; line-height:1.35;
+}
+.opts button:active{border-color:var(--euro)}
+.opts b{font-family:var(--disp); font-weight:800; color:var(--soft); margin-right:8px}
+.namerow{margin-bottom:16px}
+.namerow label{display:block; font-family:var(--book); font-size:14px; color:var(--soft); margin-bottom:6px}
+.namerow input{
+  width:100%; padding:14px 15px; border-radius:14px; border:1.5px solid var(--line);
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  font-size:19px; font-weight:800;
+}
+.hand{text-align:center; padding:34px 20px}
+.hand .nm{font-size:clamp(30px,9vw,46px); font-weight:800; letter-spacing:-.02em; margin:0 0 8px}
+.hand p{font-family:var(--book); color:var(--soft); margin:0; font-size:16px}
+.pair{display:flex; gap:10px; margin-bottom:14px}
+.pair>div{
+  flex:1; background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:14px; text-align:center;
+}
+.pair .n{font-weight:800; font-size:14px; letter-spacing:.04em; margin-bottom:6px}
+.pair .s{font-size:clamp(26px,8vw,34px); font-weight:800; line-height:1; font-variant-numeric:tabular-nums}
+.pair .u{font-family:var(--book); font-size:12.5px; color:var(--soft); margin-top:4px}
+.axis{border-bottom:1px solid var(--line); padding:12px 0}
+.axis:last-child{border-bottom:none}
+.axis .h{font-weight:800; font-size:16px; margin-bottom:2px}
+.axis .g{font-family:var(--book); font-size:13.5px; color:var(--soft); margin-bottom:7px}
+.axis .r{font-family:var(--book); font-size:14.5px; line-height:1.4; margin:3px 0}
+.axis .r .ok{font-weight:800; color:var(--teal)}
+.axis .r .mid{font-weight:800; color:var(--gold-text)}
+.axis .r .no{font-weight:800; color:var(--coral)}
+.bar{height:8px; border-radius:99px; background:var(--line); position:relative; margin:9px 0 3px}
+.bar i{position:absolute; top:-4px; width:16px; height:16px; border-radius:50%; margin-left:-8px}
+.bar i.a{background:var(--euro)} .bar i.b{background:var(--gold-fill)}
+.barlab{display:flex; justify-content:space-between; font-family:var(--book); font-size:12px; color:var(--soft)}
+/* Χωρίς υπόμνημα η μπάρα ΔΕΝ διαβάζεται: δύο κουκκίδες χωρίς όνομα δεν λένε
+   τίποτα. Πιάστηκε στον οπτικό έλεγχο — το «title» δεν φαίνεται σε κινητό. */
+.leg2{display:flex; gap:16px; margin:0 0 14px; font-family:var(--book); font-size:13.5px; color:var(--soft)}
+.leg2 span{display:flex; align-items:center; gap:7px}
+.leg2 i{width:14px; height:14px; border-radius:50%; flex:none}
+.leg2 i.a{background:var(--euro)} .leg2 i.b{background:var(--gold-fill)}
+</style>
+</head>
+<body>
+<button class="tog" id="tog" title="Φωτεινό / σκοτεινό" aria-label="Αλλαγή θέματος">◐</button>
+<a class="tog back" id="toTamploTop" href="index.html"
+   title="Πίσω στο ταμπλό" aria-label="Πίσω στο ταμπλό" style="display:none">←</a>
+
+<div class="wrap">
+
+<!-- ══════════ ΑΡΧΗ ══════════ -->
+<section class="scr on" id="s-start">
+  <h1>Λόγια εναντίον Ενστίκτου</h1>
+  <p class="lede">Παίζεται από <b>δύο</b>, με ένα κινητό. Ο καθένας λέει τι θα έκανε —
+     και μαντεύει τι είπε ο άλλος. Η διαφορά ανάμεσα στα δύο είναι η κουβέντα.</p>
+
+  <div class="card">
+    <svg class="art" viewBox="0 0 300 132" role="img"
+         aria-label="Δύο άνθρωποι: ο ένας λέει, ο άλλος μαντεύει — και δεν συμπίπτουν">
+      <rect x="8" y="16" width="120" height="52" rx="14" fill="none" stroke="var(--euro)" stroke-width="2.5"/>
+      <text x="68" y="38" text-anchor="middle" font-family="var(--book)" font-size="11.5" fill="var(--soft)">τι λέω για μένα</text>
+      <text x="68" y="58" text-anchor="middle" font-family="var(--disp)" font-size="17" font-weight="800" fill="var(--euro)">ΛΟΓΙΑ</text>
+      <rect x="172" y="16" width="120" height="52" rx="14" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
+      <text x="232" y="38" text-anchor="middle" font-family="var(--book)" font-size="11.5" fill="var(--soft)">τι νομίζει για μένα</text>
+      <text x="232" y="58" text-anchor="middle" font-family="var(--disp)" font-size="17" font-weight="800" fill="var(--gold-text)">ΕΝΣΤΙΚΤΟ</text>
+      <path d="M128 34 C148 34 152 50 172 50" fill="none" stroke="var(--line)" stroke-width="2.5"/>
+      <path d="M128 50 C148 50 152 34 172 34" fill="none" stroke="var(--line)" stroke-width="2.5"/>
+      <path d="M46 92 H254" stroke="var(--coral)" stroke-width="2" stroke-dasharray="5 5"/>
+      <text x="150" y="86" text-anchor="middle" font-family="var(--book)" font-size="12" fill="var(--soft)">η απόσταση ανάμεσά τους</text>
+      <text x="150" y="122" text-anchor="middle" font-family="var(--disp)" font-size="14" font-weight="800" fill="var(--coral)">…εκεί αρχίζει η συζήτηση</text>
+    </svg>
+    <p class="q" style="margin:0">Έξι διλήμματα. Κανένα δεν έχει σωστή απάντηση —
+      έχουν όμως <b>δική σου</b> απάντηση. Το ερώτημα είναι αν την ξέρει ο άλλος.</p>
+  </div>
+
+  <button class="btn" id="go">Είμαστε δύο — πάμε</button>
+</section>
+
+<!-- ══════════ ΤΑ ΟΝΟΜΑΤΑ ══════════ -->
+<section class="scr" id="s-names">
+  <h2 class="kat">Ποιοι παίζετε;</h2>
+  <p class="sub">Μόνο τα μικρά ονόματα, και μόνο για να ξέρει η σελίδα ποιος απαντά.
+     Μένουν σε αυτό εδώ το κινητό και σβήνονται με το «Καθάρισε» του ταμπλό.
+     Αν το προσπεράσεις, γίνεστε <b>Α</b> και <b>Β</b>.</p>
+  <div class="card">
+    <div class="namerow">
+      <label>Ο πρώτος που θα απαντήσει</label>
+      <input id="nA" type="text" maxlength="14" placeholder="π.χ. Μαρία" autocomplete="off">
+    </div>
+    <div class="namerow" style="margin-bottom:0">
+      <label>Ο δεύτερος</label>
+      <input id="nB" type="text" maxlength="14" placeholder="π.χ. Νίκος" autocomplete="off">
+    </div>
+  </div>
+  <button class="btn" id="toHand">Ξεκινάμε</button>
+</section>
+
+<!-- ══════════ ΠΑΣΕ ΤΟ ΚΙΝΗΤΟ ══════════ -->
+<section class="scr" id="s-hand">
+  <div class="card hand">
+    <p class="nm" id="h-nm">—</p>
+    <p id="h-tx">—</p>
+  </div>
+  <button class="btn" id="handGo">Το κρατάω εγώ τώρα</button>
+</section>
+
+<!-- ══════════ ΤΟ ΔΙΛΗΜΜΑ ══════════ -->
+<section class="scr" id="s-play">
+  <div class="prog" id="prog"></div>
+  <span class="who" id="who">—</span>
+  <div class="card">
+    <p class="q" id="q">—</p>
+    <p class="sub" id="qsub" style="margin:6px 0 0">—</p>
+  </div>
+  <div class="opts" id="opts"></div>
+</section>
+
+<!-- ══════════ ΤΕΛΟΣ ══════════ -->
+<section class="scr" id="s-end">
+  <div class="punch">
+    <h2>Σε μία γραμμή</h2>
+    <p id="punch">—</p>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Πόσο καλά ξέρει ο ένας τον άλλον</h2>
+    <p class="sub" style="margin-bottom:12px">Κάθε σωστή μαντεψιά 50 · παραδίπλα 20 · τελείως αλλού 0.</p>
+    <div class="pair">
+      <div><div class="n" id="p-nA">Α</div><div class="s mono" id="p-sA">0</div><div class="u">στα 300</div></div>
+      <div><div class="n" id="p-nB">Β</div><div class="s mono" id="p-sB">0</div><div class="u">στα 300</div></div>
+    </div>
+    <p class="sub" id="rank" style="margin:0">—</p>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Πού διαφέρετε πραγματικά</h2>
+    <p class="sub" style="margin-bottom:10px">Η θέση του καθενός στα έξι διλήμματα.
+       Όσο πιο μακριά οι δύο κουκκίδες, τόσο πιο μεγάλη η κουβέντα που χρωστάτε.</p>
+    <div class="leg2" id="leg2"></div>
+    <div id="axes"></div>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Το τυφλό σημείο</h2>
+    <p class="q" id="blind">—</p>
+  </div>
+
+  <div class="card">
+    <h2 class="kat">Τι να κρατήσετε</h2>
+    <p class="q"><b>Κανένα από τα δύο δεν είναι λάθος.</b> Το ένα φρενάρει, το άλλο πατάει
+      γκάζι — και τα δύο μαζί κρατάνε το αυτοκίνητο στον δρόμο. Το πρόβλημα δεν είναι
+      η διαφορά· είναι όταν κανείς από τους δύο δεν την ξέρει.</p>
+    <p class="q" style="margin-bottom:0"><b>Ένα πλάνο που το άντεξε μόνο ο ένας, δεν άντεξε.</b>
+      Στην πρώτη πτώση αποφασίζει αυτός που δεν ρωτήθηκε.</p>
+  </div>
+
+  <a class="btn ghost" id="toTamplo" href="index.html"
+     style="display:none; text-align:center; text-decoration:none">← Πίσω στο ταμπλό</a>
+  <button class="btn ghost" id="again">Δώσ' το στους επόμενους</button>
+</section>
+
+</div>
+
+<footer>
+  <b>Τι μετράει και τι όχι:</b> το παιχνίδι <b>δεν</b> βγάζει προφίλ επενδυτή και δεν κρίνει
+  ποιος έχει δίκιο. Μετράει ένα και μόνο πράγμα: <b>πόσο καλά προβλέπει ο ένας τον άλλον.</b>
+  Καμία απάντηση δεν είναι σωστή ή λάθος.
+  <br><br>
+  <b>Τα έξι διλήμματα</b> δεν γράφτηκαν εδώ: αντλούνται αυτούσια από το εργαλείο
+  <span class="mono">investment_compass</span> με
+  <span class="mono">εργαλεία/άντληση_διλημμάτων.py</span> και ελέγχονται λέξη προς λέξη από
+  <span class="mono">εργαλεία/έλεγχος_διλημμάτων.py</span>. Καθένα πατάει σε δημοσιευμένο
+  εύρημα της συμπεριφορικής οικονομίας:<br><b>Το Φρένο</b> (Αποστροφή Ζημιάς) — Prospect Theory (Kahneman & Tversky, 1979). Ο πόνος μιας απώλειας βιώνεται περίπου 2 φορές πιο έντονα από τη χαρά ενός ίσου κέρδους.<br><b>Το Τώρα</b> (Προκατάληψη του Τώρα) — Hyperbolic Discounting (Thaler 1981, Laibson 1997). Προτιμάμε μικρότερη άμεση ανταμοιβή από μεγαλύτερη μελλοντική — η αξία του μέλλοντος προεξοφλείται απότομα.<br><b>Ο Καθρέφτης</b> (Προκατάληψη Πρόσφατου) — Availability Heuristic (Tversky & Kahneman, 1973). Κρίνουμε την πιθανότητα ενός γεγονότος από το πόσο εύκολα το ανακαλούμε — τα πρόσφατα βαραίνουν δυσανάλογα.<br><b>Το Ρεύμα</b> (Αγελαία Συμπεριφορά) — Social Proof / Herding (Banerjee 1992). Μιμούμαστε τις αποφάσεις των πολλών σε συνθήκες αβεβαιότητας — ακόμη κι όταν η δική μας πληροφορία λέει άλλο.<br><b>Η Άγκυρα</b> (Μεροληψία Αδράνειας) — Status-Quo Bias (Samuelson & Zeckhauser, 1988). Διατηρούμε την τρέχουσα κατάσταση ακόμη κι όταν μια αλλαγή θα μας συνέφερε — η προεπιλογή έχει τεράστια δύναμη.<br><b>Το Τιμόνι</b> (Υπερβολική Αυτοπεποίθηση) — Overconfidence / Illusion of Control (Odean, 1998). Υπερεκτιμούμε την ακρίβεια των κρίσεών μας και τον έλεγχό μας πάνω σε τυχαία γεγονότα.
+  <br><br>
+  <b>Τι ΔΕΝ είναι:</b> δεν είναι ψυχομετρικό τεστ, δεν είναι διάγνωση και δεν είναι
+  αξιολόγηση σχέσης. Έξι ερωτήσεις δεν χαρακτηρίζουν άνθρωπο — ανοίγουν κουβέντα.
+  Οι «τύποι» (Το Φρένο, Το Τώρα, Ο Καθρέφτης, Το Ρεύμα, Η Άγκυρα, Το Τιμόνι) είναι
+  <b>ονόματα τάσης, όχι ταμπέλες χαρακτήρα</b>.
+  <br><br>
+  <b>Τα ονόματα και οι απαντήσεις</b> μένουν σε αυτό εδώ το κινητό, δεν φεύγουν πουθενά
+  και σβήνονται με το «Καθάρισε» του ταμπλό. Το παιχνίδι <b>δεν γράφει τίποτα στο
+  διαβατήριο</b>: οι απαντήσεις είναι δύο ανθρώπων, το διαβατήριο κρατάει έναν.
+  <br><br>
+  Παιχνίδι ενημέρωσης — δεν αποτελεί επενδυτική συμβουλή, ασφαλιστική πρόταση ή προσφορά.
+</footer>
+<script>
+"use strict";
+
+/* ═══════════ Η ΚΟΙΝΗ ΜΝΗΜΗ ΤΟΥ «ΚΕΡΑΣΜΑΤΟΣ» ═══════════
+   Το ίδιο κομμάτι υπάρχει ΑΥΤΟΥΣΙΟ και στα επτά παιχνίδια, στο «Πόσες μέρες
+   ακόμα μαζί;» και στο ταμπλό.
+   Κρατάει μόνο ό,τι έγραψε ο ίδιος ο παίκτης, σε αυτόν εδώ τον υπολογιστή:
+   τίποτα δεν φεύγει πουθενά, καμία σύνδεση, κανένας server.
+   Αν ο φυλλομετρητής δεν αφήνει αποθήκευση (π.χ. ιδιωτική περιήγηση), το
+   παιχνίδι δουλεύει ΑΚΡΙΒΩΣ το ίδιο — απλώς δεν γεμίζει το ταμπλό.
+
+   ΤΟ ΔΙΑΒΑΤΗΡΙΟ — ό,τι είπε για τον εαυτό του (ηλικία, φύλο, πόσα βάζει,
+   δάνειο) ζει σε ΕΝΑ σημείο, ώστε το επόμενο παιχνίδι να μην το ξαναρωτήσει.
+   Δύο κανόνες, και οι δύο για τον ίδιο λόγο — να μην μπουν στο στόμα του
+   λόγια που δεν είπε:
+     1. Γράφεται ΜΟΝΟ ό,τι άγγιξε ο ίδιος. Μια δική μας προεπιλογή δεν είναι
+        απάντησή του και δεν μπαίνει ποτέ στο διαβατήριο.
+     2. Το διαβατήριο ΦΑΙΝΕΤΑΙ στο ταμπλό, πάντα και πρώτο. Αν δοθεί το κινητό
+        σε δεύτερο άνθρωπο, το πρώτο που βλέπει είναι τι ξέρει η σελίδα για
+        τον προηγούμενο — και δίπλα του το «Καθάρισε».                       */
+const KERASMA = (function(){
+  const P = "KERASMA:v1:";
+  let zei = null;
+  function ok(){
+    if(zei !== null) return zei;
+    try{ localStorage.setItem(P + "dokimi", "1"); localStorage.removeItem(P + "dokimi"); zei = true; }
+    catch(e){ zei = false; }
+    return zei;
+  }
+  function fakelaki(){
+    if(!ok()) return {};
+    try{ return JSON.parse(localStorage.getItem(P + "pass")) || {}; }catch(e){ return {}; }
+  }
+  return {
+    zei: ok,
+    grapse(id, d){
+      if(!ok()) return false;
+      d.v = 1; d.id = id; d.pote = Date.now();
+      try{ localStorage.setItem(P + "p:" + id, JSON.stringify(d)); return true; }catch(e){ return false; }
+    },
+    diavase(id){
+      if(!ok()) return null;
+      try{ return JSON.parse(localStorage.getItem(P + "p:" + id)); }catch(e){ return null; }
+    },
+    svise(id){ if(ok()){ try{ localStorage.removeItem(P + "p:" + id); }catch(e){} } },
+    onoma(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "onoma") || "";
+        localStorage.setItem(P + "onoma", v); return v;
+      }catch(e){ return ""; }
+    },
+    thema(v){
+      if(!ok()) return "";
+      try{
+        if(v === undefined) return localStorage.getItem(P + "thema") || "";
+        localStorage.setItem(P + "thema", v); return v;
+      }catch(e){ return ""; }
+    },
+    apoTamplo(v){
+      if(!ok()) return false;
+      try{
+        if(v === undefined) return localStorage.getItem(P + "tamplo") === "1";
+        localStorage.setItem(P + "tamplo", v ? "1" : "0"); return !!v;
+      }catch(e){ return false; }
+    },
+
+    /* ---------- ΤΟ ΔΙΑΒΑΤΗΡΙΟ ---------- */
+    olo: fakelaki,
+    pass(k){ return fakelaki()[k]; },
+    /* «είπε» — και το όνομα είναι η προδιαγραφή: μπαίνει μόνο ό,τι είπε. */
+    eipe(k, v){
+      if(!ok()) return false;
+      const o = fakelaki();
+      if(v === undefined || v === null || v === "") delete o[k]; else o[k] = v;
+      try{ localStorage.setItem(P + "pass", JSON.stringify(o)); return true; }catch(e){ return false; }
+    },
+    svisePass(){ if(ok()){ try{ localStorage.removeItem(P + "pass"); }catch(e){} } },
+    /* Δένει ένα πεδίο με το διαβατήριο: ανοίγει γεμάτο αν το έχει ήδη πει
+       αλλού, και γράφει πίσω ΜΟΝΟ αν το αγγίξει ο ίδιος.
+       Το κόψιμο στα όρια του πεδίου δεν γυρίζει ποτέ πίσω στο διαβατήριο:
+       αλλιώς το ΠΑΖΑΡΙ, που σταματάει στα 65, θα «διόρθωνε» σιωπηλά έναν
+       68άρη σε 65 — και το επόμενο παιχνίδι θα τον ρωτούσε σαν 65άρη.       */
+    dese(el, k){
+      if(!el) return;
+      const arith = el.type === "range" || el.type === "number";
+      const v = this.pass(k);
+      if(v !== undefined && v !== null && v !== ""){
+        if(arith){
+          const n = Number(v);
+          if(isFinite(n)){
+            const lo = el.min === "" ? -Infinity : Number(el.min);
+            const hi = el.max === "" ?  Infinity : Number(el.max);
+            el.value = Math.min(hi, Math.max(lo, n));
+          }
+        } else el.value = v;
+      }
+      const kata = () => {
+        if(!arith) return this.eipe(k, el.value);
+        const n = Number(el.value);
+        this.eipe(k, el.value === "" || !isFinite(n) ? undefined : n);
+      };
+      el.addEventListener("input", kata);
+      el.addEventListener("change", kata);
+    }
+  };
+})();
+
+/* Το φωτεινό/σκοτεινό ταξιδεύει μαζί με τον παίκτη: αν το γύρισε στο ταμπλό,
+   δεν έχει νόημα να ανοίγει το επόμενο παιχνίδι στο άλλο θέμα. */
+(function(){ const th = KERASMA.thema(); if(th) document.documentElement.setAttribute("data-theme", th); })();
+
+
+/* ═══════════ ΤΑ ΕΞΙ ΔΙΛΗΜΜΑΤΑ ═══════════
+   ΜΗΝ ΤΑ ΑΓΓΙΞΕΙΣ ΜΕ ΤΟ ΧΕΡΙ. Γράφονται από:
+       python3 εργαλεία/άντληση_διλημμάτων.py
+   και ελέγχονται λέξη προς λέξη από:
+       python3 εργαλεία/έλεγχος_διλημμάτων.py --σπάσε
+
+   Πηγή: investment_compass.html — Αποτύπωμα: f138ce7987af8fb74d0eaaed81356d28
+   Αντλήθηκε: 2026-08-25 · 6 από τα 12 (ένα ανά άξονα)                */
+const D = [
+ {
+  "k": "loss",
+  "key": "loss1",
+  "t": "Η επένδυσή σου έχει -15% φέτος. Τι κάνεις;",
+  "o": [
+   {
+    "g": "α",
+    "t": "Πουλάω αμέσως, δεν αντέχω άλλη πτώση",
+    "v": 10
+   },
+   {
+    "g": "β",
+    "t": "Ανησυχώ πολύ, αλλά περιμένω",
+    "v": 6
+   },
+   {
+    "g": "γ",
+    "t": "Το βλέπω ως ευκαιρία — ίσως βάλω κι άλλα",
+    "v": 0
+   }
+  ],
+  "nm": "Το Φρένο",
+  "ti": "κρατάει ό,τι έχει — η ζημιά πονάει διπλά από όσο ευχαριστεί το κέρδος",
+  "meth": "Prospect Theory (Kahneman & Tversky, 1979)",
+  "ref": "Ο πόνος μιας απώλειας βιώνεται περίπου 2 φορές πιο έντονα από τη χαρά ενός ίσου κέρδους.",
+  "lab": "Αποστροφή Ζημιάς"
+ },
+ {
+  "k": "present",
+  "key": "present1",
+  "t": "Τι προτιμάς;",
+  "o": [
+   {
+    "g": "α",
+    "t": "1.000€ στο χέρι σου σήμερα",
+    "v": 10
+   },
+   {
+    "g": "β",
+    "t": "1.150€ σε έναν χρόνο",
+    "v": 4
+   },
+   {
+    "g": "γ",
+    "t": "1.400€ σε τρία χρόνια",
+    "v": 0
+   }
+  ],
+  "nm": "Το Τώρα",
+  "ti": "ζει τη σημερινή μέρα· το αύριο προεξοφλείται απότομα",
+  "meth": "Hyperbolic Discounting (Thaler 1981, Laibson 1997)",
+  "ref": "Προτιμάμε μικρότερη άμεση ανταμοιβή από μεγαλύτερη μελλοντική — η αξία του μέλλοντος προεξοφλείται απότομα.",
+  "lab": "Προκατάληψη του Τώρα"
+ },
+ {
+  "k": "recency",
+  "key": "recency1",
+  "t": "Μετά από μια χρονιά με μεγάλες πτώσεις στις αγορές, πιστεύεις ότι:",
+  "o": [
+   {
+    "g": "α",
+    "t": "Θα συνεχίσουν να πέφτουν — καλύτερα να μείνω εκτός",
+    "v": 10
+   },
+   {
+    "g": "β",
+    "t": "Δεν ξέρω, μοιάζουν ριψοκίνδυνες τώρα",
+    "v": 5
+   },
+   {
+    "g": "γ",
+    "t": "Οι αγορές πάντα ανακάμπτουν μακροπρόθεσμα",
+    "v": 0
+   }
+  ],
+  "nm": "Ο Καθρέφτης",
+  "ti": "βλέπει μπροστά ό,τι μόλις συνέβη",
+  "meth": "Availability Heuristic (Tversky & Kahneman, 1973)",
+  "ref": "Κρίνουμε την πιθανότητα ενός γεγονότος από το πόσο εύκολα το ανακαλούμε — τα πρόσφατα βαραίνουν δυσανάλογα.",
+  "lab": "Προκατάληψη Πρόσφατου"
+ },
+ {
+  "k": "herding",
+  "key": "herding1",
+  "t": "Ένας φίλος βγάζει μεγάλα κέρδη σε μια «καυτή» επένδυση που όλοι συζητούν. Εσύ;",
+  "o": [
+   {
+    "g": "α",
+    "t": "Μπαίνω κι εγώ, δεν θέλω να το χάσω",
+    "v": 10
+   },
+   {
+    "g": "β",
+    "t": "Το ψάχνω, επειδή το ακούω από πολλούς",
+    "v": 6
+   },
+   {
+    "g": "γ",
+    "t": "Μένω στο δικό μου πλάνο ανεξάρτητα",
+    "v": 0
+   }
+  ],
+  "nm": "Το Ρεύμα",
+  "ti": "νιώθει ασφάλεια εκεί που πάνε οι πολλοί",
+  "meth": "Social Proof / Herding (Banerjee 1992)",
+  "ref": "Μιμούμαστε τις αποφάσεις των πολλών σε συνθήκες αβεβαιότητας — ακόμη κι όταν η δική μας πληροφορία λέει άλλο.",
+  "lab": "Αγελαία Συμπεριφορά"
+ },
+ {
+  "k": "status",
+  "key": "status1",
+  "t": "Έχεις χρήματα σε λογαριασμό ταμιευτηρίου με ~0% τόκο εδώ και χρόνια. Τα μετακινείς;",
+  "o": [
+   {
+    "g": "α",
+    "t": "Όχι, εκεί είναι ασφαλή — δεν τα πειράζω",
+    "v": 10
+   },
+   {
+    "g": "β",
+    "t": "Το σκέφτομαι, αλλά όλο το αναβάλλω",
+    "v": 6
+   },
+   {
+    "g": "γ",
+    "t": "Ήδη ψάχνω καλύτερες επιλογές",
+    "v": 0
+   }
+  ],
+  "nm": "Η Άγκυρα",
+  "ti": "μένει εκεί που είναι, ακόμα κι όταν η αλλαγή συμφέρει",
+  "meth": "Status-Quo Bias (Samuelson & Zeckhauser, 1988)",
+  "ref": "Διατηρούμε την τρέχουσα κατάσταση ακόμη κι όταν μια αλλαγή θα μας συνέφερε — η προεπιλογή έχει τεράστια δύναμη.",
+  "lab": "Μεροληψία Αδράνειας"
+ },
+ {
+  "k": "over",
+  "key": "over1",
+  "t": "Πόσο σίγουρος είσαι ότι μπορείς να διαλέξεις τη σωστή στιγμή για να μπεις/βγεις από τις αγορές;",
+  "o": [
+   {
+    "g": "α",
+    "t": "Αρκετά — παρακολουθώ και έχω καλό ένστικτο",
+    "v": 10
+   },
+   {
+    "g": "β",
+    "t": "Λίγο — κάποιες φορές το πετυχαίνω",
+    "v": 5
+   },
+   {
+    "g": "γ",
+    "t": "Κανείς δεν προβλέπει το timing — γι' αυτό μένω σταθερός",
+    "v": 0
+   }
+  ],
+  "nm": "Το Τιμόνι",
+  "ti": "πιστεύει ότι κρατάει το τιμόνι πιο σταθερά απ' όσο το κρατάει",
+  "meth": "Overconfidence / Illusion of Control (Odean, 1998)",
+  "ref": "Υπερεκτιμούμε την ακρίβεια των κρίσεών μας και τον έλεγχό μας πάνω σε τυχαία γεγονότα.",
+  "lab": "Υπερβολική Αυτοπεποίθηση"
+ }
+];
+/* ═══════════ ΔΕΔΟΜΕΝΑ — ΤΕΛΟΣ ═══════════ */
+
+/* ═══════════ Η ΜΗΧΑΝΗ ═══════════
+   Δεν υπάρχει «σωστή» απάντηση σε κανένα δίλημμα — άρα το μόνο που μετριέται
+   είναι η ΑΠΟΣΤΑΣΗ ανάμεσα σε δύο ανθρώπους:
+     · τι απάντησε ο καθένας για τον εαυτό του            (η αλήθεια του)
+     · τι μάντεψε ο καθένας για τον άλλον                 (το ένστικτό του)
+
+   Η βαθμολογία της μαντεψιάς πάει με ΑΠΟΣΤΑΣΗ ΕΠΙΛΟΓΗΣ, όχι με «σωστό/λάθος»:
+   το να πεις «β» ενώ ο άλλος είπε «α» δείχνει ότι τον ξέρεις σχεδόν — το να
+   πεις «γ» δείχνει ότι δεν τον ξέρεις καθόλου. Ίδια=50, παραδίπλα=20, αλλού=0. */
+const ΜΟΝΑΔΑ = 50, ΠΑΡΑΔΙΠΛΑ = 20;
+const vath = (mant, alith) => {
+  const d = Math.abs(mant - alith);
+  return d === 0 ? ΜΟΝΑΔΑ : d === 1 ? ΠΑΡΑΔΙΠΛΑ : 0;
+};
+
+/* ═══════════ ΚΑΤΑΣΤΑΣΗ ═══════════ */
+const NAM = ["Α", "Β"];
+/* self[παίκτης][δίλημμα] = ποια επιλογή διάλεξε ΓΙΑ ΤΟΝ ΕΑΥΤΟ ΤΟΥ
+   gues[παίκτης][δίλημμα] = τι μάντεψε ΓΙΑ ΤΟΝ ΑΛΛΟΝ                          */
+const self_ = [[], []], gues = [[], []];
+let turn = 0, phase = "self", qi = 0;
+
+const $ = id => document.getElementById(id);
+const allos = p => 1 - p;
+
+/* ΚΕΦΑΛΑΙΑ ΣΤΑ ΕΛΛΗΝΙΚΑ — και ο τόνος ΦΕΥΓΕΙ.
+   Το σκέτο toUpperCase() γράφει «ΜΑΡΊΑ». Στα ελληνικά τα κεφαλαία δεν
+   τονίζονται· τα διαλυτικά όμως ΜΕΝΟΥΝ («ΑΪΒΑΛΙ»). Γι' αυτό δεν αρκεί
+   πίνακας γραμμάτων: σπάμε τον χαρακτήρα στα συστατικά του (NFD), πετάμε
+   ΜΟΝΟ την οξεία, και τον ξαναδένουμε. Το όνομα του πελάτη γραμμένο λάθος,
+   μπροστά του, είναι από τα πράγματα που δεν συγχωρούνται.                */
+const ΚΕΦ = s => (s || "").toUpperCase()
+  .normalize("NFD").replace(/\u0301/g, "").normalize("NFC");
+
+$("tog").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const neo = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", neo);
+  KERASMA.thema(neo);
+};
+
+const show = id => {
+  document.querySelectorAll(".scr").forEach(s => s.classList.toggle("on", s.id === id));
+  scrollTo({top:0, behavior:"instant"});
+};
+
+/* ═══════════ ΟΝΟΜΑΤΑ ═══════════
+   Το όνομα μπαίνει ΚΕΦΑΛΑΙΟ και σκέτο, χωρίς άρθρο — «ΜΑΡΙΑ · τι απάντησε;».
+   Έτσι η σελίδα δεν χρειάζεται να ξέρει το φύλο κανενός για να μιλήσει σωστά
+   ελληνικά, και δεν ρωτάει κάτι που δεν της χρειάζεται.                      */
+$("go").onclick = () => show("s-names");
+$("toHand").onclick = () => {
+  const a = $("nA").value.trim(), b = $("nB").value.trim();
+  NAM[0] = a || "Α"; NAM[1] = b || "Β";
+  if(ΚΕΦ(NAM[0]) === ΚΕΦ(NAM[1])) NAM[1] = NAM[1] + " (2)";
+  turn = 0; phase = "self"; qi = 0;
+  self_[0].length = self_[1].length = gues[0].length = gues[1].length = 0;
+  hand();
+};
+
+function hand(){
+  $("h-nm").textContent = ΚΕΦ(NAM[turn]);
+  $("h-tx").innerHTML = turn === 0
+    ? "Πάρε το κινητό. Έξι διλήμματα για σένα — και μετά έξι μαντεψιές για τον διπλανό σου."
+    : "Σειρά σου. Οι απαντήσεις του άλλου είναι <b>κρυμμένες</b> — δεν θα τις δεις μέχρι το τέλος.";
+  show("s-hand");
+}
+$("handGo").onclick = () => { phase = "self"; qi = 0; render(); };
+
+/* ═══════════ ΤΟ ΔΙΛΗΜΜΑ ═══════════ */
+function render(){
+  /* 🔴 ΑΥΤΗ Η ΓΡΑΜΜΗ ΕΛΕΙΠΕ (πιάστηκε από τον Γιάννη, 25/8/2026).
+     Η render() γέμιζε σωστά την ερώτηση αλλά ΔΕΝ άλλαζε οθόνη: το κουμπί
+     «Το κρατάω εγώ τώρα» φαινόταν νεκρό, ενώ από κάτω όλα δούλευαν.
+     Πέρασε τη δοκιμή επειδή ο έλεγχος διάβαζε το ΠΕΡΙΕΧΟΜΕΝΟ των στοιχείων
+     ($("q").innerText) αντί για το τι ΦΑΙΝΕΤΑΙ. Το περιεχόμενο ήταν σωστό·
+     η οθόνη ήταν λάθος. Μάθημα: δοκιμή = πάτα τα κουμπιά και ΚΟΙΤΑ. */
+  show("s-play");
+  const c = D[qi], ego = phase === "self";
+  $("who").textContent = ΚΕΦ(NAM[turn]) + (ego ? " · για σένα" : " · μάντεψε");
+  $("who").className = "who " + (turn === 0 ? "a" : "b");
+  $("q").innerHTML = ego ? c.t
+    : ΚΕΦ(NAM[allos(turn)]) + " — τι απάντησε εδώ;";
+  $("qsub").innerHTML = ego
+    ? "Δεν υπάρχει σωστή απάντηση. Διάλεξε αυτό που <b>θα έκανες</b>, όχι αυτό που ακούγεται σωστό."
+    : "<i>" + c.t + "</i>";
+  $("opts").innerHTML = c.o.map((o, k) =>
+    `<button data-k="${k}"><b>${o.g}</b>${o.t}</button>`).join("");
+  $("opts").querySelectorAll("button").forEach(b =>
+    b.onclick = () => dialexe(+b.dataset.k));
+  /* Η πρόοδος μετράει και τους δύο γύρους του ίδιου ανθρώπου: 12 βήματα. */
+  const βημα = (phase === "self" ? 0 : 6) + qi;
+  $("prog").innerHTML = Array.from({length:12}, (_, k) =>
+    `<span class="pip ${k === βημα ? "now" : k < βημα ? "done" : ""}"></span>`).join("");
+}
+
+function dialexe(k){
+  (phase === "self" ? self_ : gues)[turn][qi] = k;
+  qi++;
+  if(qi < D.length){ render(); return; }
+  if(phase === "self"){ phase = "guess"; qi = 0; render(); return; }
+  if(turn === 0){ turn = 1; hand(); return; }
+  telos();
+}
+
+/* ═══════════ ΤΟ ΤΕΛΟΣ ═══════════ */
+function skor(p){
+  /* Πόσο καλά μάντεψε ο p τον άλλον. */
+  let s = 0;
+  for(let i = 0; i < D.length; i++) s += vath(gues[p][i], self_[allos(p)][i]);
+  return s;
+}
+/* Ο «τύπος» του καθενός: το δίλημμα όπου η τάση του βγήκε πιο δυνατή.
+   Ισοπαλία → κρατάει το πρώτο, με τη σειρά που παίχτηκαν. Καμία τυχαιότητα. */
+function typos(p){
+  let best = 0;
+  for(let i = 1; i < D.length; i++)
+    if(D[i].o[self_[p][i]].v > D[best].o[self_[p][best]].v) best = i;
+  return D[best];
+}
+
+function telos(){
+  const sA = skor(0), sB = skor(1), olo = sA + sB;
+  $("p-nA").textContent = ΚΕΦ(NAM[0]);
+  $("p-nB").textContent = ΚΕΦ(NAM[1]);
+  $("p-sA").textContent = sA;
+  $("p-sB").textContent = sB;
+
+  const μεγ = sA >= sB ? 0 : 1;
+  /* Οι παρενθέσεις ΔΕΝ είναι διακοσμητικές: χωρίς αυτές το «+» κολλάει μόνο
+     στον τελευταίο κλάδο του ερωτηματικού, και η δεύτερη πρόταση θα φαινόταν
+     μόνο στο χειρότερο σκορ. Πιάστηκε στη δοκιμή. */
+  $("rank").innerHTML = (
+    olo >= 500 ? "Ξέρετε ο ένας τον άλλον <b>πολύ</b> καλά — σπάνιο."
+  : olo >= 350 ? "Τα βασικά τα ξέρετε. Οι διαφορές είναι στις λεπτομέρειες που κοστίζουν."
+  : olo >= 200 ? "Ο καθένας φαντάζεται τον άλλον λίγο σαν τον εαυτό του. Το κάνουν όλοι."
+  :              "Πολύ μακριά ο ένας από τον άλλον — και αυτό είναι το πιο χρήσιμο αποτέλεσμα της βραδιάς."
+  ) + (Math.abs(sA - sB) >= 100
+        ? ` <b>${ΚΕΦ(NAM[μεγ])}</b> διαβάζει τον άλλον αισθητά καλύτερα απ' ό,τι διαβάζεται.`
+        : "");
+
+  $("leg2").innerHTML =
+    `<span><i class="a"></i>${ΚΕΦ(NAM[0])}</span><span><i class="b"></i>${ΚΕΦ(NAM[1])}</span>`;
+
+  /* Οι έξι άξονες: τι είπε ο καθένας, τι μάντεψε ο καθένας. */
+  $("axes").innerHTML = D.map((c, i) => {
+    const a = c.o[self_[0][i]].v, b = c.o[self_[1][i]].v;
+    const gA = vath(gues[0][i], self_[1][i]), gB = vath(gues[1][i], self_[0][i]);
+    const γρ = (nm, poios, mant, p) =>
+      `<div class="r">${nm} είπε <b>${c.o[self_[poios][i]].g}</b> · ` +
+      `${ΚΕΦ(NAM[allos(poios)])} μάντεψε <b>${c.o[mant].g}</b> ` +
+      `<span class="${p === ΜΟΝΑΔΑ ? "ok" : p > 0 ? "mid" : "no"}">+${p}</span></div>`;
+    return `<div class="axis">
+      <div class="h">${c.nm}</div>
+      <div class="g">${c.ti}</div>
+      <div class="bar">
+        <i class="a" style="left:${a * 10}%" title="${NAM[0]}"></i>
+        <i class="b" style="left:${b * 10}%" title="${NAM[1]}"></i>
+      </div>
+      <div class="barlab"><span>${c.o[2].g} — χαλαρά</span><span>σφιχτά — ${c.o[0].g}</span></div>
+      ${γρ(ΚΕΦ(NAM[0]), 0, gues[1][i], gB)}
+      ${γρ(ΚΕΦ(NAM[1]), 1, gues[0][i], gA)}
+    </div>`;
+  }).join("");
+
+  /* ΤΟ ΤΥΦΛΟ ΣΗΜΕΙΟ: η μαντεψιά που έπεσε πιο μακριά — και προς ποια μεριά.
+     Αυτό είναι το πραγματικό εύρημα του παιχνιδιού, όχι το σκορ.            */
+  let bi = 0, bp = -1, bd = 0;
+  for(let p = 0; p < 2; p++) for(let i = 0; i < D.length; i++){
+    const δ = Math.abs(D[i].o[gues[p][i]].v - D[i].o[self_[allos(p)][i]].v);
+    if(δ > bd){ bd = δ; bi = i; bp = p; }
+  }
+  if(bd === 0){
+    $("blind").innerHTML = `Δεν υπάρχει. Και στα έξι διλήμματα ο καθένας πέτυχε τη θέση
+      του άλλου — <b>ξέρετε πραγματικά ο ένας τον άλλον</b>. Είναι σπάνιο· κρατήστε το.`;
+  } else {
+    const c = D[bi], εγω = ΚΕΦ(NAM[allos(bp)]), αυτος = ΚΕΦ(NAM[bp]);
+    const νομ = c.o[gues[bp][bi]].v, πραγ = c.o[self_[allos(bp)][bi]].v;
+    $("blind").innerHTML =
+      `<b>${c.nm}</b> — ${c.ti}.<br><br>` +
+      `${αυτος} μάντεψε ότι ${εγω} θα απαντούσε «<b>${c.o[gues[bp][bi]].t}</b>». ` +
+      `${εγω} απάντησε «<b>${c.o[self_[allos(bp)][bi]].t}</b>».<br><br>` +
+      (νομ > πραγ
+        ? `Δηλαδή ${αυτος} θεωρεί τον άλλον <b>πιο επιφυλακτικό απ' ό,τι είναι</b>.`
+        : `Δηλαδή ${αυτος} θεωρεί τον άλλον <b>πιο τολμηρό απ' ό,τι είναι</b>.`) +
+      ` Εδώ γεννιούνται οι αποφάσεις που ο ένας παίρνει «για το καλό του άλλου» — και ο άλλος δεν τις ζήτησε ποτέ.`;
+  }
+
+  const tA = typos(0), tB = typos(1);
+  $("punch").innerHTML = tA.nm === tB.nm
+    ? `Και οι δύο τραβάτε προς την ίδια μεριά — <b>${tA.nm}</b>. Αυτό δεν είναι
+       συμφωνία· είναι <b>το ίδιο τυφλό σημείο δύο φορές</b>.`
+    : `${ΚΕΦ(NAM[0])} · <b>${tA.nm}</b> — ${ΚΕΦ(NAM[1])} · <b>${tB.nm}</b>.
+       Δύο διαφορετικά ένστικτα στο ίδιο τραπέζι. <b>Το πλάνο πρέπει να αντέχει και τα δύο.</b>`;
+
+  /* Δύο άνθρωποι απάντησαν — το διαβατήριο κρατάει ΕΝΑΝ. Άρα δεν γράφεται
+     τίποτα εκεί, με κανέναν τρόπο. Στον φάκελο μπαίνει μόνο το αποτέλεσμα. */
+  KERASMA.grapse("logia", {
+    nm: "Λόγια εναντίον Ενστίκτου",
+    skor: olo, sto: D.length * ΜΟΝΑΔΑ * 2,
+    seires: D.map((c, i) => ({
+      nm: c.nm,
+      you: ΚΕΦ(NAM[0]) + " " + c.o[self_[0][i]].g + " · " + ΚΕΦ(NAM[1]) + " " + c.o[self_[1][i]].g,
+      real: "μάντεψαν " + c.o[gues[1][i]].g + " / " + c.o[gues[0][i]].g,
+      p: vath(gues[1][i], self_[0][i]) + vath(gues[0][i], self_[1][i])
+    })),
+    dika: [
+      {nm: ΚΕΦ(NAM[0]) + " · τύπος", tim: tA.nm},
+      {nm: ΚΕΦ(NAM[1]) + " · τύπος", tim: tB.nm},
+      {nm: ΚΕΦ(NAM[0]) + " μάντεψε σωστά", tim: sA + " στα 300"},
+      {nm: ΚΕΦ(NAM[1]) + " μάντεψε σωστά", tim: sB + " στα 300"}
+    ],
+    mathima: "Ένα πλάνο που το άντεξε μόνο ο ένας, δεν άντεξε."
+  });
+  show("s-end");
+}
+
+$("again").onclick = () => { $("nA").value = ""; $("nB").value = ""; show("s-start"); };
+
+/* ---- ο δρόμος της επιστροφής: φαίνεται ΜΟΝΟ αν ο παίκτης ήρθε από το ταμπλό,
+        αλλιώς το παιχνίδι θα έδειχνε κουμπί προς αρχείο που μπορεί να μην υπάρχει ---- */
+if(KERASMA.apoTamplo() || /ΤΑΜΠΛΟ/.test(decodeURIComponent(document.referrer || ""))){
+  $("toTamplo").style.display = "block";
+  $("toTamploTop").style.display = "flex";
+  document.body.classList.add("hasback");
+}
+</script>
+</body>
+</html>
