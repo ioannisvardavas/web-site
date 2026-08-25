@@ -13,6 +13,13 @@
       "runtimeExecutable": "node",
       "runtimeArgs": [".claude/mobile-server.js"],
       "port": 8099
+    },
+    {
+      "name": "risk-radar",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../risk-radar/.claude/serve.js"],
+      "port": 8090,
+      "autoPort": true
     }
   ]
 }
