@@ -21,6 +21,7 @@
 import re
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 PIGI = Path("/Users/user/Desktop/ELI5")
 RIZA = Path(__file__).resolve().parent.parent
@@ -141,6 +142,127 @@ def tamplo(t, arx):
 EIDIKA = {"ΠΑΖΑΡΙ_ΗΜΕΡΑΣ_ΠΑΙΧΝΙΔΙ.html": pazari, "ΤΑΜΠΛΟ.html": tamplo}
 
 
+# ───────────────────────── Η ΥΠΟΓΡΑΦΗ ─────────────────────────
+# Κάθε παιχνίδι ταξιδεύει μόνο του: στέλνεται σε WhatsApp, προωθείται, ανοίγει
+# χωρίς να έχει περάσει κανείς από το site. Ως τώρα ο παραλήπτης δεν μάθαινε
+# ποτέ ποιος το έφτιαξε. Από εδώ και πέρα κάθε αρχείο κλείνει με όνομα,
+# τηλέφωνο και έναν δρόμο πίσω.
+
+TILEFONO = "698 388 0746"
+TIL_LINK = "+306983880746"
+WHATSAPP = "306983880746"
+
+# Ο τίτλος του κάθε παιχνιδιού — μπαίνει στο έτοιμο μήνυμα του WhatsApp,
+# ώστε ο Γιάννης να ξέρει από πού ήρθε ο κόσμος χωρίς να ρωτήσει.
+TITLOI = {
+    "index.html":               "Το κέρασμα",
+    "poso-ekane.html":          "Πόσο έκανε;",
+    "pano-i-kato.html":         "Πάνω ή κάτω;",
+    "xilioi-san-esena.html":    "Χίλιοι σαν εσένα",
+    "tha-sou-ftasoun.html":     "Θα σου φτάσουν;",
+    "kostos-imeras.html":       "Το παζάρι της ημέρας",
+    "mythos-i-alitheia.html":   "Μύθος ή αλήθεια;",
+    "logia-i-enstikto.html":    "Λόγια εναντίον Ενστίκτου",
+    "poses-fores-akoma.html":   "Πόσες μέρες ακόμα μαζί;",
+    "plithorismos.html":        "Τι κάνει ο χρόνος στα λεφτά σου",
+    "pios-ftiaxnei-ta-evro.html": "Ποιος φτιάχνει τα ευρώ",
+}
+
+# Μία γραμμή ανά παιχνίδι: πιάνει το νήμα που μόλις άφησε ο παίκτης.
+# Γενική ατάκα σε όλα θα διαβαζόταν ως διαφήμιση· η συνέχεια της κουβέντας όχι.
+AGKISTRIA = {
+    "index.html":
+        "Τα παιχνίδια είναι το κέρασμα. Η κουβέντα για τους <b>δικούς σου</b> αριθμούς "
+        "είναι κι αυτή δωρεάν.",
+    "poso-ekane.html":
+        "Χάνουμε όλοι — και προς την ίδια μεριά. Θέλεις να δούμε τι σημαίνει αυτό "
+        "για τα <b>δικά σου</b> λεφτά;",
+    "pano-i-kato.html":
+        "Στα λίγα χρόνια η αγορά είναι θόρυβος· στα πολλά, τάση. "
+        "Πόσα χρόνια έχουν <b>τα δικά σου</b> μπροστά τους;",
+    "xilioi-san-esena.html":
+        "Τα νούμερα λένε τι συμβαίνει στους χίλιους. Εσύ είσαι ο ένας — "
+        "και το πλάνο γίνεται πάντα για <b>τον έναν</b>.",
+    "tha-sou-ftasoun.html":
+        "Είδες αν φτάνουν στο παράδειγμα. Θες να δούμε αν φτάνουν "
+        "<b>στα δικά σου</b>;",
+    "kostos-imeras.html":
+        "Αυτή ήταν ενδεικτική τιμή. Η <b>δική σου</b> βγαίνει σε δέκα λεπτά, "
+        "στο τηλέφωνο.",
+    "mythos-i-alitheia.html":
+        "Αν σε ξάφνιασαν οι μισές, αξίζει μισή ώρα κουβέντα για "
+        "<b>τα δικά σου</b>.",
+    "logia-i-enstikto.html":
+        "Το ένστικτο είναι καλός σύμβουλος στα μικρά και κακός στα μεγάλα. "
+        "Για <b>τα μεγάλα</b>, πάρε με.",
+    "poses-fores-akoma.html":
+        "Αυτό δεν λύνεται με λεφτά. Ό,τι <b>λύνεται</b> όμως, ας λυθεί "
+        "όσο υπάρχει χρόνος.",
+    "plithorismos.html":
+        "Ο χρόνος δουλεύει ήδη πάνω στα λεφτά σου. Το ερώτημα είναι αν δουλεύει "
+        "<b>για σένα ή εναντίον σου</b>.",
+    "pios-ftiaxnei-ta-evro.html":
+        "Τώρα ξέρεις ποιος φτιάχνει τα ευρώ. Το επόμενο ερώτημα είναι τι κάνεις "
+        "εσύ με <b>τα δικά σου</b>.",
+}
+
+YPOGRAFI_CSS = """<style>
+/* ── η υπογραφή (μπαίνει αυτόματα από το tools/sync_paixnidia.py) ── */
+.ypog{width:100%; max-width:620px; margin:34px auto 4px; box-sizing:border-box;
+  background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:20px 20px 18px; box-shadow:var(--shadow);
+  font-family:var(--disp); color:var(--ink); text-align:left}
+.ypog-hook{font-family:var(--book); font-size:16.5px; line-height:1.5;
+  color:var(--ink); margin:0 0 16px}
+.ypog-hook b{color:var(--euro); font-weight:700}
+.ypog-nm{font-size:19px; font-weight:800; letter-spacing:-.01em; margin:0}
+.ypog-nm span{font-size:11.5px; font-weight:700; letter-spacing:.08em;
+  color:var(--gold-text, var(--gold)); margin-left:7px; vertical-align:2px}
+.ypog-rol{font-family:var(--book); font-size:13.5px; color:var(--soft);
+  margin:3px 0 15px; line-height:1.4}
+.ypog-act{display:flex; flex-wrap:wrap; gap:9px}
+.ypog-b{flex:1 1 auto; min-width:130px; text-align:center; text-decoration:none;
+  padding:12px 14px; border-radius:13px; font-size:15.5px; font-weight:700;
+  border:1.5px solid var(--line); color:var(--ink); background:var(--paper)}
+.ypog-b.kyrio{background:var(--euro); border-color:var(--euro); color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ypog-b.kyrio{color:#08122A}}
+:root[data-theme="dark"] .ypog-b.kyrio{color:#08122A}
+:root[data-theme="light"] .ypog-b.kyrio{color:#fff}
+.ypog-site{display:inline-block; margin-top:15px; font-size:12.5px; font-weight:700;
+  letter-spacing:.05em; text-transform:uppercase; color:var(--soft); text-decoration:none}
+@media print{.ypog{box-shadow:none; page-break-inside:avoid} .ypog-act{display:none}}
+</style>
+"""
+
+
+def ypografi_html(onoma):
+    minima = ("Γεια σας κ. Βαρδαβά. Έπαιξα το «" + TITLOI[onoma] +
+              "» και θα ήθελα να δούμε τους δικούς μου αριθμούς.")
+    return (
+        '\n<section class="ypog" id="ypografi">\n'
+        '  <p class="ypog-hook">' + AGKISTRIA[onoma] + '</p>\n'
+        '  <p class="ypog-nm">Γιάννης Βαρδαβάς <span>LUTCF</span></p>\n'
+        '  <p class="ypog-rol">Financial Planning &amp; Business Risk Management</p>\n'
+        '  <div class="ypog-act">\n'
+        '    <a class="ypog-b kyrio" href="tel:' + TIL_LINK + '">Πάρε με · ' + TILEFONO + '</a>\n'
+        '    <a class="ypog-b" href="https://wa.me/' + WHATSAPP + '?text=' + quote(minima) +
+        '" target="_blank" rel="noopener">WhatsApp</a>\n'
+        '    <a class="ypog-b" href="viber://chat?number=' + quote(TIL_LINK) + '">Viber</a>\n'
+        '  </div>\n'
+        '  <a class="ypog-site" href="' + SITE + '/">Τα υπόλοιπα εργαλεία &rarr;</a>\n'
+        '</section>\n'
+    )
+
+
+def vale_ypografi(t, onoma):
+    if onoma not in AGKISTRIA:
+        lathi.append(f"{onoma}: δεν έχει οριστεί γραμμή υπογραφής")
+        return t
+    t = allakse(t, "</head>", YPOGRAFI_CSS + "</head>", onoma)
+    t = allakse(t, "</body>", ypografi_html(onoma) + "</body>", onoma)
+    return t
+
+
 # ───────────────────────── Η ΔΟΥΛΕΙΑ ─────────────────────────
 
 def main():
@@ -165,6 +287,9 @@ def main():
         if palio_onoma in EIDIKA:
             t = EIDIKA[palio_onoma](t, palio_onoma)
 
+        # η υπογραφή μπαίνει τελευταία, σε ΟΛΑ ανεξαιρέτως
+        t = vale_ypografi(t, neo_onoma)
+
         grammena[neo_onoma] = t
 
     # ───── οι φρουροί: τι ΔΕΝ επιτρέπεται να έχει φύγει στο site ─────
@@ -177,6 +302,15 @@ def main():
                 lathi.append(f"{onoma}: έμεινε ελληνικός σύνδεσμος → {ell}")
     if "index.html" in grammena and "Πώς βγήκε η τιμή" in grammena.get("kostos-imeras.html", ""):
         lathi.append("kostos-imeras.html: η ανάλυση τιμής δεν αφαιρέθηκε")
+
+    # κανένα αρχείο δεν φεύγει ανώνυμο — ούτε μία φορά, ούτε δύο
+    for onoma, t in grammena.items():
+        if t.count('<section class="ypog" id="ypografi">') != 1:
+            lathi.append(f"{onoma}: η υπογραφή δεν μπήκε ακριβώς μία φορά")
+        if TIL_LINK not in t:
+            lathi.append(f"{onoma}: λείπει το τηλέφωνο")
+        if f"{SITE}/" not in t:
+            lathi.append(f"{onoma}: λείπει ο δρόμος πίσω στο site")
 
     if lathi:
         print("✖ ΣΤΑΜΑΤΗΣΑ — δεν γράφτηκε τίποτα:\n")

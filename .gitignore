@@ -7,3 +7,6 @@ site.zip
 .claude/settings.local.json
 
 .DS_Store
+
+# προσωρινά του Playwright
+.playwright-mcp/

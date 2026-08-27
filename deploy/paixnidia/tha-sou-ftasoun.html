@@ -212,6 +212,32 @@ body.hasback{padding-top:58px}
   padding-left:13px; margin:10px 0 0;
 }
 </style>
+<style>
+/* ── η υπογραφή (μπαίνει αυτόματα από το tools/sync_paixnidia.py) ── */
+.ypog{width:100%; max-width:620px; margin:34px auto 4px; box-sizing:border-box;
+  background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:20px 20px 18px; box-shadow:var(--shadow);
+  font-family:var(--disp); color:var(--ink); text-align:left}
+.ypog-hook{font-family:var(--book); font-size:16.5px; line-height:1.5;
+  color:var(--ink); margin:0 0 16px}
+.ypog-hook b{color:var(--euro); font-weight:700}
+.ypog-nm{font-size:19px; font-weight:800; letter-spacing:-.01em; margin:0}
+.ypog-nm span{font-size:11.5px; font-weight:700; letter-spacing:.08em;
+  color:var(--gold-text, var(--gold)); margin-left:7px; vertical-align:2px}
+.ypog-rol{font-family:var(--book); font-size:13.5px; color:var(--soft);
+  margin:3px 0 15px; line-height:1.4}
+.ypog-act{display:flex; flex-wrap:wrap; gap:9px}
+.ypog-b{flex:1 1 auto; min-width:130px; text-align:center; text-decoration:none;
+  padding:12px 14px; border-radius:13px; font-size:15.5px; font-weight:700;
+  border:1.5px solid var(--line); color:var(--ink); background:var(--paper)}
+.ypog-b.kyrio{background:var(--euro); border-color:var(--euro); color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ypog-b.kyrio{color:#08122A}}
+:root[data-theme="dark"] .ypog-b.kyrio{color:#08122A}
+:root[data-theme="light"] .ypog-b.kyrio{color:#fff}
+.ypog-site{display:inline-block; margin-top:15px; font-size:12.5px; font-weight:700;
+  letter-spacing:.05em; text-transform:uppercase; color:var(--soft); text-decoration:none}
+@media print{.ypog{box-shadow:none; page-break-inside:avoid} .ypog-act{display:none}}
+</style>
 </head>
 <body>
 <button class="tog" id="tog" title="Φωτεινό / σκοτεινό" aria-label="Αλλαγή θέματος">◐</button>
@@ -1019,5 +1045,17 @@ if(KERASMA.apoTamplo() || /ΤΑΜΠΛΟ/.test(decodeURIComponent(document.referr
   document.body.classList.add("hasback");
 }
 </script>
+
+<section class="ypog" id="ypografi">
+  <p class="ypog-hook">Είδες αν φτάνουν στο παράδειγμα. Θες να δούμε αν φτάνουν <b>στα δικά σου</b>;</p>
+  <p class="ypog-nm">Γιάννης Βαρδαβάς <span>LUTCF</span></p>
+  <p class="ypog-rol">Financial Planning &amp; Business Risk Management</p>
+  <div class="ypog-act">
+    <a class="ypog-b kyrio" href="tel:+306983880746">Πάρε με · 698 388 0746</a>
+    <a class="ypog-b" href="https://wa.me/306983880746?text=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%B1%CF%82%20%CE%BA.%20%CE%92%CE%B1%CF%81%CE%B4%CE%B1%CE%B2%CE%AC.%20%CE%88%CF%80%CE%B1%CE%B9%CE%BE%CE%B1%20%CF%84%CE%BF%20%C2%AB%CE%98%CE%B1%20%CF%83%CE%BF%CF%85%20%CF%86%CF%84%CE%AC%CF%83%CE%BF%CF%85%CE%BD%3B%C2%BB%20%CE%BA%CE%B1%CE%B9%20%CE%B8%CE%B1%20%CE%AE%CE%B8%CE%B5%CE%BB%CE%B1%20%CE%BD%CE%B1%20%CE%B4%CE%BF%CF%8D%CE%BC%CE%B5%20%CF%84%CE%BF%CF%85%CF%82%20%CE%B4%CE%B9%CE%BA%CE%BF%CF%8D%CF%82%20%CE%BC%CE%BF%CF%85%20%CE%B1%CF%81%CE%B9%CE%B8%CE%BC%CE%BF%CF%8D%CF%82." target="_blank" rel="noopener">WhatsApp</a>
+    <a class="ypog-b" href="viber://chat?number=%2B306983880746">Viber</a>
+  </div>
+  <a class="ypog-site" href="https://vardavas-site.pages.dev/">Τα υπόλοιπα εργαλεία &rarr;</a>
+</section>
 </body>
 </html>
