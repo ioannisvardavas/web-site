@@ -149,7 +149,7 @@ EIDIKA = {"ΠΑΖΑΡΙ_ΗΜΕΡΑΣ_ΠΑΙΧΝΙΔΙ.html": pazari, "ΤΑΜΠΛ
 # τηλέφωνο και έναν δρόμο πίσω.
 
 # Η διεύθυνση του ημερολογίου. Αλλάζει ΜΟΝΟ εδώ και στο standalone.html.
-RANTEVOU = "https://cal.com/ioannis-vardavas-0yon6x"
+RANTEVOU = "https://cal.com/ioannis-vardavas-0yon6x/30min"
 
 TILEFONO = "698 388 0746"
 TIL_LINK = "+306983880746"
