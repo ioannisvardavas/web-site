@@ -6,6 +6,7 @@ cd "$(dirname "$0")/.."
 
 python3 tools/sync_paixnidia.py
 
+cp standalone.html index.html      # ώστε να ανοίγει σωστά και με διπλό κλικ, τοπικά
 cp standalone.html deploy/index.html
 rm -rf deploy/paixnidia
 cp -r paixnidia deploy/paixnidia

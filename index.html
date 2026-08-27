@@ -65,12 +65,10 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
-  scroll-padding-top: 80px;
-}
-
-main > section {
-  scroll-snap-align: start;
+  /* ΟΧΙ scroll-snap εδώ: οι ενότητες είναι ψηλότερες από την οθόνη, οπότε το
+     snap πάλευε με το smooth scroll — κλείδωνε σε λάθος σημείο και έτρεμε.
+     scroll-padding-top = ύψος του κολλητού header (102.7px) + λίγη ανάσα. */
+  scroll-padding-top: 112px;
 }
 
 body {
@@ -79,6 +77,16 @@ body {
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
+  animation: pageFadeIn 460ms ease both;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 img {
@@ -188,6 +196,8 @@ a {
 }
 
 .hero-copy {
+  position: relative;
+  z-index: 1;
   max-width: 720px;
 }
 
@@ -228,12 +238,25 @@ a {
 
 .eyebrow,
 .card-kicker {
-  margin: 0 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 14px;
   color: var(--petrol);
   font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+
+.eyebrow::before,
+.card-kicker::before {
+  flex: none;
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold);
+  content: "";
 }
 
 .role-line {
@@ -346,6 +369,7 @@ h1 {
 .intelligence-band,
 .method-section,
 .tools-section,
+.games-section,
 .calculator-section,
 .about-section,
 .contact-section {
@@ -390,15 +414,16 @@ h2 {
 .audience-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
 
 .audience-card,
 .step {
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: 1px solid rgba(220, 228, 225, 0.8);
+  border-radius: 14px;
   background: var(--paper);
   padding: clamp(24px, 3vw, 36px);
+  box-shadow: 0 10px 30px rgba(15, 111, 106, 0.06);
 }
 
 .audience-card.accent {
@@ -427,12 +452,12 @@ h2 {
 
 .service-modules {
   background: linear-gradient(180deg, var(--white) 0%, var(--paper) 100%);
-  padding-top: clamp(36px, 4vw, 56px);
-  padding-bottom: clamp(36px, 4vw, 56px);
+  padding-top: clamp(56px, 6vw, 88px);
+  padding-bottom: clamp(56px, 6vw, 88px);
 }
 
 .service-modules .section-heading {
-  margin-bottom: 22px;
+  margin-bottom: 34px;
 }
 
 .service-modules .section-heading h2 {
@@ -442,18 +467,19 @@ h2 {
 .module-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 20px;
 }
 
 .service-card {
   position: relative;
   min-height: 210px;
-  padding: clamp(22px, 2.4vw, 30px);
+  padding: clamp(24px, 2.6vw, 34px);
   padding-bottom: 64px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(220, 228, 225, 0.8);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 111, 106, 0.06);
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
@@ -502,8 +528,22 @@ h2 {
 }
 
 .service-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--petrol-soft);
+  color: var(--petrol);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.service-card-dark .service-number {
+  background: rgba(255, 255, 255, 0.12);
   color: var(--gold);
-  font-weight: 900;
 }
 
 .service-tag {
@@ -615,8 +655,9 @@ h2 {
 
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 520ms ease, transform 520ms ease;
+  transform: translateY(-44px);
+  transition: opacity 620ms ease, transform 760ms cubic-bezier(0.34, 1.28, 0.5, 1);
+  will-change: transform, opacity;
 }
 
 .reveal.is-visible {
@@ -625,15 +666,15 @@ h2 {
 }
 
 .reveal:nth-child(2) {
-  transition-delay: 90ms;
+  transition-delay: 110ms;
 }
 
 .reveal:nth-child(3) {
-  transition-delay: 180ms;
+  transition-delay: 220ms;
 }
 
 .reveal:nth-child(4) {
-  transition-delay: 270ms;
+  transition-delay: 330ms;
 }
 
 .intelligence-band {
@@ -909,6 +950,113 @@ h2 {
 .metric-panel strong {
   color: var(--petrol-deep);
   font-size: 2rem;
+}
+
+/* ── Το κέρασμα: τα παιχνίδια ── */
+.games-section {
+  background: var(--petrol-soft);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.game-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 1px 0 rgba(23, 32, 31, 0.04), 0 18px 40px -34px rgba(10, 76, 73, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(15, 111, 106, 0.32);
+  box-shadow: 0 1px 0 rgba(23, 32, 31, 0.05), 0 26px 52px -30px rgba(10, 76, 73, 0.5);
+}
+
+.game-disc {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--petrol-soft);
+  color: var(--petrol-deep);
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: -0.02em;
+}
+
+.game-card h3 {
+  margin: 3px 0 6px;
+  font-size: 1.05rem;
+}
+
+.game-card p {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.games-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.game-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  font-weight: 800;
+  font-size: 0.86rem;
+  color: var(--white);
+  background: var(--petrol);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.game-cta:hover {
+  background: var(--petrol-deep);
+  transform: translateY(-1px);
+}
+
+.game-cta.alt {
+  color: var(--petrol-deep);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.game-cta.alt:hover {
+  background: var(--white);
+  color: var(--petrol-deep);
+}
+
+.games-note {
+  max-width: 680px;
+  margin-top: 20px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .game-card { padding: 16px 18px; gap: 13px; }
+  .game-disc { width: 46px; height: 46px; font-size: 0.86rem; }
 }
 
 .module-tool {
@@ -1813,6 +1961,66 @@ body.modal-open {
   gap: 18px;
 }
 
+
+/* ── Το ημερολόγιο ραντεβού ──────────────────────────────────────────
+   Ζει πάνω από τη φόρμα επειδή είναι ο μόνος δρόμος που κλείνει κάτι
+   χωρίς να περιμένει ο επισκέπτης απάντηση. Η φόρμα μένει από κάτω,
+   για όποιον θέλει να ρωτήσει πρώτα. */
+.book-card {
+  width: min(420px, 100%);
+  padding: 22px 22px 20px;
+  border: 1px solid rgba(182, 145, 82, 0.45);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.book-card .eyebrow {
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.book-title {
+  margin: 0 0 8px;
+  color: var(--white);
+  font-size: 1.32rem;
+  line-height: 1.2;
+}
+
+.contact-section .book-text {
+  margin: 0 0 16px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+
+/* Χρειάζεται δύο κλάσεις για να κερδίσει το .button.primary από πάνω:
+   το ραντεβού πρέπει να είναι χρυσό, όχι πράσινο σαν την «Αποστολή» —
+   αλλιώς δύο ίδια κουμπιά διεκδικούν το ίδιο μάτι. */
+.button.book-button {
+  width: 100%;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.button.book-button:hover {
+  background: #c9a262;
+  transform: translateY(-1px);
+}
+
+.book-button svg {
+  flex: none;
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+}
+
+.contact-section .book-alt {
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.88rem;
+}
+
 .contact-form {
   display: grid;
   gap: 12px;
@@ -2044,7 +2252,7 @@ body.modal-open {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
   .site-header {
     display: flex;
     align-items: center;
@@ -2160,8 +2368,11 @@ body.modal-open {
 
   .hero-visual {
     position: absolute;
-    inset: auto -90px 0 28%;
-    z-index: -1;
+    top: 190px;
+    right: -90px;
+    bottom: 0;
+    left: 28%;
+    z-index: 0;
     border-radius: 0;
     box-shadow: none;
     opacity: 0.48;
@@ -2185,6 +2396,7 @@ body.modal-open {
   .intelligence-band,
   .method-section,
   .tools-section,
+  .games-section,
   .about-section,
   .contact-section {
     padding-inline: 16px;
@@ -2265,6 +2477,7 @@ body.modal-open {
         <a href="#services" data-i18n="navServices">Υπηρεσίες</a>
         <a href="#modules" data-i18n="navModules">Τι κάνω</a>
         <a href="#method" data-i18n="navMethod">Μεθοδολογία</a>
+        <a href="#games" data-i18n="navGames">Παιχνίδια με νούμερα</a>
         <a href="#about" data-i18n="navAbout">Σχετικά</a>
         <a href="#contact" data-i18n="navContact">Επικοινωνία</a>
         <a href="https://risk-radar-2yr.pages.dev" class="nav-risk" data-i18n="navRisk">Εργαλεία Ρίσκου →</a>
@@ -2338,11 +2551,11 @@ body.modal-open {
 
       <section class="philosophy-band" aria-label="Φιλοσοφία συμβουλευτικής">
         <div class="philosophy-inner reveal">
-          <p class="philosophy-label">Πριν οτιδήποτε άλλο</p>
-          <p class="philosophy-text">
+          <p class="philosophy-label" data-i18n="philosophyLabel">Πριν οτιδήποτε άλλο</p>
+          <p class="philosophy-text" data-i18n="philosophyText">
             Κάθε συζήτηση ξεκινά από αυτό που ήδη έχετε. Υπάρχουσες ασφαλίσεις, συμβόλαια, καλύψεις — αναλύονται λεπτομερώς, κατανοούνται και λαμβάνονται πλήρως υπόψιν σε κάθε πρόταση. Δεν αντικαθιστώ αυτό που δουλεύει. Δεν προτείνω κάτι που δεν χρειάζεται. Αν η καλύτερη σύσταση είναι να μην αλλάξει τίποτα, αυτό λέω.
           </p>
-          <p class="philosophy-credo">«Καλύτερα καμμία πώληση παρά μία λάθος πώληση.»</p>
+          <p class="philosophy-credo" data-i18n="philosophyCredo">«Καλύτερα καμμία πώληση παρά μία λάθος πώληση.»</p>
         </div>
       </section>
 
@@ -3017,6 +3230,81 @@ body.modal-open {
         </div>
       </div>
 
+      <section class="games-section" id="games" aria-labelledby="games-title">
+        <div class="section-heading narrow">
+          <p class="eyebrow" data-i18n="gamesEyebrow">Το κέρασμα</p>
+          <h2 id="games-title" data-i18n="gamesTitle">Επτά παιχνίδια που εξηγούν όσα δεν εξηγεί μια παρουσίαση.</h2>
+          <p data-i18n="gamesIntro">
+            Τρία λεπτά το καθένα, στο κινητό, χωρίς εγγραφή. Τα νούμερα δεν είναι φτιαγμένα:
+            βγαίνουν από ΕΛΣΤΑΤ, Eurostat και ΕΚΤ — και κάθε παιχνίδι γράφει από κάτω τι
+            ακριβώς περιλαμβάνει και τι δεν περιλαμβάνει.
+          </p>
+        </div>
+
+        <div class="games-grid">
+          <a class="game-card reveal" href="paixnidia/poso-ekane.html">
+            <span class="game-disc" aria-hidden="true">€</span>
+            <span>
+              <h3 data-i18n="gameOneTitle">Πόσο έκανε;</h3>
+              <p data-i18n="gameOneText">Μάντεψε τις τιμές του παρελθόντος. Τα λεφτά στο συρτάρι δεν κάθονται — λιώνουν.</p>
+            </span>
+          </a>
+          <a class="game-card reveal" href="paixnidia/pano-i-kato.html">
+            <span class="game-disc" aria-hidden="true">↑↓</span>
+            <span>
+              <h3 data-i18n="gameTwoTitle">Πάνω ή κάτω;</h3>
+              <p data-i18n="gameTwoText">39 χρονιές αγοράς. Πόσες τελείωσαν πάνω, τι κόστισε η χειρότερη, πόσο κράτησε η επιστροφή.</p>
+            </span>
+          </a>
+          <a class="game-card reveal" href="paixnidia/xilioi-san-esena.html">
+            <span class="game-disc" aria-hidden="true">1.000</span>
+            <span>
+              <h3 data-i18n="gameThreeTitle">Χίλιοι σαν εσένα</h3>
+              <p data-i18n="gameThreeText">Από 1.000 ανθρώπους στην ηλικία σας, πόσοι φτάνουν τα 80, τα 90, τα 95.</p>
+            </span>
+          </a>
+          <a class="game-card reveal" href="paixnidia/tha-sou-ftasoun.html">
+            <span class="game-disc" aria-hidden="true">30</span>
+            <span>
+              <h3 data-i18n="gameFourTitle">Θα σου φτάσουν;</h3>
+              <p data-i18n="gameFourText">Σταματάτε να δουλεύετε και τραβάτε κάθε μήνα. 21 πραγματικές αφετηρίες, 21 διαφορετικά τέλη.</p>
+            </span>
+          </a>
+          <a class="game-card reveal" href="paixnidia/kostos-imeras.html">
+            <span class="game-disc" aria-hidden="true">365</span>
+            <span>
+              <h3 data-i18n="gameFiveTitle">Το παζάρι της ημέρας</h3>
+              <p data-i18n="gameFiveText">Τι κοστίζει, ανά ημέρα, να μη μείνει η οικογένεια με το δάνειο.</p>
+            </span>
+          </a>
+          <a class="game-card reveal" href="paixnidia/mythos-i-alitheia.html">
+            <span class="game-disc" aria-hidden="true">1%</span>
+            <span>
+              <h3 data-i18n="gameSixTitle">Μύθος ή αλήθεια;</h3>
+              <p data-i18n="gameSixText">Οκτώ δηλώσεις για το ποιος φτιάχνει τα ευρώ. Οι μισές είναι λάθη που «τα ξέρουν όλοι».</p>
+            </span>
+          </a>
+          <a class="game-card reveal" href="paixnidia/logia-i-enstikto.html">
+            <span class="game-disc" aria-hidden="true">2</span>
+            <span>
+              <h3 data-i18n="gameSevenTitle">Λόγια εναντίον ενστίκτου</h3>
+              <p data-i18n="gameSevenText">Για δύο. Ο καθένας λέει τι θα έκανε — και μαντεύει τι είπε ο άλλος.</p>
+            </span>
+          </a>
+        </div>
+
+        <div class="games-more">
+          <a class="game-cta" href="paixnidia/index.html" data-i18n="gamesAll">Άνοιξέ τα όλα από το ταμπλό →</a>
+          <a class="game-cta alt" href="paixnidia/plithorismos.html" data-i18n="gamesInflation">Τι κάνει ο χρόνος στα λεφτά σου →</a>
+          <a class="game-cta alt" href="paixnidia/pios-ftiaxnei-ta-evro.html" data-i18n="gamesMoney">Ποιος φτιάχνει τα ευρώ →</a>
+        </div>
+
+        <p class="games-note" data-i18n="gamesNote">
+          Ό,τι γράφετε μένει στη δική σας συσκευή — τίποτα δεν αποστέλλεται και δεν αποθηκεύεται
+          αλλού. Τα παιχνίδια είναι στα ελληνικά.
+        </p>
+      </section>
+
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-copy section-heading narrow">
           <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
@@ -3054,6 +3342,17 @@ body.modal-open {
           </div>
         </div>
         <div class="contact-actions">
+          <div class="book-card">
+            <p class="eyebrow" data-i18n="bookEyebrow">Ο πιο γρήγορος δρόμος</p>
+            <h3 class="book-title" data-i18n="bookTitle">Διαλέξτε ώρα μόνοι σας</h3>
+            <p class="book-text" data-i18n="bookText">Μισή ώρα, χωρίς δέσμευση. Βλέπετε πότε είμαι ελεύθερος και κλείνετε ό,τι σας βολεύει — ακόμα και τώρα, στις έντεκα το βράδυ.</p>
+            <a class="button primary book-button" id="bookLink" href="https://cal.com/ioannis-vardavas-0yon6x/30min" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-9 4h5v5h-5v-5z"/></svg>
+              <span data-i18n="bookCta">Κλείστε ραντεβού 30′</span>
+            </a>
+            <p class="book-alt" data-i18n="bookAlt">Ή, αν προτιμάτε, γράψτε μου και απαντώ εγώ:</p>
+          </div>
+
           <form
             class="contact-form"
             id="contact-form"
@@ -3100,16 +3399,16 @@ body.modal-open {
           <div class="calc-card legal-card">
             <p class="eyebrow" data-i18n="privacyEyebrow">Νομικά</p>
             <h2 id="privacy-title" class="calc-title" data-i18n="privacyTitle">Πολιτική Απορρήτου</h2>
-            <div class="legal-body" data-i18n="privacyBody"><p class="legal-updated">Τελευταία ενημέρωση: Ιούνιος 2026</p>
+            <div class="legal-body" data-i18n="privacyBody"><p class="legal-updated">Τελευταία ενημέρωση: Αύγουστος 2026</p>
 <p>Η προστασία των προσωπικών σας δεδομένων είναι σημαντική. Η παρούσα πολιτική εξηγεί ποια δεδομένα συλλέγονται μέσω αυτού του ιστότοπου, για ποιον σκοπό και ποια είναι τα δικαιώματά σας, σύμφωνα με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR — ΕΕ 2016/679).</p>
 <h3>1. Υπεύθυνος επεξεργασίας</h3>
 <p>Γιάννης Βαρδαβάς, ασφαλιστικός διαμεσολαβητής. Επικοινωνία: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · τηλ. 698 388 0746.</p>
 <h3>2. Ποια δεδομένα συλλέγονται</h3>
-<p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies</strong> και δεν συλλέγει δεδομένα εν αγνοία σας. Για ανώνυμα, συγκεντρωτικά στατιστικά επισκεψιμότητας χρησιμοποιείται το <strong>Cloudflare Web Analytics</strong> — ένα εργαλείο που λειτουργεί <strong>χωρίς cookies</strong> και χωρίς να συλλέγει ή να αποθηκεύει προσωπικά δεδομένα που σας ταυτοποιούν.</p>
+<p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies</strong> και δεν συλλέγει δεδομένα εν αγνοία σας. Για ανώνυμα, συγκεντρωτικά στατιστικά επισκεψιμότητας χρησιμοποιείται το <strong>Cloudflare Web Analytics</strong> — ένα εργαλείο που λειτουργεί <strong>χωρίς cookies</strong> και χωρίς να συλλέγει ή να αποθηκεύει προσωπικά δεδομένα που σας ταυτοποιούν. Τα <strong>παιχνίδια</strong> της ενότητας «Το κέρασμα» κρατούν όσα γράφετε <strong>μόνο τοπικά, στη δική σας συσκευή</strong> (τοπική αποθήκευση του φυλλομετρητή)· δεν αποστέλλονται πουθενά και τα σβήνετε ανά πάσα στιγμή από το κουμπί «Καθάρισε».</p>
 <h3>3. Σκοπός &amp; νομική βάση</h3>
 <p>Τα στοιχεία χρησιμοποιούνται αποκλειστικά για να απαντήσω στο αίτημά σας και να επικοινωνήσω μαζί σας. Νομική βάση είναι η <strong>συγκατάθεσή σας</strong> (άρθρο 6§1α GDPR), την οποία δηλώνετε υποβάλλοντας τη φόρμα.</p>
 <h3>4. Αποδέκτες — τρίτα μέρη</h3>
-<p>Για την τεχνική αποστολή της φόρμας χρησιμοποιείται η υπηρεσία <strong>Web3Forms</strong> και για τη φιλοξενία του ιστότοπου η <strong>Cloudflare</strong>. Τα δεδομένα σας δεν πωλούνται και δεν διαβιβάζονται σε τρίτους για σκοπούς marketing.</p>
+<p>Για την τεχνική αποστολή της φόρμας χρησιμοποιείται η υπηρεσία <strong>Web3Forms</strong> και για τη φιλοξενία του ιστότοπου η <strong>Cloudflare</strong>. Αν κλείσετε ραντεβού, αυτό γίνεται στη σελίδα της υπηρεσίας <strong>Cal.com</strong>, όπου μεταφέρεστε με νέα καρτέλα: τα στοιχεία που συμπληρώνετε εκεί (όνομα, email, τυχόν σχόλιο) τα λαμβάνει το Cal.com ως εκτελών την επεξεργασία και ισχύει επιπλέον η δική του πολιτική απορρήτου. Ο παρών ιστότοπος <strong>δεν φορτώνει κώδικα του Cal.com</strong> και δεν σας παρακολουθεί εκεί. Τα δεδομένα σας δεν πωλούνται και δεν διαβιβάζονται σε τρίτους για σκοπούς marketing.</p>
 <h3>5. Χρόνος διατήρησης</h3>
 <p>Τα στοιχεία διατηρούνται μόνο για όσο διάστημα απαιτείται για την επικοινωνία μας και διαγράφονται όταν δεν είναι πλέον απαραίτητα.</p>
 <h3>6. Τα δικαιώματά σας</h3>
@@ -3168,11 +3467,36 @@ const copy = {
   el: {
     brand: "Γιάννης Βαρδαβάς, lutcf",
     navServices: "Υπηρεσίες",
+    philosophyLabel: "Πριν οτιδήποτε άλλο",
+    philosophyText: "Κάθε συζήτηση ξεκινά από αυτό που ήδη έχετε. Υπάρχουσες ασφαλίσεις, συμβόλαια, καλύψεις — αναλύονται λεπτομερώς, κατανοούνται και λαμβάνονται πλήρως υπόψιν σε κάθε πρόταση. Δεν αντικαθιστώ αυτό που δουλεύει. Δεν προτείνω κάτι που δεν χρειάζεται. Αν η καλύτερη σύσταση είναι να μην αλλάξει τίποτα, αυτό λέω.",
+    philosophyCredo: "«Καλύτερα καμμία πώληση παρά μία λάθος πώληση.»",
     navModules: "Τι κάνω",
     navMethod: "Μεθοδολογία",
     navAbout: "Σχετικά",
     navContact: "Επικοινωνία",
     navRisk: "Εργαλεία Ρίσκου →",
+    navGames: "Παιχνίδια με νούμερα",
+    gamesEyebrow: "Το κέρασμα",
+    gamesTitle: "Επτά παιχνίδια που εξηγούν όσα δεν εξηγεί μια παρουσίαση.",
+    gamesIntro: "Τρία λεπτά το καθένα, στο κινητό, χωρίς εγγραφή. Τα νούμερα δεν είναι φτιαγμένα: βγαίνουν από ΕΛΣΤΑΤ, Eurostat και ΕΚΤ — και κάθε παιχνίδι γράφει από κάτω τι ακριβώς περιλαμβάνει και τι δεν περιλαμβάνει.",
+    gameOneTitle: "Πόσο έκανε;",
+    gameOneText: "Μάντεψε τις τιμές του παρελθόντος. Τα λεφτά στο συρτάρι δεν κάθονται — λιώνουν.",
+    gameTwoTitle: "Πάνω ή κάτω;",
+    gameTwoText: "39 χρονιές αγοράς. Πόσες τελείωσαν πάνω, τι κόστισε η χειρότερη, πόσο κράτησε η επιστροφή.",
+    gameThreeTitle: "Χίλιοι σαν εσένα",
+    gameThreeText: "Από 1.000 ανθρώπους στην ηλικία σας, πόσοι φτάνουν τα 80, τα 90, τα 95.",
+    gameFourTitle: "Θα σου φτάσουν;",
+    gameFourText: "Σταματάτε να δουλεύετε και τραβάτε κάθε μήνα. 21 πραγματικές αφετηρίες, 21 διαφορετικά τέλη.",
+    gameFiveTitle: "Το παζάρι της ημέρας",
+    gameFiveText: "Τι κοστίζει, ανά ημέρα, να μη μείνει η οικογένεια με το δάνειο.",
+    gameSixTitle: "Μύθος ή αλήθεια;",
+    gameSixText: "Οκτώ δηλώσεις για το ποιος φτιάχνει τα ευρώ. Οι μισές είναι λάθη που «τα ξέρουν όλοι».",
+    gameSevenTitle: "Λόγια εναντίον ενστίκτου",
+    gameSevenText: "Για δύο. Ο καθένας λέει τι θα έκανε — και μαντεύει τι είπε ο άλλος.",
+    gamesAll: "Άνοιξέ τα όλα από το ταμπλό →",
+    gamesInflation: "Τι κάνει ο χρόνος στα λεφτά σου →",
+    gamesMoney: "Ποιος φτιάχνει τα ευρώ →",
+    gamesNote: "Ό,τι γράφετε μένει στη δική σας συσκευή — τίποτα δεν αποστέλλεται και δεν αποθηκεύεται αλλού. Τα παιχνίδια είναι στα ελληνικά.",
     eyebrow: "Financial Planning | Business Risk Management",
     roleLine: "Life, Health, P&C & Investment Architect",
     heroTitle: "Ξεκινώ πάντα από εσάς — από αυτό που έχει πραγματικά σημασία.",
@@ -3466,6 +3790,11 @@ const copy = {
     aboutText4: 'Τα τελευταία χρόνια αναπτύσσω <strong>δικά μου εργαλεία τεχνητής νοημοσύνης</strong> — εφαρμογές ανάλυσης κινδύνου, σύγκρισης σεναρίων, αποτύπωσης αναγκών. Δεν αντικαθιστούν τη συμβουλή. Την κάνουν πιο ακριβή, πιο διαφανή, πιο δική σας.',
     aboutText5: '<strong>Η εμπειρία χτίζει ένστικτο. Η τεχνολογία το κάνει μετρήσιμο.</strong>',
     aboutPersonal: '<em>Εκτός γραφείου: σπουδές κλασικής κιθάρας και ανώτερα θεωρητικά μουσικής. Ενεργό μέλος επαγγελματικής χορωδίας κλασικού ρεπερτορίου — γιατί και στη μουσική, όπως και στη συμβουλευτική, η αρμονία δεν είναι τυχαία.</em>',
+    bookEyebrow: "Ο πιο γρήγορος δρόμος",
+    bookTitle: "Διαλέξτε ώρα μόνοι σας",
+    bookText: "Μισή ώρα, χωρίς δέσμευση. Βλέπετε πότε είμαι ελεύθερος και κλείνετε ό,τι σας βολεύει — ακόμα και τώρα, στις έντεκα το βράδυ.",
+    bookCta: "Κλείστε ραντεβού 30′",
+    bookAlt: "Ή, αν προτιμάτε, γράψτε μου και απαντώ εγώ:",
     contactEyebrow: "Επόμενο βήμα",
     contactTitle: "Ας μιλήσουμε — χωρίς δέσμευση, χωρίς πίεση.",
     contactText: "Μια πρώτη συζήτηση — χωρίς άγχος, χωρίς έτοιμες απαντήσεις. Βλέπουμε μαζί πού βρίσκεστε και αν μπορώ να βοηθήσω.",
@@ -3488,16 +3817,41 @@ const copy = {
     formConsent: 'Έχω διαβάσει και αποδέχομαι την <button type="button" class="legal-link" data-target="privacyModal">Πολιτική Απορρήτου</button> και συναινώ στην επεξεργασία των στοιχείων μου για να μου απαντήσετε.',
     privacyEyebrow: "Νομικά",
     privacyTitle: "Πολιτική Απορρήτου",
-    privacyBody: '<p class="legal-updated">Τελευταία ενημέρωση: Ιούνιος 2026</p><p>Η προστασία των προσωπικών σας δεδομένων είναι σημαντική. Η παρούσα πολιτική εξηγεί ποια δεδομένα συλλέγονται μέσω αυτού του ιστότοπου, για ποιον σκοπό και ποια είναι τα δικαιώματά σας, σύμφωνα με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR — ΕΕ 2016/679).</p><h3>1. Υπεύθυνος επεξεργασίας</h3><p>Γιάννης Βαρδαβάς, ασφαλιστικός διαμεσολαβητής. Επικοινωνία: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · τηλ. 698 388 0746.</p><h3>2. Ποια δεδομένα συλλέγονται</h3><p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies</strong> και δεν συλλέγει δεδομένα εν αγνοία σας. Για ανώνυμα, συγκεντρωτικά στατιστικά επισκεψιμότητας χρησιμοποιείται το <strong>Cloudflare Web Analytics</strong> — ένα εργαλείο που λειτουργεί <strong>χωρίς cookies</strong> και χωρίς να συλλέγει ή να αποθηκεύει προσωπικά δεδομένα που σας ταυτοποιούν.</p><h3>3. Σκοπός &amp; νομική βάση</h3><p>Τα στοιχεία χρησιμοποιούνται αποκλειστικά για να απαντήσω στο αίτημά σας και να επικοινωνήσω μαζί σας. Νομική βάση είναι η <strong>συγκατάθεσή σας</strong> (άρθρο 6§1α GDPR), την οποία δηλώνετε υποβάλλοντας τη φόρμα.</p><h3>4. Αποδέκτες — τρίτα μέρη</h3><p>Για την τεχνική αποστολή της φόρμας χρησιμοποιείται η υπηρεσία <strong>Web3Forms</strong> και για τη φιλοξενία του ιστότοπου η <strong>Cloudflare</strong>. Τα δεδομένα σας δεν πωλούνται και δεν διαβιβάζονται σε τρίτους για σκοπούς marketing.</p><h3>5. Χρόνος διατήρησης</h3><p>Τα στοιχεία διατηρούνται μόνο για όσο διάστημα απαιτείται για την επικοινωνία μας και διαγράφονται όταν δεν είναι πλέον απαραίτητα.</p><h3>6. Τα δικαιώματά σας</h3><p>Έχετε δικαίωμα πρόσβασης, διόρθωσης, διαγραφής, περιορισμού, εναντίωσης και φορητότητας των δεδομένων σας. Για την άσκησή τους επικοινωνήστε στο <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. Έχετε επίσης δικαίωμα καταγγελίας στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Ασφάλεια</h3><p>Λαμβάνονται εύλογα τεχνικά και οργανωτικά μέτρα για την προστασία των δεδομένων σας από μη εξουσιοδοτημένη πρόσβαση ή χρήση.</p><p class="legal-note">Η παρούσα πολιτική ενδέχεται να επικαιροποιείται. Για ασφαλιστικά προϊόντα ισχύουν επιπλέον οι όροι και οι πολιτικές απορρήτου των αντίστοιχων ασφαλιστικών εταιρειών.</p>'
+    privacyBody: '<p class="legal-updated">Τελευταία ενημέρωση: Αύγουστος 2026</p><p>Η προστασία των προσωπικών σας δεδομένων είναι σημαντική. Η παρούσα πολιτική εξηγεί ποια δεδομένα συλλέγονται μέσω αυτού του ιστότοπου, για ποιον σκοπό και ποια είναι τα δικαιώματά σας, σύμφωνα με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR — ΕΕ 2016/679).</p><h3>1. Υπεύθυνος επεξεργασίας</h3><p>Γιάννης Βαρδαβάς, ασφαλιστικός διαμεσολαβητής. Επικοινωνία: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · τηλ. 698 388 0746.</p><h3>2. Ποια δεδομένα συλλέγονται</h3><p>Μόνο όσα συμπληρώνετε εσείς στη φόρμα επικοινωνίας: <strong>όνομα, email και το μήνυμά σας</strong>. Ο ιστότοπος <strong>δεν χρησιμοποιεί cookies</strong> και δεν συλλέγει δεδομένα εν αγνοία σας. Για ανώνυμα, συγκεντρωτικά στατιστικά επισκεψιμότητας χρησιμοποιείται το <strong>Cloudflare Web Analytics</strong> — ένα εργαλείο που λειτουργεί <strong>χωρίς cookies</strong> και χωρίς να συλλέγει ή να αποθηκεύει προσωπικά δεδομένα που σας ταυτοποιούν. Τα <strong>παιχνίδια</strong> της ενότητας «Το κέρασμα» κρατούν όσα γράφετε <strong>μόνο τοπικά, στη δική σας συσκευή</strong> (τοπική αποθήκευση του φυλλομετρητή)· δεν αποστέλλονται πουθενά και τα σβήνετε ανά πάσα στιγμή από το κουμπί «Καθάρισε».</p><h3>3. Σκοπός &amp; νομική βάση</h3><p>Τα στοιχεία χρησιμοποιούνται αποκλειστικά για να απαντήσω στο αίτημά σας και να επικοινωνήσω μαζί σας. Νομική βάση είναι η <strong>συγκατάθεσή σας</strong> (άρθρο 6§1α GDPR), την οποία δηλώνετε υποβάλλοντας τη φόρμα.</p><h3>4. Αποδέκτες — τρίτα μέρη</h3><p>Για την τεχνική αποστολή της φόρμας χρησιμοποιείται η υπηρεσία <strong>Web3Forms</strong> και για τη φιλοξενία του ιστότοπου η <strong>Cloudflare</strong>. Αν κλείσετε ραντεβού, αυτό γίνεται στη σελίδα της υπηρεσίας <strong>Cal.com</strong>, όπου μεταφέρεστε με νέα καρτέλα: τα στοιχεία που συμπληρώνετε εκεί (όνομα, email, τυχόν σχόλιο) τα λαμβάνει το Cal.com ως εκτελών την επεξεργασία και ισχύει επιπλέον η δική του πολιτική απορρήτου. Ο παρών ιστότοπος <strong>δεν φορτώνει κώδικα του Cal.com</strong> και δεν σας παρακολουθεί εκεί. Τα δεδομένα σας δεν πωλούνται και δεν διαβιβάζονται σε τρίτους για σκοπούς marketing.</p><h3>5. Χρόνος διατήρησης</h3><p>Τα στοιχεία διατηρούνται μόνο για όσο διάστημα απαιτείται για την επικοινωνία μας και διαγράφονται όταν δεν είναι πλέον απαραίτητα.</p><h3>6. Τα δικαιώματά σας</h3><p>Έχετε δικαίωμα πρόσβασης, διόρθωσης, διαγραφής, περιορισμού, εναντίωσης και φορητότητας των δεδομένων σας. Για την άσκησή τους επικοινωνήστε στο <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. Έχετε επίσης δικαίωμα καταγγελίας στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Ασφάλεια</h3><p>Λαμβάνονται εύλογα τεχνικά και οργανωτικά μέτρα για την προστασία των δεδομένων σας από μη εξουσιοδοτημένη πρόσβαση ή χρήση.</p><p class="legal-note">Η παρούσα πολιτική ενδέχεται να επικαιροποιείται. Για ασφαλιστικά προϊόντα ισχύουν επιπλέον οι όροι και οι πολιτικές απορρήτου των αντίστοιχων ασφαλιστικών εταιρειών.</p>'
   },
   en: {
     brand: "Ioannis Vardavas, lutcf",
     navServices: "Services",
+    philosophyLabel: "Before anything else",
+    philosophyText: "Every conversation starts from what you already have. Existing policies, contracts and cover are analysed in detail, understood, and fully taken into account in every proposal. I do not replace what works. I do not propose what is not needed. If the best recommendation is to change nothing, that is what I say.",
+    philosophyCredo: "\u201cBetter no sale than the wrong sale.\u201d",
     navModules: "What I do",
     navMethod: "Method",
     navAbout: "About",
     navContact: "Contact",
     navRisk: "Risk Tools →",
+    navGames: "Games with real numbers",
+    gamesEyebrow: "On the house",
+    gamesTitle: "Seven games that explain what a presentation cannot.",
+    gamesIntro: "Three minutes each, on your phone, no sign-up. The numbers are not invented: they come from ELSTAT, Eurostat and the ECB — and every game states underneath exactly what it includes and what it does not. The games are in Greek.",
+    gameOneTitle: "What did it cost?",
+    gameOneText: "Guess the prices of the past. Money left in a drawer does not sit still — it melts.",
+    gameTwoTitle: "Up or down?",
+    gameTwoText: "39 market years. How many ended up, what the worst one cost, how long the recovery took.",
+    gameThreeTitle: "A thousand like you",
+    gameThreeText: "Out of 1,000 people your age, how many reach 80, 90, 95.",
+    gameFourTitle: "Will it be enough?",
+    gameFourText: "You stop working and withdraw every month. 21 real starting points, 21 different endings.",
+    gameFiveTitle: "The price of a day",
+    gameFiveText: "What it costs, per day, so your family is not left with the loan.",
+    gameSixTitle: "Myth or fact?",
+    gameSixText: "Eight statements about who creates euros. Half are mistakes that «everybody knows».",
+    gameSevenTitle: "Words versus instinct",
+    gameSevenText: "For two people. Each says what they would do — and guesses what the other said.",
+    gamesAll: "Open them all from the board →",
+    gamesInflation: "What time does to your money →",
+    gamesMoney: "Who creates euros →",
+    gamesNote: "Whatever you type stays on your own device — nothing is sent or stored anywhere else. The games are in Greek.",
     eyebrow: "Financial Planning | Business Risk Management",
     roleLine: "Life, Health, P&C & Investment Architect",
     heroTitle: "I always start with you — with what truly matters to you.",
@@ -3791,6 +4145,11 @@ const copy = {
     aboutText4: 'In recent years I have been developing <strong>my own AI-powered tools</strong> — applications for risk analysis, scenario comparison, and needs mapping. They don\'t replace advice. They make it more precise, more transparent, more yours.',
     aboutText5: '<strong>Experience builds instinct. Technology makes it measurable.</strong>',
     aboutPersonal: '<em>Off duty: classical guitar studies and advanced music theory. Active member of a professional classical repertoire choir — because in music, as in advisory, harmony is never accidental.</em>',
+    bookEyebrow: "The fastest route",
+    bookTitle: "Pick a time yourself",
+    bookText: "Thirty minutes, no commitment. See when I am free and book whatever suits you — even right now, at eleven at night.",
+    bookCta: "Book a 30-min call",
+    bookAlt: "Or, if you prefer, write to me and I will reply:",
     contactEyebrow: "Next step",
     contactTitle: "Let’s talk — no commitment, no pressure.",
     contactText: "One conversation — no rush, no ready answers. We simply look together at where you are and whether I can help.",
@@ -3813,7 +4172,7 @@ const copy = {
     formConsent: 'I have read and accept the <button type="button" class="legal-link" data-target="privacyModal">Privacy Policy</button> and consent to the processing of my details so you can reply to me.',
     privacyEyebrow: "Legal",
     privacyTitle: "Privacy Policy",
-    privacyBody: '<p class="legal-updated">Last updated: June 2026</p><p>Protecting your personal data matters. This policy explains what data is collected through this website, for what purpose, and what your rights are, in accordance with the General Data Protection Regulation (GDPR — EU 2016/679).</p><h3>1. Data controller</h3><p>Ioannis Vardavas, insurance intermediary. Contact: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · tel. +30 698 388 0746.</p><h3>2. What data is collected</h3><p>Only what you enter in the contact form: <strong>your name, email and message</strong>. The website <strong>uses no cookies</strong> and collects no data without your knowledge. For anonymous, aggregate visitor statistics it uses <strong>Cloudflare Web Analytics</strong> — a tool that works <strong>without cookies</strong> and does not collect or store personal data that identifies you.</p><h3>3. Purpose &amp; legal basis</h3><p>Your details are used solely to reply to your request and to contact you. The legal basis is your <strong>consent</strong> (Article 6(1)(a) GDPR), which you provide by submitting the form.</p><h3>4. Recipients — third parties</h3><p>The form is delivered via the <strong>Web3Forms</strong> service and the site is hosted on <strong>Cloudflare</strong>. Your data is not sold and is not shared with third parties for marketing purposes.</p><h3>5. Retention period</h3><p>Your details are kept only for as long as needed for our communication and are deleted once no longer necessary.</p><h3>6. Your rights</h3><p>You have the right to access, rectify, erase, restrict, object to and port your data. To exercise them, contact <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. You also have the right to lodge a complaint with the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Security</h3><p>Reasonable technical and organisational measures are taken to protect your data from unauthorised access or use.</p><p class="legal-note">This policy may be updated. For insurance products, the terms and privacy policies of the respective insurance companies also apply.</p>'
+    privacyBody: '<p class="legal-updated">Last updated: August 2026</p><p>Protecting your personal data matters. This policy explains what data is collected through this website, for what purpose, and what your rights are, in accordance with the General Data Protection Regulation (GDPR — EU 2016/679).</p><h3>1. Data controller</h3><p>Ioannis Vardavas, insurance intermediary. Contact: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · tel. +30 698 388 0746.</p><h3>2. What data is collected</h3><p>Only what you enter in the contact form: <strong>your name, email and message</strong>. The website <strong>uses no cookies</strong> and collects no data without your knowledge. For anonymous, aggregate visitor statistics it uses <strong>Cloudflare Web Analytics</strong> — a tool that works <strong>without cookies</strong> and does not collect or store personal data that identifies you. The <strong>games</strong> keep whatever you type <strong>only locally, on your own device</strong> (browser local storage); nothing is sent anywhere and you can erase it at any time with the «Clear» button.</p><h3>3. Purpose &amp; legal basis</h3><p>Your details are used solely to reply to your request and to contact you. The legal basis is your <strong>consent</strong> (Article 6(1)(a) GDPR), which you provide by submitting the form.</p><h3>4. Recipients — third parties</h3><p>The form is delivered via the <strong>Web3Forms</strong> service and the site is hosted on <strong>Cloudflare</strong>. If you book a call, that happens on the <strong>Cal.com</strong> service, which opens in a new tab: the details you enter there (name, email, any note) are received by Cal.com as a processor and its own privacy policy additionally applies. This website <strong>loads no Cal.com code</strong> and does not track you there. Your data is not sold and is not shared with third parties for marketing purposes.</p><h3>5. Retention period</h3><p>Your details are kept only for as long as needed for our communication and are deleted once no longer necessary.</p><h3>6. Your rights</h3><p>You have the right to access, rectify, erase, restrict, object to and port your data. To exercise them, contact <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. You also have the right to lodge a complaint with the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Security</h3><p>Reasonable technical and organisational measures are taken to protect your data from unauthorised access or use.</p><p class="legal-note">This policy may be updated. For insurance products, the terms and privacy policies of the respective insurance companies also apply.</p>'
   }
 };
 
@@ -4521,11 +4880,15 @@ if ("IntersectionObserver" in window) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
+        } else if (entry.boundingClientRect.top > 0) {
+          /* Ξε-αποκαλύπτουμε ΜΟΝΟ όσα ξαναβρέθηκαν κάτω από την οθόνη, ώστε το
+             animation να ξαναπαίζει όταν ανεβοκατεβαίνεις. Αν σβήναμε και όσα
+             βγήκαν από πάνω, κάθε κάρτα στο όριο τρεμόσβηνε. */
+          entry.target.classList.remove("is-visible");
         }
       });
     },
-    { threshold: 0.22 }
+    { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
   );
 
   revealNodes.forEach((node) => revealObserver.observe(node));
@@ -4537,7 +4900,7 @@ if ("IntersectionObserver" in window) {
    CSS ::after so it can animate; re-run after each i18n render (setLanguage hook). --- */
 window._decorateArrows = function () {
   document
-    .querySelectorAll(".module-tool, .calc-cta, .cs-cta, .story-btn")
+    .querySelectorAll(".module-tool, .calc-cta, .cs-cta, .story-btn, .game-cta")
     .forEach(function (el) {
       var orig = el.textContent;
       if (/[→➔]\s*$/.test(orig)) {

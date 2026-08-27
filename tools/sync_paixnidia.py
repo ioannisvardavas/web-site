@@ -121,7 +121,7 @@ KARTA = f'''<meta name="description" content="Επτά σύντομα παιχν
 <link rel="canonical" href="{SITE}/paixnidia/">
 '''
 
-PISO = ('<a class="noprint" href="/" style="display:inline-block; margin-bottom:18px; '
+PISO = ('<a class="noprint" href="../index.html" style="display:inline-block; margin-bottom:18px; '
         'font-family:var(--disp); font-size:.86rem; font-weight:700; letter-spacing:.06em; '
         'text-transform:uppercase; color:var(--soft); text-decoration:none">'
         '← Γιάννης Βαρδαβάς</a>\n\n<h1>Το κέρασμα</h1>')
