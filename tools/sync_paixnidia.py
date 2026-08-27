@@ -148,6 +148,9 @@ EIDIKA = {"ΠΑΖΑΡΙ_ΗΜΕΡΑΣ_ΠΑΙΧΝΙΔΙ.html": pazari, "ΤΑΜΠΛ
 # ποτέ ποιος το έφτιαξε. Από εδώ και πέρα κάθε αρχείο κλείνει με όνομα,
 # τηλέφωνο και έναν δρόμο πίσω.
 
+# Η διεύθυνση του ημερολογίου. Αλλάζει ΜΟΝΟ εδώ και στο standalone.html.
+RANTEVOU = "https://cal.com/ioannis-vardavas-0yon6x"
+
 TILEFONO = "698 388 0746"
 TIL_LINK = "+306983880746"
 WHATSAPP = "306983880746"
@@ -224,6 +227,7 @@ YPOGRAFI_CSS = """<style>
 .ypog-b{flex:1 1 auto; min-width:130px; text-align:center; text-decoration:none;
   padding:12px 14px; border-radius:13px; font-size:15.5px; font-weight:700;
   border:1.5px solid var(--line); color:var(--ink); background:var(--paper)}
+.ypog-b.rantevou{flex:1 1 100%}
 .ypog-b.kyrio{background:var(--euro); border-color:var(--euro); color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ypog-b.kyrio{color:#08122A}}
 :root[data-theme="dark"] .ypog-b.kyrio{color:#08122A}
@@ -244,7 +248,8 @@ def ypografi_html(onoma):
         '  <p class="ypog-nm">Γιάννης Βαρδαβάς <span>LUTCF</span></p>\n'
         '  <p class="ypog-rol">Financial Planning &amp; Business Risk Management</p>\n'
         '  <div class="ypog-act">\n'
-        '    <a class="ypog-b kyrio" href="tel:' + TIL_LINK + '">Πάρε με · ' + TILEFONO + '</a>\n'
+        '    <a class="ypog-b kyrio rantevou" href="' + RANTEVOU + '" target="_blank" rel="noopener">Κλείσε ραντεβού 30&prime;</a>\n'
+        '    <a class="ypog-b" href="tel:' + TIL_LINK + '">Πάρε με · ' + TILEFONO + '</a>\n'
         '    <a class="ypog-b" href="https://wa.me/' + WHATSAPP + '?text=' + quote(minima) +
         '" target="_blank" rel="noopener">WhatsApp</a>\n'
         '    <a class="ypog-b" href="viber://chat?number=' + quote(TIL_LINK) + '">Viber</a>\n'
@@ -311,6 +316,8 @@ def main():
             lathi.append(f"{onoma}: λείπει το τηλέφωνο")
         if f"{SITE}/" not in t:
             lathi.append(f"{onoma}: λείπει ο δρόμος πίσω στο site")
+        if RANTEVOU not in t:
+            lathi.append(f"{onoma}: λείπει ο σύνδεσμος για ραντεβού")
 
     if lathi:
         print("✖ ΣΤΑΜΑΤΗΣΑ — δεν γράφτηκε τίποτα:\n")
