@@ -2323,8 +2323,8 @@ body.modal-open {
   }
 
   .hero-visual {
-    justify-self: center;
-    max-width: 320px;
+    justify-self: start;
+    max-width: 360px;
   }
 
   .section-heading,
@@ -2383,10 +2383,11 @@ body.modal-open {
     display: flex;
     order: -1;
     align-items: center;
-    gap: 14px;
-    width: auto;
+    justify-self: start;
+    gap: 16px;
+    width: 100%;
     max-width: none;
-    margin: 0 0 24px;
+    margin: 0 0 26px;
     overflow: visible;
     border-radius: 0;
     box-shadow: none;
@@ -2396,8 +2397,8 @@ body.modal-open {
 
   .hero-avatar {
     flex: none;
-    width: 84px;
-    height: 84px;
+    width: 112px;
+    height: 112px;
     overflow: hidden;
     border-radius: 50%;
     box-shadow:
@@ -2417,8 +2418,10 @@ body.modal-open {
 
   .hero-id-name {
     display: block;
+    /* Στα 360px το «Ioannis Vardavas, lutcf» έσπαγε σε δύο γραμμές δίπλα στο
+       πορτραίτο· το ελαστικό μέγεθος το κρατά σε μία. */
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.1rem;
+    font-size: clamp(0.96rem, 4.1vw, 1.2rem);
     font-weight: 600;
     line-height: 1.25;
   }
@@ -5025,8 +5028,11 @@ window._decorateArrows();
 // κουμπιά είναι αριστερά, δεν συγκρούονται, και το Viber μένει ορατό από την αρχή.
 (function () {
   var viber = document.querySelector(".viber-float");
-  var actions = document.querySelector(".hero-actions");
-  if (!viber || !actions) return;
+  // Ολόκληρη η στήλη κειμένου, όχι μόνο τα κουμπιά: στο κινητό το πλωτό κουμπί
+  // έπεφτε και πάνω στην περιγραφή. Στο desktop η στήλη είναι αριστερά, οπότε
+  // δεν συγκρούεται ποτέ και το Viber μένει ορατό από την αρχή.
+  var copy = document.querySelector(".hero-copy");
+  if (!viber || !copy) return;
 
   var GAP = 12;
 
@@ -5035,7 +5041,7 @@ window._decorateArrows();
   // είναι αμελητέες.
   function update() {
     var v = viber.getBoundingClientRect();
-    var a = actions.getBoundingClientRect();
+    var a = copy.getBoundingClientRect();
     var apart =
       a.bottom < v.top - GAP ||
       a.top > v.bottom + GAP ||
