@@ -2384,7 +2384,7 @@ body.modal-open {
     order: -1;
     align-items: center;
     justify-self: start;
-    gap: 16px;
+    gap: 18px;
     width: 100%;
     max-width: none;
     margin: 0 0 26px;
@@ -2397,8 +2397,9 @@ body.modal-open {
 
   .hero-avatar {
     flex: none;
-    width: 112px;
-    height: 112px;
+    /* Ελαστικό: όσο μεγάλο σηκώνει η οθόνη χωρίς να στριμώξει το όνομα δίπλα. */
+    width: clamp(132px, 41vw, 184px);
+    height: clamp(132px, 41vw, 184px);
     overflow: hidden;
     border-radius: 50%;
     box-shadow:
@@ -2428,10 +2429,11 @@ body.modal-open {
 
   .hero-id-role {
     display: block;
-    margin-top: 3px;
+    margin-top: 4px;
     color: var(--muted);
-    font-size: 0.8rem;
+    font-size: clamp(0.72rem, 3.1vw, 0.82rem);
     font-weight: 800;
+    line-height: 1.35;
   }
 
   .hero-copy > .role-line {
@@ -2573,8 +2575,8 @@ body.modal-open {
             />
           </span>
           <figcaption class="hero-id">
-            <span class="hero-id-name" data-i18n="footerName">Γιάννης Βαρδαβάς, lutcf</span>
-            <span class="hero-id-role" data-i18n="roleLine">Life, Health, P&amp;C &amp; Investment Architect</span>
+            <span class="hero-id-name" data-i18n="heroIdName">Γιάννης Βαρδαβάς</span>
+            <span class="hero-id-role" data-i18n="heroIdRole">lutcf · Life, Health, P&amp;C &amp; Investment Architect</span>
           </figcaption>
         </figure>
       </section>
@@ -3556,6 +3558,8 @@ const copy = {
     gamesNote: "Ό,τι γράφετε μένει στη δική σας συσκευή — τίποτα δεν αποστέλλεται και δεν αποθηκεύεται αλλού. Τα παιχνίδια είναι στα ελληνικά.",
     eyebrow: "Financial Planning | Business Risk Management",
     roleLine: "Life, Health, P&C & Investment Architect",
+    heroIdName: "Γιάννης Βαρδαβάς",
+    heroIdRole: "lutcf · Life, Health, P&C & Investment Architect",
     heroTitle: "Ξεκινώ πάντα από εσάς — από αυτό που έχει πραγματικά σημασία.",
     heroSubtitle:
       "Ασφαλιστική, επενδυτική συμβουλευτική και business risk management — με αφετηρία τις πραγματικές ανάγκες σας, όχι ένα έτοιμο πακέτο.",
@@ -3911,6 +3915,8 @@ const copy = {
     gamesNote: "Whatever you type stays on your own device — nothing is sent or stored anywhere else. The games are in Greek.",
     eyebrow: "Financial Planning | Business Risk Management",
     roleLine: "Life, Health, P&C & Investment Architect",
+    heroIdName: "Ioannis Vardavas",
+    heroIdRole: "lutcf · Life, Health, P&C & Investment Architect",
     heroTitle: "I always start with you — with what truly matters to you.",
     heroSubtitle:
       "Insurance, investment advisory and business risk management — built around your actual needs, not a ready-made package.",
