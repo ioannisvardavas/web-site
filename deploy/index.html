@@ -2319,7 +2319,7 @@ body.modal-open {
   }
 
   h1 {
-    max-width: 15ch;
+    max-width: 22ch;
   }
 
   .hero-visual {
@@ -2485,6 +2485,10 @@ body.modal-open {
 
 .viber-float{position:fixed;bottom:28px;right:28px;z-index:9999;width:60px;height:60px;border-radius:50%;background:#7360f2;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.35);cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none}
 .viber-float:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(0,0,0,.45)}
+/* Δεν σκεπάζει τα κουμπιά της πρώτης οθόνης: εμφανίζεται αφού περάσει το hero. */
+.viber-float{opacity:1;visibility:visible;transition:transform .2s,box-shadow .2s,opacity .28s ease,visibility .28s}
+.viber-float.is-hidden{opacity:0;visibility:hidden;transform:scale(.85) translateY(10px);pointer-events:none}
+.viber-float.is-hidden:hover{transform:scale(.85) translateY(10px)}
 .viber-float svg{width:32px;height:32px;fill:#fff}
 @media(max-width:600px){.viber-float{bottom:18px;right:18px;width:54px;height:54px}.viber-float svg{width:28px;height:28px}}
 
@@ -5014,6 +5018,37 @@ window._decorateArrows();
 
 </script>
 <a href="viber://chat?number=%2B306983880746" class="viber-float" aria-label="Viber"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.398.002C9.473.028 5.331.344 3.014 2.467 1.294 4.177.518 6.77.404 9.94c-.114 3.17-.26 9.109 5.559 10.734l.01.006.006-.01s-.065 2.275-.01 2.97c.055.696.345 1.114.85.672.7-.61 3.27-3.848 3.27-3.848 1.26.1 2.449.05 3.51-.128.275-.046.543-.1.804-.162 3.641-.862 5.864-3.19 6.655-7.325.823-4.305.36-8.455-2.063-10.605C16.713.6 13.323-.024 11.398.002zm.602 1.997c1.6-.012 4.396.382 6.265 2.088 1.907 1.69 2.26 5.186 1.558 8.862-.68 3.56-2.548 5.205-5.396 5.88-.225.053-.458.098-.698.136-.92.147-1.958.18-3.065.095l-.4-.034-.272.326s-1.344 1.646-2.154 2.672c-.09-.735-.07-1.962-.07-1.962l-.034-.422-.414-.094c-4.266-1.093-4.228-5.478-4.127-8.298.1-2.82.755-5.012 2.14-6.39C6.755 3.375 9.14 2.165 12 2zM9.875 5.91a.909.909 0 00-.592.218c-.387.332-.766.769-.882 1.26-.19.81.105 1.81.846 3.058a14.078 14.078 0 002.674 3.479c.04.044.083.088.126.13l.002.002.002.001.001.002.002.001c.043.043.087.086.13.127a14.078 14.078 0 003.479 2.674c1.247.74 2.248 1.036 3.058.846.491-.116.928-.495 1.26-.882a.909.909 0 00.107-.975l-1.453-2.665a.909.909 0 00-1.01-.442l-1.578.448a.136.136 0 01-.127-.032l-2.467-2.098-.04-.037-.037-.04-2.098-2.467a.136.136 0 01-.032-.127l.449-1.578a.909.909 0 00-.443-1.01L9.607 5.97a.909.909 0 00-.383-.111.909.909 0 00-.35.051zm2.39 1.072c-.02 0-.04.01-.055.03a.077.077 0 00.014.108c.053.042.13.032.164-.014a2.678 2.678 0 013.324-.635c.062.034.14.011.172-.051s.01-.14-.052-.174a2.835 2.835 0 00-3.52.672.116.116 0 01-.047.063zm-.322-.281a.116.116 0 01-.047.063.08.08 0 01-.055.03.077.077 0 01-.067-.039 3.472 3.472 0 015.464-.684c.049.053.045.136-.008.185s-.136.045-.185-.008a3.315 3.315 0 00-5.102.453zm4.903 4.544a.077.077 0 01-.108-.014.077.077 0 01.014-.108 2.678 2.678 0 00.635-3.324.077.077 0 01.051-.172c.062.032.085.11.051.172a2.835 2.835 0 01-.672 3.52.116.116 0 01-.063.047.08.08 0 01-.03.006.077.077 0 01.122-.127zm.281.322a.116.116 0 01-.063.047.08.08 0 01-.03.006.077.077 0 01-.039-.067 3.472 3.472 0 00.684-5.464.131.131 0 01-.008-.185.131.131 0 01.185.008 3.315 3.315 0 01-.453 5.102.077.077 0 01-.276.553z"/></svg></a>
+<script>
+// Το πλωτό Viber καθόταν πάνω στα κουμπιά του hero (μετρημένο: στο κινητό έπεφτε
+// ακριβώς πάνω στο «Κλείσε μια αρχική συζήτηση»). Κρύβεται όσο πραγματικά
+// επικαλύπτει τα κουμπιά — δηλαδή στην πρώτη οθόνη του κινητού· στο desktop τα
+// κουμπιά είναι αριστερά, δεν συγκρούονται, και το Viber μένει ορατό από την αρχή.
+(function () {
+  var viber = document.querySelector(".viber-float");
+  var actions = document.querySelector(".hero-actions");
+  if (!viber || !actions) return;
+
+  var GAP = 12;
+
+  // Χωρίς requestAnimationFrame: παγώνει όταν η καρτέλα είναι στο παρασκήνιο και
+  // το κουμπί θα έμενε κολλημένο στη λάθος κατάσταση. Δύο μετρήσεις ανά scroll
+  // είναι αμελητέες.
+  function update() {
+    var v = viber.getBoundingClientRect();
+    var a = actions.getBoundingClientRect();
+    var apart =
+      a.bottom < v.top - GAP ||
+      a.top > v.bottom + GAP ||
+      a.right < v.left - GAP ||
+      a.left > v.right + GAP;
+    viber.classList.toggle("is-hidden", !apart);
+  }
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+})();
+</script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cb726ef2fe2b41bc8da2f3cbe828f22f"}'></script><!-- End Cloudflare Web Analytics -->
   </body>
 </html>
