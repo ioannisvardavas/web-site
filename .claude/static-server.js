@@ -23,6 +23,9 @@ http.createServer((req, res) => {
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404); return res.end("not found"); }
     res.writeHead(200, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
+    // Τοπικά, το «← Στην ιστοσελίδα μου» του ραντάρ γυρνά στη δοκιμαστική σελίδα, όχι στο ζωντανό site.
+    if (base === RADAR && path.extname(file) === ".html")
+      data = data.toString().split("https://vardavas-site.pages.dev").join("/standalone_v4.html");
     res.end(data);
   });
 }).listen(PORT, () => console.log("listening on " + PORT));
