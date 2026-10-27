@@ -273,7 +273,7 @@ h1, h2, h3, h4, .calc-title {
   z-index: -1;
   overflow: hidden;
   background: #ffe3b3;
-  clip-path: polygon(0 0, 100% 0, 100% 52%, 0 84%);
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
 }
 .hb {
   position: absolute;
@@ -287,6 +287,8 @@ h1, h2, h3, h4, .calc-title {
 .hb4 { width: 40vw; height: 40vw; right: 10vw; top: 6vw; background: var(--coral); animation: v4h4 20s ease-in-out infinite alternate; }
 .hb5 { width: 34vw; height: 34vw; right: -6vw; top: 18vw; background: var(--teal); animation: v4h2 24s ease-in-out infinite alternate-reverse; }
 .hb6 { width: 36vw; height: 36vw; left: -8vw; top: 16vw; background: #ffb5a0; animation: v4h3 19s ease-in-out infinite alternate-reverse; }
+.hb7 { width: 44vw; height: 44vw; left: 26vw; top: 34vw; background: #9fe0f7; animation: v4h4 23s ease-in-out infinite alternate-reverse; }
+.hb8 { width: 46vw; height: 46vw; right: -12vw; top: 34vw; background: #b9a6ff; animation: v4h1 21s ease-in-out infinite alternate; }
 @keyframes v4h1 { to { transform: translate(12vw, 6vw) scale(1.08); } }
 @keyframes v4h2 { to { transform: translate(-8vw, 6vw) scale(0.92); } }
 @keyframes v4h3 { to { transform: translate(-10vw, 8vw) scale(1.12); } }
@@ -1066,7 +1068,9 @@ main {
     color: #fff;
   }
   .hero { min-height: auto; padding-top: 120px; padding-bottom: 110px; }
-  .hero-mesh { clip-path: polygon(0 0, 100% 0, 100% 66%, 0 88%); }
+  .hero-mesh { clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%); }
+  .hb7 { width: 90vw; height: 90vw; left: -10vw; top: 90vw; }
+  .hb8 { width: 90vw; height: 90vw; top: 120vw; }
   .hb1 { width: 110vw; height: 110vw; }
   .hb2 { width: 80vw; height: 80vw; top: 30vw; }
   .hb3 { width: 90vw; height: 90vw; }
