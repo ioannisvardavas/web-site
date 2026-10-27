@@ -26,4 +26,8 @@
   document.addEventListener("click", () =>
     document.querySelectorAll(".hint.open").forEach((t) => t.classList.remove("open"))
   );
+  const header = document.querySelector(".site-header");
+  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 })();

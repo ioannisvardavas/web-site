@@ -2638,9 +2638,15 @@ h1, h2, h3, h4, .calc-title {
   min-height: 74px;
   padding: 14px var(--pad-x);
   border-bottom: 0;
-  background: rgba(244, 241, 236, 0.82);
+  background: transparent;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+.site-header.is-scrolled,
+.site-header:has(.nav-links.is-open) {
+  background: rgba(244, 241, 236, 0.86);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(18, 20, 20, 0.06);
 }
 .brand {
   margin-right: auto;
@@ -2706,11 +2712,13 @@ h1, h2, h3, h4, .calc-title {
 .hero {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   gap: 0;
-  min-height: calc(100vh - 74px);
-  padding: 32px var(--pad-x) 0;
+  isolation: isolate;
+  min-height: 100vh;
+  margin-top: -74px;
+  padding: 130px var(--pad-x) 90px;
   overflow: hidden;
 }
 .hero-copy {
@@ -2790,51 +2798,38 @@ h1, h2, h3, h4, .calc-title {
   font-size: 17px;
   letter-spacing: -0.02em;
 }
-/* ποτάμια χρώματος: πιάνουν όλο το πλάτος, ζωγραφίζονται από αριστερά προς
-   δεξιά και μετά «τρέχουν» (λάμψεις που κυλούν πάνω τους). Το δεξί κομμάτι
-   ανεβαίνει στο άδειο χώρο δίπλα στο κείμενο. */
-.art {
-  position: relative;
-  z-index: 0;
-  flex: none;
-  width: 100vw;
-  aspect-ratio: 1440 / 420;
-  margin: -14vw calc(50% - 50vw) 0;
-  pointer-events: none;
+/* χρώματα σε στυλ Stripe: λείο κινούμενο gradient πίσω από την αρχή, με
+   λοξή κάτω άκρη. Ανοιχτόχρωμα (κίτρινο, γαλάζιο, ροδακινί) πίσω από το
+   κείμενο, τα έντονα (μωβ, κοραλί, τιρκουάζ) προς τα δεξιά και πάνω. */
+.hero-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: #ffe3b3;
+  clip-path: polygon(0 0, 100% 0, 100% 52%, 0 84%);
 }
-.art svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+.hb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
 }
-.stroke {
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 3000;
-  stroke-dashoffset: 3000;
-  animation: v4draw 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
-.s1 { animation-delay: 0.1s; }
-.s2 { animation-delay: 0.3s; }
-.s3 { animation-delay: 0.5s; }
-.s4 { animation-delay: 0.7s; }
-.s5 { animation-delay: 0.9s; }
-.glint {
-  fill: none;
-  stroke: #fff;
-  stroke-linecap: round;
-  stroke-dasharray: 16 150;
-  opacity: 0;
-  animation: v4glow 0.8s ease 2.6s forwards, v4flow 16s linear 2.6s infinite;
-}
-.glint.s2 { animation-duration: 0.8s, 19s; }
-.glint.s3 { animation-duration: 0.8s, 14s; }
-.glint.s4 { animation-duration: 0.8s, 21s; }
-.glint.s5 { animation-duration: 0.8s, 12s; }
-@keyframes v4draw { to { stroke-dashoffset: 0; } }
-@keyframes v4glow { to { opacity: 0.45; } }
-@keyframes v4flow { to { stroke-dashoffset: -1000; } }
+.hb1 { width: 62vw; height: 62vw; left: -16vw; top: -22vw; background: #ffd27a; animation: v4h1 18s ease-in-out infinite alternate; }
+.hb2 { width: 44vw; height: 44vw; left: 18vw; top: 4vw; background: #9fe0f7; animation: v4h2 22s ease-in-out infinite alternate; }
+.hb3 { width: 50vw; height: 50vw; right: -12vw; top: -20vw; background: var(--violet); animation: v4h3 16s ease-in-out infinite alternate; }
+.hb4 { width: 40vw; height: 40vw; right: 10vw; top: 6vw; background: var(--coral); animation: v4h4 20s ease-in-out infinite alternate; }
+.hb5 { width: 34vw; height: 34vw; right: -6vw; top: 18vw; background: var(--teal); animation: v4h2 24s ease-in-out infinite alternate-reverse; }
+.hb6 { width: 36vw; height: 36vw; left: -8vw; top: 16vw; background: #ffb5a0; animation: v4h3 19s ease-in-out infinite alternate-reverse; }
+@keyframes v4h1 { to { transform: translate(12vw, 6vw) scale(1.08); } }
+@keyframes v4h2 { to { transform: translate(-8vw, 6vw) scale(0.92); } }
+@keyframes v4h3 { to { transform: translate(-10vw, 8vw) scale(1.12); } }
+@keyframes v4h4 { to { transform: translate(8vw, -6vw) scale(1.05); } }
+.hero h1 .paint path { stroke: #fff; }
+.hero .tag { box-shadow: 0 6px 20px rgba(18, 20, 20, 0.08); }
+.hero .lead { color: rgba(18, 20, 20, 0.78); }
+.hero .pill.ghost { background: rgba(255, 255, 255, 0.6); }
+.hero .pill.ghost:hover { background: var(--ink); }
 
 /* ── ζώνη με τον υπολογιστή ──────────────────── */
 .band {
@@ -3591,8 +3586,12 @@ main {
     background: var(--ink);
     color: #fff;
   }
-  .hero { min-height: auto; padding-top: 24px; }
-  .art { aspect-ratio: auto; height: 300px; margin-top: 8px; }
+  .hero { min-height: auto; padding-top: 120px; padding-bottom: 110px; }
+  .hero-mesh { clip-path: polygon(0 0, 100% 0, 100% 66%, 0 88%); }
+  .hb1 { width: 110vw; height: 110vw; }
+  .hb2 { width: 80vw; height: 80vw; top: 30vw; }
+  .hb3 { width: 90vw; height: 90vw; }
+  .hb4 { width: 70vw; height: 70vw; top: 40vw; }
   .band-grid { grid-template-columns: 1fr; }
   .audience-grid,
   .module-grid { grid-template-columns: 1fr; }
@@ -3607,11 +3606,10 @@ main {
   .brand { max-width: none; font-size: 19px; white-space: nowrap; }
   .brand small { display: none; }
   .site-header { gap: 12px; }
-  .hero { padding: 20px 20px 0; }
+  .hero { margin-top: -74px; padding: 110px 20px 90px; }
   .hero h1 { font-size: clamp(44px, 13vw, 60px); }
   .tag { font-size: 13px; }
   .portrait { width: min(300px, 74vw); height: min(330px, 82vw); }
-  .art { height: 240px; }
   .band { padding: 110px 20px 130px; }
   .b1 { width: 130vw; height: 130vw; left: -50vw; top: -30vw; }
   .b2 { width: 110vw; height: 110vw; left: 20vw; top: 40%; }
@@ -3644,7 +3642,7 @@ main {
   .stroke,
   .hero h1 .paint path { animation: none; stroke-dashoffset: 0; }
   .blob,
-  .glint { animation: none; opacity: 0; }
+  .hb { animation: none; }
 }
 .service-card-dark > .module-tool {
   margin-top: 10px;
@@ -3682,6 +3680,7 @@ main {
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-mesh" aria-hidden="true"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb6"></span></div>
         <div class="hero-copy">
           <span class="tag"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span></span>
           <h1 id="hero-title" data-i18n="v4HeroTitle">Τα χρήματά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span></h1>
@@ -3695,40 +3694,6 @@ main {
             <span><b>LUTCF</b><span data-i18n="v4Cred2">διεθνής πιστοποίηση</span></span>
             <span><b>177766</b><span data-i18n="v4Cred3">Αρ. Μητρώου ΕΕΑ</span></span>
           </div>
-        </div>
-        <div class="art" aria-hidden="true">
-    <svg viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice">
-      <defs>
-        <filter id="v4brush" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="2" seed="7" result="n" />
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" result="d" />
-          <feTurbulence type="fractalNoise" baseFrequency="0.003 0.22" numOctaves="2" seed="3" result="streak" />
-          <feColorMatrix in="streak" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 -0.32" result="sa" />
-          <feComposite in="sa" in2="d" operator="in" result="lines" />
-          <feMerge><feMergeNode in="d" /><feMergeNode in="lines" /></feMerge>
-        </filter>
-        <linearGradient id="v4gT" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0fa39a"/><stop offset="1" stop-color="#0a4c49"/></linearGradient>
-        <linearGradient id="v4gV" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9b86ff"/><stop offset="1" stop-color="#5b3df0"/></linearGradient>
-        <linearGradient id="v4gC" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8a6b"/><stop offset="1" stop-color="#f0492a"/></linearGradient>
-        <linearGradient id="v4gG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f2b544"/><stop offset="1" stop-color="#ffd77a"/></linearGradient>
-        <linearGradient id="v4gS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5cc8f0"/><stop offset="1" stop-color="#9fe0f7"/></linearGradient>
-      </defs>
-      <g filter="url(#v4brush)">
-        <path class="stroke s1" stroke="url(#v4gS)" stroke-width="50" d="M -120 250 C 240 290, 560 260, 840 240 C 1060 225, 1240 150, 1580 150" pathLength="3000"/>
-        <path class="stroke s2" stroke="url(#v4gV)" stroke-width="76" d="M -120 300 C 280 280, 600 360, 880 280 C 1080 220, 1220 60, 1580 30" pathLength="3000"/>
-        <path class="stroke s3" stroke="url(#v4gT)" stroke-width="92" d="M -120 362 C 300 330, 620 420, 920 322 C 1120 252, 1260 122, 1580 92" pathLength="3000"/>
-        <path class="stroke s4" stroke="url(#v4gC)" stroke-width="66" d="M -120 412 C 340 400, 700 444, 1000 362 C 1200 302, 1330 222, 1580 222" pathLength="3000"/>
-        <path class="stroke s5" stroke="url(#v4gG)" stroke-width="38" d="M -120 330 C 220 370, 520 300, 800 312 C 1040 322, 1240 42, 1580 4" pathLength="3000"/>
-      </g>
-      <g class="flow">
-        <path class="glint s1" stroke-width="7" d="M -120 250 C 240 290, 560 260, 840 240 C 1060 225, 1240 150, 1580 150" pathLength="1000"/>
-        <path class="glint s2" stroke-width="10" d="M -120 300 C 280 280, 600 360, 880 280 C 1080 220, 1220 60, 1580 30" pathLength="1000"/>
-        <path class="glint s3" stroke-width="13" d="M -120 362 C 300 330, 620 420, 920 322 C 1120 252, 1260 122, 1580 92" pathLength="1000"/>
-        <path class="glint s4" stroke-width="9" d="M -120 412 C 340 400, 700 444, 1000 362 C 1200 302, 1330 222, 1580 222" pathLength="1000"/>
-        <path class="glint s5" stroke-width="5" d="M -120 330 C 220 370, 520 300, 800 312 C 1040 322, 1240 42, 1580 4" pathLength="1000"/>
-      </g>
-    </svg>
-
         </div>
       </section>
 
@@ -6287,6 +6252,10 @@ window._decorateArrows();
   document.addEventListener("click", () =>
     document.querySelectorAll(".hint.open").forEach((t) => t.classList.remove("open"))
   );
+  const header = document.querySelector(".site-header");
+  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 })();
 
 </script>

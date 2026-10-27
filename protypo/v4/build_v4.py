@@ -71,8 +71,8 @@ rep(
 )
 
 # ---------- hero ----------
-ART = (SCR / "art.svg").read_text(encoding="utf-8")
 hero_new = f'''<section class="hero" aria-labelledby="hero-title">
+        <div class="hero-mesh" aria-hidden="true"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb6"></span></div>
         <div class="hero-copy">
           <span class="tag"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span></span>
           <h1 id="hero-title" data-i18n="v4HeroTitle">Τα χρήματά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span></h1>
@@ -86,9 +86,6 @@ hero_new = f'''<section class="hero" aria-labelledby="hero-title">
             <span><b>LUTCF</b><span data-i18n="v4Cred2">διεθνής πιστοποίηση</span></span>
             <span><b>177766</b><span data-i18n="v4Cred3">Αρ. Μητρώου ΕΕΑ</span></span>
           </div>
-        </div>
-        <div class="art" aria-hidden="true">
-{ART}
         </div>
       </section>'''
 
