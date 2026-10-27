@@ -1,0 +1,1043 @@
+/* ═══ Πρόταση 4: φωτεινό, μεγάλα γράμματα, πινελιές και χρώματα που κινούνται ═══
+   Μπαίνει ΜΕΤΑ το παλιό stylesheet, άρα κερδίζει κάθε κανόνα ίδιας ισχύος. */
+:root {
+  --paper: #f4f1ec;
+  --ink: #121414;
+  --muted: #5d6462;
+  --line: #e2ddd5;
+  --petrol: #0d7a73;
+  --petrol-deep: #0a4c49;
+  --petrol-soft: #e3f3f1;
+  --gold: #c8901f;
+  --teal: #0fa39a;
+  --sun: #f2b544;
+  --coral: #ff6b4a;
+  --violet: #7c5cff;
+  --sky: #5cc8f0;
+  --shell: 1240px;
+  --shadow: 0 30px 70px rgba(18, 20, 20, 0.1);
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, .calc-title {
+  font-family: Manrope, Inter, sans-serif;
+  letter-spacing: -0.03em;
+}
+.me-photo {
+  display: block;
+  background: url("__AVATAR__") center 30% / cover no-repeat;
+}
+
+/* ── κουμπιά ─────────────────────────────────── */
+.pill,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 0;
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  font: 600 16px/1.2 Inter, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.pill.dark,
+.button.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.pill.dark:hover,
+.button.primary:hover {
+  background: var(--petrol-deep);
+  border-color: var(--petrol-deep);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+.pill.ghost,
+.button.secondary {
+  background: transparent;
+  color: var(--ink);
+}
+.pill.ghost:hover,
+.button.secondary:hover {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: none;
+}
+.pill.small {
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+/* ── μικρή ετικέτα πάνω από τίτλους ──────────── */
+.eyebrow,
+.kicker,
+.philosophy-label,
+.card-kicker {
+  display: block;
+  margin: 0 0 16px;
+  color: var(--petrol);
+  font: 600 13px/1.3 Inter, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.eyebrow::before,
+.card-kicker::before {
+  display: none;
+}
+
+/* ── μπάρα πλοήγησης ─────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  min-height: 74px;
+  padding: 14px var(--pad-x);
+  border-bottom: 0;
+  background: rgba(244, 241, 236, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.brand {
+  margin-right: auto;
+  gap: 0;
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+}
+.brand small {
+  margin-left: 6px;
+  color: var(--muted);
+  font: 500 12px Inter, sans-serif;
+  letter-spacing: 0.02em;
+}
+.nav-links {
+  gap: 26px;
+}
+.nav-links a {
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 15px;
+}
+.nav-links a:hover {
+  color: var(--teal);
+}
+.nav-links a.nav-risk {
+  padding: 7px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--petrol-deep);
+  font-weight: 600;
+}
+.nav-links a.nav-risk:hover {
+  border-color: var(--teal);
+  background: #fff;
+  color: var(--petrol-deep);
+}
+.language-switch {
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  padding: 3px;
+}
+.lang-button {
+  border-radius: 999px;
+  font-weight: 600;
+}
+.lang-button.is-active {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ── hero ────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 24px;
+  min-height: calc(100vh - 74px);
+  padding: 32px var(--pad-x) 64px;
+  overflow: hidden;
+}
+.hero-copy {
+  max-width: none;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 0 var(--line);
+  color: var(--petrol-deep);
+  font-weight: 600;
+  font-size: 14px;
+}
+.tag .me-photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.hero h1 {
+  max-width: none;
+  margin: 28px 0 26px;
+  font-family: Manrope, Inter, sans-serif;
+  font-weight: 800;
+  font-size: clamp(54px, 6.3vw, 92px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+.hero h1 .paint {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+.hero h1 .paint svg {
+  position: absolute;
+  left: -4%;
+  bottom: 0.02em;
+  width: 108%;
+  height: 0.42em;
+  z-index: -1;
+  overflow: visible;
+}
+.hero h1 .paint path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: v4draw 1.1s 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.hero .lead {
+  max-width: 520px;
+  margin: 0 0 34px;
+  color: var(--muted);
+  font-size: clamp(18px, 1.5vw, 21px);
+}
+.hero .ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.creds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 40px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.creds b {
+  display: block;
+  color: var(--ink);
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+.art {
+  position: relative;
+  height: min(78vh, 680px);
+}
+.art svg {
+  position: absolute;
+  inset: -8% -14% -8% -4%;
+  width: 118%;
+  height: 116%;
+  overflow: visible;
+}
+.stroke {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: v4draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.s1 { animation-delay: 0.1s; }
+.s2 { animation-delay: 0.35s; }
+.s3 { animation-delay: 0.6s; }
+.s4 { animation-delay: 0.85s; }
+.s5 { animation-delay: 1.1s; }
+.art .float {
+  transform-origin: center;
+  animation: v4drift 9s ease-in-out 2.6s infinite alternate;
+}
+@keyframes v4draw { to { stroke-dashoffset: 0; } }
+@keyframes v4drift { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-10px, 14px) rotate(-1.6deg); } }
+
+/* ── ζώνη με τον υπολογιστή ──────────────────── */
+.band {
+  position: relative;
+  padding: 150px var(--pad-x) 170px;
+  color: #fff;
+  isolation: isolate;
+}
+.band .mesh {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  clip-path: polygon(0 9%, 100% 0, 100% 91%, 0 100%);
+  background: #1d1b4f;
+}
+.blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.95; }
+.b1 { width: 60vw; height: 60vw; left: -18vw; top: -20vw; background: var(--petrol-deep); animation: v4m1 16s ease-in-out infinite alternate; }
+.b2 { width: 48vw; height: 48vw; left: 22vw; top: -8vw; background: var(--violet); animation: v4m2 19s ease-in-out infinite alternate; }
+.b3 { width: 42vw; height: 42vw; right: -10vw; top: 4vw; background: var(--coral); animation: v4m3 14s ease-in-out infinite alternate; }
+.b4 { width: 34vw; height: 34vw; right: 14vw; bottom: -14vw; background: var(--sun); animation: v4m4 17s ease-in-out infinite alternate; }
+.b5 { width: 30vw; height: 30vw; left: 8vw; bottom: -12vw; background: var(--teal); animation: v4m2 21s ease-in-out infinite alternate-reverse; }
+@keyframes v4m1 { to { transform: translate(14vw, 8vw) scale(1.1); } }
+@keyframes v4m2 { to { transform: translate(-10vw, 10vw) scale(0.9); } }
+@keyframes v4m3 { to { transform: translate(-12vw, -6vw) scale(1.15); } }
+@keyframes v4m4 { to { transform: translate(10vw, -8vw) scale(1.05); } }
+.band-grid {
+  display: grid;
+  grid-template-columns: 1fr 520px;
+  gap: 64px;
+  align-items: center;
+}
+.band .kicker { color: #ffd77a; }
+.band h2 {
+  font-weight: 800;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 1.02;
+  color: #fff;
+}
+.band-copy p:not(.kicker) {
+  max-width: 480px;
+  margin: 22px 0 0;
+  font-size: 20px;
+  opacity: 0.9;
+}
+.band .calc-card {
+  max-width: none;
+  margin: 0;
+  padding: 32px;
+  border: 0;
+  border-radius: 26px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 40px 90px rgba(10, 10, 40, 0.35);
+}
+.band .calc-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.band .calc-goals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 24px;
+}
+.band .goal-btn {
+  display: inline-flex;
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font: 500 14px Inter, sans-serif;
+  box-shadow: none;
+  cursor: pointer;
+}
+.band .goal-btn svg { display: none; }
+.band .goal-btn.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.band .calc-field { margin-bottom: 20px; }
+.band .calc-field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+.band .calc-field-head label {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+.band .calc-field-head output {
+  color: var(--ink);
+  font: 800 26px Manrope, sans-serif;
+  letter-spacing: -0.02em;
+}
+.band input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--teal) var(--p, 50%), var(--line) var(--p, 50%));
+  outline: none;
+  accent-color: var(--ink);
+}
+.band input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--ink);
+  cursor: grab;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.band input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--ink);
+  cursor: grab;
+}
+.band input[type="range"]:focus-visible { outline: 2px solid var(--teal); outline-offset: 6px; }
+.band .calc-results {
+  display: block;
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.band .calc-row-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.band .calc-row-head:first-child { margin-top: 0; }
+.band .calc-row-head strong {
+  margin-left: auto;
+  color: var(--ink);
+  font: 800 19px Manrope, sans-serif;
+}
+.band .calc-dot { display: none; }
+.band .calc-bar-track {
+  height: 14px;
+  border-radius: 99px;
+  background: #efece6;
+  overflow: hidden;
+}
+.band .calc-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.band .calc-totals {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--paper);
+}
+.band .calc-total {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.band .calc-total p:first-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.band .calc-total p:last-child {
+  margin: 0;
+  color: var(--ink);
+  font: 800 20px Manrope, sans-serif;
+}
+.band .calc-total.gain { text-align: right; }
+.band .calc-total.gain p:last-child { color: var(--petrol); }
+.band .calc-note {
+  margin: 12px 0 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.band .calc-cta {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+}
+.band .calc-cta::after { display: none; }
+
+/* εξήγηση όρου (tooltip) */
+.hint {
+  position: relative;
+  border-bottom: 1.5px dotted currentColor;
+  cursor: help;
+}
+.hint .bubble {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  width: 250px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.45;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 10;
+}
+.hint:hover .bubble,
+.hint:focus .bubble,
+.hint.open .bubble {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── κοινά ενοτήτων ──────────────────────────── */
+.audience-band,
+.service-modules,
+.intelligence-band,
+.method-section,
+.tools-section,
+.games-section,
+.about-section,
+.contact-section {
+  padding: 120px var(--pad-x);
+}
+.section-heading,
+.section-heading.narrow {
+  display: block;
+  max-width: 900px;
+  margin-bottom: 56px;
+}
+.section-heading h2,
+.service-modules .section-heading h2,
+.intelligence-copy h2,
+.tools-copy h2,
+.about-section h2,
+.contact-section h2 {
+  font-weight: 800;
+  font-size: clamp(36px, 4.4vw, 62px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.section-heading p:not(.eyebrow),
+.tools-copy p,
+.about-section p:not(.eyebrow) {
+  max-width: 640px;
+  color: var(--muted);
+  font-size: 19px;
+}
+
+/* ── για ποιους (δύο μεγάλες κάρτες) ─────────── */
+.audience-band {
+  background: transparent;
+  padding-top: 90px;
+}
+.audience-grid { gap: 20px; }
+.audience-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  padding: clamp(28px, 3.4vw, 48px);
+  border: 0;
+  border-radius: 28px;
+  background: #bfeae6;
+  box-shadow: none;
+}
+.audience-card.accent {
+  background: var(--ink);
+  color: #fff;
+}
+.audience-card h3 {
+  font-weight: 800;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+.audience-card p:last-child,
+.audience-card p {
+  color: #2c4b48;
+  font-size: 17px;
+}
+.audience-card .card-kicker { color: var(--petrol-deep); }
+.audience-card.accent .card-kicker { color: #ffd77a; }
+.audience-card.accent p { color: rgba(255, 255, 255, 0.78); }
+.audience-card .story-btn,
+.audience-card.accent .story-btn {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 12px 20px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: 600 15px Inter, sans-serif;
+}
+.audience-card .story-btn:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.audience-card.accent .story-btn {
+  border-color: #fff;
+  color: #fff;
+}
+.audience-card.accent .story-btn:hover {
+  background: #fff;
+  color: var(--ink);
+}
+
+/* ── η φράση (creed) ─────────────────────────── */
+.philosophy-band {
+  padding: 140px var(--pad-x);
+  border: 0;
+  background: transparent;
+  text-align: center;
+}
+.philosophy-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.philosophy-label { margin-bottom: 22px; }
+.philosophy-credo {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font: 800 clamp(40px, 5.4vw, 78px)/1.05 Manrope, Inter, sans-serif;
+  font-style: normal;
+  letter-spacing: -0.04em;
+}
+.philosophy-credo mark {
+  position: relative;
+  z-index: 0;
+  background: none;
+  color: inherit;
+  white-space: nowrap;
+}
+.philosophy-credo mark::before {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 0.06em;
+  z-index: -1;
+  height: 0.38em;
+  border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
+  background: var(--sun);
+  transform: rotate(-1.2deg);
+  content: "";
+}
+.philosophy-text {
+  max-width: 680px;
+  margin: 34px auto 0;
+  color: var(--muted);
+  font-size: 19px;
+}
+
+/* ── τι κάνω (4 κάρτες) ──────────────────────── */
+.service-modules {
+  background: #fff;
+}
+.module-grid { gap: 18px; }
+.service-card {
+  padding: clamp(28px, 3vw, 40px);
+  padding-bottom: clamp(28px, 3vw, 40px);
+  border: 0;
+  border-radius: 26px;
+  background: var(--paper);
+  box-shadow: none;
+}
+.service-card::after { display: none; }
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.08);
+}
+.service-card-top { margin-bottom: 34px; }
+.service-number {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #bfeae6;
+  color: var(--ink);
+  font: 800 16px Manrope, sans-serif;
+}
+.module-grid > .service-card:nth-child(2) .service-number { background: #ffd0c4; }
+.module-grid > .service-card:nth-child(3) .service-number { background: #ddd4ff; }
+.service-card-dark .service-number,
+.module-grid > .service-card-dark .service-number { background: var(--sun); color: var(--ink); }
+.service-tag {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.service-card h3 {
+  font-weight: 800;
+  font-size: clamp(24px, 2.2vw, 30px);
+  line-height: 1.1;
+}
+.service-card p { color: var(--muted); }
+.service-card-dark {
+  background: var(--ink);
+  color: #fff;
+}
+.service-card-dark p,
+.service-card-dark .service-tag { color: rgba(255, 255, 255, 0.75); }
+.module-tools { gap: 8px; }
+.module-tool,
+.module-tools .module-tool {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: 600 14px Inter, sans-serif;
+  text-decoration: none;
+  box-shadow: none;
+}
+.module-tool:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.module-tool.alt {
+  background: var(--ink);
+  color: #fff;
+}
+.module-tool.alt:hover {
+  background: var(--petrol-deep);
+  border-color: var(--petrol-deep);
+}
+.service-card-dark .module-tool {
+  border-color: #fff;
+  background: transparent;
+  color: #fff;
+}
+.service-card-dark .module-tool:hover {
+  background: #fff;
+  color: var(--ink);
+}
+.tool-stack {
+  position: static;
+  flex-wrap: wrap;
+  margin: 18px 0 24px;
+}
+.tool-stack span {
+  border-radius: 999px;
+}
+main {
+  overflow-x: clip;
+}
+
+/* ── σκοτεινή ζώνη «η τεχνολογία…» ───────────── */
+.intelligence-band {
+  background: var(--ink);
+}
+.intelligence-copy h2 { color: #fff; }
+.intelligence-copy .eyebrow { color: #ffd77a; }
+.panel-row {
+  border-radius: 18px;
+}
+.panel-row strong.plus {
+  color: var(--sun);
+  font: 600 28px/1 Inter, sans-serif;
+  transition: transform 0.2s ease;
+}
+.panel-row.open strong.plus { transform: rotate(45deg); }
+
+/* ── μεθοδολογία (4 βήματα) ──────────────────── */
+.method-section { background: var(--paper); }
+.steps { gap: 18px; margin-top: 0; }
+.step {
+  min-height: 300px;
+  padding: clamp(24px, 2.6vw, 32px);
+  border: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: none;
+}
+.step-num {
+  margin-bottom: 40px;
+  color: var(--teal);
+  font: 800 56px/1 Manrope, sans-serif;
+  letter-spacing: -0.04em;
+}
+.steps > .step:nth-child(2) .step-num { color: var(--coral); }
+.steps > .step:nth-child(3) .step-num { color: var(--violet); }
+.steps > .step:nth-child(4) .step-num { color: var(--gold); }
+.step h3 {
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+.step-more { border-radius: 999px; }
+
+/* ── τα εργαλεία μου ─────────────────────────── */
+.tools-section {
+  display: block;
+  padding-top: 0;
+  background: var(--paper);
+}
+.tools-copy { max-width: 900px; }
+
+/* ── παιχνίδια (χρωματιστά πλακάκια) ─────────── */
+.games-section { background: #fff; }
+.games-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 0;
+}
+.game-card {
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 260px;
+  padding: 26px;
+  border: 0;
+  border-radius: 24px;
+  box-shadow: none;
+  color: var(--ink);
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+.game-card:hover {
+  transform: translateY(-6px) rotate(-0.6deg);
+  border-color: transparent;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+}
+.game-card.wide { grid-column: span 2; }
+.game-disc {
+  display: block;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: 800 64px/1 Manrope, sans-serif;
+  letter-spacing: -0.04em;
+}
+.game-card h3 {
+  margin: 0 0 6px;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+.game-card p {
+  color: inherit;
+  opacity: 0.8;
+  font-size: 15px;
+}
+.c-teal { background: #bfeae6; }
+.c-gold { background: #fbe2a9; }
+.c-coral { background: #ffd0c4; }
+.c-violet { background: #ddd4ff; }
+.c-sky { background: #c9ecfa; }
+.c-ink { background: var(--ink); color: #fff; }
+.games-more { gap: 10px; margin-top: 34px; }
+.game-cta {
+  padding: 12px 20px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font: 600 15px Inter, sans-serif;
+}
+.game-cta:hover { background: var(--petrol-deep); border-color: var(--petrol-deep); }
+.game-cta.alt {
+  background: transparent;
+  color: var(--ink);
+}
+.game-cta.alt:hover { background: var(--ink); color: #fff; }
+
+/* ── σχετικά (φωτογραφία με πινελιά) ─────────── */
+.about-section {
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 72px;
+  align-items: center;
+  background: var(--paper);
+}
+.about-copy.section-heading.narrow { margin: 0; max-width: 720px; }
+.portrait {
+  position: relative;
+  width: 420px;
+  height: 460px;
+  isolation: isolate;
+}
+.portrait .me-photo {
+  position: absolute;
+  inset: 0;
+  border-radius: 48% 52% 44% 56% / 52% 44% 56% 48%;
+}
+.portrait svg {
+  position: absolute;
+  inset: -14%;
+  z-index: -1;
+  width: 128%;
+  height: 128%;
+  overflow: visible;
+}
+.about-section p:not(.eyebrow) { font-size: 18px; }
+.about-section strong { color: var(--ink); }
+
+/* ── επικοινωνία (σκοτεινή) ──────────────────── */
+.contact-section {
+  background: var(--ink);
+  border-radius: 40px 40px 0 0;
+}
+.contact-section h2 { color: #fff; }
+.contact-section .eyebrow { color: #ffd77a; }
+.contact-section .button.secondary {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}
+.contact-section .button.secondary:hover {
+  background: #fff;
+  color: var(--ink);
+}
+.book-card {
+  padding: 26px;
+  border: 0;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.07);
+}
+.book-title {
+  font: 800 24px/1.15 Manrope, sans-serif;
+  letter-spacing: -0.02em;
+}
+.button.book-button {
+  border-color: var(--sun);
+  background: var(--sun);
+  color: var(--ink);
+}
+.button.book-button:hover {
+  border-color: #ffd77a;
+  background: #ffd77a;
+  color: var(--ink);
+}
+.contact-form input,
+.contact-form textarea {
+  border-radius: 14px;
+}
+.contact-form .button.primary {
+  border-color: #fff;
+  background: #fff;
+  color: var(--ink);
+}
+.contact-form .button.primary:hover {
+  border-color: var(--sun);
+  background: var(--sun);
+  color: var(--ink);
+}
+
+/* ── παράθυρα (modals) ───────────────────────── */
+.tool-modal-overlay {
+  background: rgba(18, 20, 20, 0.5);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.tool-modal .calc-card {
+  border: 0;
+  border-radius: 28px;
+  box-shadow: 0 40px 90px rgba(10, 10, 40, 0.3);
+}
+.tool-modal .calc-title,
+.tool-modal h2 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* ── footer ──────────────────────────────────── */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.footer-id .footer-name {
+  color: #fff;
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+}
+
+/* ── κινητό & tablet ─────────────────────────── */
+@media (max-width: 1100px) {
+  .nav-links { gap: 2px; align-items: stretch; background: rgba(244, 241, 236, 0.98); }
+  .nav-links a { padding: 12px 4px; font-size: 17px; text-align: left; }
+  .nav-links a.nav-risk { align-self: flex-start; margin-top: 8px; padding: 9px 16px; font-size: 15px; }
+  .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 24px; }
+  .art { height: 380px; order: -1; margin: -10px -20px 0; }
+  .band-grid { grid-template-columns: 1fr; }
+  .audience-grid,
+  .module-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .games-grid { grid-template-columns: 1fr 1fr; }
+  .about-section { grid-template-columns: 1fr; gap: 56px; }
+  .portrait { width: min(340px, 80vw); height: min(372px, 88vw); margin: 0 auto; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .nav-cta { display: none; }
+  .hero { padding: 20px 20px 56px; }
+  .hero h1 { font-size: clamp(44px, 13vw, 60px); }
+  .tag { font-size: 13px; }
+  .portrait { width: min(300px, 74vw); height: min(330px, 82vw); }
+  .art { height: 300px; }
+  .band { padding: 110px 20px 130px; }
+  .b1 { width: 130vw; height: 130vw; left: -50vw; top: -30vw; }
+  .b2 { width: 110vw; height: 110vw; left: 20vw; top: 40%; }
+  .b3 { width: 100vw; height: 100vw; right: -40vw; top: 15%; }
+  .b4 { width: 90vw; height: 90vw; right: -10vw; bottom: -20vw; }
+  .b5 { width: 90vw; height: 90vw; left: -30vw; bottom: 20%; }
+  .band .calc-card { padding: 24px 20px; }
+  .audience-band,
+  .service-modules,
+  .intelligence-band,
+  .method-section,
+  .tools-section,
+  .games-section,
+  .about-section,
+  .contact-section,
+  .philosophy-band { padding: 84px 20px; }
+  .tools-section { padding-top: 0; }
+  .audience-card { min-height: 0; }
+  .audience-card .story-btn { margin-top: 26px; }
+  .steps,
+  .games-grid { grid-template-columns: 1fr; }
+  .game-card.wide { grid-column: auto; }
+  .game-card { min-height: 200px; }
+  .philosophy-credo mark { white-space: normal; }
+  .contact-section { border-radius: 28px 28px 0 0; }
+  .hint .bubble { width: min(250px, 70vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stroke,
+  .hero h1 .paint path { animation: none; stroke-dashoffset: 0; }
+  .blob,
+  .art .float { animation: none; }
+}
+.service-card-dark > .module-tool {
+  margin-top: 10px;
+}
