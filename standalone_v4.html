@@ -6284,9 +6284,10 @@ window._decorateArrows();
   document.addEventListener("click", () =>
     document.querySelectorAll(".hint.open").forEach((t) => t.classList.remove("open"))
   );
-  /* Στη δοκιμή (localhost ή η δοκιμαστική διεύθυνση στο Cloudflare) τα κουμπιά
-     του Ραντάρ ανοίγουν τη νέα μορφή του· στο ζωντανό site μένει ο κανονικός σύνδεσμος. */
-  if (/^(localhost|127\.0\.0\.1)$|(^|\.)vardavas-v4-dokimi\./.test(location.hostname)) {
+  /* Στη δοκιμή (localhost) τα κουμπιά του Ραντάρ ανοίγουν την τοπική, νέα
+     μορφή του· στο ζωντανό site μένει ο κανονικός σύνδεσμος. Η δοκιμαστική
+     διεύθυνση στο Cloudflare τα αλλάζει ήδη στο ανέβασμα (tools/anevasma_dokimis.sh). */
+  if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
     document.querySelectorAll('a[href^="https://risk-radar-2yr.pages.dev"]').forEach((a) => {
       a.href = a.getAttribute("href").replace("https://risk-radar-2yr.pages.dev", "/risk-radar");
       if (!/\/risk-radar\//.test(a.href)) a.href = "/risk-radar/";
