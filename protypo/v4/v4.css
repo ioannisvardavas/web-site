@@ -119,7 +119,7 @@ h1, h2, h3, h4, .calc-title {
   gap: 0;
   font-family: Manrope, sans-serif;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 26px;
   letter-spacing: -0.03em;
 }
 .brand small {
@@ -292,7 +292,20 @@ h1, h2, h3, h4, .calc-title {
 @keyframes v4h3 { to { transform: translate(-10vw, 8vw) scale(1.12); } }
 @keyframes v4h4 { to { transform: translate(8vw, -6vw) scale(1.05); } }
 .hero h1 .paint path { stroke: #fff; }
-.hero .tag { box-shadow: 0 6px 20px rgba(18, 20, 20, 0.08); }
+.hero .tag {
+  box-shadow: 0 6px 20px rgba(18, 20, 20, 0.08);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.hero .tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(18, 20, 20, 0.14);
+}
+.tag-go {
+  margin-left: 2px;
+  transition: transform 0.18s ease;
+}
+.hero .tag:hover .tag-go { transform: translateX(3px); }
 .hero .lead { color: rgba(18, 20, 20, 0.78); }
 .hero .pill.ghost { background: rgba(255, 255, 255, 0.6); }
 .hero .pill.ghost:hover { background: var(--ink); }
@@ -1069,7 +1082,7 @@ main {
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .nav-cta { display: none; }
-  .brand { max-width: none; font-size: 19px; white-space: nowrap; }
+  .brand { max-width: none; font-size: 21px; white-space: nowrap; }
   .brand small { display: none; }
   .site-header { gap: 12px; }
   .hero { margin-top: -74px; padding: 110px 20px 90px; }
@@ -1112,4 +1125,19 @@ main {
 }
 .service-card-dark > .module-tool {
   margin-top: 10px;
+}
+.brand,
+.nav-cta,
+.lang-button {
+  flex: none;
+  white-space: nowrap;
+}
+.brand { max-width: none; }
+@media (min-width: 1101px) and (max-width: 1320px) {
+  .site-header { gap: 18px; }
+  .nav-links { gap: 18px; }
+  .brand { font-size: 23px; }
+}
+@media (min-width: 1101px) and (max-width: 1260px) {
+  .nav-cta { display: none; }
 }

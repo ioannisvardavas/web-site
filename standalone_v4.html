@@ -2653,7 +2653,7 @@ h1, h2, h3, h4, .calc-title {
   gap: 0;
   font-family: Manrope, sans-serif;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 26px;
   letter-spacing: -0.03em;
 }
 .brand small {
@@ -2826,7 +2826,20 @@ h1, h2, h3, h4, .calc-title {
 @keyframes v4h3 { to { transform: translate(-10vw, 8vw) scale(1.12); } }
 @keyframes v4h4 { to { transform: translate(8vw, -6vw) scale(1.05); } }
 .hero h1 .paint path { stroke: #fff; }
-.hero .tag { box-shadow: 0 6px 20px rgba(18, 20, 20, 0.08); }
+.hero .tag {
+  box-shadow: 0 6px 20px rgba(18, 20, 20, 0.08);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.hero .tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(18, 20, 20, 0.14);
+}
+.tag-go {
+  margin-left: 2px;
+  transition: transform 0.18s ease;
+}
+.hero .tag:hover .tag-go { transform: translateX(3px); }
 .hero .lead { color: rgba(18, 20, 20, 0.78); }
 .hero .pill.ghost { background: rgba(255, 255, 255, 0.6); }
 .hero .pill.ghost:hover { background: var(--ink); }
@@ -3603,7 +3616,7 @@ main {
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .nav-cta { display: none; }
-  .brand { max-width: none; font-size: 19px; white-space: nowrap; }
+  .brand { max-width: none; font-size: 21px; white-space: nowrap; }
   .brand small { display: none; }
   .site-header { gap: 12px; }
   .hero { margin-top: -74px; padding: 110px 20px 90px; }
@@ -3647,6 +3660,21 @@ main {
 .service-card-dark > .module-tool {
   margin-top: 10px;
 }
+.brand,
+.nav-cta,
+.lang-button {
+  flex: none;
+  white-space: nowrap;
+}
+.brand { max-width: none; }
+@media (min-width: 1101px) and (max-width: 1320px) {
+  .site-header { gap: 18px; }
+  .nav-links { gap: 18px; }
+  .brand { font-size: 23px; }
+}
+@media (min-width: 1101px) and (max-width: 1260px) {
+  .nav-cta { display: none; }
+}
 
     </style>
   </head>
@@ -3682,7 +3710,7 @@ main {
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-mesh" aria-hidden="true"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb6"></span></div>
         <div class="hero-copy">
-          <span class="tag"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span></span>
+          <a class="tag" href="#about"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span><span class="tag-go" aria-hidden="true">→</span></a>
           <h1 id="hero-title" data-i18n="v4HeroTitle">Τα χρήματά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span></h1>
           <p class="lead" data-i18n="v4Lead">Ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι επιχείρησης — σε μία καθαρή εικόνα, με πραγματικά νούμερα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
           <div class="ctas">
@@ -4472,7 +4500,7 @@ main {
 
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="portrait reveal">
-          <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 C 78 2, 98 26, 96 52 C 94 80, 70 98, 46 96 C 20 94, 2 74, 4 48 C 6 22, 24 6, 50 4 Z" fill="#fbe2a9"/><path d="M14 30 C 30 8, 70 6, 88 28" stroke="#0fa39a" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 C 78 2, 98 26, 96 52 C 94 80, 70 98, 46 96 C 20 94, 2 74, 4 48 C 6 22, 24 6, 50 4 Z" fill="#fbe2a9"/></svg>
           <span class="me-photo" role="img" aria-label="Γιάννης Βαρδαβάς, lutcf"></span>
         </div>
         <div class="about-copy section-heading narrow">

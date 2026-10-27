@@ -74,7 +74,7 @@ rep(
 hero_new = f'''<section class="hero" aria-labelledby="hero-title">
         <div class="hero-mesh" aria-hidden="true"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb6"></span></div>
         <div class="hero-copy">
-          <span class="tag"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span></span>
+          <a class="tag" href="#about"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span><span class="tag-go" aria-hidden="true">→</span></a>
           <h1 id="hero-title" data-i18n="v4HeroTitle">Τα χρήματά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span></h1>
           <p class="lead" data-i18n="v4Lead">Ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι επιχείρησης — σε μία καθαρή εικόνα, με πραγματικά νούμερα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
           <div class="ctas">
@@ -169,7 +169,7 @@ h = h[:gi] + '<div class="games-grid">\n' + "".join(cards) + "        </div>" + 
 rep('<section class="about-section" id="about" aria-labelledby="about-title">',
     '''<section class="about-section" id="about" aria-labelledby="about-title">
         <div class="portrait reveal">
-          <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 C 78 2, 98 26, 96 52 C 94 80, 70 98, 46 96 C 20 94, 2 74, 4 48 C 6 22, 24 6, 50 4 Z" fill="#fbe2a9"/><path d="M14 30 C 30 8, 70 6, 88 28" stroke="#0fa39a" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 C 78 2, 98 26, 96 52 C 94 80, 70 98, 46 96 C 20 94, 2 74, 4 48 C 6 22, 24 6, 50 4 Z" fill="#fbe2a9"/></svg>
           <span class="me-photo" role="img" aria-label="Γιάννης Βαρδαβάς, lutcf"></span>
         </div>''')
 
