@@ -5,12 +5,12 @@
     '<span class="paint">' + word +
     '<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span>';
   Object.assign(copy.el, {
-    v4Brand: "Βαρδαβάς",
+    v4Brand: "Γιάννης Βαρδαβάς",
     v4NavNumbers: "Νούμερα",
     v4NavGames: "Παιχνίδια",
     v4NavCta: "Κλείσε 30 λεπτά",
-    v4Tag: "Γιάννης Βαρδαβάς · 25 χρόνια στα οικονομικά",
-    v4HeroTitle: "Τα λεφτά σου,<br />με " + paint("σχέδιο."),
+    v4Tag: "Σύμβουλος ασφαλίσεων & επενδύσεων · 25 χρόνια",
+    v4HeroTitle: "Τα χρήματά σου,<br />με " + paint("σχέδιο."),
     v4Lead: "Ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι επιχείρησης — σε μία καθαρή εικόνα, με πραγματικά νούμερα. Χωρίς ψιλά γράμματα, χωρίς πίεση.",
     v4Cta1: "Κλείσε μια συζήτηση",
     v4Cta2: "Παίξε με τα νούμερα ↓",
@@ -27,11 +27,11 @@
     philosophyCredo: "Καλύτερα <mark>καμμία πώληση</mark> παρά μία λάθος πώληση."
   });
   Object.assign(copy.en, {
-    v4Brand: "Vardavas",
+    v4Brand: "Ioannis Vardavas",
     v4NavNumbers: "Numbers",
     v4NavGames: "Games",
     v4NavCta: "Book 30 minutes",
-    v4Tag: "Ioannis Vardavas · 25 years in finance",
+    v4Tag: "Insurance & investment advisor · 25 years",
     v4HeroTitle: "Your money,<br />with a " + paint("plan."),
     v4Lead: "Insurance, retirement, investments and business risk — in one clear picture, with real numbers. No fine print, no pressure.",
     v4Cta1: "Book a conversation",

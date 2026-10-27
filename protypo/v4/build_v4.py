@@ -45,17 +45,18 @@ rep("</style>\n  </head>", "</style>\n    <style id=\"v4\">\n" + v4css + "\n    
 bi, bj = cut('<a class="brand" href="#top" aria-label="Homepage">', "</a>")
 h = h[:bi] + (
     '<a class="brand" href="#top" aria-label="Homepage">'
-    '<span data-i18n="v4Brand">Βαρδαβάς</span><small>lutcf</small></a>'
+    '<span data-i18n="v4Brand">Γιάννης Βαρδαβάς</span><small>lutcf</small></a>'
 ) + h[bj:]
 
 ni, nj = cut('<nav class="nav-links" id="primary-nav"', "</nav>")
-h = h[:ni] + '''<nav class="nav-links" id="primary-nav" aria-label="Main navigation">
+h = h[:ni] + f'''<nav class="nav-links" id="primary-nav" aria-label="Main navigation">
         <a href="#arithmoi" data-i18n="v4NavNumbers">Νούμερα</a>
         <a href="#services" data-i18n="navServices">Υπηρεσίες</a>
         <a href="#method" data-i18n="navMethod">Μεθοδολογία</a>
         <a href="#games" data-i18n="v4NavGames">Παιχνίδια</a>
         <a href="#about" data-i18n="navAbout">Σχετικά</a>
         <a href="https://risk-radar-2yr.pages.dev" class="nav-risk" data-i18n="navRisk">Εργαλεία Ρίσκου →</a>
+        <a href="{CAL}" class="nav-menu-cta" target="_blank" rel="noreferrer" data-i18n="v4NavCta">Κλείσε 30 λεπτά</a>
       </nav>''' + h[nj:]
 
 rep(
@@ -73,8 +74,8 @@ rep(
 ART = (SCR / "art.svg").read_text(encoding="utf-8")
 hero_new = f'''<section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <span class="tag"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Γιάννης Βαρδαβάς · 25 χρόνια στα οικονομικά</span></span>
-          <h1 id="hero-title" data-i18n="v4HeroTitle">Τα λεφτά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span></h1>
+          <span class="tag"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span></span>
+          <h1 id="hero-title" data-i18n="v4HeroTitle">Τα χρήματά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span></h1>
           <p class="lead" data-i18n="v4Lead">Ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι επιχείρησης — σε μία καθαρή εικόνα, με πραγματικά νούμερα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
           <div class="ctas">
             <a class="pill dark" href="{CAL}" target="_blank" rel="noreferrer" data-i18n="v4Cta1">Κλείσε μια συζήτηση</a>
