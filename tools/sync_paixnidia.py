@@ -115,9 +115,9 @@ KARTA = f'''<meta name="description" content="Επτά σύντομα παιχν
 <meta property="og:title" content="Το κέρασμα — επτά σύντομα παιχνίδια">
 <meta property="og:description" content="Τρία λεπτά το καθένα. Τα νούμερα είναι αληθινά, από ΕΛΣΤΑΤ, Eurostat και ΕΚΤ.">
 <meta property="og:url" content="{SITE}/paixnidia/">
-<meta property="og:image" content="{SITE}/og-image-v2.png">
+<meta property="og:image" content="{SITE}/og-image-v4.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{SITE}/og-image-v2.png">
+<meta name="twitter:image" content="{SITE}/og-image-v4.jpg">
 <link rel="canonical" href="{SITE}/paixnidia/">
 '''
 

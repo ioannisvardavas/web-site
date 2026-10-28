@@ -1,0 +1,76 @@
+<!doctype html>
+<!-- Η κάρτα που φαίνεται όταν στέλνεται ο σύνδεσμος σε WhatsApp/Viber/email.
+     Ίδιο ύφος με την αρχή του site (v4.css: .hero, .hero-mesh, .tag, .creds).
+     Δεν ανεβαίνει· τη φωτογραφίζει το build_og_v4.py σε 1200×630. -->
+<html lang="el">
+<head>
+<meta charset="utf-8" />
+<link href="../../assets/fonts/fonts.css" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f4f1ec;
+    --ink: #121414;
+    --muted: #5d6462;
+    --petrol-deep: #0a4c49;
+    --teal: #0fa39a;
+    --coral: #ff6b4a;
+    --violet: #7c5cff;
+  }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--paper); }
+  body { position: relative; color: var(--ink); font-family: Inter, sans-serif; -webkit-font-smoothing: antialiased; }
+  .mesh {
+    position: absolute; inset: 0; overflow: hidden; background: #ffe3b3;
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  }
+  .hb { position: absolute; border-radius: 50%; filter: blur(70px); }
+  /* ανοιχτά πίσω από το κείμενο, έντονα προς τα δεξιά — όπως στο hero */
+  .hb1 { width: 640px; height: 640px; left: -200px; top: -260px; background: #ffd27a; }
+  .hb2 { width: 520px; height: 520px; left: 180px; top: 160px; background: #9fe0f7; }
+  .hb6 { width: 420px; height: 420px; left: -140px; top: 300px; background: #ffb5a0; }
+  .hb3 { width: 560px; height: 560px; right: -160px; top: -240px; background: var(--violet); }
+  .hb4 { width: 460px; height: 460px; right: 150px; top: 40px; background: var(--coral); }
+  .hb5 { width: 420px; height: 420px; right: -100px; top: 250px; background: var(--teal); }
+  .hb8 { width: 420px; height: 420px; right: 260px; top: 380px; background: #b9a6ff; }
+
+  .copy { position: absolute; left: 72px; top: 60px; width: 720px; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 10px 22px 10px 12px; border-radius: 999px; background: #fff;
+    box-shadow: 0 6px 20px rgba(18, 20, 20, 0.08);
+    color: var(--petrol-deep); font-weight: 600; font-size: 21px;
+  }
+  .tag b { font-family: Manrope, sans-serif; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+  .tag small { font-size: 15px; color: var(--muted); font-weight: 600; margin-left: -6px; }
+  .tag i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); opacity: .5; }
+  h1 {
+    margin: 30px 0 24px; font-family: Manrope, Inter, sans-serif; font-weight: 800;
+    font-size: 88px; line-height: 0.98; letter-spacing: -0.035em;
+  }
+  .paint { position: relative; display: inline-block; z-index: 0; }
+  .paint svg { position: absolute; left: -4%; bottom: 0.02em; width: 108%; height: 0.42em; z-index: -1; overflow: visible; }
+  .lead { margin: 0; max-width: 600px; font-size: 25px; line-height: 1.45; color: rgba(18, 20, 20, 0.78); }
+  .creds { display: flex; gap: 40px; margin-top: 34px; font-size: 17px; color: var(--muted); }
+  .creds b { display: block; color: var(--ink); font-family: Manrope, sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+
+  .photo {
+    position: absolute; left: 818px; top: 118px; width: 330px; height: 330px; border-radius: 50%;
+    border: 8px solid #fff; box-shadow: 0 30px 70px rgba(18, 20, 20, 0.22);
+    background: url("__AVATAR__") center 30% / cover no-repeat;
+  }
+</style>
+</head>
+<body>
+  <div class="mesh"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb6"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb8"></span></div>
+  <div class="copy">
+    <div class="tag"><b>Γιάννης Βαρδαβάς</b><small>lutcf</small><i></i>Σύμβουλος ασφαλίσεων &amp; επενδύσεων</div>
+    <h1>Τα χρήματά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#fff" stroke-width="22" stroke-linecap="round" fill="none"/></svg></span></h1>
+    <p class="lead">Ασφάλιση, σύνταξη, επενδύσεις — σε μία καθαρή εικόνα, με πραγματικά νούμερα.</p>
+    <div class="creds">
+      <div><b>25+ χρόνια</b>Τράπεζα Εργασίας → Allianz</div>
+      <div><b>LUTCF</b>διεθνής πιστοποίηση</div>
+      <div><b>177766</b>Αρ. Μητρώου ΕΕΑ</div>
+    </div>
+  </div>
+  <div class="photo"></div>
+</body>
+</html>
