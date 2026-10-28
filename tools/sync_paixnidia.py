@@ -271,6 +271,9 @@ def vale_ypografi(t, onoma):
 # ───────────────────── ΤΟ ΥΦΟΣ ΤΗΣ ΙΣΤΟΣΕΛΙΔΑΣ ─────────────────────
 
 YFOS_CSS = (RIZA / "tools" / "paixnidia_v4.css")
+# οι δύο «εξηγήσεις» έχουν δικά τους μεγάλα πλαίσια — παίρνουν και ένα δεύτερο στρώμα
+EKSIGISEIS_CSS = (RIZA / "tools" / "paixnidia_v4_eksigiseis.css")
+EKSIGISEIS = ("pios-ftiaxnei-ta-evro.html", "plithorismos.html")
 # Οι γραμματοσειρές φιλοξενούνται στο ίδιο το site (assets/fonts/) — όχι στη Google,
 # που αλλιώς βλέπει τη διεύθυνση κάθε επισκέπτη (GDPR). Ούτε preconnect: κι αυτό
 # ανοίγει σύνδεση με τη Google πριν φορτωθεί οτιδήποτε.
@@ -295,8 +298,18 @@ def vale_yfos(t, onoma):
     if not YFOS_CSS.is_file():
         lathi.append(f"{onoma}: λείπει το {YFOS_CSS.name}")
         return t
+    # χωρίς αυτό το κινητό δείχνει τη σελίδα σαν υπολογιστή σε μικρογραφία
+    # (έλειπε από το «Ποιος φτιάχνει τα ευρώ» — βρέθηκε 28/10/2026)
+    if 'name="viewport"' not in t:
+        t = allakse(t, '<meta charset="utf-8">',
+                    '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">',
+                    onoma)
     css = YFOS_CSS.read_text(encoding="utf-8")
-    return allakse(t, "</head>", '<style id="v4">\n' + css + '\n</style>\n</head>', onoma)
+    t = allakse(t, "</head>", '<style id="v4">\n' + css + '\n</style>\n</head>', onoma)
+    if onoma in EKSIGISEIS:
+        css = EKSIGISEIS_CSS.read_text(encoding="utf-8")
+        t = allakse(t, "</head>", '<style id="v4-eksigisi">\n' + css + '\n</style>\n</head>', onoma)
+    return t
 
 
 # ───────────────────────── Η ΔΟΥΛΕΙΑ ─────────────────────────
@@ -349,6 +362,10 @@ def main():
             lathi.append(f"{onoma}: λείπει το τηλέφωνο")
         if t.count('<style id="v4">') != 1:
             lathi.append(f"{onoma}: το ύφος του site δεν μπήκε ακριβώς μία φορά")
+        if 'name="viewport"' not in t:
+            lathi.append(f"{onoma}: δεν είναι φτιαγμένο για κινητό (λείπει το viewport)")
+        if t.count('<style id="v4-eksigisi">') != (1 if onoma in EKSIGISEIS else 0):
+            lathi.append(f"{onoma}: το ύφος των εξηγήσεων μπήκε λάθος φορές")
         # (οι παλιές γραμματοσειρές μένουν ως εφεδρεία μέσα στις μεταβλητές
         #  του παιχνιδιού· σημασία έχει να μην ΚΑΤΕΒΑΙΝΕΙ τίποτα από τη Google)
         if re.search(r'fonts\.(googleapis|gstatic)\.com', t):

@@ -2,6 +2,7 @@
 <html lang="el">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ποιος φτιάχνει τα ευρώ</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 
@@ -536,6 +537,121 @@ h1 {
 .coin.done .st {
   color: var(--euro-deep);
   opacity: 1;
+}
+
+</style>
+<style id="v4-eksigisi">
+/* ═══ Οι δύο «εξηγήσεις» στο ύφος της ιστοσελίδας (πρόταση 4) ═══
+   Μόνο για: pios-ftiaxnei-ta-evro.html, plithorismos.html.
+   Μπαίνει ΜΕΤΑ το paixnidia_v4.css, από το sync_paixnidia.py.
+   Γιατί: είχαν κρατήσει μεγάλα σκούρα πράσινα πλαίσια με χρυσά γράμματα και μια
+   μπλε κάρτα τράπεζας, από την προηγούμενη μορφή. Το site μιλά με μαύρα και
+   παστέλ πλακάκια — όπως στην ενότητα «Νούμερα». Μόνο φωτεινό θέμα· το σκούρο
+   (από το κουμπί) μένει όπως ήταν. */
+
+/* ── κορυφή: παστέλ πλακάκι, μαύρα γράμματα ── */
+html:root:not([data-theme="dark"]) .hero {
+  background: #ddd4ff;
+  color: var(--ink);
+  box-shadow: none;
+}
+html:root:not([data-theme="dark"]) .hero::after {
+  display: none;
+}
+html:root:not([data-theme="dark"]) .hero .eyebrow {
+  color: var(--ink);
+  opacity: 0.7;
+}
+html:root:not([data-theme="dark"]) .hero p {
+  color: var(--ink);
+}
+html:root:not([data-theme="dark"]) .hero .big b {
+  color: var(--ink);
+  font-weight: 700;
+  background: linear-gradient(transparent 62%, rgba(255, 255, 255, 0.85) 62%);
+}
+
+/* ── η κάρτα «Λογαριασμός Μαρίας»: μαύρη, όπως το μαύρο πλακάκι του site ── */
+html:root:not([data-theme="dark"]) .hero svg rect[fill="#0A1B44"] {
+  fill: #121414;
+  stroke: #121414;
+}
+html:root:not([data-theme="dark"]) .hero svg rect[fill="#123FA8"] {
+  fill: #2a2f2e;
+}
+html:root:not([data-theme="dark"]) .hero svg rect[fill="#2A4A96"] {
+  fill: #3a403e;
+}
+html:root:not([data-theme="dark"]) .hero svg [fill="#F0B429"] {
+  fill: #f2b544;
+}
+html:root:not([data-theme="dark"]) .hero svg [stroke="#F0B429"] {
+  stroke: #f2b544;
+}
+html:root:not([data-theme="dark"]) .hero svg text[fill="#DCE6FF"],
+html:root:not([data-theme="dark"]) .hero svg text[fill="#C6D2EE"] {
+  fill: #f2efe9;
+}
+html:root:not([data-theme="dark"]) .hero svg text[fill="#8FA6DC"] {
+  fill: #a3aba8;
+}
+.hero svg text,
+.scene svg text {
+  font-family: var(--disp);
+}
+
+/* ── «Τα τέσσερα νούμερα»: παστέλ πλακάκια με μεγάλο νούμερο, όπως στο site ── */
+html:root:not([data-theme="dark"]) .facts .fact {
+  border: 0;
+  border-radius: 24px;
+  box-shadow: none;
+  background: #bfeae6;
+}
+html:root:not([data-theme="dark"]) .facts .fact:nth-child(4n + 2) { background: #c9ecfa; }
+html:root:not([data-theme="dark"]) .facts .fact:nth-child(4n + 3) { background: #121414; }
+html:root:not([data-theme="dark"]) .facts .fact:nth-child(4n + 4) { background: #fbe2a9; }
+html:root:not([data-theme="dark"]) .facts .fact .n {
+  color: var(--ink);
+}
+html:root:not([data-theme="dark"]) .facts .fact .l {
+  color: var(--ink);
+  opacity: 0.75;
+}
+html:root:not([data-theme="dark"]) .facts .fact:nth-child(4n + 3) .n,
+html:root:not([data-theme="dark"]) .facts .fact:nth-child(4n + 3) .l {
+  color: #fff;
+}
+
+/* ── κλείσιμο & «Τι σημαίνει στην πράξη»: το μαύρο πλακάκι του site ── */
+html:root:not([data-theme="dark"]) .closing,
+html:root:not([data-theme="dark"]) .punch {
+  background: #121414;
+  color: #fff;
+  border: 0;
+  box-shadow: none;
+}
+html:root:not([data-theme="dark"]) .closing .eyebrow {
+  color: #bfeae6;
+}
+html:root:not([data-theme="dark"]) .closing p {
+  color: rgba(255, 255, 255, 0.82);
+}
+html:root:not([data-theme="dark"]) .closing .line {
+  color: #fff;
+}
+html:root:not([data-theme="dark"]) .closing em {
+  color: #f2b544;
+  font-style: normal;
+}
+html:root:not([data-theme="dark"]) .punch h2,
+html:root:not([data-theme="dark"]) .punch h3 {
+  color: #fff;
+}
+html:root:not([data-theme="dark"]) .punch p {
+  color: rgba(255, 255, 255, 0.82);
+}
+html:root:not([data-theme="dark"]) .punch .row {
+  border-left-color: #f2b544;
 }
 
 </style>
