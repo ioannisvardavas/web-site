@@ -33,9 +33,8 @@ avatar = re.search(r'src="(data:[^"]+)"', hero_old).group(1)
 rep(
     '<meta name="theme-color" content="#0f6f6a" />',
     '<meta name="theme-color" content="#f4f1ec" />\n'
-    '    <link rel="preconnect" href="https://fonts.googleapis.com" />\n'
-    '    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n'
-    '    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />',
+    # γραμματοσειρές από το ίδιο το site, όχι από τη Google (GDPR) — βλ. assets/fonts/fonts.css
+    '    <link href="assets/fonts/fonts.css" rel="stylesheet" />',
 )
 v4css = (SCR / "v4.css").read_text(encoding="utf-8").replace("__AVATAR__", avatar)
 rep("</style>\n  </head>", "</style>\n    <style id=\"v4\">\n" + v4css + "\n    </style>\n  </head>")
@@ -185,6 +184,9 @@ v4js = (SCR / "v4.js").read_text(encoding="utf-8")
 rep("</body>", "<script>\n" + v4js + "\n</script>\n</body>")
 
 assert 'id="toolModal"' not in h
+# καμία σύνδεση με τη Google για γραμματοσειρές (GDPR) — ούτε link, ούτε preconnect, ούτε @import
+assert not re.search(r'fonts\.(googleapis|gstatic)\.com', h), "συνδέεται ακόμα με τη Google"
+assert (ROOT / "assets/fonts/fonts.css").is_file(), "λείπουν οι τοπικές γραμματοσειρές"
 for must in ('id="calcSave"', 'id="calcYears"', 'id="calcR1"', 'id="calcBar3"', 'id="calcTotalGain"',
              'id="contact-form"', 'id="bookLink"', 'id="privacyModal"', 'id="bizChecklist"'):
     assert h.count(must) == 1, must

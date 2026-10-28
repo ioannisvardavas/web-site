@@ -271,9 +271,11 @@ def vale_ypografi(t, onoma):
 # ───────────────────── ΤΟ ΥΦΟΣ ΤΗΣ ΙΣΤΟΣΕΛΙΔΑΣ ─────────────────────
 
 YFOS_CSS = (RIZA / "tools" / "paixnidia_v4.css")
-FONTS_V4 = ('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
-            'family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700'
-            '&display=swap">')
+# Οι γραμματοσειρές φιλοξενούνται στο ίδιο το site (assets/fonts/) — όχι στη Google,
+# που αλλιώς βλέπει τη διεύθυνση κάθε επισκέπτη (GDPR). Ούτε preconnect: κι αυτό
+# ανοίγει σύνδεση με τη Google πριν φορτωθεί οτιδήποτε.
+FONTS_V4 = '<link rel="stylesheet" href="../assets/fonts/fonts.css">'
+PRECONNECT_GOOGLE = r'<link rel="preconnect" href="https://fonts\.(googleapis|gstatic)\.com"[^>]*>\n?'
 
 
 def vale_yfos(t, onoma):
@@ -289,6 +291,7 @@ def vale_yfos(t, onoma):
         FONTS_V4.replace("\\", "\\\\"),
         onoma,
     )
+    t = allakse_motivo(t, PRECONNECT_GOOGLE, "", onoma, fores=2)
     if not YFOS_CSS.is_file():
         lathi.append(f"{onoma}: λείπει το {YFOS_CSS.name}")
         return t
@@ -347,9 +350,9 @@ def main():
         if t.count('<style id="v4">') != 1:
             lathi.append(f"{onoma}: το ύφος του site δεν μπήκε ακριβώς μία φορά")
         # (οι παλιές γραμματοσειρές μένουν ως εφεδρεία μέσα στις μεταβλητές
-        #  του παιχνιδιού· σημασία έχει να μην ΚΑΤΕΒΑΙΝΟΥΝ πια από τη Google)
-        if re.search(r'fonts\.googleapis\.com[^"\']*(Alegreya|Source\+Serif)', t):
-            lathi.append(f"{onoma}: κατεβαίνει ακόμα παλιά γραμματοσειρά")
+        #  του παιχνιδιού· σημασία έχει να μην ΚΑΤΕΒΑΙΝΕΙ τίποτα από τη Google)
+        if re.search(r'fonts\.(googleapis|gstatic)\.com', t):
+            lathi.append(f"{onoma}: συνδέεται ακόμα με τη Google για γραμματοσειρές")
         if "Manrope" not in t:
             lathi.append(f"{onoma}: δεν μπήκε η γραμματοσειρά του site")
         if f"{SITE}/" not in t:
