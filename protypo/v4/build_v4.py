@@ -173,6 +173,12 @@ rep('<section class="about-section" id="about" aria-labelledby="about-title">',
           <span class="me-photo" role="img" aria-label="Γιάννης Βαρδαβάς, lutcf"></span>
         </div>''')
 
+# ---------- οι εικόνες της πλατφόρμας φεύγουν (η πλατφόρμα καταργήθηκε) ----------
+# Τα κείμενα κάτω από κάθε εικόνα μένουν: περιγράφουν τη μέθοδο, όχι την οθόνη.
+assert h.count('src="assets/ai-') == 5
+h = re.sub(r'\n\s*<img src="assets/ai-[^"]*"[^>]*>', "", h)
+assert 'assets/ai-' not in h
+
 # ---------- κείμενα (EL/EN) + μικρό script ----------
 v4copy = (SCR / "v4copy.js").read_text(encoding="utf-8")
 rep("\n};\n\nconst languageButtons", "\n};\n" + v4copy + "\nconst languageButtons")
