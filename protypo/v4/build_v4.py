@@ -175,7 +175,7 @@ rep('<section class="about-section" id="about" aria-labelledby="about-title">',
 
 # ---------- οι εικόνες της πλατφόρμας φεύγουν (η πλατφόρμα καταργήθηκε) ----------
 # Τα κείμενα κάτω από κάθε εικόνα μένουν: περιγράφουν τη μέθοδο, όχι την οθόνη.
-assert h.count('src="assets/ai-') == 5
+# (έφυγαν και από την πηγή στις 28/10 — το βήμα μένει ως δικλείδα)
 h = re.sub(r'\n\s*<img src="assets/ai-[^"]*"[^>]*>', "", h)
 assert 'assets/ai-' not in h
 
