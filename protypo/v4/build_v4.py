@@ -33,7 +33,6 @@ avatar = re.search(r'src="(data:[^"]+)"', hero_old).group(1)
 rep(
     '<meta name="theme-color" content="#0f6f6a" />',
     '<meta name="theme-color" content="#f4f1ec" />\n'
-    '    <meta name="robots" content="noindex" />\n'
     '    <link rel="preconnect" href="https://fonts.googleapis.com" />\n'
     '    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n'
     '    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />',
