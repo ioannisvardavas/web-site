@@ -1387,3 +1387,81 @@ main {
   .ai-grid { grid-template-columns: 1fr; }
   .ai-shot { padding: 20px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Μεθοδολογία (28/10, δεύτερος γύρος): χρωματιστά πλακάκια όπως
+   παντού αλλού, και τα «Αναλυτικά» στο ΙΔΙΟ ύψος σε όλες τις
+   στήλες — ως τώρα το κουμπί τεντωνόταν ως το κάτω μέρος της
+   κάρτας, οπότε μόλις άνοιγε ένα βήμα τα άλλα τρία έμεναν με
+   τεράστιο λευκό κενό στη μέση.
+   ═══════════════════════════════════════════════════════════════ */
+.method-section { background: #fff; }
+.step {
+  min-height: 0;
+  padding: clamp(26px, 2.6vw, 32px);
+  border-radius: 26px;
+  background: #bfeae6;
+}
+.steps > .step:nth-child(2) { background: #ffd0c4; }
+.steps > .step:nth-child(3) { background: #ddd4ff; }
+.steps > .step:nth-child(4) { background: #fbe2a9; }
+.steps > .step:nth-child(1) .step-num,
+.steps > .step:nth-child(2) .step-num,
+.steps > .step:nth-child(3) .step-num,
+.steps > .step:nth-child(4) .step-num {
+  margin-bottom: 16px;
+  color: var(--ink);
+  font-size: clamp(42px, 4.2vw, 58px);
+  opacity: 0.32;
+}
+.step h3 {
+  margin: 0 0 10px;
+  font-size: clamp(21px, 1.8vw, 25px);
+}
+.step-head p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.55;
+  opacity: 0.8;
+}
+.step-more {
+  margin-top: 18px;
+  padding: 8px 15px 8px 16px;
+  background: rgba(18, 20, 20, 0.1);
+  color: var(--ink);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+.step:hover .step-more {
+  background: rgba(18, 20, 20, 0.18);
+}
+.step-detail {
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.62;
+  opacity: 0;
+}
+.step.open .step-detail {
+  max-height: 4000px;   /* το «Ανάλυση» είναι μακρύ· 1000px το έκοβε σε στενή στήλη */
+  margin-top: 18px;
+  opacity: 0.84;
+}
+
+/* Τα «Αναλυτικά» στο ίδιο ύψος σε όλες τις στήλες.
+   Η αιτία του κενού ήταν ότι το κουμπί τεντωνόταν (flex: 1 1 auto) ώσπου να
+   γεμίσει την ισοϋψή κάρτα, με το «Αναλυτικά» κολλημένο στο κάτω άκρο του.
+   Τώρα το κουμπί παίρνει το φυσικό του ύψος και η περιγραφή κρατά σταθερό
+   χώρο, ώστε τα τέσσερα «Αναλυτικά» να πέφτουν στην ίδια γραμμή.
+   (Το subgrid δοκιμάστηκε και απορρίφθηκε: το padding της κάρτας δεν μετράει
+   στις σειρές του γονικού πλέγματος και το κείμενο ξεχείλιζε κάτω.) */
+.step-head {
+  flex: 0 0 auto;
+}
+/* το ακριβές ύψος το βάζει το v4.js (evenStepTexts) — εδώ μόνο ένα δάπεδο
+   ώστε να μη χοροπηδά η σελίδα πριν τρέξει */
+@media (min-width: 641px) {
+  .step-head p {
+    min-height: calc(3 * 1.55em);
+  }
+}

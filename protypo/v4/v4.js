@@ -36,6 +36,25 @@
     });
   }
 
+  /* Μεθοδολογία: οι τέσσερις περιγραφές κρατούν ίδιο ύψος, ώστε τα
+     «Αναλυτικά» να πέφτουν στην ίδια γραμμή σε κάθε πλάτος και γλώσσα.
+     (Το CSS min-height μόνο του δεν αρκεί: άλλο πλάτος ή τα αγγλικά
+     αλλάζουν τον αριθμό των γραμμών.) */
+  const stepTexts = document.querySelectorAll("#method .step-head p");
+  const evenStepTexts = () => {
+    if (!stepTexts.length) return;
+    stepTexts.forEach((p) => (p.style.minHeight = ""));
+    if (window.innerWidth < 641) return;
+    const tallest = Math.max(...[...stepTexts].map((p) => p.getBoundingClientRect().height));
+    stepTexts.forEach((p) => (p.style.minHeight = Math.ceil(tallest) + "px"));
+  };
+  evenStepTexts();
+  window.addEventListener("resize", evenStepTexts);
+  document.querySelectorAll(".lang-button").forEach((b) =>
+    b.addEventListener("click", () => setTimeout(evenStepTexts, 60))
+  );
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(evenStepTexts);
+
   const header = document.querySelector(".site-header");
   const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
   window.addEventListener("scroll", onScroll, { passive: true });
