@@ -254,7 +254,7 @@ def ypografi_html(onoma):
         '" target="_blank" rel="noopener">WhatsApp</a>\n'
         '    <a class="ypog-b" href="viber://chat?number=' + quote(TIL_LINK) + '">Viber</a>\n'
         '  </div>\n'
-        '  <a class="ypog-site" href="' + SITE + '/">Τα υπόλοιπα εργαλεία &rarr;</a>\n'
+        '  <a class="ypog-site" href="' + SITE + '/#games">Τα υπόλοιπα παιχνίδια &rarr;</a>\n'
         '</section>\n'
     )
 
@@ -266,6 +266,34 @@ def vale_ypografi(t, onoma):
     t = allakse(t, "</head>", YPOGRAFI_CSS + "</head>", onoma)
     t = allakse(t, "</body>", ypografi_html(onoma) + "</body>", onoma)
     return t
+
+
+# ───────────────────── ΤΟ ΥΦΟΣ ΤΗΣ ΙΣΤΟΣΕΛΙΔΑΣ ─────────────────────
+
+YFOS_CSS = (RIZA / "tools" / "paixnidia_v4.css")
+FONTS_V4 = ('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
+            'family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700'
+            '&display=swap">')
+
+
+def vale_yfos(t, onoma):
+    """Τα παιχνίδια παίρνουν την παλέτα και τις γραμματοσειρές του site.
+
+    Μπαίνει ΜΕΤΑ την υπογραφή, ώστε να κερδίζει κάθε προηγούμενο κανόνα.
+    Οι γραμματοσειρές του παιχνιδιού (Alegreya Sans / Source Serif 4)
+    αντικαθίστανται από Manrope + Inter — ένα ύφος σε όλη την ιστοσελίδα.
+    """
+    t = allakse_motivo(
+        t,
+        r'<link[^>]*fonts\.googleapis\.com/css2[^>]*>',
+        FONTS_V4.replace("\\", "\\\\"),
+        onoma,
+    )
+    if not YFOS_CSS.is_file():
+        lathi.append(f"{onoma}: λείπει το {YFOS_CSS.name}")
+        return t
+    css = YFOS_CSS.read_text(encoding="utf-8")
+    return allakse(t, "</head>", '<style id="v4">\n' + css + '\n</style>\n</head>', onoma)
 
 
 # ───────────────────────── Η ΔΟΥΛΕΙΑ ─────────────────────────
@@ -294,6 +322,8 @@ def main():
 
         # η υπογραφή μπαίνει τελευταία, σε ΟΛΑ ανεξαιρέτως
         t = vale_ypografi(t, neo_onoma)
+        # και πάνω από όλα το ύφος της ιστοσελίδας
+        t = vale_yfos(t, neo_onoma)
 
         grammena[neo_onoma] = t
 
@@ -314,6 +344,14 @@ def main():
             lathi.append(f"{onoma}: η υπογραφή δεν μπήκε ακριβώς μία φορά")
         if TIL_LINK not in t:
             lathi.append(f"{onoma}: λείπει το τηλέφωνο")
+        if t.count('<style id="v4">') != 1:
+            lathi.append(f"{onoma}: το ύφος του site δεν μπήκε ακριβώς μία φορά")
+        # (οι παλιές γραμματοσειρές μένουν ως εφεδρεία μέσα στις μεταβλητές
+        #  του παιχνιδιού· σημασία έχει να μην ΚΑΤΕΒΑΙΝΟΥΝ πια από τη Google)
+        if re.search(r'fonts\.googleapis\.com[^"\']*(Alegreya|Source\+Serif)', t):
+            lathi.append(f"{onoma}: κατεβαίνει ακόμα παλιά γραμματοσειρά")
+        if "Manrope" not in t:
+            lathi.append(f"{onoma}: δεν μπήκε η γραμματοσειρά του site")
         if f"{SITE}/" not in t:
             lathi.append(f"{onoma}: λείπει ο δρόμος πίσω στο site")
         if RANTEVOU not in t:

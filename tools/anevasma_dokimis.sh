@@ -21,7 +21,8 @@ t = r.read_text()
 assert t.count('href="https://vardavas-site.pages.dev"') == 1
 r.write_text(t.replace('href="https://vardavas-site.pages.dev"', 'href="/"'))
 for p in (out / "paixnidia").glob("*.html"):
-    p.write_text(p.read_text().replace('href="https://vardavas-site.pages.dev/"', 'href="/"'))
+    # κάθε σύνδεσμος προς το ζωντανό site δείχνει μέσα στη δοκιμή (και το /#games)
+    p.write_text(p.read_text().replace('href="https://vardavas-site.pages.dev/', 'href="/'))
 EOF
 printf '/*\n  X-Robots-Tag: noindex, nofollow\n' > "$OUT/_headers"
 npx wrangler pages deploy "$OUT" --project-name=vardavas-dokimi --branch=main --commit-dirty=true

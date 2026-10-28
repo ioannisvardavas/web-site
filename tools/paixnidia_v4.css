@@ -1,0 +1,223 @@
+/* ═══ Τα παιχνίδια στο ύφος της ιστοσελίδας (πρόταση 4) ═══
+   Μπαίνει ΤΕΛΕΥΤΑΙΟ σε κάθε παιχνίδι, από το sync_paixnidia.py.
+   Αλλάζει χρώματα, γραμματοσειρές και σχήματα — ποτέ τη μηχανική
+   του παιχνιδιού. Τίποτα εδώ δεν γράφεται στα paixnidia/*.html με
+   το χέρι. */
+
+/* ── η παλέτα του site ──────────────────────── */
+:root,
+:root[data-theme="light"] {
+  --paper: #f4f1ec;
+  --card: #ffffff;
+  --ink: #121414;
+  --soft: #5d6462;
+  --line: #e2ddd5;
+  --euro: #0d7a73;
+  --euro-deep: #0a4c49;
+  --gold: #c8901f;
+  --gold-text: #8f5b05;
+  --gold-fill: #f2b544;
+  --coral: #ff6b4a;
+  --teal: #0fa39a;
+  --dot-off: #ddd7cd;
+  --shadow: 0 1px 0 rgba(18, 20, 20, 0.04), 0 24px 48px -34px rgba(18, 20, 20, 0.45);
+  --disp: Manrope, Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --book: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Σκούρο ΜΟΝΟ από το κουμπί — ποτέ αυτόματα από τη ρύθμιση του μηχανήματος.
+   (Ο ίδιος κανόνας ισχύει σε όλη την ιστοσελίδα.) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="dark"]) {
+    --paper: #f4f1ec;
+    --card: #ffffff;
+    --ink: #121414;
+    --soft: #5d6462;
+    --line: #e2ddd5;
+    --euro: #0d7a73;
+    --euro-deep: #0a4c49;
+    --gold: #c8901f;
+    --gold-text: #8f5b05;
+    --gold-fill: #f2b544;
+    --coral: #ff6b4a;
+    --teal: #0fa39a;
+    --dot-off: #ddd7cd;
+  }
+}
+/* Μερικοί κανόνες του παιχνιδιού γράφουν χρώμα απευθείας, όχι μέσω μεταβλητών,
+   και με μεγαλύτερη ισχύ από τους δικούς μας. Χειρότερο: ο κανόνας
+   `:root:not([data-theme="light"]) .btn{color:#08122A}` γράφτηκε ΕΞΩ από το
+   @media του σκούρου θέματος, οπότε ίσχυε ΠΑΝΤΑ — σκούρο μπλε κείμενο πάνω σε
+   σκούρο κουμπί, αδιάβαστο, σε κάθε μηχάνημα. Το `html:root` ανεβάζει την ισχύ
+   όσο χρειάζεται για να γυρίσουν όλα στο φωτεινό. */
+html:root:not([data-theme="dark"]) .btn {
+  color: #fff;
+}
+html:root:not([data-theme="dark"]) .btn.ghost {
+  color: var(--euro);
+}
+html:root:not([data-theme="dark"]) .ypog-b.kyrio {
+  color: #fff;
+}
+html:root:not([data-theme="dark"]) .punch,
+html:root:not([data-theme="dark"]) .mystery {
+  background: var(--euro-deep);
+}
+html:root:not([data-theme="dark"]) .pick button[aria-pressed="true"] {
+  color: #fff;
+}
+
+:root[data-theme="dark"] {
+  --paper: #121414;
+  --card: #1d2120;
+  --ink: #f2efe9;
+  --soft: #a3aba8;
+  --line: #2f3533;
+  --euro: #4fd1c5;
+  --euro-deep: #0a4c49;
+  --gold: #f2b544;
+  --gold-text: #f2b544;
+  --gold-fill: #f2b544;
+  --coral: #ff8b70;
+  --teal: #4fd1c5;
+  --dot-off: #3a4240;
+}
+
+/* ── τυπογραφία ─────────────────────────────── */
+body {
+  font-family: var(--book);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .big, .nm {
+  font-family: var(--disp);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+h1 {
+  letter-spacing: -0.035em;
+}
+.lede, .sub, .kat, .q {
+  font-family: var(--book);
+}
+.mono, .n, .v {
+  font-family: var(--disp);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ── σχήματα: στρογγυλά, χωρίς περιγράμματα ─── */
+.card, .box, .modal, .wrap > .scr {
+  border: 0;
+  border-radius: 26px;
+}
+.punch,
+.mystery {
+  border: 0;
+  border-radius: 24px;
+  background: var(--euro-deep);
+  color: #fff;
+}
+
+/* ── κουμπιά: pills σε χρώμα, ΠΟΤΕ μαύρα ───── */
+.btn {
+  border: 1.5px solid var(--euro);
+  border-radius: 999px;
+  background: var(--euro);
+  color: #fff;
+  font-family: var(--book);
+  font-weight: 600;
+  font-size: 17px;
+  box-shadow: none;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.btn:hover {
+  background: var(--euro-deep);
+  border-color: var(--euro-deep);
+  transform: translateY(-2px);
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--euro);
+}
+.btn.ghost:hover {
+  background: var(--euro);
+  color: #fff;
+}
+.tog {
+  border: 0;
+  background: #bfeae6;
+  color: var(--euro-deep);
+  box-shadow: none;
+}
+.tog:hover {
+  background: #9fd8d3;
+}
+
+/* ── η υπογραφή στο τέλος ───────────────────── */
+.ypog {
+  border: 0;
+  border-radius: 26px;
+}
+.ypog-nm {
+  font-family: var(--disp);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.ypog-b {
+  border: 1.5px solid var(--euro);
+  border-radius: 999px;
+  font-family: var(--book);
+  font-weight: 600;
+  background: transparent;
+  color: var(--euro);
+}
+.ypog-b.kyrio {
+  border-color: var(--euro);
+  background: var(--euro);
+  color: #fff;
+}
+.ypog-site {
+  color: var(--euro);
+}
+
+/* ── το ταμπλό: χρωματιστά πλακάκια, όπως στην ιστοσελίδα ── */
+.coins > .coin {
+  border: 0;
+  border-radius: 24px;
+  padding: 20px 18px;
+  box-shadow: none;
+  background: #bfeae6;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s ease;
+}
+.coins > .coin:nth-child(5n + 2) { background: #fbe2a9; }
+.coins > .coin:nth-child(5n + 3) { background: #ffd0c4; }
+.coins > .coin:nth-child(5n + 4) { background: #ddd4ff; }
+.coins > .coin:nth-child(5n + 5) { background: #c9ecfa; }
+.coins > .coin:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  box-shadow: 0 20px 44px rgba(18, 20, 20, 0.12);
+}
+.coin .disc {
+  border: 0;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+  font-family: var(--disp);
+  font-weight: 800;
+}
+.coin.done .disc {
+  background: var(--ink);
+  color: #fff;
+}
+.coin .nm {
+  font-family: var(--disp);
+  letter-spacing: -0.02em;
+}
+.coin .hk,
+.coin .st {
+  color: var(--ink);
+  opacity: 0.72;
+}
+.coin.done .st {
+  color: var(--euro-deep);
+  opacity: 1;
+}
