@@ -767,6 +767,7 @@ h1, h2, h3, h4, .calc-title {
 .module-tool.alt:hover {
   background: var(--petrol-deep);
   border-color: var(--petrol-deep);
+  color: #fff;
 }
 .service-card-dark .module-tool {
   border-color: #fff;
