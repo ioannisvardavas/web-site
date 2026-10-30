@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""og_card.html -> og-image-v5.jpg: η κάρτα του συνδέσμου σε WhatsApp/Viber, στο νέο ύφος.
+"""og_card.html -> og-image-v6.jpg: η κάρτα του συνδέσμου σε WhatsApp/Viber, στο νέο ύφος.
 
 Η φωτογραφία είναι η ίδια με του site (το avatar του hero στο standalone.html).
 Το Chrome τη «φωτογραφίζει» σε 1200×630 και βγαίνει JPEG < 300 KB — πάνω από αυτό
 το WhatsApp δείχνει μόνο μικρό εικονίδιο. Νέο όνομα αρχείου σε κάθε αλλαγή εμφάνισης,
 αλλιώς WhatsApp/Viber κρατούν την παλιά εικόνα στη μνήμη τους.
 
-Τρέξιμο:  python3 protypo/v4/build_og_v4.py   (γράφει og-image-v5.jpg στη ρίζα + deploy/)
+Τρέξιμο:  python3 protypo/v4/build_og_v4.py   (γράφει og-image-v6.jpg στη ρίζα + deploy/)
 """
 import pathlib, re, subprocess, tempfile
 from PIL import Image
@@ -14,7 +14,7 @@ from PIL import Image
 ROOT = pathlib.Path("/Users/user/Desktop/Claude dir/Web Site")
 SCR = pathlib.Path(__file__).parent
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-OUT = "og-image-v5.jpg"
+OUT = "og-image-v6.jpg"
 MAX_KB = 300
 
 src = (ROOT / "standalone.html").read_text(encoding="utf-8")

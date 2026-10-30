@@ -75,9 +75,9 @@ rep(
 hero_new = f'''<section class="hero" aria-labelledby="hero-title">
         <div class="hero-mesh" aria-hidden="true"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb6"></span><span class="hb hb7"></span><span class="hb hb8"></span></div>
         <div class="hero-copy">
-          <a class="tag" href="#about"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Σύμβουλος ασφαλίσεων &amp; επενδύσεων · 25 χρόνια</span><span class="tag-go" aria-hidden="true">→</span></a>
-          <h1 id="hero-title" data-i18n="v4HeroTitle">Τα χρήματά σου,<br />με <span class="paint">σχέδιο.<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span></h1>
-          <p class="lead" data-i18n="v4Lead">Ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι επιχείρησης — σε μία καθαρή εικόνα, με πραγματικά νούμερα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
+          <a class="tag" href="#about"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Financial Planning &amp; Risk Management · 25 χρόνια</span><span class="tag-go" aria-hidden="true">→</span></a>
+          <h1 id="hero-title" data-i18n="v4HeroTitle">Το οικονομικό σου σχέδιο,<br /><span class="paint">δοκιμασμένο<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span> πριν το χρειαστείς.</h1>
+          <p class="lead" data-i18n="v4Lead">Για οικογένειες και επιχειρήσεις: ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι σε μία καθαρή εικόνα, με πραγματικά νούμερα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
           <div class="ctas">
             <a class="pill dark" href="{CAL}" target="_blank" rel="noreferrer" data-i18n="v4Cta1">Κλείσε μια συζήτηση</a>
             <a class="pill ghost" href="#arithmoi" data-i18n="v4Cta2">Παίξε με τα νούμερα ↓</a>

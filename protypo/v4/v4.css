@@ -190,7 +190,7 @@ h1, h2, h3, h4, .calc-title {
 .hero-copy {
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  max-width: 1260px;
 }
 .tag {
   display: inline-flex;
@@ -215,8 +215,9 @@ h1, h2, h3, h4, .calc-title {
   margin: 28px 0 26px;
   font-family: Manrope, Inter, sans-serif;
   font-weight: 800;
-  font-size: clamp(54px, 6.3vw, 92px);
-  line-height: 0.98;
+  font-size: clamp(50px, 5.4vw, 80px);
+  line-height: 1.02;
+  text-wrap: balance;
   letter-spacing: -0.035em;
 }
 .hero h1 .paint {
@@ -1094,7 +1095,7 @@ main {
   .brand small { display: none; }
   .site-header { gap: 12px; }
   .hero { margin-top: -74px; padding: 110px 20px 90px; }
-  .hero h1 { font-size: clamp(44px, 13vw, 60px); }
+  .hero h1 { font-size: clamp(36px, 10.5vw, 52px); }
   .tag { gap: 10px; padding: 8px 18px 8px 8px; font-size: 15px; line-height: 1.3; }
   .tag .me-photo { width: 40px; height: 40px; }
   .portrait { width: min(300px, 74vw); height: min(330px, 82vw); }
