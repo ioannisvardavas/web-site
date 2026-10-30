@@ -36,6 +36,9 @@ rep(
     # γραμματοσειρές από το ίδιο το site, όχι από τη Google (GDPR) — βλ. assets/fonts/fonts.css
     '    <link href="assets/fonts/fonts.css" rel="stylesheet" />',
 )
+koryfi = (SCR / "v4_koryfi.js").read_text(encoding="utf-8")
+rep('<meta name="theme-color" content="#f4f1ec" />',
+    '<meta name="theme-color" content="#f4f1ec" />\n    <script>\n' + koryfi + '    </script>')
 v4css = (SCR / "v4.css").read_text(encoding="utf-8").replace("__AVATAR__", avatar)
 rep("</style>\n  </head>", "</style>\n    <style id=\"v4\">\n" + v4css + "\n    </style>\n  </head>")
 

@@ -10,6 +10,28 @@
     />
 
     <meta name="theme-color" content="#f4f1ec" />
+    <script>
+/* Το site ανοίγει πάντα από την κορυφή: από το Dock (η εφαρμογή του Safari έχει
+   κρατήσει διεύθυνση με #about), με πληκτρολόγηση, από σελιδοδείκτη, με ανανέωση.
+   Τρέχει στο <head>, πριν ο browser προλάβει να κατέβει στην ενότητα.
+   Εξαιρέσεις: το «Πίσω» κρατά τη θέση του, και ένας σύνδεσμος από άλλη σελίδα προς
+   ενότητα (π.χ. το «πίσω στα παιχνίδια» → /#games) πάει εκεί που λέει. */
+(function () {
+  var nav = performance.getEntriesByType("navigation")[0];
+  var type = nav ? nav.type : "navigate";
+  if (type === "back_forward") {
+    history.scrollRestoration = "auto";
+    return;
+  }
+  if (type === "navigate" && document.referrer && location.hash) return;
+  history.scrollRestoration = "manual";
+  if (!location.hash) return;
+  history.replaceState(null, "", location.pathname + location.search);
+  window.addEventListener("load", function () {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  });
+})();
+    </script>
     <link href="assets/fonts/fonts.css" rel="stylesheet" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230f6f6a%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2215%22%20fill%3D%22none%22%20stroke%3D%22%23fbfaf7%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%225%22%20fill%3D%22%23b69152%22/%3E%3C/svg%3E" />
 
