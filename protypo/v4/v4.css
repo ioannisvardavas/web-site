@@ -237,8 +237,18 @@ h1, h2, h3, h4, .calc-title {
 .hero h1 .paint path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: v4draw 1.1s 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: v4draw 0.6s 0.55s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
+.hero h1 .h-line {
+  display: block;
+  animation: v4rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero h1 .h-line + .h-line { animation-delay: 0.12s; }
+@keyframes v4rise { from { opacity: 0; transform: translateY(0.3em); } }
+@keyframes v4draw { to { stroke-dashoffset: 0; } }
+/* παίζει μία φορά: η αλλαγή γλώσσας ξαναγράφει τον τίτλο και δεν πρέπει να το ξαναπαίξει */
+.hero h1.anim-done .h-line { animation: none; }
+.hero h1.anim-done .paint path { animation: none; stroke-dashoffset: 0; }
 .hero .lead {
   max-width: 520px;
   margin: 0 0 34px;
@@ -283,14 +293,14 @@ h1, h2, h3, h4, .calc-title {
   filter: blur(80px);
   will-change: transform;
 }
-.hb1 { width: 62vw; height: 62vw; left: -16vw; top: -22vw; background: #ffd27a; animation: v4h1 18s ease-in-out infinite alternate; }
-.hb2 { width: 44vw; height: 44vw; left: 18vw; top: 4vw; background: #9fe0f7; animation: v4h2 22s ease-in-out infinite alternate; }
-.hb3 { width: 50vw; height: 50vw; right: -12vw; top: -20vw; background: var(--violet); animation: v4h3 16s ease-in-out infinite alternate; }
-.hb4 { width: 40vw; height: 40vw; right: 10vw; top: 6vw; background: var(--coral); animation: v4h4 20s ease-in-out infinite alternate; }
-.hb5 { width: 34vw; height: 34vw; right: -6vw; top: 18vw; background: var(--teal); animation: v4h2 24s ease-in-out infinite alternate-reverse; }
-.hb6 { width: 36vw; height: 36vw; left: -8vw; top: 16vw; background: #ffb5a0; animation: v4h3 19s ease-in-out infinite alternate-reverse; }
-.hb7 { width: 44vw; height: 44vw; left: 26vw; top: 34vw; background: #9fe0f7; animation: v4h4 23s ease-in-out infinite alternate-reverse; }
-.hb8 { width: 46vw; height: 46vw; right: -12vw; top: 34vw; background: #b9a6ff; animation: v4h1 21s ease-in-out infinite alternate; }
+.hb1 { width: 62vw; height: 62vw; left: -16vw; top: -22vw; background: #ffd27a; animation: v4h1 7s ease-in-out infinite alternate; }
+.hb2 { width: 44vw; height: 44vw; left: 18vw; top: 4vw; background: #9fe0f7; animation: v4h2 8.5s ease-in-out infinite alternate; }
+.hb3 { width: 50vw; height: 50vw; right: -12vw; top: -20vw; background: var(--violet); animation: v4h3 6.5s ease-in-out infinite alternate; }
+.hb4 { width: 40vw; height: 40vw; right: 10vw; top: 6vw; background: var(--coral); animation: v4h4 8s ease-in-out infinite alternate; }
+.hb5 { width: 34vw; height: 34vw; right: -6vw; top: 18vw; background: var(--teal); animation: v4h2 9s ease-in-out infinite alternate-reverse; }
+.hb6 { width: 36vw; height: 36vw; left: -8vw; top: 16vw; background: #ffb5a0; animation: v4h3 7.5s ease-in-out infinite alternate-reverse; }
+.hb7 { width: 44vw; height: 44vw; left: 26vw; top: 34vw; background: #9fe0f7; animation: v4h4 9.5s ease-in-out infinite alternate-reverse; }
+.hb8 { width: 46vw; height: 46vw; right: -12vw; top: 34vw; background: #b9a6ff; animation: v4h1 8s ease-in-out infinite alternate; }
 @keyframes v4h1 { to { transform: translate(12vw, 6vw) scale(1.08); } }
 @keyframes v4h2 { to { transform: translate(-8vw, 6vw) scale(0.92); } }
 @keyframes v4h3 { to { transform: translate(-10vw, 8vw) scale(1.12); } }
@@ -330,11 +340,11 @@ h1, h2, h3, h4, .calc-title {
   background: #1d1b4f;
 }
 .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.95; }
-.b1 { width: 60vw; height: 60vw; left: -18vw; top: -20vw; background: var(--petrol-deep); animation: v4m1 16s ease-in-out infinite alternate; }
-.b2 { width: 48vw; height: 48vw; left: 22vw; top: -8vw; background: var(--violet); animation: v4m2 19s ease-in-out infinite alternate; }
-.b3 { width: 42vw; height: 42vw; right: -10vw; top: 4vw; background: var(--coral); animation: v4m3 14s ease-in-out infinite alternate; }
-.b4 { width: 34vw; height: 34vw; right: 14vw; bottom: -14vw; background: var(--sun); animation: v4m4 17s ease-in-out infinite alternate; }
-.b5 { width: 30vw; height: 30vw; left: 8vw; bottom: -12vw; background: var(--teal); animation: v4m2 21s ease-in-out infinite alternate-reverse; }
+.b1 { width: 60vw; height: 60vw; left: -18vw; top: -20vw; background: var(--petrol-deep); animation: v4m1 6.5s ease-in-out infinite alternate; }
+.b2 { width: 48vw; height: 48vw; left: 22vw; top: -8vw; background: var(--violet); animation: v4m2 7.5s ease-in-out infinite alternate; }
+.b3 { width: 42vw; height: 42vw; right: -10vw; top: 4vw; background: var(--coral); animation: v4m3 6s ease-in-out infinite alternate; }
+.b4 { width: 34vw; height: 34vw; right: 14vw; bottom: -14vw; background: var(--sun); animation: v4m4 7s ease-in-out infinite alternate; }
+.b5 { width: 30vw; height: 30vw; left: 8vw; bottom: -12vw; background: var(--teal); animation: v4m2 8.5s ease-in-out infinite alternate-reverse; }
 @keyframes v4m1 { to { transform: translate(14vw, 8vw) scale(1.1); } }
 @keyframes v4m2 { to { transform: translate(-10vw, 10vw) scale(0.9); } }
 @keyframes v4m3 { to { transform: translate(-12vw, -6vw) scale(1.15); } }
@@ -1130,6 +1140,7 @@ main {
   .nav-links.is-open a { animation: none; }
   .stroke,
   .hero h1 .paint path { animation: none; stroke-dashoffset: 0; }
+  .hero h1 .h-line { animation: none; }
   .blob,
   .hb { animation: none; }
 }

@@ -55,6 +55,9 @@
   );
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(evenStepTexts);
 
+  const heroTitle = document.getElementById("hero-title");
+  setTimeout(() => heroTitle.classList.add("anim-done"), 1400);
+
   const header = document.querySelector(".site-header");
   const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
   window.addEventListener("scroll", onScroll, { passive: true });
