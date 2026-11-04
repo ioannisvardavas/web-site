@@ -1032,6 +1032,51 @@ main {
   font-family: Manrope, sans-serif;
   font-weight: 800;
 }
+/* αποθήκευση επαφής (4/11/2026): QR στον υπολογιστή · κουμπί στο κινητό (εκεί το QR δεν σκανάρεται από την ίδια οθόνη) */
+.footer-vcard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.footer-qr {
+  display: block;
+  flex: none;
+  padding: 6px;
+  border-radius: 10px;
+  background: #fff;
+  line-height: 0;
+}
+.footer-qr img {
+  display: block;
+  width: 138px;
+  height: 138px;
+}
+.footer-qr-cap {
+  max-width: 170px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.78);
+}
+.footer-save {
+  display: none;
+}
+@media (max-width: 700px), (hover: none) and (pointer: coarse) {
+  .footer-qr,
+  .footer-qr-cap {
+    display: none;
+  }
+  .footer-save {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font: 700 0.95rem/1 Manrope, Inter, sans-serif;
+    text-decoration: none;
+  }
+}
 
 /* ── κινητό & tablet ─────────────────────────── */
 @media (max-width: 1100px) {

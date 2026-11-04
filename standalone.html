@@ -3489,6 +3489,12 @@ body.modal-open {
         <span class="footer-reg" data-i18n="footerReg">Ασφαλιστικός διαμεσολαβητής · Αρ. Γεν. Μητρώου Επαγγελματικού Επιμελητηρίου Αθηνών: 177766 · σε συνεργασία με Allianz</span>
       </div>
       <div class="footer-meta">
+        <!-- Αποθήκευση επαφής (4/11/2026): QR στον υπολογιστή, κουμπί στο κινητό· ίδιο vCard με την υπογραφή email -->
+        <div class="footer-vcard">
+          <a class="footer-qr" href="https://vardavas.pages.dev/epafi.vcf" aria-label="QR — αποθήκευση επαφής"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARQAAAEUAQMAAADQvls6AAAABlBMVEUKHzz///9cD/vxAAADrUlEQVR42u2aS45cUQhDUTbA/nfJDsj1MdU9inoSwSB51VLXT3qIC7YxFf3jVfFPfycisvr97ww9OvP9q/dulz/8FT9ff+s77/bd7+6lP0VVmfXieZHU+4APl+OJl5CsUhR6/eKqF2S+eMjURTxKirPz0sLDR9lH8SgTxUMFo2Tp3PT2QTzdvjFFrMp5aWqKJ/ugfsjIn66D/tLlRCXtNK3fwUthwnJ+kkOqpLN0ZGowXe/8dGLb+dH93V+q4lBVU03KjkJbPy/d+YWkJhcO6g2dWdBj0ev9XiCfWorWmtdu/F6PpwFmMxiIqKevbmqiW8+PwEaV7HiEig00qsMU3XI8qmZVDPhMtkTrEKtQOw744t2a+xNWTzhSIZD9dn6segSBquGg06DVpPfW+SIL8ZVQ2QumDDy8pLqW+0vqSzGVcyJwVkWrwC/4y6oH+BPkNNBsWaaW2+ev0t0HfQBr93ma1dbxB0jsMkXAZB9h36719fNCz6uOqOGyCkvTfqyfl1gKyUNcDm+oI8nQen8JBaEwxgrOCQ5Revbrhyxo+qrRZoH8gVhF+Qd4SPWWo0KqCn6ap7VeP0VAPfNgMwwaeYLBJw/0c8BaaeZC4H/G+QM9FvU1nqKXw6zxGeMv5guNgjmFFNb3TTAX/gZ0msw6NWNPMDi3B9R9/ZxhDExisPbxI/f1j5QyhBEkiZQYDdOyfl0/R3xPyhSTEoVYVTEd5KcYRuELw2AC19hS+3iYnk/bZURvTcsxqeY+/nTFp4LhDBwqUtX78zs2lDndWh4Z71oqolo+L7qL2zNioJ2ZxOy93OAzR2TX16QuxvCQus7vUHlPdyPkTfaOap9PaTDZ8emU1ChWQGjf37AJFsabsFXfeNLhZG3Hk1+SJ2Z1wKCcN/XjTcXMXzNejDYzi6zzxWjCcXclzdrDfMUBPufQgg1o3ETQWgV+o+etwjpmEvPsXp9g1+uHhNjFxPoJbCDAxxPHvj78BFQuIk+q5ov1+rGv62NSwfjYvIGyOtruLzur47cA12ENm5ic+/5P9ccPh+c9xNek60CPYSMANqhF61WQMg72uV/uPFo1/axNbHmin203444hnGcV5oPrg/3gGD5eEYY3zmXrLm/2p16qfO++LF3z4LzGvJz9LbI1XVN4vxd+wojU8X9sIhbmYezvm2ZTSgXXZ4tqN7P6gL84qhrvx63lGAMLqC9+nxA560nlpXo2Bdlegh30V8xGmV4DjsYpr5PfJ/z/vdafvvMbvw2LUfF//4UAAAAASUVORK5CYII=" width="138" height="138" alt="QR: Γιάννης Βαρδαβάς — αποθήκευση επαφής" /></a>
+          <span class="footer-qr-cap" data-i18n="footerQrCap">Σκανάρετε με την κάμερα του κινητού για να αποθηκεύσετε την επαφή μου</span>
+          <a class="footer-save" href="https://vardavas.pages.dev/epafi.vcf" data-i18n="footerSave">Αποθήκευση επαφής</a>
+        </div>
         <nav class="footer-links" aria-label="Footer">
           <a href="#contact" data-i18n="footerContact">Επικοινωνία</a>
           <button type="button" class="legal-link" data-target="privacyModal" data-i18n="footerPrivacy">Πολιτική Απορρήτου</button>
@@ -3875,6 +3881,8 @@ const copy = {
     footerRole: "Life, Health, P&C & Investment Architect",
     footerReg: "Ασφαλιστικός διαμεσολαβητής · Αρ. Γεν. Μητρώου Επαγγελματικού Επιμελητηρίου Αθηνών: 177766 · σε συνεργασία με Allianz",
     footerContact: "Επικοινωνία",
+    footerQrCap: "Σκανάρετε με την κάμερα του κινητού για να αποθηκεύσετε την επαφή μου",
+    footerSave: "Αποθήκευση επαφής",
     footerPrivacy: "Πολιτική Απορρήτου",
     footerCopy: "© 2026 Γιάννης Βαρδαβάς. Με επιφύλαξη παντός δικαιώματος.",
     formConsent: 'Έχω διαβάσει και αποδέχομαι την <button type="button" class="legal-link" data-target="privacyModal">Πολιτική Απορρήτου</button> και συναινώ στην επεξεργασία των στοιχείων μου για να μου απαντήσετε.',
@@ -4232,6 +4240,8 @@ const copy = {
     footerRole: "Life, Health, P&C & Investment Architect",
     footerReg: "Registered insurance intermediary · Athens Professional Chamber General Reg. No.: 177766 · in cooperation with Allianz",
     footerContact: "Contact",
+    footerQrCap: "Scan with your phone camera to save my contact",
+    footerSave: "Save contact",
     footerPrivacy: "Privacy Policy",
     footerCopy: "© 2026 Ioannis Vardavas. All rights reserved.",
     formConsent: 'I have read and accept the <button type="button" class="legal-link" data-target="privacyModal">Privacy Policy</button> and consent to the processing of my details so you can reply to me.',
