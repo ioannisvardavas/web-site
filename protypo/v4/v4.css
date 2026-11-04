@@ -1021,6 +1021,50 @@ main {
   letter-spacing: -0.03em;
 }
 
+/* ── «Κράτα την επαφή μου» (4/11/2026) ───────── */
+.hero-save {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: 0.95rem;
+  text-decoration: none;
+  opacity: 0.78;
+}
+.hero-save u {
+  text-decoration-color: #f2b544;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.hero-save:hover,
+.hero-save:focus-visible {
+  opacity: 1;
+}
+.contact-save {
+  margin-top: 10px;
+}
+.nav-save {
+  display: none;
+}
+.epafi-modal {
+  max-width: 380px;
+}
+.epafi-card {
+  text-align: center;
+}
+.epafi-qr {
+  display: block;
+  width: 207px;
+  height: 207px;
+  margin: 14px auto 12px;
+}
+.epafi-text {
+  margin: 0 0 10px;
+}
+.epafi-dl {
+  font-size: 0.85rem;
+  color: var(--muted, #64748b);
+}
+
 /* ── footer ──────────────────────────────────── */
 .site-footer {
   background: var(--ink);
@@ -1081,6 +1125,15 @@ main {
 /* ── κινητό & tablet ─────────────────────────── */
 @media (max-width: 1100px) {
   /* μενού κινητού: ολόκληρη οθόνη, μεγάλα γράμματα, χωρίς γραμμές */
+  .nav-links a.nav-save.nav-save {   /* διπλή τάξη: νικά το «.nav-links a:last-child» από κάτω */
+    display: block;
+    margin-top: 6px;
+    font-size: clamp(18px, 4.6vw, 22px);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: #f2b544;
+    text-underline-offset: 4px;
+  }
   .nav-links {
     height: calc(100dvh - 64px);
     overflow-y: auto;

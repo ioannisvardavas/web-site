@@ -58,6 +58,7 @@ h = h[:ni] + f'''<nav class="nav-links" id="primary-nav" aria-label="Main naviga
         <a href="#about" data-i18n="navAbout">Σχετικά</a>
         <a href="https://risk-radar-2yr.pages.dev" class="nav-risk" data-i18n="navRisk">Εργαλεία Ρίσκου →</a>
         <a href="{CAL}" class="nav-menu-cta" target="_blank" rel="noreferrer" data-i18n="v4NavCta">Κλείσε 30 λεπτά</a>
+        <a href="https://vardavas.pages.dev/epafi.vcf" class="nav-save" data-epafi data-i18n="v4NavSave">Αποθήκευση επαφής</a>
       </nav>''' + h[nj:]
 
 rep(
@@ -82,6 +83,7 @@ hero_new = f'''<section class="hero" aria-labelledby="hero-title">
             <a class="pill dark" href="{CAL}" target="_blank" rel="noreferrer" data-i18n="v4Cta1">Κλείσε μια συζήτηση</a>
             <a class="pill ghost" href="#arithmoi" data-i18n="v4Cta2">Παίξε με τα νούμερα ↓</a>
           </div>
+          <a class="hero-save" href="https://vardavas.pages.dev/epafi.vcf" data-epafi data-i18n="v4HeroSave">Όχι ακόμα; <u>Κράτα την επαφή μου</u> — πριν τη χρειαστείς.</a>
           <div class="creds">
             <span><b data-i18n="v4Cred1b">25+ χρόνια</b><span data-i18n="v4Cred1">Τράπεζα Εργασίας → Allianz</span></span>
             <span><b>LUTCF</b><span data-i18n="v4Cred2">διεθνής πιστοποίηση</span></span>
@@ -193,7 +195,7 @@ assert (ROOT / "assets/fonts/fonts.css").is_file(), "λείπουν οι τοπ�
 # η κάρτα του WhatsApp/Viber (build_og_v4.py) πρέπει να υπάρχει εκεί που δείχνει η σελίδα
 for og in set(re.findall(r'pages\.dev/(og-image[^"]+)"', h)):
     assert (ROOT / "deploy" / og).is_file(), f"λείπει η κάρτα deploy/{og}"
-for must in ('id="calcSave"', 'id="calcYears"', 'id="calcR1"', 'id="calcBar3"', 'id="calcTotalGain"',
+for must in ('id="epafiModal"', 'class="hero-save"', 'class="nav-save"', 'id="calcYears"', 'id="calcR1"', 'id="calcBar3"', 'id="calcTotalGain"',
              'id="contact-form"', 'id="bookLink"', 'id="privacyModal"', 'id="bizChecklist"'):
     assert h.count(must) == 1, must
 (ROOT / "standalone_v4.html").write_text(h, encoding="utf-8")

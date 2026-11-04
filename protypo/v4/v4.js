@@ -63,3 +63,15 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 })();
+
+/* «Κράτα την επαφή μου» (4/11/2026): με ποντίκι → παράθυρο με το QR (σκανάρεται από το κινητό)·
+   με αφή / στενή οθόνη → ο σύνδεσμος κατεβάζει κατευθείαν την επαφή (vardavas.pages.dev/epafi.vcf). */
+document.addEventListener("click", function (e) {
+  var a = e.target.closest && e.target.closest("[data-epafi]");
+  if (!a) return;
+  if (!window.matchMedia("(min-width: 701px) and (hover: hover)").matches) return;
+  e.preventDefault();
+  var nav = document.getElementById("primary-nav");
+  if (nav && nav.classList.contains("is-open")) { var t = document.querySelector(".nav-toggle"); if (t) t.click(); }
+  if (typeof openOverlay === "function") openOverlay("epafiModal");
+});
