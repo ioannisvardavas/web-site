@@ -7,6 +7,8 @@
     IV: G + '<g fill="none" stroke="#121414" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M22 18V74"/><path d="M44 18L72 74L100 18"/></g><path d="M72 85C72 85 60 98 60 104.5A12 12 0 0 0 84 104.5C84 98 72 85 72 85Z" fill="url(#mkv)"/>'
   };
   let mark = 'B', on = true;
+  // προαιρετικά: <script src="marka.js" data-othoni="Κανόνες μελέτης"> ανοίγει κατευθείαν εκείνη την οθόνη
+  const othoni = document.currentScript && document.currentScript.dataset.othoni;
   const css = document.getElementById('marka-css');
 
   function brandNode() {
@@ -47,6 +49,7 @@
   // Η εφαρμογή (React) ζωγραφίζει την οθόνη λίγο μετά το φόρτωμα· περιμένουμε την επάνω μπάρα.
   const wait = setInterval(() => {
     if (document.querySelector('.top')) { clearInterval(wait); apply(); toggle();
+      if (othoni) { const b = [...document.querySelectorAll('.nav__item')].find(n => n.textContent.includes(othoni)); if (b) b.click(); }
       // αν η εφαρμογή ξαναζωγραφίσει την μπάρα, ξαναβάζουμε το σήμα
       new MutationObserver(() => { if (on && !document.querySelector('.mk-brand')) apply(); }).observe(document.getElementById('root'), { childList: true, subtree: true });
     }
