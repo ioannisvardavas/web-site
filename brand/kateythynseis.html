@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Νέες κατευθύνσεις μάρκας</title>
+<link rel="icon" href="logo/iv-favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+:root{
+  --paper:#f4f1ec; --ink:#121414; --muted:#5d6462; --line:#e2ddd5; --night:#1d1b4f; --petrol:#0d7a73;
+  --violet:#7c5cff; --coral:#ff6b4a; --sun:#f2b544; --teal:#0fa39a; --sky:#5cc8f0;
+  --lilac:#ddd4ff; --peach:#ffd0c4; --mint:#bfeae6; --butter:#fbe2a9; --mist:#c9ecfa;
+  --drop:linear-gradient(135deg,#7c5cff,#ff6b4a 55%,#f2b544);
+  --aygi:
+    radial-gradient(55% 75% at 8% 8%,#ffd27a 0,rgba(255,210,122,0) 62%),
+    radial-gradient(48% 70% at 92% 0%,#7c5cff 0,rgba(124,92,255,0) 62%),
+    radial-gradient(42% 60% at 72% 58%,#ff6b4a 0,rgba(255,107,74,0) 62%),
+    radial-gradient(40% 60% at 100% 100%,#0fa39a 0,rgba(15,163,154,0) 62%),
+    radial-gradient(50% 60% at 30% 95%,#9fe0f7 0,rgba(159,224,247,0) 62%),
+    #ffe3b3;
+  --head:Manrope,Inter,sans-serif; --sans:Inter,system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0}
+p{margin:0 0 .9em}
+.wrap{max-width:1560px;margin:0 auto;padding:64px 56px 90px}
+.topbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:40px}
+.topbar a{font-weight:600;text-decoration:none;background:#fff;padding:9px 15px;border-radius:99px;font-size:14px;color:var(--ink)}
+.eyebrow{font-family:var(--head);font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--petrol);margin-bottom:14px}
+.big{font-size:clamp(44px,5vw,80px);letter-spacing:-.045em;max-width:16ch}
+.lede{font-size:19.5px;color:#2e3432;max-width:64ch;margin:20px 0 0}
+section{margin-top:90px}
+h2.s{font-size:clamp(34px,3.4vw,52px);max-width:20ch;margin-bottom:14px}
+.card{background:#fff;border-radius:24px;padding:28px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.find .card h3{font-size:44px;letter-spacing:-.05em;margin-bottom:8px}
+.find .card p{font-size:15px;color:#2e3432;margin:0}
+.find .card:nth-child(1){background:var(--lilac)}.find .card:nth-child(2){background:var(--peach)}.find .card:nth-child(3){background:var(--mint)}.find .card:nth-child(4){background:var(--butter)}
+.oldlogos{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.oldlogos span{background:rgba(255,255,255,.7);border-radius:99px;padding:4px 11px;font-size:12.5px;font-weight:600;text-decoration:line-through;text-decoration-color:var(--coral)}
+.insight{margin-top:20px;background:var(--night);color:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.insight .q{font-family:var(--head);font-weight:800;font-size:clamp(30px,3vw,46px);letter-spacing:-.035em;line-height:1.08}
+.insight .q em{font-style:normal;background:linear-gradient(90deg,#f2b544,#ff6b4a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.insight p{color:rgba(255,255,255,.82);font-size:16.5px}
+.insight ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.insight li{background:rgba(255,255,255,.08);border-radius:14px;padding:11px 14px;font-size:15px}
+.insight li b{color:var(--sun)}
+
+/* κατευθύνσεις */
+.dir{display:grid;grid-template-columns:400px 1fr;gap:20px;background:#fff;border-radius:30px;padding:20px;margin-top:22px;scroll-margin-top:16px}
+.dir .mk{border-radius:22px;min-height:420px;display:flex;flex-direction:column;justify-content:space-between;padding:22px;position:relative;overflow:hidden}
+.dir .mk .num{font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:.14em;opacity:.6}
+.dir .mk svg.m{width:190px;height:190px;align-self:center}
+.dir .mk .nm{font-family:var(--head);font-weight:800;font-size:40px;letter-spacing:-.04em;line-height:1}
+.dir .mk .tl{font-size:15px;font-weight:600;opacity:.8;margin-top:6px}
+.dir .body{padding:10px 14px;display:flex;flex-direction:column;gap:14px}
+.dir .story{font-size:17.5px;color:#2e3432;max-width:72ch;margin:0}
+.dir .story b{color:var(--ink)}
+.mocks{display:grid;grid-template-columns:1.05fr 1fr .8fr;gap:14px}
+.mock{border-radius:16px;overflow:hidden;position:relative;container-type:inline-size}
+.mock .lbl{position:absolute;left:10px;bottom:8px;font-size:11px;font-weight:600;opacity:.6}
+.bcard{aspect-ratio:85/55;display:grid;place-items:center;box-shadow:0 14px 28px rgba(18,20,20,.14);border-radius:5px}
+.stagebg{background:linear-gradient(160deg,#e9e4dc,#d9d2c7);padding:22px 22px 30px;display:grid;place-items:center;height:100%}
+.post{background:var(--paper);height:100%;padding:7cqw;display:flex;flex-direction:column;gap:3cqw;aspect-ratio:1}
+.post .h{display:flex;align-items:center;gap:2.5cqw;font-size:4cqw;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.post .h svg{width:9cqw;height:9cqw}
+.post .t{margin-top:auto;font-family:var(--head);font-weight:800;font-size:8.2cqw;letter-spacing:-.04em;line-height:1.05}
+.post .t em{font-style:normal;color:var(--violet)}
+.post .f{font-size:3.6cqw;color:var(--muted);margin-top:auto}
+.av{display:grid;place-items:center;height:100%;background:#eef0f3;gap:10px;padding:16px}
+.av .c{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 4px #fff,0 8px 20px rgba(0,0,0,.12)}
+.av .c svg{width:72px;height:72px}
+.av .fav{display:flex;gap:10px;align-items:flex-end}
+.pc{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.pc div{border-radius:16px;padding:14px 16px;font-size:14.5px}
+.pc .p{background:var(--mint)}.pc .k{background:var(--peach)}.pc .w{background:var(--paper)}
+.pc h4{margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.pc ul{margin:0;padding-left:18px}.pc li{margin-bottom:3px}
+.verdict{display:flex;gap:12px;align-items:center;font-size:15.5px}
+.verdict .badge{font-family:var(--head);font-weight:800;font-size:13px;padding:6px 12px;border-radius:99px;white-space:nowrap}
+.yes{background:var(--ink);color:#fff}.maybe{background:var(--butter)}.no{background:var(--peach)}
+
+/* αρχιτεκτονική */
+.arch{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:20px}
+.fam{background:#fff;border-radius:20px;padding:18px;border-top:8px solid var(--c)}
+.fam h4{font-size:19px;margin-bottom:4px}
+.fam small{display:block;color:var(--muted);font-size:12.5px;margin-bottom:10px}
+.fam ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.fam li{font-size:12.5px;font-weight:600;background:var(--paper);border-radius:99px;padding:4px 10px}
+.tiers{margin-top:20px;width:100%;border-collapse:collapse;background:#fff;border-radius:22px;overflow:hidden;font-size:14.5px}
+.tiers th,.tiers td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tiers th{font-family:var(--head);font-size:13px;color:var(--muted)}
+.tiers td:first-child{font-weight:700;white-space:nowrap}
+.shells{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.shell{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 26px rgba(18,20,20,.08)}
+.shell .bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:4px solid var(--c)}
+.shell .bar .l{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:14px}
+.shell .bar .l svg{width:28px;height:28px}
+.shell .bar .l small{display:block;font-family:var(--sans);font-weight:500;font-size:11.5px;color:var(--muted)}
+.shell .bar .pill{font-size:11.5px;font-weight:700;background:var(--c);color:#fff;border-radius:99px;padding:4px 10px}
+.shell .bd{padding:18px 16px;height:150px;display:flex;align-items:flex-end;gap:8px}
+.shell .bd i{flex:1;border-radius:6px 6px 0 0;background:var(--c);opacity:.25}
+.shell .bd i.hi{opacity:1}
+.shell .bd i:nth-child(1){height:38%}.shell .bd i:nth-child(2){height:62%}.shell .bd i:nth-child(3){height:84%}.shell .bd i:nth-child(4){height:55%}.shell .bd i:nth-child(5){height:70%}
+.shell .ft{display:flex;justify-content:space-between;padding:10px 16px;font-size:11.5px;color:var(--muted);background:var(--paper)}
+
+/* κόλπα */
+.tricks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.trick{background:#fff;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.trick .k{font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.trick h4{font-size:24px;letter-spacing:-.03em}
+.trick p{font-size:14.5px;color:#2e3432;margin:0}
+.trick .ex{margin-top:auto;font-size:13.5px;background:var(--paper);border-radius:12px;padding:10px 12px;font-style:italic}
+.trick.hot{background:var(--night);color:#fff}
+.trick.hot p{color:rgba(255,255,255,.82)}
+.trick.hot .ex{background:rgba(255,255,255,.1)}
+.trick.hot .k{color:var(--sun)}
+
+/* σύστημα */
+.system{margin-top:20px;background:var(--aygi);border-radius:30px;padding:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.system .card{background:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
+.system .card .k{font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.14em;color:var(--muted)}
+.system .card h3{font-size:34px;margin:8px 0 10px;letter-spacing:-.04em}
+.system .card svg{width:90px;height:90px;margin-bottom:6px}
+.rank{margin-top:20px}
+.rank ol{margin:0;padding-left:22px;font-size:17px}
+.rank li{margin-bottom:10px}
+
+@media (max-width:1200px){.dir{grid-template-columns:1fr}.mocks{grid-template-columns:1fr 1fr}.arch{grid-template-columns:repeat(2,1fr)}.tricks,.shells,.system{grid-template-columns:1fr 1fr}.insight{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.wrap{padding:40px 16px 60px}.mocks,.pc,.arch,.tricks,.shells,.system,.g2,.g3,.g4{grid-template-columns:1fr}.dir .mk{min-height:320px}.insight,.system{padding:26px}.tiers td:first-child{white-space:normal}.tiers thead{display:none}.tiers,.tiers tbody,.tiers tr,.tiers td{display:block;width:100%}.tiers tr{border-bottom:1px solid var(--line);padding:6px 0}.tiers td{border:0;padding:6px 16px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset=".55" stop-color="#ff6b4a"/><stop offset="1" stop-color="#f2b544"/></linearGradient>
+  <linearGradient id="gv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset=".55" stop-color="#ff6b4a"/><stop offset="1" stop-color="#f2b544"/></linearGradient>
+  <mask id="astcut" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120"><rect width="120" height="120" fill="#fff"/><path d="M16 104L104 16" stroke="#000" stroke-width="26" stroke-linecap="round"/></mask>
+
+  <!-- 1 · Σχέδιο Β: το κάτω μισό του Β (το δίχτυ) είναι μεγαλύτερο και σε χρώμα -->
+  <symbol id="mB" viewBox="0 0 120 120"><g fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M32 14V106" stroke="currentColor"/><path d="M32 14H58A20 20 0 0 1 58 54H32" stroke="currentColor"/><path d="M32 54H64A26 26 0 0 1 64 106H32" stroke="url(#gv)"/></g></symbol>
+  <!-- 2 · Πρόβα: ο διακεκομμένος κύκλος (η πρόβα) πάνω στον γεμάτο (η πραγματικότητα) -->
+  <symbol id="mP" viewBox="0 0 120 120"><circle cx="72" cy="60" r="32" fill="url(#gd)"/><circle cx="46" cy="60" r="32" fill="none" stroke="currentColor" stroke-width="8" stroke-dasharray="10 9" stroke-linecap="round"/></symbol>
+  <!-- 3 · Χωρίς αστεράκι -->
+  <symbol id="mA" viewBox="0 0 120 120"><g mask="url(#astcut)" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round"><path d="M60 18V102"/><path d="M23.6 39L96.4 81"/><path d="M23.6 81L96.4 39"/></g><path d="M18 102L102 18" stroke="url(#gd)" stroke-width="11" stroke-linecap="round"/></symbol>
+  <!-- 4 · Βάρδα: ορίζοντας, ήλιος που ανατέλλει, τόξα ραντάρ -->
+  <symbol id="mV" viewBox="0 0 120 120"><path d="M46 88A14 14 0 0 1 74 88Z" fill="url(#gd)"/><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"><path d="M12 88H108"/><path d="M31.8 77.7A30 30 0 0 1 88.2 77.7"/><path d="M16.8 72.3A46 46 0 0 1 103.2 72.3"/></g></symbol>
+  <!-- 5 · VaR -->
+  <symbol id="mR" viewBox="0 0 120 120"><rect x="6" y="26" width="108" height="68" rx="18" fill="currentColor"/><text x="60" y="76" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="44" letter-spacing="-2" fill="#f2b544">VaR</text></symbol>
+  <!-- 6 · Τεστ αντοχής -->
+  <symbol id="mC" viewBox="0 0 120 120"><circle cx="60" cy="60" r="46" fill="#f2b544"/><path d="M60 60V14A46 46 0 0 0 14 60Z" fill="currentColor"/><path d="M60 60V106A46 46 0 0 0 106 60Z" fill="currentColor"/><circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="5"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <div class="topbar"><a href="index.html">← Εγχειρίδιο (IV)</a><a href="proseis-simatos.html">Οι 7 εκδοχές του IV</a></div>
+
+  <div class="eyebrow">Γύρος 2 · 5 Νοεμβρίου 2026</div>
+  <h1 class="big">Ξεκολλάμε από τον ορό.</h1>
+  <p class="lede">Πρώτα σάρωσα όλη την Επιφάνεια: τις εφαρμογές, τα παλιά λογότυπα, τις μελέτες. Εκεί βρήκα την πιο δυνατή ιδέα, και δεν είναι λογοπαίγνιο, είναι η ίδια η δουλειά σου. Μετά: έξι ελεύθερες κατευθύνσεις, πώς μπαίνουν οι εφαρμογές στη μάρκα, και ένας τοίχος με κόλπα μάρκετινγκ.</p>
+
+  <!-- ═══ ΣΑΡΩΣΗ ═══ -->
+  <section>
+    <div class="eyebrow">Τι βρήκα στη σάρωση</div>
+    <h2 class="s">Έχεις 52 εργαλεία και καμία κοινή φάτσα.</h2>
+    <div class="grid g4 find">
+      <div class="card"><h3>52</h3><p>εφαρμογές στον Κατάλογο. Περίπου 35 τις βλέπει ή τις παίρνει στο χέρι ο πελάτης: μελέτες, χάρτες, προσομοιωτές, παιχνίδια, ραντάρ.</p></div>
+      <div class="card"><h3>10 / 11</h3><p>διαφορετικές παλέτες στις 11 εφαρμογές που έλεγξα (μόνο ΑΓΟΡΕΣ και My Global μοιράζονται χρώματα). Από το μπλε της Allianz στην ΑΣΠΙΔΑ ως το ύφος Apple στην Ανάλυση Αναγκών. Άλλα γράμματα σε κάθε μία.</p></div>
+      <div class="card"><h3>0</h3><p>κοινό σήμα. Ο πελάτης που βλέπει τον Χάρτη Υγείας και μετά τη ΝΕΣΤΟΡ δεν καταλαβαίνει ότι είναι του ίδιου ανθρώπου.</p></div>
+      <div class="card"><h3>9</h3><p>παλιά λογότυπα, όλα το ίδιο κλισέ: ασπίδες, εγκέφαλοι, δίκτυα με κουκκίδες.</p><div class="oldlogos"><span>AdvisorMind</span><span>AERIS</span><span>NEXUS</span><span>Risk Mgmt Family</span><span>Risk Mgmt Pro</span></div></div>
+    </div>
+    <div class="insight">
+      <div>
+        <div class="eyebrow" style="color:var(--sun)">Το εύρημα</div>
+        <div class="q">Όλες οι εφαρμογές σου κάνουν το ίδιο πράγμα: δείχνουν στον πελάτη <em>το μέλλον του, πριν έρθει.</em></div>
+        <p style="margin-top:18px">Κανένας άλλος σύμβουλος στην Ελλάδα δεν κάθεται απέναντι στον πελάτη με 52 δικά του εργαλεία. Αυτό είναι το άδικο πλεονέκτημά σου, και η μάρκα πρέπει να το δείχνει, όχι να το κρύβει πίσω από ένα λογοπαίγνιο. Σήμερα το κρύβει: κάθε εργαλείο μοιάζει με διαφορετική εταιρεία.</p>
+      </div>
+      <ul>
+        <li><b>Σύνταξη</b> (HERMA, ΝΕΣΤΟΡ, Retirement): «πώς θα ζεις στα 67;»</li>
+        <li><b>ΑΣΠΙΔΑ</b>: «τι θα λείψει αν λείψω;»</li>
+        <li><b>P&C</b>: «τι γίνεται αν έρθει ο σεισμός;»</li>
+        <li><b>ΑΓΟΡΕΣ / Πότε κέρδισε η τράπεζα</b>: «τι θα είχα αν…;»</li>
+        <li><b>Κόστος αναβολής</b>: «τι χάνω αν περιμένω;»</li>
+        <li><b>Ραντάρ Ρίσκου</b>: «τι έρχεται για την επιχείρησή μου;»</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ ΚΑΤΕΥΘΥΝΣΕΙΣ ═══ -->
+  <section>
+    <div class="eyebrow">Έξι ελεύθερες κατευθύνσεις</div>
+    <h2 class="s">Ένα όνομα, ένα σήμα, ένα κόλπο η καθεμιά.</h2>
+    <p class="lede" style="margin-top:0">Όλες με τα χρώματα του site, ώστε να συγκρίνεις ιδέες, όχι χρώματα. Στο τέλος κάθε κατεύθυνσης γράφω ειλικρινά αν τη θέλω.</p>
+    <div id="dirs"></div>
+  </section>
+
+  <!-- ═══ ΑΡΧΙΤΕΚΤΟΝΙΚΗ ═══ -->
+  <section>
+    <div class="eyebrow">Απόφαση για τις εφαρμογές</div>
+    <h2 class="s">Ναι, μπαίνουν. Είναι το μεγαλύτερο κομμάτι της μάρκας σου.</h2>
+    <p class="lede" style="margin-top:0">Ο πελάτης βλέπει την κάρτα σου για πέντε δευτερόλεπτα. Τις εφαρμογές σου τις βλέπει για μία ώρα, απέναντί σου. Δεν χρειάζεται να ξαναφτιαχτούν: φτάνει ένα κοινό «κέλυφος», δηλαδή ίδια επάνω μπάρα με το σήμα, ίδια γράμματα, ίδια κάτω γραμμή, και ένα χρώμα ανά οικογένεια.</p>
+    <div class="arch">
+      <div class="fam" style="--c:var(--coral)"><h4>Προστασία</h4><small>Κοράλλι · «αν συμβεί κάτι»</small><ul><li>ΑΣΠΙΔΑ</li><li>Χάρτης Υγείας</li><li>Οικογ. Χάρτης Προστασίας</li><li>Σύγκριση υγείας</li><li>PolicyLens</li><li>Καμβάς Στόχων</li></ul></div>
+      <div class="fam" style="--c:var(--violet)"><h4>Σύνταξη</h4><small>Βιολέτα · «αργότερα»</small><ul><li>HERMA</li><li>ΝΕΣΤΟΡ</li><li>Retirement Planning</li><li>Καμπύλη Ζωής</li><li>Σύνταξη</li><li>Σπουδές</li><li>Κόστος αναβολής</li></ul></div>
+      <div class="fam" style="--c:var(--teal)"><h4>Επενδύσεις</h4><small>Τιρκουάζ · «να μεγαλώσουν»</small><ul><li>ΑΓΟΡΕΣ</li><li>My Global</li><li>Eurolife</li><li>Generali</li><li>NN</li><li>Investment Compass</li><li>Investment Radar</li><li>Πότε κέρδισε η τράπεζα</li><li>Πτωχεύσεις</li><li>Επενδυτικό Προφίλ</li></ul></div>
+      <div class="fam" style="--c:var(--sun)"><h4>Επιχείρηση</h4><small>Ήλιος · «για την εταιρεία»</small><ul><li>ERMA</li><li>P&C</li><li>Αστική Ευθύνη</li><li>Ραντάρ Ρίσκου</li></ul></div>
+      <div class="fam" style="--c:var(--sky)"><h4>Κατανόηση</h4><small>Ουρανός · «να το καταλάβω»</small><ul><li>Παιχνίδια ELI5</li><li>Stats Paradox</li><li>Ο Χρόνος των Ανθρώπων</li><li>Η γραμμή σου</li><li>Παρτιτούρα</li><li>Τετραφωνία</li></ul></div>
+    </div>
+
+    <div class="shells">
+      <div class="shell" style="--c:var(--coral)"><div class="bar"><div class="l"><svg viewBox="0 0 120 120" color="#121414"><use href="#mB"/></svg><div>ΑΣΠΙΔΑ<small>Γιάννης Βαρδαβάς · Προστασία</small></div></div><span class="pill">Πρόβα</span></div><div class="bd"><i></i><i></i><i class="hi"></i><i></i><i></i></div><div class="ft"><span>Στοιχεία έως 31/10/2026</span><span>Χωρίς αστεράκι</span></div></div>
+      <div class="shell" style="--c:var(--violet)"><div class="bar"><div class="l"><svg viewBox="0 0 120 120" color="#121414"><use href="#mB"/></svg><div>ΝΕΣΤΟΡ<small>Γιάννης Βαρδαβάς · Σύνταξη</small></div></div><span class="pill">Πρόβα</span></div><div class="bd"><i></i><i class="hi"></i><i></i><i></i><i></i></div><div class="ft"><span>Στοιχεία έως 31/10/2026</span><span>Χωρίς αστεράκι</span></div></div>
+      <div class="shell" style="--c:var(--teal)"><div class="bar"><div class="l"><svg viewBox="0 0 120 120" color="#121414"><use href="#mB"/></svg><div>ΑΓΟΡΕΣ<small>Γιάννης Βαρδαβάς · Επενδύσεις</small></div></div><span class="pill">Πρόβα</span></div><div class="bd"><i></i><i></i><i></i><i class="hi"></i><i></i></div><div class="ft"><span>Στοιχεία έως 31/10/2026</span><span>Χωρίς αστεράκι</span></div></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted);margin-top:10px">Παράδειγμα με το σήμα της κατεύθυνσης 1. Οι ημερομηνίες στο κάτω μέρος είναι ενδεικτικές: κάθε εφαρμογή θα δείχνει τη δική της πραγματική ημερομηνία στοιχείων.</p>
+
+    <table class="tiers">
+      <thead><tr><th>Ποιος το βλέπει</th><th>Εφαρμογές</th><th>Τι παίρνουν από τη μάρκα</th></tr></thead>
+      <tbody>
+        <tr><td>Ο πελάτης, απέναντί σου</td><td>Οι πέντε οικογένειες από πάνω (περίπου 35)</td><td>Ολόκληρο το κέλυφος: σήμα, όνομα οικογένειας, χρώμα, γράμματα, κάτω γραμμή. Και οι μελέτες PDF που βγάζουν παίρνουν το εξώφυλλο της μάρκας.</td></tr>
+        <tr><td>Το κοινό, δημόσια</td><td>Ιστοσελίδα, Ραντάρ Ρίσκου, παιχνίδια ELI5, σελίδα QR-INBOX</td><td>Πλήρης μάρκα. Είναι η «βιτρίνα».</td></tr>
+        <tr><td>Άλλοι σύμβουλοι (αγοραστές)</td><td>Ό,τι δίνεις μέσω της Πύλης Δοκιμής</td><td><b>Χωριστό όνομα προϊόντος</b> («ΠΡΟΒΑ», βλ. κατεύθυνση 2), με μικρό «από τον Γ. Βαρδαβά». Ο σύμβουλος που αγοράζει δεν θέλει το δικό σου όνομα μπροστά στους δικούς του πελάτες.</td></tr>
+        <tr><td>Μόνο εσύ</td><td>Σάρωση Τραπεζών, Ψυχογράφημα, Ανάλυση συνάντησης, Καφέδες LinkedIn, Αποστολή Email, Summarize, Book Analyzer, Πύλη Δοκιμών</td><td>Τίποτα υποχρεωτικό. Μόνο το μικρό σήμα στην καρτέλα, για να τα βρίσκεις.</td></tr>
+        <tr><td>Εκτός μάρκας</td><td>Συχνότητες, Ζέσταμα φωνής</td><td>Προσωπικά, δεν αφορούν τη δουλειά.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══ ΚΟΛΠΑ ═══ -->
+  <section>
+    <div class="eyebrow">Ο τοίχος με τα κόλπα</div>
+    <h2 class="s">Ονόματα, λογοπαίγνια, τελετουργίες.</h2>
+    <p class="lede" style="margin-top:0">Ένα λογότυπο το θυμάται κανείς αν το ξαναδεί. Ένα κόλπο το θυμάται και το λέει σε άλλον. Αυτά δουλεύουν με οποιαδήποτε κατεύθυνση. Τα σκούρα είναι τα αγαπημένα μου.</p>
+    <div class="tricks" id="tricks"></div>
+  </section>
+
+  <!-- ═══ ΣΥΣΤΗΜΑ ═══ -->
+  <section>
+    <div class="eyebrow">Η πρότασή μου</div>
+    <h2 class="s">Όχι ένα λογότυπο. Τρία κομμάτια που κουμπώνουν.</h2>
+    <div class="system">
+      <div class="card"><div class="k">ΠΟΙΟΣ · ΤΟ ΣΗΜΑ</div><svg viewBox="0 0 120 120" color="#121414"><use href="#mB"/></svg><h3>Σχέδιο Β</h3><p>Το Β του Βαρδαβά. Το κάτω μισό, το δίχτυ, είναι μεγαλύτερο από το πάνω. Κάθε Έλληνας καταλαβαίνει «σχέδιο Β» χωρίς εξήγηση, και είναι ακριβώς αυτό που πουλάς.</p></div>
+      <div class="card"><div class="k">ΠΩΣ · Η ΜΕΘΟΔΟΣ</div><svg viewBox="0 0 120 120" color="#121414"><use href="#mP"/></svg><h3>Πρόβα</h3><p>Το όνομα της συνάντησης και των εργαλείων. «Δεν κάνουμε ραντεβού, κάνουμε πρόβα του μέλλοντός σου». Και το προϊόν που πουλάς σε άλλους συμβούλους.</p></div>
+      <div class="card"><div class="k">ΓΙΑΤΙ ΕΣΕΝΑ · Η ΥΠΟΣΧΕΣΗ</div><svg viewBox="0 0 120 120" color="#121414"><use href="#mA"/></svg><h3>Χωρίς αστεράκι</h3><p>Η γραμμή εμπιστοσύνης στο κάτω μέρος κάθε εργαλείου, μελέτης και ανάρτησης. Απαντά στο «μπορώ να τον εμπιστευτώ;», που είναι το πρώτο ερώτημα του site.</p></div>
+    </div>
+    <div class="card rank">
+      <h3 style="font-size:24px;margin-bottom:14px">Πώς τις κατατάσσω, ειλικρινά</h3>
+      <ol>
+        <li><b>Σχέδιο Β + Πρόβα + Χωρίς αστεράκι</b>, ως σύστημα. Ελληνικό, δεμένο με το όνομά σου, με τη δουλειά σου και με τα 52 εργαλεία σου.</li>
+        <li><b>IV / σταγόνα</b> (ο πρώτος γύρος). Ωραίο σχήμα, αλλά δουλεύει κυρίως στα αγγλικά και δεν λέει τίποτα για τα εργαλεία σου. Μένει ως εφεδρεία.</li>
+        <li><b>VaR</b>, μόνο ως υπο-μάρκα για επιχειρήσεις στο LinkedIn, αργότερα.</li>
+        <li><b>Βάρδα</b> και <b>Τεστ αντοχής</b>: όχι. Το πρώτο είναι παλιακό για τους νεότερους, το δεύτερο είναι δανεικό σύμβολο.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+const D=[
+ {id:"mB",n:"01",name:"Σχέδιο Β",tl:"Πάντα υπάρχει Σχέδιο Β.",bg:"var(--paper)",fg:"#121414",
+  story:"Η ασφάλιση είναι, κυριολεκτικά, το <b>σχέδιο Β</b> της ζωής, και το Β είναι το αρχικό σου στα ελληνικά. Το σήμα είναι ένα Β όπου το κάτω μισό, το δίχτυ, είναι μεγαλύτερο και σε χρώμα: πιάνει το πάνω αν πέσει. Κανείς δεν χρειάζεται εξήγηση.",
+  post:"Το Σχέδιο Α είναι η ζωή που σχεδιάζεις. <em>Το Σχέδιο Β</em> την κρατάει όρθια.",
+  pro:["Ελληνικό, το καταλαβαίνει ο καθένας αμέσως","Δεμένο με το όνομά σου (Β)","Ταιριάζει σε προστασία, σύνταξη, επιχείρηση"],
+  con:["Στα αγγλικά το «Plan B» είναι και όνομα χαπιού έκτακτης αντισύλληψης (ΗΠΑ): μόνο ελληνικά","Κοινή φράση, δεν κατοχυρώνεται ως σήμα, μόνο το σχέδιο του Β"],
+  where:["Σήμα όλων των εφαρμογών","Κάρτα: «Το Σχέδιο Β σου έχει όνομα.»","Σειρά: «Σχέδιο Β για…» (τον ελεύθερο επαγγελματία, τη μαμά, τον μαγαζάτορα)"],
+  v:["yes","Το θέλω","Η πιο δυνατή κατεύθυνση για σήμα και κύρια μάρκα."]},
+ {id:"mP",n:"02",name:"Πρόβα",tl:"Το μέλλον σου, πρώτα σε πρόβα.",bg:"var(--lilac)",fg:"#121414",
+  story:"Βγήκε από τη σάρωση: οι 52 εφαρμογές σου είναι <b>πρόβες του μέλλοντος</b>. Η συνάντηση γίνεται «Πρόβα»: δοκιμάζουμε τη σύνταξη στα 62 και στα 67, το «αν λείψω», τον σεισμό, πριν συμβούν. Το σήμα: ο διακεκομμένος κύκλος (η πρόβα) ακουμπάει τον γεμάτο (την πραγματικότητα).",
+  post:"Δεν κάνουμε ραντεβού. <em>Κάνουμε πρόβα</em> του μέλλοντός σου.",
+  pro:["Λέει τι κάνεις διαφορετικά από κάθε άλλον σύμβουλο","Έτοιμο όνομα για τα εργαλεία που πουλάς σε άλλους","Δένει με το site: «δοκιμασμένο πριν το χρειαστείς»"],
+  con:["Η λέξη θυμίζει θέατρο και ρούχα, θέλει τη φράση δίπλα στην αρχή","Το σήμα είναι αφηρημένο, δεν έχει το όνομά σου"],
+  where:["Όνομα συνάντησης: «Κλείσε μια Πρόβα, 30 λεπτά»","ΠΡΟΒΑ: η σουίτα για συμβούλους (Πύλη Δοκιμής)","Κουμπί στο site: «Κάνε πρόβα»"],
+  v:["yes","Το θέλω","Ως μέθοδος και όνομα εργαλείων, όχι ως σήμα σου."]},
+ {id:"mA",n:"03",name:"Χωρίς αστεράκι",tl:"Χωρίς αστεράκι.",bg:"var(--mint)",fg:"#121414",
+  story:"Κάθε διαφήμιση στον χώρο σου έχει ένα αστεράκι: «αποδόσεις έως 8%<b>*</b>». Εσύ υπόσχεσαι το αντίθετο: ό,τι σημαντικό υπάρχει, το λες μεγάλα. Το σήμα είναι ένα αστεράκι διαγραμμένο. Δένει με το PolicyLens (οι παγίδες στα συμβόλαια) και με το «χωρίς ψιλά γράμματα» του site.",
+  post:"Κάθε αστεράκι έχει μια τιμή. <em>Ρώτα με ποια.</em>",
+  pro:["Παγκόσμιο: δουλεύει σε ελληνικά και αγγλικά","Απαντά κατευθείαν στο «μπορώ να τον εμπιστευτώ;»","Πολύ δυνατό σύνθημα για αναρτήσεις"],
+  con:["Οι επενδύσεις έχουν υποχρεωτικές προειδοποιήσεις από τον νόμο. Η υπόσχεση πρέπει να είναι «τα λέω μεγάλα», ποτέ «δεν υπάρχουν»","Σύμβολο απαγόρευσης: λίγο αρνητικό για κύριο σήμα"],
+  where:["Κάτω γραμμή κάθε εργαλείου και μελέτης","Σφραγίδα στο τέλος της μελέτης","Σειρά: «Το αστεράκι της εβδομάδας» (μία παγίδα από αληθινό έντυπο)"],
+  v:["maybe","Ως υπόσχεση","Εξαιρετικό σύνθημα, όχι για κύριο σήμα."]},
+ {id:"mV",n:"04",name:"Βάρδα",tl:"Στη βάρδια, για τα χρήματά σου.",bg:"var(--mist)",fg:"#121414",
+  story:"Στα βενετσιάνικα «varda» σημαίνει «κοίτα, πρόσεχε», και από εκεί το ναυτικό «βάρδα!» και η «βάρδια». Το όνομά σου ξεκινά με τον ίδιο ήχο (δεν λέω ότι βγαίνει από εκεί, μόνο ότι ηχεί έτσι). Το σήμα: ορίζοντας, ήλιος που ανατέλλει, δύο τόξα ραντάρ. Δένει με το Ραντάρ Ρίσκου.",
+  post:"<em>Βάρδα!</em> Ο πληθωρισμός δεν κάνει θόρυβο.",
+  pro:["Ηχεί σαν το όνομά σου","Δένει με το Ραντάρ Ρίσκου","Ζεστό, θαλασσινό, ελληνικό"],
+  con:["Για τους κάτω των 40 η «βάρδα» είναι παλιακή λέξη","Η «βάρδια» θυμίζει κούραση, νοσοκομείο, εργοστάσιο","Το σήμα μοιάζει με σήματα Wi-Fi και ανατολής"],
+  where:["Ειδοποιήσεις ραντάρ: «Βάρδα: άλλαξαν τα επιτόκια»"],
+  v:["no","Όχι","Ωραία ιστορία, γερασμένη λέξη."]},
+ {id:"mR",n:"05",name:"VaR",tl:"Value at Risk. Μετρημένο.",bg:"#fff",fg:"#121414",
+  story:"Το VaR (Value at Risk) είναι το διεθνές μέτρο κινδύνου που ξέρει κάθε οικονομικός διευθυντής, και είναι τα πρώτα τρία γράμματα του επωνύμου σου στα λατινικά: <b>VaR</b>davas. Για τη γραμμή επιχειρήσεων (ERMA, P&C, Αστική Ευθύνη) και το LinkedIn.",
+  post:"Η εταιρεία σου έχει ισολογισμό. <em>Έχει και VaR;</em>",
+  pro:["Οι οικονομικοί διευθυντές το «πιάνουν» αμέσως","Σε βάζει στη γλώσσα του διαχειριστή κινδύνου, όχι του πωλητή"],
+  con:["Ο ιδιώτης δεν ξέρει τι είναι","Μόνο λατινικά","Μοιάζει με εταιρεία λογισμικού, όχι με άνθρωπο"],
+  where:["Υπο-μάρκα «VaRdavas · Business Risk» στο LinkedIn","Τίτλος για σεμινάρια σε λογιστικά γραφεία"],
+  v:["maybe","Αργότερα","Μόνο ως υπο-μάρκα για επιχειρήσεις."]},
+ {id:"mC",n:"06",name:"Τεστ αντοχής",tl:"Δοκιμασμένο πριν το χρειαστείς.",bg:"var(--butter)",fg:"#121414",
+  story:"Το σημάδι των crash test στα αυτοκίνητα: κύκλος με τέσσερα τεταρτημόρια, που εδώ είναι οι τέσσερις άξονες (ασφάλιση, σύνταξη, επενδύσεις, κίνδυνοι). Η φράση είναι ήδη ο τίτλος του site σου.",
+  post:"Το αυτοκίνητό σου πέρασε crash test. <em>Το οικονομικό σου σχέδιο;</em>",
+  pro:["Η φράση υπάρχει ήδη στο site","Μεταφορά που τη λέει κι ένα παιδί"],
+  con:["Το σημάδι δεν είναι δικό σου, είναι κοινό σύμβολο της αυτοκινητοβιομηχανίας","Κίτρινο-μαύρο = προειδοποίηση, ταξί, οικοδομή","Θυμίζει τρακάρισμα: φόβος"],
+  where:["Η μεταφορά μένει για αναρτήσεις"],
+  v:["no","Όχι ως σήμα","Η μεταφορά κάνει για ανάρτηση, όχι για ταυτότητα."]}
+];
+const use=(id,c)=>`<svg viewBox="0 0 120 120" color="${c}"><use href="#${id}"/></svg>`;
+document.getElementById('dirs').innerHTML=D.map(d=>`
+<article class="dir" id="d-${d.id}">
+  <div class="mk" style="background:${d.bg};${d.bg==='#fff'?'outline:1px solid var(--line);outline-offset:-1px':''}">
+    <span class="num">ΚΑΤΕΥΘΥΝΣΗ ${d.n}</span>
+    <svg class="m" viewBox="0 0 120 120" color="${d.fg}"><use href="#${d.id}"/></svg>
+    <div><div class="nm">${d.name}</div><div class="tl">${d.tl}</div></div>
+  </div>
+  <div class="body">
+    <p class="story">${d.story}</p>
+    <div class="mocks">
+      <div class="mock"><div class="stagebg"><div class="bcard" style="width:100%;background:var(--aygi)"><div style="display:flex;flex-direction:column;align-items:center;gap:6px">${use(d.id,'#121414').replace('<svg','<svg width="64" height="64"')}<span style="font-family:var(--head);font-weight:800;font-size:13px">${d.tl}</span></div></div></div><span class="lbl">πίσω όψη κάρτας</span></div>
+      <div class="mock"><div class="post"><div class="h">${use(d.id,'#121414')}${d.name}</div><div class="t">${d.post}</div><div class="f">Γιάννης Βαρδαβάς · vardavas.pages.dev</div></div><span class="lbl">ανάρτηση LinkedIn / Instagram</span></div>
+      <div class="mock"><div class="av"><div class="c" style="background:var(--night)">${use(d.id,'#fff')}</div><div class="fav">${[16,32,48].map(s=>`<div style="width:${s}px;height:${s}px">${use(d.id,'#121414')}</div>`).join('')}</div></div><span class="lbl">προφίλ · εικονίδια 16/32/48</span></div>
+    </div>
+    <div class="pc">
+      <div class="p"><h4>Υπέρ</h4><ul>${d.pro.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="k"><h4>Κίνδυνοι</h4><ul>${d.con.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div class="w"><h4>Πού ζει</h4><ul>${d.where.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    </div>
+    <div class="verdict"><span class="badge ${d.v[0]}">${d.v[1]}</span><span>${d.v[2]}</span></div>
+  </div>
+</article>`).join('');
+
+const T=[
+ {k:"Λογοπαίγνιο · όνομα",h:"Σχέδιο Β",p:"Β = Βαρδαβάς = το δίχτυ ασφαλείας. Μία φράση που ο πελάτης λέει ήδη μόνος του.",ex:"«Ποιο είναι το Σχέδιο Β σου; Έχει όνομα: Βαρδαβάς.»",hot:1},
+ {k:"Μέθοδος με όνομα",h:"Η Πρόβα",p:"Η πρώτη συνάντηση αποκτά όνομα. Ένα επώνυμο προϊόν πουλιέται, ένα «ραντεβού» αναβάλλεται.",ex:"«Κλείσε μια Πρόβα. 30 λεπτά, δωρεάν, χωρίς δέσμευση.»",hot:1},
+ {k:"Υπόσχεση",h:"Χωρίς αστεράκι",p:"Αντί για το αστεράκι, η απάντηση γραμμένη μεγάλα. Και οι προειδοποιήσεις που θέλει ο νόμος, μεγάλα κι αυτές.",ex:"«Τα ψιλά γράμματα, σε μεγάλα.»",hot:1},
+ {k:"Τελετουργία",h:"Το ετήσιο σέρβις",p:"Όπως στο αυτοκίνητο: κάθε χρόνο έλεγχος του σχεδίου. Αυτοκόλλητο στον φάκελο του πελάτη: «Επόμενο σέρβις: Νοέμβριος 2027».",ex:"Ο πελάτης σε θυμάται κάθε φορά που ανοίγει τον φάκελο."},
+ {k:"Επώνυμη έννοια",h:"Ο αριθμός του ύπνου",p:"Το ποσό που χρειάζεται μια οικογένεια για να κοιμάται ήσυχη αν σταματήσει το εισόδημα. Η ΑΣΠΙΔΑ μετράει ήδη τι θα λείψει: του δίνουμε όνομα.",ex:"«Ποιος είναι ο αριθμός του ύπνου σου;»",hot:1},
+ {k:"Υπηρεσία-δόλωμα",h:"Δεύτερη γνώμη",p:"Όπως στον γιατρό: φέρε το συμβόλαιό σου, σου λέω τι καλύπτει πραγματικά. Η μηχανή υπάρχει ήδη, το PolicyLens.",ex:"«Πριν υπογράψεις, πάρε δεύτερη γνώμη. Δωρεάν.»"},
+ {k:"Λέξη-κλειδί",h:"Πριν.",p:"Όλη η μάρκα σε μία λέξη. Στο τέλος κάθε βίντεο, πάνω στο QR της κάρτας, στο τέλος κάθε email.",ex:"Κάρτα: «Σκάναρε. Πριν το χρειαστείς.»"},
+ {k:"Σειρά αναρτήσεων",h:"Το νούμερο της Δευτέρας",p:"Κάθε Δευτέρα ένα αληθινό νούμερο από τα στοιχεία της ΑΓΟΡΕΣ, με ημερομηνία και πηγή. Ο κόσμος περιμένει τη Δευτέρα.",ex:"Πηγή: ΑΓΟΡΕΣ · στοιχεία έως την Παρασκευή"},
+ {k:"Σειρά αναρτήσεων",h:"Πότε κέρδισε η τράπεζα",p:"Η εφαρμογή γίνεται σειρά: μία χρονιά τη φορά, καταθέσεις απέναντι σε επένδυση. Ήδη έτοιμα δεδομένα.",ex:"«Η χρονιά που κέρδισε η τράπεζα, και όσες δεν κέρδισε», με τα νούμερα της εφαρμογής"},
+ {k:"Επώνυμη ερώτηση",h:"Αν λείψω",p:"Η ερώτηση της ΑΣΠΙΔΑΣ, ως τίτλος ενότητας στο site και ως σειρά βίντεο. Δύο λέξεις που τις σκέφτεται κάθε γονιός, και δεν τις λέει κανείς.",ex:"«Αν λείψω: τι θα λείψει; Το μετράμε σε 20 λεπτά.»"},
+ {k:"Αντικείμενο",h:"Ο Φάκελος",p:"Ένας φυσικός φάκελος οικογένειας με όλα τα συμβόλαια, τη μελέτη, το αυτοκόλλητο σέρβις. Μένει στο σπίτι του πελάτη για χρόνια, με το σήμα σου επάνω.",ex:"«Όλα τα χαρτιά σου, σε έναν φάκελο. Και ένα τηλέφωνο.»"},
+ {k:"Υπογραφή",h:"Με σχέδιο,",p:"Το κλείσιμο κάθε email και μηνύματος. Μικρό, ζεστό, και λέει τη δουλειά σου.",ex:"«Με σχέδιο, Γιάννης»"},
+ {k:"Β2Β",h:"VaRdavas",p:"Για οικονομικούς διευθυντές και λογιστικά γραφεία: το VaR στο όνομά σου. Τίτλος σεμιναρίου, όχι κύρια μάρκα.",ex:"«VaRdavas Sessions: ο κίνδυνος της εταιρείας σου σε ένα νούμερο»"},
+ {k:"Στατιστικό κόλπο",h:"Το παράδοξο της εβδομάδας",p:"Από το Stats Paradox: ένα νούμερο που ξεγελάει, και η αλήθεια από πίσω. Σε κάνει αυτόν που «βλέπει πίσω από τα νούμερα».",ex:"«Το μέσο ποσό σύνταξης λέει ψέματα. Δες γιατί.»"},
+ {k:"Μικρό δώρο",h:"Η κάρτα με το νούμερο",p:"Στο τέλος της Πρόβας ο πελάτης παίρνει μια κάρτα με ένα μόνο νούμερο: το δικό του. Τη βάζει στο πορτοφόλι.",ex:"«Ο αριθμός του ύπνου σου: ____ €»"}
+];
+document.getElementById('tricks').innerHTML=T.map(t=>`<div class="trick${t.hot?' hot':''}"><span class="k">${t.k}</span><h4>${t.h}</h4><p>${t.p}</p><div class="ex">${t.ex}</div></div>`).join('');
+</script>
+</body>
+</html>
