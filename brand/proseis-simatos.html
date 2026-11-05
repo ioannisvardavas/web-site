@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IV · Εκδοχές σήματος</title>
+<link rel="icon" href="logo/iv-favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+:root{
+  --paper:#f4f1ec; --ink:#121414; --muted:#5d6462; --line:#e2ddd5; --night:#1d1b4f; --petrol:#0d7a73;
+  --violet:#7c5cff; --coral:#ff6b4a; --sun:#f2b544; --lilac:#ddd4ff; --peach:#ffd0c4; --mint:#bfeae6; --butter:#fbe2a9;
+  --aygi:
+    radial-gradient(55% 75% at 8% 8%,#ffd27a 0,rgba(255,210,122,0) 62%),
+    radial-gradient(48% 70% at 92% 0%,#7c5cff 0,rgba(124,92,255,0) 62%),
+    radial-gradient(42% 60% at 72% 58%,#ff6b4a 0,rgba(255,107,74,0) 62%),
+    radial-gradient(40% 60% at 100% 100%,#0fa39a 0,rgba(15,163,154,0) 62%),
+    radial-gradient(50% 60% at 30% 95%,#9fe0f7 0,rgba(159,224,247,0) 62%),
+    #ffe3b3;
+  --head:Manrope,Inter,sans-serif; --sans:Inter,system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0}
+.wrap{max-width:1560px;margin:0 auto;padding:70px 56px 90px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:46px;flex-wrap:wrap}
+.top h1{font-size:clamp(40px,4.4vw,68px);max-width:15ch}
+.top p{max-width:56ch;color:#2e3432;font-size:18.5px;margin:16px 0 0}
+.back{font-weight:600;text-decoration:none;background:#fff;padding:10px 16px;border-radius:99px;font-size:14px;color:var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;margin-bottom:56px}
+.strip a{background:#fff;border-radius:18px;padding:18px 10px 14px;text-align:center;text-decoration:none;color:var(--ink);font-size:13px;font-weight:600;transition:transform .15s}
+.strip a:hover{transform:translateY(-3px)}
+.strip svg{width:78px;height:78px;display:block;margin:0 auto 10px}
+.strip b{font-family:var(--head);color:var(--muted);font-size:11px;display:block;letter-spacing:.1em}
+.opt{display:grid;grid-template-columns:360px 1fr 1fr;gap:20px;background:#fff;border-radius:28px;padding:20px;margin-bottom:26px;scroll-margin-top:20px}
+.hero{border-radius:20px;background:var(--paper);display:grid;place-items:center;min-height:340px;position:relative}
+.hero svg{width:220px;height:220px}
+.hero .lt{position:absolute;left:16px;top:14px;font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:.12em;color:var(--muted)}
+.uses{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px}
+.u{border-radius:18px;position:relative;display:grid;place-items:center;overflow:hidden;min-height:160px}
+.u .c{position:absolute;left:12px;bottom:10px;font-size:11.5px;font-weight:600;opacity:.65}
+.u.night{background:var(--night);color:#fff}
+.u.night .c{color:#fff}
+.sizes{background:var(--paper);display:flex;gap:22px;align-items:flex-end;justify-content:center;padding-bottom:30px}
+.sizes div{text-align:center;font-size:11px;color:var(--muted)}
+.card{aspect-ratio:85/55;width:82%;background:var(--aygi);border-radius:6px;display:grid;place-items:center;box-shadow:0 14px 30px rgba(18,20,20,.16);container-type:inline-size}
+.card svg{width:30cqw;height:30cqw}
+.u.cardbg{background:linear-gradient(160deg,#e9e4dc,#d9d2c7)}
+.av{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:var(--night);box-shadow:0 0 0 4px #fff,0 8px 20px rgba(0,0,0,.12)}
+.av svg{width:62px;height:62px}
+.u.feed{background:#eef0f3;justify-items:start;padding:0 18px}
+.post{display:flex;gap:10px;align-items:center;font-size:13px}
+.post .av{width:44px;height:44px;box-shadow:none}
+.post .av svg{width:28px;height:28px}
+.post b{display:block;font-size:14px}
+.txt{padding:14px 16px}
+.txt .n{font-family:var(--head);font-size:12px;letter-spacing:.14em;color:var(--petrol);font-weight:800}
+.txt h2{font-size:34px;margin:6px 0 10px}
+.txt .story{font-size:17px;color:#2e3432;margin:0 0 16px}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pc div{border-radius:16px;padding:14px 16px;font-size:14.5px}
+.pc .p{background:var(--mint)}
+.pc .k{background:var(--peach)}
+.pc h4{margin:0 0 6px;font-family:var(--head);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.pc ul{margin:0;padding-left:18px}
+.pc li{margin-bottom:4px}
+.verdict{margin-top:14px;font-size:15px;border-left:4px solid var(--ink);padding:4px 0 4px 14px}
+.verdict b{font-family:var(--head)}
+.final{background:var(--night);color:#fff;border-radius:28px;padding:44px;margin-top:40px;display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:center}
+.final h2{font-size:42px}
+.final p{color:rgba(255,255,255,.82);font-size:17px}
+.final ol{margin:0;padding-left:22px;font-size:17px}
+.final li{margin-bottom:12px}
+.final li b{color:var(--sun);font-family:var(--head)}
+.combo{display:flex;gap:24px;align-items:center;margin-top:20px}
+.combo .t{width:110px;height:110px;border-radius:24px;background:var(--paper);display:grid;place-items:center}
+@media (max-width:1200px){.opt{grid-template-columns:1fr 1fr}.txt{grid-column:1/-1}.strip{grid-template-columns:repeat(4,1fr)}.final{grid-template-columns:1fr}}
+@media (max-width:700px){.wrap{padding:44px 16px 60px}.opt{grid-template-columns:1fr}.strip{grid-template-columns:repeat(2,1fr)}.pc{grid-template-columns:1fr}.hero{min-height:260px}.hero svg{width:170px;height:170px}.final{padding:28px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset=".55" stop-color="#ff6b4a"/><stop offset="1" stop-color="#f2b544"/></linearGradient>
+  <linearGradient id="gdiag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset=".55" stop-color="#ff6b4a"/><stop offset="1" stop-color="#f2b544"/></linearGradient>
+  <linearGradient id="gh" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7c5cff"/><stop offset=".55" stop-color="#ff6b4a"/><stop offset="1" stop-color="#f2b544"/></linearGradient>
+
+  <!-- Α · Σταγόνα (η σημερινή πρόταση) -->
+  <symbol id="mA" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M22 18V74"/><path d="M44 18L72 74L100 18"/></g><path d="M72 85C72 85 60 98 60 104.5A12 12 0 0 0 84 104.5C84 98 72 85 72 85Z" fill="url(#gd)"/></symbol>
+  <!-- Β · Χωνί: το V ανοίγει στην κορυφή και αφήνει τη σταγόνα να περάσει -->
+  <symbol id="mB" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20V78"/><path d="M42 20L62 58"/><path d="M102 20L82 58"/></g><path d="M72 66C72 66 60 80 60 87A12 12 0 0 0 84 87C84 80 72 66 72 66Z" fill="url(#gd)"/></symbol>
+  <!-- Γ · Η σταγόνα είναι το I -->
+  <symbol id="mC" viewBox="0 0 120 120"><path d="M24 12C24 12 11 54 11 70A13 13 0 0 0 37 70C37 54 24 12 24 12Z" fill="url(#gd)"/><g fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"><path d="M52 22L78 80L104 22"/></g></symbol>
+  <!-- Δ · Πλακίδιο gradient -->
+  <symbol id="mD" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="30" fill="url(#gdiag)"/><g fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"><path d="M35 36V84"/><path d="M53 36L70 84L87 36"/></g></symbol>
+  <!-- Ε · Το V είναι τικ: «ελεγμένο» -->
+  <symbol id="mE" viewBox="0 0 120 120"><path d="M22 18V80" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round"/><path d="M42 52L62 82L104 16" fill="none" stroke="url(#gh)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <!-- ΣΤ · Τέσσερα κομμάτια, τέσσερις άξονες -->
+  <symbol id="mF" viewBox="0 0 120 120"><g fill="none" stroke-width="15" stroke-linecap="round"><path d="M22 18V74" stroke="#0d7a73"/><path d="M44 18L72 74" stroke="#7c5cff"/><path d="M100 18L72 74" stroke="#ff6b4a"/></g><path d="M72 85C72 85 60 98 60 104.5A12 12 0 0 0 84 104.5C84 98 72 85 72 85Z" fill="#f2b544"/></symbol>
+  <!-- Ζ · Σφραγίδα-σταγόνα -->
+  <symbol id="mG" viewBox="0 0 120 120"><path d="M60 4C60 4 14 56 14 77A46 46 0 0 0 106 77C106 56 60 4 60 4Z" fill="url(#gd)"/><g fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M42 60V94"/><path d="M55 60L67 94L79 60"/></g></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Επτά εκδοχές του σήματος.</h1>
+      <p>Ίδια χρώματα, ίδια γράμματα, διαφορετική ιδέα. Η καθεμιά φαίνεται σε μεγάλο μέγεθος, πάνω σε σκούρο, στο μέγεθος καρτέλας του browser, στην πίσω όψη της κάρτας και ως φωτογραφία προφίλ. Στο τέλος σου γράφω ποια θα διάλεγα και γιατί.</p>
+    </div>
+    <a class="back" href="index.html">← Στο εγχειρίδιο</a>
+  </div>
+
+  <nav class="strip" id="strip"></nav>
+  <div id="opts"></div>
+
+  <section class="final">
+    <div>
+      <h2>Η γνώμη μου</h2>
+      <p>Δεν θα διάλεγα ένα. Θα έπαιρνα το <b style="color:#fff">Α</b> ως λογότυπο και το <b style="color:#fff">Ζ</b> ως σφραγίδα: έχουν την ίδια σταγόνα, άρα είναι ένα σύστημα, όχι δύο λογότυπα.</p>
+      <div class="combo">
+        <div class="t"><svg width="80" height="80" color="#121414"><use href="#mA"/></svg></div>
+        <span style="font-size:28px;opacity:.6">+</span>
+        <div class="t" style="background:var(--night)"><svg width="80" height="80"><use href="#mG"/></svg></div>
+      </div>
+    </div>
+    <ol>
+      <li><b>Α + Ζ.</b> Το Α διαβάζεται αμέσως ως IV και κουβαλάει την ιστορία της σταγόνας. Το Ζ λύνει τη μόνη αδυναμία του Α: στα πολύ μικρά μεγέθη (φωτογραφία προφίλ, εικονίδιο, σφραγίδα σε PDF) η σταγόνα του Α χάνεται, ενώ το Ζ είναι όλο σταγόνα.</li>
+      <li><b>Ε, αν θέλεις άλλο μήνυμα.</b> Το τικ λέει «ελεγμένο», που ταιριάζει απόλυτα με το «δοκιμασμένο πριν το χρειαστείς» του site. Θυσιάζει όμως το IV: πολλοί θα δουν «I✓».</li>
+      <li><b>Γ, αν θέλεις το πιο κομψό.</b> Ωραία ιδέα («πρώτα η αλήθεια»), αλλά η ψηλή σταγόνα μπορεί να διαβαστεί ως θαυμαστικό.</li>
+      <li><b>Β, Δ, ΣΤ: όχι.</b> Το Β χαλάει το V, το Δ μοιάζει επικίνδυνα με το εικονίδιο του Instagram, το ΣΤ με τα τέσσερα χρώματα θυμίζει παιδικό παιχνίδι ή Google.</li>
+    </ol>
+  </section>
+</div>
+
+<script>
+const O=[
+ {id:"mA",L:"Α",name:"Η σταγόνα",now:true,story:"Το IV σε μία γραμμή, και από την κορυφή του V πέφτει μία σταγόνα: η καθαρή εικόνα που βγαίνει από τα σκόρπια. Η σημερινή πρόταση του εγχειριδίου.",
+  pro:["Διαβάζεται αμέσως ως IV","Η ιστορία της σταγόνας λέγεται σε μία πρόταση","Ήρεμο, σοβαρό, ταιριάζει με το site"],
+  con:["Στα 16 pixel η σταγόνα γίνεται κουκκίδα","Ψηλό σχήμα: σε κύκλο προφίλ μένει κενό στα πλάγια"],
+  v:"Το πιο ισορροπημένο. Ο καλύτερος υποψήφιος για κύριο λογότυπο."},
+ {id:"mB",L:"Β",name:"Το χωνί",story:"Το V ανοίγει στη βάση του σαν χωνί, και η σταγόνα περνάει από το άνοιγμα. Η ιδέα «μπαίνουν τα σκόρπια, βγαίνει η αλήθεια» φαίνεται, δεν χρειάζεται να ειπωθεί.",
+  pro:["Η πιο ξεκάθαρη εικόνα του «χωνιού»","Η σταγόνα δένει με το γράμμα, δεν κρέμεται"],
+  con:["Το V χάνεται, διαβάζεται σαν «IY» ή σαν ποτήρι","Θέλει εξήγηση για να γίνει IV"],
+  v:"Δυνατή ιστορία, αδύναμο γράμμα. Όχι."},
+ {id:"mC",L:"Γ",name:"Πρώτα η αλήθεια",story:"Το I είναι η ίδια η σταγόνα. Το πρώτο γράμμα του ονόματός σου είναι η αλήθεια, και ακολουθεί το V.",
+  pro:["Το πιο κομψό και πρωτότυπο","Η σταγόνα έχει μέγεθος, φαίνεται και σε μικρό","Χρώμα ακριβώς στην αρχή του ονόματος"],
+  con:["Η ψηλή σταγόνα μπορεί να διαβαστεί ως θαυμαστικό («!V»)","Λιγότερο σοβαρό από το Α"],
+  v:"Ενδιαφέρον. Θέλει δοκιμή σε 5–6 ανθρώπους: διαβάζουν IV;"},
+ {id:"mD",L:"Δ",name:"Το πλακίδιο",tile:true,story:"Λευκό IV σε στρογγυλεμένο τετράγωνο με το gradient της σταγόνας. Το ύφος των εφαρμογών και του Stripe.",
+  pro:["Η πιο δυνατή παρουσία σε κινητό και social","Δουλεύει σε κάθε φόντο χωρίς αλλαγή"],
+  con:["Μοιάζει επικίνδυνα με το εικονίδιο του Instagram","Η σταγόνα και η ιστορία χάνονται","Στο χαρτί είναι βαρύ"],
+  v:"Εντυπωσιακό, αλλά δανεικό. Όχι."},
+ {id:"mE",L:"Ε",name:"Το τικ",story:"Το V γίνεται σημάδι «ελέγχθηκε». IV, αλλά και «ό,τι σου λέω το έχω ελέγξει», όπως λέει η υπόσχεση του site: δοκιμασμένο πριν το χρειαστείς.",
+  pro:["Μήνυμα που καταλαβαίνει ο καθένας, χωρίς εξήγηση","Δένει με τη φράση του site","Δυνατό και στα μικρά μεγέθη"],
+  con:["Το IV αδυνατίζει: πολλοί θα δουν «I✓»","Το τικ το χρησιμοποιούν πολλοί, είναι λιγότερο δικό σου","Χάνεται η σταγόνα και η «δόση αλήθειας»"],
+  v:"Η καλύτερη εναλλακτική, αν θέλεις μήνυμα «ελεγμένο» αντί για «αλήθεια»."},
+ {id:"mF",L:"ΣΤ",name:"Οι τέσσερις άξονες",multi:true,story:"Τέσσερα κομμάτια σε τέσσερα χρώματα: ασφάλιση, σύνταξη, επενδύσεις, κίνδυνοι. Το IV = 4 γίνεται ορατό.",
+  pro:["Η ιδέα των τεσσάρων αξόνων φαίνεται αμέσως","Χαρούμενο, ταιριάζει με τα πλακάκια του site"],
+  con:["Θυμίζει Google ή παιχνίδι για παιδιά","Δεν έχει μονόχρωμη εκδοχή χωρίς να χάσει το νόημα","Τέσσερα χρώματα = τίποτα δεν ξεχωρίζει"],
+  v:"Η ιδέα είναι καλή για μια διαφάνεια, όχι για λογότυπο. Όχι."},
+ {id:"mG",L:"Ζ",name:"Η σφραγίδα",tile:true,story:"Ολόκληρο το σήμα είναι μια σταγόνα, με το IV λευκό μέσα της. Σαν σφραγίδα κεριού στο τέλος μιας μελέτης.",
+  pro:["Το πιο δυνατό σχήμα σε φωτογραφία προφίλ και εικονίδιο","Αναγνωρίζεται ακόμα κι αν δεν διαβάζεις τα γράμματα","Η σταγόνα και η ιστορία μένουν"],
+  con:["Τα γράμματα είναι μικρά, θέλει τουλάχιστον 32 pixel","Μόνο του, για κύριο λογότυπο, είναι λίγο «σήμα προϊόντος»"],
+  v:"Τέλειο συμπλήρωμα του Α: για προφίλ, εικονίδια, σφραγίδα σε PDF."}
+];
+const use=(id,col)=>`<svg viewBox="0 0 120 120" color="${col}"><use href="#${id}"/></svg>`;
+document.getElementById('strip').innerHTML=O.map(o=>`<a href="#o-${o.id}">${use(o.id,'#121414')}<b>${o.L}${o.now?' · ΣΗΜΕΡΑ':''}</b>${o.name}</a>`).join('');
+document.getElementById('opts').innerHTML=O.map(o=>`
+<article class="opt" id="o-${o.id}">
+  <div class="hero"><span class="lt">${o.L}${o.now?' · ΣΗΜΕΡΙΝΗ ΠΡΟΤΑΣΗ':''}</span>${use(o.id,'#121414')}</div>
+  <div class="uses">
+    <div class="u night"><svg width="110" height="110" viewBox="0 0 120 120" color="#fff"><use href="#${o.id}"/></svg><span class="c">σε Νύχτα</span></div>
+    <div class="u sizes"><div><svg width="16" height="16" viewBox="0 0 120 120" color="#121414"><use href="#${o.id}"/></svg><br>16</div><div><svg width="32" height="32" viewBox="0 0 120 120" color="#121414"><use href="#${o.id}"/></svg><br>32</div><div><svg width="64" height="64" viewBox="0 0 120 120" color="#121414"><use href="#${o.id}"/></svg><br>64 px</div><span class="c">καρτέλα browser · εικονίδιο</span></div>
+    <div class="u cardbg"><div class="card">${use(o.id,'#121414')}</div><span class="c">πίσω όψη κάρτας</span></div>
+    <div class="u feed"><div><div class="av" style="margin-bottom:14px">${use(o.id,'#fff')}</div><div class="post"><div class="av">${use(o.id,'#fff')}</div><div><b>Γιάννης Βαρδαβάς</b>Δόση αλήθειας #07 · 2 ώρες</div></div></div><span class="c">προφίλ & ροή LinkedIn</span></div>
+  </div>
+  <div class="txt">
+    <div class="n">ΕΚΔΟΧΗ ${o.L}</div>
+    <h2>${o.name}</h2>
+    <p class="story">${o.story}</p>
+    <div class="pc"><div class="p"><h4>Υπέρ</h4><ul>${o.pro.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="k"><h4>Κατά</h4><ul>${o.con.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+    <div class="verdict"><b>Γνώμη:</b> ${o.v}</div>
+  </div>
+</article>`).join('');
+</script>
+</body>
+</html>
