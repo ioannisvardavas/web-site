@@ -24,5 +24,19 @@ for p in (out / "paixnidia").glob("*.html"):
     # κάθε σύνδεσμος προς το ζωντανό site δείχνει μέσα στη δοκιμή (και το /#games)
     p.write_text(p.read_text().replace('href="https://vardavas-site.pages.dev/', 'href="/'))
 EOF
+# MARKA=1 → στη θέση της αρχικής μπαίνουν οι δύο δοκιμαστικές εκδοχές σλόγκαν (tools/marka_ekdoxes.py):
+#            ρίζα = εκδοχή 1, /ekdoxi-2.html = εκδοχή 2, με κουμπάκι εναλλαγής κάτω αριστερά.
+if [ "${MARKA:-}" = "1" ]; then
+  python3 tools/marka_ekdoxes.py "$OUT"
+  python3 - "$OUT" <<'EOF'
+import sys, pathlib
+out = pathlib.Path(sys.argv[1])
+for n in ("index.html", "ekdoxi-2.html"):
+    p = out / n
+    t = p.read_text()
+    assert t.count("https://risk-radar-2yr.pages.dev") >= 1
+    p.write_text(t.replace("https://risk-radar-2yr.pages.dev", "/risk-radar"))
+EOF
+fi
 printf '/*\n  X-Robots-Tag: noindex, nofollow\n' > "$OUT/_headers"
 npx wrangler pages deploy "$OUT" --project-name=vardavas-dokimi --branch=main --commit-dirty=true
