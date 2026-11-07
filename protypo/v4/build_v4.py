@@ -24,6 +24,18 @@ def cut(start, end):
 
 CAL = "https://cal.com/ioannis-vardavas-0yon6x/30min"
 
+
+def b_mark(size, gid, ink="currentColor"):
+    """Σήμα Β (7/11/2026): το κάτω μισό — το «δίχτυ» — μεγαλύτερο και σε χρώμα."""
+    return (
+        f'<svg class="b-mark" width="{size}" height="{size}" viewBox="0 0 120 120" aria-hidden="true">'
+        f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c5cff"/>'
+        f'<stop offset=".55" stop-color="#ff6b4a"/><stop offset="1" stop-color="#f2b544"/></linearGradient></defs>'
+        f'<g fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">'
+        f'<path d="M32 14V106" stroke="{ink}"/><path d="M32 14H58A20 20 0 0 1 58 54H32" stroke="{ink}"/>'
+        f'<path d="M32 54H64A26 26 0 0 1 64 106H32" stroke="url(#{gid})"/></g></svg>'
+    )
+
 # ---------- avatar data URI (μία φορά, ως CSS) ----------
 hero_i, hero_j = cut('<section class="hero" aria-labelledby="hero-title">', "</section>")
 hero_old = h[hero_i:hero_j]
@@ -45,7 +57,7 @@ rep("</style>\n  </head>", "</style>\n    <style id=\"v4\">\n" + v4css + "\n    
 # ---------- header ----------
 bi, bj = cut('<a class="brand" href="#top" aria-label="Homepage">', "</a>")
 h = h[:bi] + (
-    '<a class="brand" href="#top" aria-label="Homepage">'
+    '<a class="brand" href="#top" aria-label="Homepage">' + b_mark(30, "bgNav") +
     '<span data-i18n="v4Brand">Γιάννης Βαρδαβάς</span><small>lutcf</small></a>'
 ) + h[bj:]
 
@@ -77,8 +89,8 @@ hero_new = f'''<section class="hero" aria-labelledby="hero-title">
         <div class="hero-mesh" aria-hidden="true"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb6"></span><span class="hb hb7"></span><span class="hb hb8"></span></div>
         <div class="hero-copy">
           <a class="tag" href="#about"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Financial Planning &amp; Risk Management · 25 χρόνια</span><span class="tag-go" aria-hidden="true">→</span></a>
-          <h1 id="hero-title" data-i18n="v4HeroTitle"><span class="h-line">Το οικονομικό σου σχέδιο,</span><span class="h-line"><span class="paint">δοκιμασμένο<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span> πριν το χρειαστείς.</span></h1>
-          <p class="lead" data-i18n="v4Lead">Για οικογένειες και επιχειρήσεις: ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι σε μία καθαρή εικόνα, με πραγματικά νούμερα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
+          <h1 id="hero-title" data-i18n="v4HeroTitle"><span class="h-line">Ο φόβος φεύγει όταν</span><span class="h-line">το χειρότερο έχει <span class="paint">νούμερο<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span>.</span></h1>
+          <p class="lead" data-i18n="v4Lead"><b>Το οικονομικό σου σχέδιο, δοκιμασμένο πριν το χρειαστείς.</b> Ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι για οικογένειες και επιχειρήσεις, σε μία καθαρή εικόνα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
           <div class="ctas">
             <a class="pill dark" href="{CAL}" target="_blank" rel="noreferrer" data-i18n="v4Cta1">Κλείσε μια συζήτηση</a>
             <a class="pill ghost" href="#arithmoi" data-i18n="v4Cta2">Παίξε με τα νούμερα ↓</a>
@@ -182,6 +194,14 @@ rep('<section class="about-section" id="about" aria-labelledby="about-title">',
 h = re.sub(r'\n\s*<img src="assets/ai-[^"]*"[^>]*>', "", h)
 assert 'assets/ai-' not in h
 
+# ---------- σκούρα λωρίδα με το σλόγκαν (7/11/2026) ----------
+# Χωρίς δικό της κουμπί: ακριβώς από κάτω είναι το «Επόμενο βήμα» με το ραντεβού.
+rep('<section class="contact-section" id="contact" aria-labelledby="contact-title">',
+    '<section class="slogan-band reveal" aria-label="Ο φόβος φεύγει όταν το χειρότερο έχει νούμερο">'
+    + b_mark(132, "bgBand", "#fff")
+    + '<p data-i18n="v4SloganBand">Ο φόβος φεύγει όταν το χειρότερο <em>έχει νούμερο.</em></p></section>\n\n      '
+    '<section class="contact-section" id="contact" aria-labelledby="contact-title">')
+
 # ---------- κείμενα (EL/EN) + μικρό script ----------
 v4copy = (SCR / "v4copy.js").read_text(encoding="utf-8")
 rep("\n};\n\nconst languageButtons", "\n};\n" + v4copy + "\nconst languageButtons")
@@ -195,6 +215,7 @@ assert (ROOT / "assets/fonts/fonts.css").is_file(), "λείπουν οι τοπ�
 # η κάρτα του WhatsApp/Viber (build_og_v4.py) πρέπει να υπάρχει εκεί που δείχνει η σελίδα
 for og in set(re.findall(r'pages\.dev/(og-image[^"]+)"', h)):
     assert (ROOT / "deploy" / og).is_file(), f"λείπει η κάρτα deploy/{og}"
+assert h.count('class="b-mark"') == 2 and h.count('class="slogan-band') == 1
 for must in ('id="epafiModal"', 'class="hero-save"', 'class="nav-save"', 'id="calcYears"', 'id="calcR1"', 'id="calcBar3"', 'id="calcTotalGain"',
              'id="contact-form"', 'id="bookLink"', 'id="privacyModal"', 'id="bizChecklist"'):
     assert h.count(must) == 1, must

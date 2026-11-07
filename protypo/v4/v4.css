@@ -1053,8 +1053,8 @@ main {
 }
 .epafi-qr {
   display: block;
-  width: 207px;
-  height: 207px;
+  width: 225px;
+  height: 225px;
   margin: 14px auto 12px;
 }
 .epafi-text {
@@ -1093,8 +1093,8 @@ main {
 }
 .footer-qr img {
   display: block;
-  width: 138px;
-  height: 138px;
+  width: 135px;
+  height: 135px;
 }
 .footer-qr-cap {
   max-width: 170px;
@@ -1577,4 +1577,47 @@ main {
   .step-head p {
     min-height: calc(3 * 1.55em);
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Μάρκα 7/11/2026 — σλόγκαν «Ο φόβος φεύγει όταν το χειρότερο έχει
+   νούμερο.» ως μεγάλος τίτλος (Εκδοχή 1, επιλογή Γιάννη) + σήμα Β
+   δίπλα στο όνομα + σκούρα λωρίδα πριν το «Επόμενο βήμα».
+   ═══════════════════════════════════════════════════════════════ */
+.brand { align-items: center; }
+.brand .b-mark { flex: none; width: 30px; height: 30px; margin-right: 10px; }
+.slogan-band {
+  position: relative;
+  margin: 0 clamp(16px, 4vw, 56px) 72px;
+  border-radius: 32px;
+  background: #1d1b4f;
+  color: #fff;
+  padding: clamp(36px, 6vw, 80px) clamp(24px, 6vw, 88px);
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4vw, 56px);
+}
+.slogan-band .b-mark { flex: none; width: clamp(72px, 9vw, 132px); height: auto; }
+.slogan-band p {
+  margin: 0;
+  font-family: Manrope, Inter, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  font-size: clamp(32px, 4.6vw, 68px);
+  max-width: 18ch;
+}
+.slogan-band p em {
+  font-style: normal;
+  background: linear-gradient(90deg, #f2b544, #ff6b4a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (max-width: 640px) {
+  .brand .b-mark { width: 22px; height: 22px; margin-right: 6px; }
+  .brand { font-size: 19px; }
+  .site-header { gap: 8px; }
+  .nav-toggle { flex: none; }
+  .slogan-band { flex-direction: column; align-items: flex-start; border-radius: 24px; }
 }
