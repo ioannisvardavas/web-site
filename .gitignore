@@ -11,7 +11,4 @@ site.zip
 # προσωρινά του Playwright
 .playwright-mcp/
 
-# αντίγραφο της Μελέτης Σύνταξης για τη δοκιμή μάρκας (παράγεται από brand/dokimi-syntaxi/ftiakse.sh)
-brand/dokimi-syntaxi/app/
-brand/dokimi-syntaxi/dimosiefsi/
 _dokimi_marka/

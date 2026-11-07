@@ -15,6 +15,12 @@
       "port": 8099
     },
     {
+      "name": "brand",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8793", "--bind", "127.0.0.1", "--directory", "/Users/user/Desktop/brand"],
+      "port": 8793
+    },
+    {
       "name": "risk-radar",
       "runtimeExecutable": "node",
       "runtimeArgs": ["../risk-radar/.claude/serve.js"],

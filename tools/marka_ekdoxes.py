@@ -19,7 +19,7 @@ SRC = pathlib.Path(__file__).resolve().parent.parent / "standalone_v4.html"
 SLOGAN_EL = "Ο φόβος φεύγει όταν το χειρότερο έχει νούμερο."
 SLOGAN_EN = "Fear fades when the worst case has a number."
 
-# Σήμα Β: το κάτω μισό (το δίχτυ) μεγαλύτερο και σε χρώμα — ίδιο με brand/gyros-3.html
+# Σήμα Β: το κάτω μισό (το δίχτυ) μεγαλύτερο και σε χρώμα — ίδιο με ~/Desktop/brand/sima-B (ftiakse_sima.py)
 def mark(size, gid, ink="currentColor"):
     return (
         f'<svg class="b-mark" width="{size}" height="{size}" viewBox="0 0 120 120" aria-hidden="true">'
