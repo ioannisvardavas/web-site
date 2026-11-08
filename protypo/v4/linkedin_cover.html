@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- Εξώφυλλο προφίλ LinkedIn (8/11/2026) — ίδιο ύφος με την κάρτα του link (og_card.html, εκδοχή b):
+     σκούρο #1d1b4f, σήμα Β λευκό, σλόγκαν με «έχει νούμερο.» κίτρινο→κοραλί.
+     Μέγεθος LinkedIn: 1584×396. Η στρογγυλή φωτογραφία προφίλ σκεπάζει κάτω-αριστερά
+     (υπολογιστής: x≈40–380, από y≈180 και κάτω· κινητό: ακόμα πιο μέσα) → ΟΛΑ τα γράμματα
+     από x≥520 και κάθετα στο κέντρο. Αριστερά μόνο χρώμα.
+     Χωρίς φωτογραφία (υπάρχει ήδη η φωτογραφία προφίλ) και χωρίς όνομα (γράφεται ακριβώς από κάτω).
+     Δεν ανεβαίνει στο site· το φωτογραφίζει το build_linkedin_v4.py. -->
+<html lang="el">
+<head>
+<meta charset="utf-8" />
+<link href="../../assets/fonts/fonts.css" rel="stylesheet" />
+<style>
+  :root { --night: #1d1b4f; --teal: #0fa39a; --coral: #ff6b4a; --violet: #7c5cff; --gold: #f2b544; }
+  html, body { margin: 0; width: 1584px; height: 396px; overflow: hidden; background: var(--night); }
+  body { position: relative; color: #fff; font-family: Inter, sans-serif; -webkit-font-smoothing: antialiased; }
+  .mesh { position: absolute; inset: 0; overflow: hidden; }
+  .hb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; }
+  .hb1 { width: 560px; height: 560px; left: -220px; top: -300px; background: var(--violet); }
+  .hb2 { width: 520px; height: 520px; left: -160px; top: 160px; background: var(--teal); }
+  .hb3 { width: 480px; height: 480px; right: -330px; top: -300px; background: var(--coral); }
+  .hb4 { width: 420px; height: 420px; right: -290px; top: 220px; background: var(--gold); opacity: 0.4; }
+
+  .copy {
+    position: absolute; left: 560px; right: 96px; top: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center; gap: 44px;
+  }
+  .copy svg { width: 160px; height: 160px; flex: none; }
+  .slogan {
+    margin: 0; font-family: Manrope, Inter, sans-serif; font-weight: 800; white-space: nowrap;
+    font-size: 54px; letter-spacing: -0.04em; line-height: 1.04;
+  }
+  .slogan em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--gold), var(--coral));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { margin: 18px 0 0; font-size: 21px; line-height: 1.35; color: rgba(255, 255, 255, 0.72); max-width: 760px; }
+</style>
+</head>
+<body>
+  <div class="mesh"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span></div>
+  <div class="copy">
+    __BMARK_WHITE__
+    <div>
+      <p class="slogan">Ο φόβος φεύγει όταν<br />το χειρότερο <em>έχει νούμερο.</em></p>
+      <p class="sub">Το οικονομικό σου σχέδιο, δοκιμασμένο πριν το χρειαστείς —<br />για οικογένειες και επιχειρήσεις.</p>
+    </div>
+  </div>
+</body>
+</html>
