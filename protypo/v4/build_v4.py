@@ -75,9 +75,11 @@ h = h[:ni] + f'''<nav class="nav-links" id="primary-nav" aria-label="Main naviga
 
 rep(
     '''        <button class="lang-button" type="button" data-lang="en">EN</button>
+        <button class="lang-button" type="button" data-lang="de">DE</button>
       </div>
 ''',
     f'''        <button class="lang-button" type="button" data-lang="en">EN</button>
+        <button class="lang-button" type="button" data-lang="de">DE</button>
       </div>
 
       <a class="pill dark small nav-cta" href="{CAL}" target="_blank" rel="noreferrer" data-i18n="v4NavCta">Κλείσε 30 λεπτά</a>

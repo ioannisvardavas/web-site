@@ -1,6 +1,6 @@
 /* Πρόταση 4 — γέμισμα των sliders, εξηγήσεις (tooltip) στα σενάρια. */
 (function () {
-  const lang = () => (document.documentElement.lang === "en" ? "en" : "el");
+  const lang = () => (["en", "de"].includes(document.documentElement.lang) ? document.documentElement.lang : "el");
   document.querySelectorAll('.bubble[data-i18n]').forEach((b) => {
     if (!b.textContent.trim()) b.textContent = copy[lang()][b.dataset.i18n] || "";
   });
