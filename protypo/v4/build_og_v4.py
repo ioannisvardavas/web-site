@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""og_card.html -> og-image-v8.jpg: η κάρτα του συνδέσμου σε WhatsApp/Viber, με τη μάρκα (7/11/2026· v8 = νέα φωτογραφία 14/11/2026).
+"""og_card.html -> og-image-v9.jpg: η κάρτα του συνδέσμου σε WhatsApp/Viber, με τη μάρκα (7/11/2026· v8 = νέα φωτογραφία, v9 = νέο σλόγκαν, 14/11/2026).
 
 Η φωτογραφία είναι η ίδια με του site (το avatar του hero στο standalone.html).
 Το Chrome τη «φωτογραφίζει» σε 1200×630 και βγαίνει JPEG < 300 KB — πάνω από αυτό
@@ -7,7 +7,7 @@
 αλλιώς WhatsApp/Viber κρατούν την παλιά εικόνα στη μνήμη τους.
 
 Τρέξιμο:  /usr/bin/python3 protypo/v4/build_og_v4.py [a|b] [--dokimi φάκελος]
-          a/b = εκδοχή (βλ. og_card.html)· χωρίς --dokimi γράφει og-image-v8.jpg στη ρίζα + deploy/,
+          a/b = εκδοχή (βλ. og_card.html)· χωρίς --dokimi γράφει og-image-v9.jpg στη ρίζα + deploy/,
           με --dokimi γράφει og-a.jpg / og-b.jpg εκεί για σύγκριση.
 """
 import pathlib, re, subprocess, sys, tempfile
@@ -16,7 +16,7 @@ from PIL import Image
 ROOT = pathlib.Path("/Users/user/Desktop/Claude dir/Web Site")
 SCR = pathlib.Path(__file__).parent
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-OUT = "og-image-v8.jpg"
+OUT = "og-image-v9.jpg"
 args = sys.argv[1:]
 VARIANT = args[0] if args and args[0] in ("a", "b") else "b"  # Β = επιλογή Γιάννη 7/11/2026
 DOKIMI = pathlib.Path(args[args.index("--dokimi") + 1]) if "--dokimi" in args else None

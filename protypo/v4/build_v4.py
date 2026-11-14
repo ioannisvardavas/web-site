@@ -89,7 +89,7 @@ hero_new = f'''<section class="hero" aria-labelledby="hero-title">
         <div class="hero-mesh" aria-hidden="true"><span class="hb hb1"></span><span class="hb hb2"></span><span class="hb hb3"></span><span class="hb hb4"></span><span class="hb hb5"></span><span class="hb hb6"></span><span class="hb hb7"></span><span class="hb hb8"></span></div>
         <div class="hero-copy">
           <a class="tag" href="#about"><span class="me-photo" aria-hidden="true"></span><span data-i18n="v4Tag">Financial Planning &amp; Risk Management · 25 χρόνια</span><span class="tag-go" aria-hidden="true">→</span></a>
-          <h1 id="hero-title" data-i18n="v4HeroTitle"><span class="h-line">Ο φόβος φεύγει όταν</span><span class="h-line">το χειρότερο έχει <span class="paint">νούμερο<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span>.</span></h1>
+          <h1 id="hero-title" data-i18n="v4HeroTitle"><span class="h-line">Ο φόβος φεύγει όταν</span><span class="h-line">το χειρότερο σενάριο αποκτήσει <span class="paint">αριθμό<svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M6 26 C 90 8, 210 6, 394 20" stroke="#f2b544" stroke-width="22" stroke-linecap="round" fill="none" pathLength="1000"/></svg></span>.</span></h1>
           <p class="lead" data-i18n="v4Lead"><b>Το οικονομικό σου σχέδιο, δοκιμασμένο πριν το χρειαστείς.</b> Ασφάλιση, σύνταξη, επενδύσεις και κίνδυνοι για οικογένειες και επιχειρήσεις, σε μία καθαρή εικόνα. Χωρίς ψιλά γράμματα, χωρίς πίεση.</p>
           <div class="ctas">
             <a class="pill dark" href="{CAL}" target="_blank" rel="noreferrer" data-i18n="v4Cta1">Κλείσε μια συζήτηση</a>
@@ -197,9 +197,9 @@ assert 'assets/ai-' not in h
 # ---------- σκούρα λωρίδα με το σλόγκαν (7/11/2026) ----------
 # Χωρίς δικό της κουμπί: ακριβώς από κάτω είναι το «Επόμενο βήμα» με το ραντεβού.
 rep('<section class="contact-section" id="contact" aria-labelledby="contact-title">',
-    '<section class="slogan-band reveal" aria-label="Ο φόβος φεύγει όταν το χειρότερο έχει νούμερο">'
+    '<section class="slogan-band reveal" aria-label="Ο φόβος φεύγει όταν το χειρότερο σενάριο αποκτήσει αριθμό">'
     + b_mark(132, "bgBand", "#fff")
-    + '<p data-i18n="v4SloganBand">Ο φόβος φεύγει όταν το χειρότερο <em>έχει νούμερο.</em></p></section>\n\n      '
+    + '<p data-i18n="v4SloganBand">Ο φόβος φεύγει όταν το χειρότερο σενάριο <em>αποκτήσει αριθμό.</em></p></section>\n\n      '
     '<section class="contact-section" id="contact" aria-labelledby="contact-title">')
 
 # ---------- κείμενα (EL/EN) + μικρό script ----------
