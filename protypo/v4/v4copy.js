@@ -1,5 +1,5 @@
 
-/* Πρόταση 4 — νέα κείμενα (EL/EN) για τα κομμάτια που άλλαξαν μορφή. */
+/* Πρόταση 4 — νέα κείμενα (EL/EN/DE) για τα κομμάτια που άλλαξαν μορφή. */
 (function () {
   const paint = (word) =>
     '<span class="paint">' + word +
@@ -53,5 +53,30 @@
     v4TipB: "If the money earned a steady 6% a year. In reality, returns go up and down.",
     v4TipD: "If the money earned a steady 8% a year. Higher possible return, bigger ups and downs.",
     philosophyCredo: "Better <mark>no sale</mark> than the wrong sale."
+  });
+  Object.assign(copy.de, {
+    v4Brand: "Ioannis Vardavas",
+    v4NavNumbers: "Zahlen",
+    v4NavGames: "Spiele",
+    v4NavCta: "30 Minuten buchen",
+    v4Tag: "Financial Planning & Risk Management · 25 Jahre",
+    v4HeroTitle: '<span class="h-line">Die Angst vergeht,</span><span class="h-line">wenn das schlimmste Szenario</span><span class="h-line">' + paint("eine Zahl") + " bekommt.</span>",
+    v4Lead: "<b>Ihr Finanzplan, getestet, bevor Sie ihn brauchen.</b> Versicherung, Rente, Anlagen und Risiken für Familien und Unternehmen, in einem klaren Bild. Ohne Kleingedrucktes, ohne Druck.",
+    v4SloganBand: "Die Angst vergeht, wenn das schlimmste Szenario <em>eine Zahl bekommt.</em>",
+    v4Cta1: "Gespräch buchen",
+    v4Cta2: "Mit den Zahlen spielen ↓",
+    v4HeroSave: "Noch nicht? <u>Speichern Sie meinen Kontakt</u> — bevor Sie ihn brauchen.",
+    v4NavSave: "Kontakt speichern",
+    v4Cred1b: "25+ Jahre",
+    v4Cred1: "Ergasias Bank → Allianz",
+    v4Cred2: "internationale Zertifizierung",
+    v4Cred3: "Reg.-Nr. Kammer Athen",
+    v4BandKicker: "Bevor wir sprechen",
+    v4BandTitle: "Zwei Zahlen eingeben.<br />Sehen, was Sie aufbauen.",
+    v4BandText: "Hier und jetzt, ohne Anmeldung und ohne persönliche Angaben. Was Sie eingeben, bleibt auf Ihrem eigenen Bildschirm.",
+    v4TipC: "Wenn das Geld stetig 3 % im Jahr brächte. Eine Annahme zum Vergleich — keine Garantie.",
+    v4TipB: "Wenn das Geld stetig 6 % im Jahr brächte. In Wirklichkeit schwanken Renditen auf und ab.",
+    v4TipD: "Wenn das Geld stetig 8 % im Jahr brächte. Höhere mögliche Rendite, stärkere Schwankungen.",
+    philosophyCredo: "Lieber <mark>kein Verkauf</mark> als ein falscher Verkauf."
   });
 })();

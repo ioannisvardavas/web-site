@@ -2689,6 +2689,8 @@ h1, h2, h3, h4, .calc-title {
   font-weight: 500;
   font-size: 15px;
 }
+/* «Über mich» (γερμανικά) να μη σπάει σε δύο γραμμές· το «Εργαλεία Ρίσκου» επιτρέπεται να σπάσει, αλλιώς τα ελληνικά ξεχειλίζουν στα 1280 */
+.nav-links a:not(.nav-risk) { white-space: nowrap; }
 .nav-links a:hover {
   color: var(--teal);
 }
@@ -3759,6 +3761,10 @@ main {
   .hero h1 { font-size: clamp(36px, 10.5vw, 52px); }
   .tag { gap: 10px; padding: 8px 18px 8px 8px; font-size: 15px; line-height: 1.3; }
   .tag .me-photo { width: 40px; height: 40px; }
+  /* 14/11: τρία κουμπιά γλώσσας (EL/EN/DE) — πιο στενά, ώστε το κουμπί μενού να μένει μέσα στην οθόνη */
+  .brand { font-size: 19px; }
+  .language-switch { padding: 2px; }
+  .lang-button { min-width: 34px; padding: 1px 4px; font-size: 14px; }
   .portrait { width: min(300px, 74vw); height: min(330px, 82vw); }
   .band { padding: 110px 20px 130px; }
   .b1 { width: 130vw; height: 130vw; left: -50vw; top: -30vw; }
@@ -3805,13 +3811,20 @@ main {
   white-space: nowrap;
 }
 .brand { max-width: none; }
+@media (min-width: 1101px) and (max-width: 1480px) {
+  /* 14/11: στενότερα κενά — χωράει και το τρίτο κουμπί γλώσσας (DE) χωρίς οριζόντια κύλιση.
+     (Τα ελληνικά ξεχείλιζαν ήδη 11–44px στα 1261–1321· διορθώνεται κι αυτό.) */
+  .site-header { gap: 14px; }
+  .nav-links { gap: 13px; }
+}
 @media (min-width: 1101px) and (max-width: 1320px) {
-  .site-header { gap: 18px; }
-  .nav-links { gap: 18px; }
   .brand { font-size: 23px; }
 }
-@media (min-width: 1101px) and (max-width: 1260px) {
-  .nav-cta { display: none; }
+@media (min-width: 1101px) and (max-width: 1200px) {
+  .nav-links { gap: 10px; }
+}
+@media (min-width: 1101px) and (max-width: 1360px) {
+  .nav-cta { display: none; }   /* το «Κλείσε 30 λεπτά» υπάρχει και στο κέντρο της πρώτης οθόνης */
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -4174,6 +4187,10 @@ main {
   .nav-toggle { flex: none; }
   .slogan-band { flex-direction: column; align-items: flex-start; border-radius: 24px; }
 }
+@media (max-width: 380px) {
+  .brand { font-size: 17px; }
+  .site-header { padding-left: 16px; padding-right: 16px; gap: 6px; }
+}
 
     </style>
   </head>
@@ -4195,6 +4212,7 @@ main {
       <div class="language-switch" aria-label="Language switcher">
         <button class="lang-button is-active" type="button" data-lang="el">EL</button>
         <button class="lang-button" type="button" data-lang="en">EN</button>
+        <button class="lang-button" type="button" data-lang="de">DE</button>
       </div>
 
       <a class="pill dark small nav-cta" href="https://cal.com/ioannis-vardavas-0yon6x/30min" target="_blank" rel="noreferrer" data-i18n="v4NavCta">Κλείσε 30 λεπτά</a>
@@ -4881,7 +4899,7 @@ main {
             <div class="fam-block">
               <p class="fam-h" data-i18n="biz3H">3. Όταν ο πελάτης δεν πληρώνει</p>
               <p class="fam-p" data-i18n="biz3P">Αν πουλάτε με πίστωση, ένα μέρος του τζίρου σας είναι πάντα «στον αέρα» — ανοιχτές απαιτήσεις που εξαρτώνται από τη φερεγγυότητα τρίτων. Μια κακή χρονιά ενός μεγάλου πελάτη μπορεί να γίνει δική σας κρίση ρευστότητας.</p>
-              <span class="fam-figure">έως 90%</span>
+              <span class="fam-figure" data-i18n="bizFig3">έως 90%</span>
               <p class="fam-p" data-i18n="biz3Bar1">της ανείσπρακτης απαίτησης αποζημιώνεται από την <strong>ασφάλιση πιστώσεων</strong>, αν ο πελάτης αδυνατεί να πληρώσει. Και κάτι εξίσου πολύτιμο: <strong>συνεχής αξιολόγηση της πιστοληπτικής ικανότητας</strong> των πελατών σας — ξέρετε εκ των προτέρων με ποιον μπαίνετε, πριν δώσετε πίστωση.</p>
               <p class="fam-p" data-i18n="biz3Note">Πουλάτε με σιγουριά, δίνετε πίστωση σε νέους πελάτες χωρίς φόβο, κοιμάστε ήσυχοι όταν ο μεγαλύτερος πελάτης σας καθυστερεί.</p>
             </div>
@@ -4907,7 +4925,7 @@ main {
             <div class="fam-block">
               <p class="fam-h" data-i18n="biz6H">6. Η προσωπική ευθύνη όποιου αποφασίζει (D&amp;O)</p>
               <p class="fam-p" data-i18n="biz6P">Κάθε απόφαση της διοίκησης μπορεί να αμφισβητηθεί — από εταίρους, εργαζομένους, την εφορία, πιστωτές, ακόμη και μετόχους. Και η ευθύνη δεν σταματά στην επιχείρηση: φτάνει στην <strong>προσωπική περιουσία</strong> του διαχειριστή ή του μέλους ΔΣ.</p>
-              <span class="fam-figure">Προσωπική περιουσία</span>
+              <span class="fam-figure" data-i18n="bizFig6">Προσωπική περιουσία</span>
               <p class="fam-p" data-i18n="biz6Bar1">— σπίτι, καταθέσεις, αποταμιεύσεις μιας ζωής — μπορεί να εκτεθεί για μια απόφαση που πάρθηκε με καλή πίστη. Η ασφάλιση <strong>D&amp;O (Directors &amp; Officers)</strong> αναλαμβάνει τα έξοδα νομικής υπεράσπισης και τις αποζημιώσεις, προστατεύοντας αυτούς που παίρνουν τις αποφάσεις.</p>
               <p class="fam-p" data-i18n="biz6Note">Όσο πιο σοβαρά παίρνετε τη διοίκηση της επιχείρησης, τόσο πιο εκτεθειμένος είστε προσωπικά. Το D&amp;O είναι η ασφάλεια για να αποφασίζετε χωρίς να ρισκάρετε το σπίτι σας.</p>
             </div>
@@ -5361,6 +5379,8 @@ const copy = {
     biz6Note: "Όσο πιο σοβαρά παίρνετε τη διοίκηση της επιχείρησης, τόσο πιο εκτεθειμένος είστε προσωπικά. Το D&O είναι η ασφάλεια για να αποφασίζετε χωρίς να ρισκάρετε το σπίτι σας.",
     bizCta: "Ας δούμε ποιοι από αυτούς τους κινδύνους αφορούν εσάς →",
     bizNote: "Τα ποσά είναι ενδεικτικά, για κατανόηση της λογικής — όχι προσφορά ή δέσμευση. Κάθε λύση διαμορφώνεται στα δικά σας δεδομένα. Ασφάλιση πιστώσεων & εγγυητικές μέσω Allianz Trade.",
+    bizFig3: "έως 90%",
+    bizFig6: "Προσωπική περιουσία",
     moduleToolPolicy: "Δες δείγμα ανάλυσης →",
     moduleToolArch: "Πριν / μετά — δες τη διαφορά →",
     archEyebrow: "Αρχιτεκτονική · Πριν και μετά",
@@ -5725,6 +5745,8 @@ const copy = {
     biz6Note: "The more seriously you take running the business, the more personally exposed you are. D&O is the cover that lets you decide without risking your home.",
     bizCta: "Let's see which of these risks apply to you →",
     bizNote: "Amounts are indicative, to convey the logic — not an offer or commitment. Every solution is shaped to your own data. Trade credit insurance & surety bonds via Allianz Trade.",
+    bizFig3: "up to 90%",
+    bizFig6: "Personal assets",
     moduleToolPolicy: "See a sample analysis →",
     moduleToolArch: "Before / after — see the difference →",
     archEyebrow: "Architecture · Before and after",
@@ -5906,10 +5928,366 @@ const copy = {
     privacyEyebrow: "Legal",
     privacyTitle: "Privacy Policy",
     privacyBody: '<p class="legal-updated">Last updated: August 2026</p><p>Protecting your personal data matters. This policy explains what data is collected through this website, for what purpose, and what your rights are, in accordance with the General Data Protection Regulation (GDPR — EU 2016/679).</p><h3>1. Data controller</h3><p>Ioannis Vardavas, insurance intermediary. Contact: <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a> · tel. +30 698 388 0746.</p><h3>2. What data is collected</h3><p>Only what you enter in the contact form: <strong>your name, email and message</strong>. The website <strong>uses no cookies</strong> and collects no data without your knowledge. For anonymous, aggregate visitor statistics it uses <strong>Cloudflare Web Analytics</strong> — a tool that works <strong>without cookies</strong> and does not collect or store personal data that identifies you. The <strong>games</strong> keep whatever you type <strong>only locally, on your own device</strong> (browser local storage); nothing is sent anywhere and you can erase it at any time with the «Clear» button.</p><h3>3. Purpose &amp; legal basis</h3><p>Your details are used solely to reply to your request and to contact you. The legal basis is your <strong>consent</strong> (Article 6(1)(a) GDPR), which you provide by submitting the form.</p><h3>4. Recipients — third parties</h3><p>The form is delivered via the <strong>Web3Forms</strong> service and the site is hosted on <strong>Cloudflare</strong>. If you book a call, that happens on the <strong>Cal.com</strong> service, which opens in a new tab: the details you enter there (name, email, any note) are received by Cal.com as a processor and its own privacy policy additionally applies. This website <strong>loads no Cal.com code</strong> and does not track you there. Your data is not sold and is not shared with third parties for marketing purposes.</p><h3>5. Retention period</h3><p>Your details are kept only for as long as needed for our communication and are deleted once no longer necessary.</p><h3>6. Your rights</h3><p>You have the right to access, rectify, erase, restrict, object to and port your data. To exercise them, contact <a href="mailto:ioannis.vardavas@gmail.com">ioannis.vardavas@gmail.com</a>. You also have the right to lodge a complaint with the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noreferrer">dpa.gr</a>).</p><h3>7. Security</h3><p>Reasonable technical and organisational measures are taken to protect your data from unauthorised access or use.</p><p class="legal-note">This policy may be updated. For insurance products, the terms and privacy policies of the respective insurance companies also apply.</p>'
+  },
+  de: {
+    "brand": "Ioannis Vardavas, lutcf",
+    "navServices": "Leistungen",
+    "philosophyLabel": "Vor allem anderen",
+    "philosophyText": "Jedes Gespräch beginnt mit dem, was Sie bereits haben. Bestehende Policen, Verträge und Absicherungen werden im Detail analysiert, verstanden und in jedem Vorschlag vollständig berücksichtigt. Ich ersetze nicht, was funktioniert. Ich schlage nicht vor, was nicht gebraucht wird. Wenn die beste Empfehlung lautet, nichts zu ändern, dann sage ich genau das.",
+    "philosophyCredo": "„Lieber kein Verkauf als ein falscher Verkauf.“",
+    "navModules": "Was ich tue",
+    "navMethod": "Methode",
+    "navAbout": "Über mich",
+    "navContact": "Kontakt",
+    "navRisk": "Risiko-Tools →",
+    "navGames": "Spiele mit echten Zahlen",
+    "gamesEyebrow": "Geht aufs Haus",
+    "gamesTitle": "Sieben Spiele, die erklären, was eine Präsentation nicht kann.",
+    "gamesIntro": "Je drei Minuten, auf dem Handy, ohne Anmeldung. Die Zahlen sind nicht erfunden: Sie stammen von ELSTAT, Eurostat und der EZB — und unter jedem Spiel steht genau, was es berücksichtigt und was nicht. Die Spiele sind auf Griechisch.",
+    "gameOneTitle": "Was hat es gekostet?",
+    "gameOneText": "Erraten Sie die Preise von früher. Geld in der Schublade bleibt nicht stehen — es schmilzt.",
+    "gameTwoTitle": "Hoch oder runter?",
+    "gameTwoText": "39 Börsenjahre. Wie viele im Plus endeten, was das schlimmste kostete, wie lange die Erholung dauerte.",
+    "gameThreeTitle": "Tausend wie Sie",
+    "gameThreeText": "Von 1.000 Menschen in Ihrem Alter: wie viele 80, 90, 95 werden.",
+    "gameFourTitle": "Wird es reichen?",
+    "gameFourText": "Sie hören auf zu arbeiten und entnehmen jeden Monat. 21 echte Startpunkte, 21 verschiedene Ergebnisse.",
+    "gameFiveTitle": "Der Preis eines Tages",
+    "gameFiveText": "Was es pro Tag kostet, damit Ihre Familie nicht allein mit dem Kredit dasteht.",
+    "gameSixTitle": "Mythos oder Wahrheit?",
+    "gameSixText": "Acht Aussagen darüber, wer Euro schafft. Die Hälfte sind Irrtümer, die „jeder weiß“.",
+    "gameSevenTitle": "Worte gegen Instinkt",
+    "gameSevenText": "Für zwei Personen. Jeder sagt, was er tun würde — und rät, was der andere gesagt hat.",
+    "gamesAll": "Alle auf einen Blick öffnen →",
+    "gamesInflation": "Was die Zeit mit Ihrem Geld macht →",
+    "gamesMoney": "Wer Euro schafft →",
+    "gamesNote": "Was Sie eingeben, bleibt auf Ihrem eigenen Gerät — nichts wird gesendet oder anderswo gespeichert. Die Spiele sind auf Griechisch.",
+    "eyebrow": "Financial Planning | Business Risk Management",
+    "roleLine": "Life, Health, P&C & Investment Architect",
+    "heroIdName": "Ioannis Vardavas",
+    "heroIdRole": "lutcf · Life, Health, P&C & Investment Architect",
+    "heroTitle": "Ich beginne immer bei Ihnen — bei dem, was Ihnen wirklich wichtig ist.",
+    "heroSubtitle": "Versicherung, Anlageberatung und betriebliches Risikomanagement — aufgebaut auf Ihrem tatsächlichen Bedarf, nicht auf einem fertigen Paket.",
+    "primaryCta": "Kennenlerngespräch buchen",
+    "secondaryCta": "So arbeite ich",
+    "servicesEyebrow": "Für wen",
+    "servicesTitle": "Zwei Bedürfnisse, eine strukturierte Denkweise.",
+    "familiesKicker": "Für Familien",
+    "familiesTitle": "Finanzplanung für echte Lebensentscheidungen.",
+    "familiesText": "Jede Familie hat ihr eigenes Bild — Verpflichtungen, Ziele, Sorgen, über die nie mit einem Berater gesprochen wurde. Dort fange ich an: Was ist vorhanden, was fehlt, was kommt zuerst. Einkommensschutz, Sparen, Altersvorsorge und ein Plan für die Kinder — immer auf Basis Ihrer tatsächlichen Situation.",
+    "casesFamBtn": "Echte Geschichten →",
+    "casesFamEyebrow": "Für Familien · Echte Geschichten",
+    "casesFamTitle": "Drei Familien. Drei Zahlen, die sie nicht kannten.",
+    "casesFamSub": "Anonyme Beispiele aus echten Gesprächen. Keine Namen — aber jede Situation ist echt.",
+    "csF1Label": "Paar · 38 & 35 · 2 Kinder",
+    "csF1Story": "Wir dachten, wir seien abgesichert. Wir hatten eine Lebensversicherung über den Arbeitgeber, eine alte Police aus der Zeit vor der Hochzeit in der Schublade und einen Kredit auf unseren Namen. Als wir alles auf den Tisch legten, kam etwas Unerwartetes heraus: Unser Einkommen — das, was den Kredit, die Kinder, alles bezahlt — war nirgends abgesichert. Nicht einmal für einen Monat. Wir haben das behoben, ohne einen einzigen Euro an unserem Gesamtbudget zu ändern.",
+    "csF1Num": "0 €",
+    "csF1Punch": "So viel hätte die Familie aus einer Einkommensabsicherung erhalten, wenn einer von beiden gestorben wäre: nichts.",
+    "csF2Label": "Alleinerziehend · 42 · 1 Kind, 10 Jahre",
+    "csF2Story": "Drei Policen, drei Gesellschaften, drei Jahreszahlungen. Niemand hatte sie je zusammen betrachtet. Manche Deckungen überschnitten sich — doppelt bezahlt für dasselbe. Andere, entscheidende, fehlten ganz. Wir haben zusammengeführt, vereinfacht, und das gesparte Geld floss in die Ausbildungsrücklage für das Kind. Zum ersten Mal hatte sie das Gefühl, ein klares Bild zu haben — und einen Plan.",
+    "csF2Num": "11 Jahre",
+    "csF2Punch": "Früher erreicht sie ihr Sparziel — allein durch die Umverteilung dessen, was sie ohnehin schon zahlte.",
+    "csF3Label": "Paar · 51 & 49 · Kinder aus dem Haus",
+    "csF3Story": "Sie dachten, die Rente sei geregelt. Einer bei IKA, der andere bei EFKA — „das wird schon reichen“. Als wir die echten Zahlen mit den heutigen EFKA-Prognosen durchrechneten, ging die Rechnung nicht auf. Es gab eine Lücke — konkret, messbar. Sie haben einen gezielten Sparplan genau für diese Lücke begonnen. Vierzehn Jahre vor der Rente — es ist noch Zeit.",
+    "csF3Num": "340 €/Monat",
+    "csF3Punch": "So viel fehlt, um die Rentenlücke zu schließen. Eine Zahl, die sie nicht kannten — bis wir sie gemeinsam berechnet haben.",
+    "casesFamCta": "Erkennen Sie sich in einem dieser Bilder wieder? Sprechen Sie mit mir →",
+    "casesFamNote": "Die Beispiele sind anonym und dienen der Veranschaulichung. Jeder Fall hat seine eigenen Daten.",
+    "businessKicker": "Für Unternehmen",
+    "businessTitle": "Risikomanagement für Kontinuität und Widerstandskraft.",
+    "businessText": "Unternehmensrisiken zeigen sich selten, bevor sie zuschlagen. Ich erfasse, was exponiert ist — Schlüsselpersonen, Betriebskontinuität, rechtliche Pflichten, Deckungslücken — und helfe Ihnen, einen Plan zu haben, bevor Sie ihn brauchen. Mitarbeiterleistungen, die Menschen halten, Versicherungen, die greifen, wenn es darauf ankommt. Inklusive Bonitätsprüfung von Partnern und Kunden — damit Sie wissen, mit wem Sie es zu tun haben.",
+    "casesBizBtn": "Echte Geschichten →",
+    "casesBizEyebrow": "Für Unternehmen · Echte Geschichten",
+    "casesBizTitle": "Vier Unternehmen. Vier Risiken, mit denen sie nicht gerechnet hatten.",
+    "casesBizSub": "Anonyme Beispiele aus echten Gesprächen. Unternehmensrisiken schlagen nie zu einem passenden Zeitpunkt zu.",
+    "csB1Label": "Dienstleister · 8 Personen",
+    "csB1Story": "Der Partner, der die Beziehungen zur Hälfte der Kunden hielt, beschloss zu gehen. Ohne Vorwarnung, ohne Übergangszeit. Es gab keinen Plan — keine Keyperson-Versicherung, kein Wettbewerbsverbot, keine geordnete Übergabe des Kundenstamms. Das Unternehmen hat überlebt, brauchte aber 18 Monate, um wieder auf dasselbe Niveau zu kommen. Beim zweiten Treffen fragten sie: „Warum hat uns das niemand früher gesagt?“",
+    "csB1Num": "280.000 €",
+    "csB1Punch": "Geschätzter Wert des Kundenportfolios, der ungeschützt war — ohne jedes Sicherheitsnetz.",
+    "csB2Label": "Familienunternehmen · 15 Personen",
+    "csB2Story": "Ein Unfall. Der Inhaber vier Monate ausgefallen. Der Betrieb lief weiter, weil Familienmitglieder einsprangen — aber die Fixkosten liefen ganz normal: Löhne, Miete, Sozialabgaben. Es gab keine Einkommensabsicherung für den Inhaber. Sie sind durchgekommen — aber mit einem Loch in den Rücklagen, das Jahre brauchte, um sich zu schließen.",
+    "csB2Num": "4 Monate",
+    "csB2Punch": "Kein Einkommen für den Inhaber — während die Fixkosten des Betriebs jeden Monat normal weiterliefen.",
+    "csB3Label": "Technologieunternehmen · 20 Personen",
+    "csB3Story": "Der erfahrene Entwickler, den sie drei Jahre lang ausgebildet hatten, ging zur Konkurrenz. Der Grund war nicht das Gehalt — sondern ein Leistungspaket, mit dem sie nicht mithalten konnten. Private Krankenversicherung, Zusatzrente, Lebensversicherung. Dinge, die es auch für kleine Unternehmen gibt, wenn man weiß, wo man suchen muss. Danach haben wir ein Leistungspaket in ihrer Größenordnung aufgebaut — und seitdem haben sie keine weitere Schlüsselperson verloren.",
+    "csB3Num": "45.000 €",
+    "csB3Punch": "Geschätzte Kosten für den Ersatz eines erfahrenen Mitarbeiters — Suche, Einarbeitung, verlorene Produktivität.",
+    "csB4Label": "Großhandel · 12 Personen",
+    "csB4Story": "Sie verkauften auf Ziel. Vier große Kunden, langjährige Beziehungen, kein Grund zur Sorge. Einer der vier ging in die Insolvenz. Der offene Betrag reichte, um auch sie in Schwierigkeiten zu bringen — sie brauchten einen Bankkredit, um ihre eigenen Verpflichtungen zu decken. Genau dafür gibt es die Warenkreditversicherung: Wenn der Kunde nicht zahlt, zahlt der Versicherer. Sie wussten es nicht. Jetzt wissen sie es.",
+    "csB4Num": "67.000 €",
+    "csB4Punch": "Der nicht eingezogene Betrag, der das Unternehmen an den Rand seiner Liquidität brachte — von einem Kunden, den sie für „sicher“ hielten.",
+    "casesBizCta": "Erkennen Sie sich in einem dieser Bilder wieder? Sprechen Sie mit mir →",
+    "casesBizNote": "Die Beispiele sind anonym und dienen der Veranschaulichung. Jedes Unternehmen hat seine eigenen Daten.",
+    "modulesEyebrow": "Leistungsbausteine",
+    "modulesTitle": "Leistungen, geordnet nach dem, was geschützt, aufgebaut und geklärt werden muss.",
+    "moduleOneTag": "Privatpersonen & Familien",
+    "moduleOneTitle": "Für Privatpersonen & Familien",
+    "moduleOneText": "Ein vollständiges Bild: Was ist vorhanden, was fehlt, was zählt am meisten — dann ein Schutz-, Spar- und Anlageplan, der um Sie herum gebaut ist.",
+    "moduleOnePointA": "Einkommens- & Familienschutz",
+    "moduleOnePointB": "Altersvorsorge und Planung für die Kinder",
+    "moduleOnePointC": "Zielbasierte Anlagestrategie",
+    "moduleTwoTag": "Unternehmer",
+    "moduleTwoTitle": "Betriebliches Risikomanagement",
+    "moduleTwoText": "Erfassung von Risiken und Lücken: Schlüsselperson, Mitarbeiterleistungen, Betriebskontinuität, Warenkreditversicherung und Kautionsversicherung — inklusive Bonitätsprüfung von Partnern und Kunden.",
+    "moduleTwoPointA": "Schlüsselperson- & Kontinuitätsrisiken",
+    "moduleTwoPointB": "Aufbau von Mitarbeiterleistungen",
+    "moduleTwoPointC": "Prüfung von Deckungslücken",
+    "moduleTwoPointCredit": "Bonitätsprüfungen",
+    "moduleTwoPointD": "Warenkredit- & Kautionsversicherung",
+    "moduleTwoPointE": "Cyber & Managerhaftung (D&O)",
+    "moduleThreeTag": "Architektur",
+    "moduleThreeTitle": "Versicherungs- & Anlagearchitektur",
+    "moduleThreeText": "Versicherungen und Anlagen abgestimmt zu einer stimmigen Architektur — keine Doppelungen, keine Lücken, wo es zählt.",
+    "moduleThreePointA": "Abstimmung von Leben, Gesundheit, Sach",
+    "moduleThreePointB": "Ausrichtung am Anlageprofil",
+    "moduleThreePointC": "Langfristige Überprüfung",
+    "moduleFourTag": "Intelligente Tools",
+    "moduleFourTitle": "KI-gestützte Planungstools",
+    "moduleFourText": "Eigene Anwendungen, die komplexe Daten in ein klares Bild verwandeln. Technologie im Dienst des Verstehens — nicht des Verkaufens.",
+    "toolChipOne": "Bedarfskarte",
+    "toolChipTwo": "Risiko-Score",
+    "toolChipThree": "Szenario-Ansicht",
+    "moduleLink": "Über diesen Baustein sprechen",
+    "moduleToolCalc": "Rechner ausprobieren →",
+    "moduleToolRisk": "Prüfen Sie Ihre Risikolage →",
+    "moduleToolFamily": "Warum es wichtig ist — im Detail →",
+    "moduleToolBiz": "Was auf dem Spiel steht — im Detail →",
+    "moduleToolBizRisk": "Machen Sie den Risiko-Test →",
+    "bizRiskEyebrow": "RiskGuard Pro · Schnellcheck",
+    "bizRiskTitle": "Was steht in Ihrem Unternehmen auf dem Spiel?",
+    "bizRiskSub": "6 kurze Fragen. Keine Dateneingabe — nur ein klares Bild der Risikolage.",
+    "bizRiskCta": "Möchten Sie eine kostenlose 30-Minuten-Einschätzung für Ihr Unternehmen? →",
+    "bizRiskNote": "Ein Orientierungsbild auf Basis Ihrer Antworten — kein Ersatz für eine vollständige Risikoanalyse.",
+    "bizRiskPrint": "Checkliste herunterladen (PDF) ⬇",
+    "clEyebrow": "Risiko-Check für Unternehmen",
+    "clTitle": "Ist Ihr Unternehmen ungeschützt?",
+    "clSub": "Kreuzen Sie an, was Ihnen Sorgen macht, und bringen Sie es zum Gespräch mit. Sechs Punkte, die selten in der Bilanz auftauchen.",
+    "cl1": "<strong>1. Schlüsselperson.</strong> Wenn die Person, die Kunden und Know-how hält, plötzlich wegfiele — was bliebe stehen?",
+    "cl2": "<strong>2. Betriebskontinuität.</strong> Gibt es eine Betriebsunterbrechungsversicherung oder einen Plan für Schaden/Katastrophe?",
+    "cl3": "<strong>3. Mitarbeiterleistungen.</strong> Gesundheit/Leben für das Team — halten und gewinnen Sie damit Mitarbeiter?",
+    "cl4": "<strong>4. Warenkreditversicherung.</strong> Was passiert, wenn ein großer Kunde nicht zahlt oder insolvent wird?",
+    "cl5": "<strong>5. Cyber & Daten (DSGVO).</strong> Schutz vor Cyberangriff, Ransomware, Verletzung von Kundendaten?",
+    "cl6": "<strong>6. Managerhaftung (D&O).</strong> Sind Sie persönlich für unternehmerische Entscheidungen abgesichert?",
+    "clFoot": "<strong>Ioannis Vardavas</strong>, LUTCF — Life, Health, P&C & Investment Architect<br>Tel.: +30 698 388 0746 · ioannis.vardavas@gmail.com · vardavas-site.pages.dev",
+    "clNote": "Eine Selbstcheck-Liste zum Verständnis — keine Ermittlung des Versicherungsbedarfs. Jeder Fall wird anhand seiner eigenen Daten geprüft.",
+    "bizEyebrow": "Für Unternehmen · Was auf dem Spiel steht",
+    "bizTitle": "Sechs Risiken, die selten in der Bilanz auftauchen.",
+    "bizSub": "In den Büchern sieht man sie nicht — bis zu dem Tag, an dem sie zuschlagen. Das liegt unter jedem gesunden Unternehmen.",
+    "biz1H": "1. Die Schlüsselperson, die das Unternehmen zusammenhält",
+    "biz1P": "Jedes kleine oder mittlere Unternehmen hat ein oder zwei Menschen, von denen ein unverhältnismäßig großer Teil des Umsatzes abhängt — Kundenbeziehungen, Know-how, der Betrieb selbst. Wenn sie plötzlich fehlen, was bleibt stehen?",
+    "biz1Bar1": "Jahresumsatz, der von der Schlüsselperson abhängt",
+    "biz1Bar2": "Keyperson-Deckung, die ich meist vorfinde",
+    "biz1Note": "Die Keyperson-Versicherung gibt dem Unternehmen Zeit und Liquidität, um sich zu fangen — Ersatz zu finden, Kunden zu halten und nicht über Nacht zusammenzubrechen.",
+    "biz2H": "2. Was es kostet, einen guten Mitarbeiter zu verlieren",
+    "biz2P": "Einen erfahrenen Mitarbeiter zu ersetzen, ist nicht nur das Gehalt. Es sind Suche, Monate der Einarbeitung, verlorene Produktivität, Wissen, das zur Tür hinausgeht. Vergleichen Sie das mit den jährlichen Kosten eines Pakets, das ihn hält:",
+    "biz2Bar1": "Kosten für den Ersatz eines Mitarbeiters (einmalig)",
+    "biz2Bar2": "Jährliches Leistungspaket, das ihn hält",
+    "biz2Note": "Das eine ist ein Verlust, der ungebeten kommt. Das andere eine kleine jährliche Investition, die Loyalität schafft — und das Unternehmen zu einem Arbeitgeber macht, den gute Leute nicht verlassen.",
+    "biz3H": "3. Wenn der Kunde nicht zahlt",
+    "biz3P": "Wenn Sie auf Ziel verkaufen, ist ein Teil Ihres Umsatzes immer „in der Luft“ — offene Forderungen, die von der Zahlungsfähigkeit anderer abhängen. Ein schlechtes Jahr bei einem großen Kunden kann zu Ihrer eigenen Liquiditätskrise werden.",
+    "biz3Bar1": "der unbezahlten Forderung ersetzt die <strong>Warenkreditversicherung</strong>, wenn der Kunde nicht zahlen kann. Und etwas ebenso Wertvolles: <strong>laufende Bonitätsbewertung</strong> Ihrer Kunden — Sie wissen im Voraus, mit wem Sie es zu tun haben, bevor Sie Kredit gewähren.",
+    "biz3Note": "Sie verkaufen mit Zuversicht, geben neuen Kunden ohne Angst Zahlungsziele und schlafen ruhig, wenn Ihr größter Kunde im Verzug ist.",
+    "biz4H": "4. Garantien, ohne Ihre Bank zu binden",
+    "biz4P": "Jede Bankbürgschaft bindet Kreditlinie — Spielraum, der Wachstum, Einkäufe, Löhne finanzieren könnte. Eine Kautionsversicherung lässt ihn frei:",
+    "biz4G1": "Bankbürgschaft",
+    "biz4G1m": "Bindet Kreditlinie & Liquidität",
+    "biz4G2": "Kautionsversicherung",
+    "biz4G2m": "Ihre Kreditlinie bei der Bank bleibt frei",
+    "biz4Note": "Für Ausschreibungen, Verträge, Zoll, Bauarbeiten — dieselbe Garantie für den Vertragspartner, aber Ihre Liquidität bleibt, wo sie hingehört: im Unternehmen.",
+    "biz5H": "5. Das unsichtbare Risiko: der Cyberangriff",
+    "biz5P": "Kleine Unternehmen halten sich für zu klein, um ein Ziel zu sein. Das Gegenteil stimmt — sie sind das bevorzugte Ziel, gerade weil ihre Abwehr schwächer ist. Ransomware, die Ihre Daten sperrt, abgeflossene Kundendaten, Betriebsstillstand, DSGVO-Bußgelder.",
+    "biz5Bar1": "der Cyberangriffe richten sich gegen kleine und mittlere Unternehmen — nicht gegen die Großen. Eine <strong>Cyber</strong>-Versicherung deckt: Wiederherstellung von Systemen & Daten, Krisenmanagement, Umsatzausfall durch Stillstand, Rechtsbeistand & DSGVO-Bußgelder, Benachrichtigung der Kunden.",
+    "biz5Note": "Sie müssen kein Technologieunternehmen sein, um getroffen zu werden. Es reichen ein Computer, eine E-Mail und ein Moment der Unachtsamkeit eines Mitarbeiters.",
+    "biz6H": "6. Die persönliche Haftung dessen, der entscheidet (D&O)",
+    "biz6P": "Jede Managemententscheidung kann angefochten werden — von Partnern, Mitarbeitern, dem Finanzamt, Gläubigern, sogar Gesellschaftern. Und die Haftung endet nicht beim Unternehmen: Sie reicht bis in das <strong>Privatvermögen</strong> des Geschäftsführers oder Vorstandsmitglieds.",
+    "biz6Bar1": "— Haus, Ersparnisse, das Vermögen eines Lebens — können wegen einer in gutem Glauben getroffenen Entscheidung auf dem Spiel stehen. Die <strong>D&O-Versicherung (Directors & Officers)</strong> übernimmt die Kosten der Rechtsverteidigung und Entschädigungen und schützt die, die entscheiden.",
+    "biz6Note": "Je ernster Sie die Unternehmensführung nehmen, desto stärker sind Sie persönlich exponiert. D&O ist die Deckung, mit der Sie entscheiden können, ohne Ihr Zuhause zu riskieren.",
+    "bizCta": "Schauen wir, welche dieser Risiken Sie betreffen →",
+    "bizNote": "Die Beträge sind beispielhaft und sollen die Logik vermitteln — kein Angebot und keine Zusage. Jede Lösung wird auf Ihre eigenen Daten zugeschnitten. Warenkredit- & Kautionsversicherung über Allianz Trade.",
+    "bizFig3": "bis zu 90 %",
+    "bizFig6": "Privatvermögen",
+    "moduleToolPolicy": "Beispielanalyse ansehen →",
+    "moduleToolArch": "Vorher / nachher — sehen Sie den Unterschied →",
+    "archEyebrow": "Architektur · Vorher und nachher",
+    "archTitle": "Von verstreuten Policen zu einem klaren Bild.",
+    "archSub": "Den meisten fehlt es nicht an Policen — sie haben ein Abstimmungsproblem. Doppelt, wo es nicht nötig ist, Lücken, wo es zählt.",
+    "arch1H": "Das „Vorher“: vier Policen, die nicht miteinander sprechen",
+    "arch1P": "Ein typisches Bild, das ich oft sehe. Für sich genommen nichts „Falsches“ — aber zusammen lassen sie Geld liegen und Risiken ungedeckt.",
+    "archBad1": "<strong>Doppelte Lebensversicherung</strong> — eine über den Arbeitgeber, eine alte Einzelpolice. Sie zahlen zweimal für den Todesfall, aber keine deckt die Berufsunfähigkeit.",
+    "archBad2": "<strong>Zwei Krankenversicherungen</strong> bei verschiedenen Versicherern — überlappende Leistungen, doppelter Beitrag.",
+    "archBad3": "<strong>Anlage & Sparen unabgestimmt</strong> — ein fondsgebundenes Produkt mit hohen Kosten neben einem „schlafenden“ Konto, ohne gemeinsames Ziel.",
+    "archBad4": "<strong>Die große Lücke:</strong> kein echter Einkommensschutz und keine gezielte Altersvorsorge.",
+    "arch2H": "Das „Nachher“: eine stimmige Architektur",
+    "arch2P": "Gleiches — oder sogar geringeres — Budget. Jedes Teil hat eine Aufgabe, nichts überschneidet sich, nichts Entscheidendes fehlt.",
+    "archGood1": "<strong>Ein Einkommensschutz</strong>, der Tod <em>und</em> Berufsunfähigkeit abdeckt — dort, wo das Leben wirklich trifft.",
+    "archGood2": "<strong>Eine Krankenversicherung</strong> auf dem richtigen Niveau, ohne Überschneidung — die Beitragsdifferenz geht woandershin.",
+    "archGood3": "<strong>Anlagen abgestimmt</strong> auf Profil und Horizont jedes Ziels — geringere Kosten, klarer Zweck.",
+    "archGood4": "<strong>Einkommens- und Rentenlücke geschlossen</strong> — mit dem Geld, das durch die Doppelungen frei wurde.",
+    "arch3H": "Was sich in der Praxis ändert",
+    "archG1": "Keine Überschneidung",
+    "archG1m": "Sie zahlen nicht zweimal für dasselbe",
+    "archG2": "Keine kritische Lücke",
+    "archG2m": "Abgesichert, wo es zählt",
+    "archG3": "Gleiche oder geringere Kosten",
+    "archG3m": "Ein vollständiges Bild, nicht mehr Ausgaben",
+    "archCta": "Möchten Sie sehen, wie Ihr eigenes Bild zusammenpasst? →",
+    "archNote": "Beispiel zur Veranschaulichung der Logik — kein Produktvorschlag. Jede Architektur wird auf Basis Ihrer eigenen Daten und bestehenden Deckungen entworfen.",
+    "riskEyebrow": "RiskGuard Family · Schnellcheck",
+    "riskTitle": "Wie ungeschützt ist Ihre Familie?",
+    "riskSub": "6 kurze Fragen. Keine Dateneingabe — nur ein klares Bild.",
+    "riskCta": "Möchten Sie eine kostenlose Prüfung Ihrer Lücken? →",
+    "riskNote": "Ein Orientierungsbild auf Basis Ihrer Antworten — es ersetzt keine vollständige Bedarfsanalyse.",
+    "moduleToolAi": "Die Plattform ansehen →",
+    "aiEyebrow": "RiskGuard Family · Die Engine hinter der Analyse",
+    "aiTitle": "Das Bild, das Sie sehen, verändert jede Entscheidung",
+    "aiSub": "Eine ganzheitliche Plattform mit 13 Modulen, die komplexe Daten in ein klares, belegtes Bild verwandelt.",
+    "aiFoundLabel": "Grundlage",
+    "aiFoundNote": "Internationale Standards und der griechische Rechts- und Regulierungsrahmen — bei jeder Änderung sofort aktualisiert.",
+    "aiCardATitle": "360°-Risiko-Score",
+    "aiCardACap": "13 Module — Schutz, Rente, Gesundheit, Erbe — in einer ganzheitlichen Sicht.",
+    "aiCardBTitle": "„Was-wäre-wenn“-Szenarien",
+    "aiCardBCap": "Deckung der Rentenlücke im direkten Vergleich — wie sich das Ergebnis mit jeder Annahme verschiebt.",
+    "aiCardCTitle": "Stress Test & Backtesting",
+    "aiCardCCap": "Belastbarkeitsprüfung unter extremen Szenarien — Monte Carlo & historisches Backtesting.",
+    "aiCardDTitle": "Inflationsverlust",
+    "aiCardDCap": "Wie die Inflation die Kaufkraft aufzehrt — in heutigen Euro.",
+    "aiMethodTitle": "Statistische Modelle im Kern",
+    "aiMethodText": "Stresstests unter extremen Szenarien, Monte Carlo, historisches Backtesting und Guyton-Klinger-Entnahmeregeln — keine Vermutung, sondern belegte Analyse.",
+    "aiCta": "Möchten Sie Ihre eigene Analyse sehen? →",
+    "aiShotStress": "Dreistufiger Stresstest (ISO 31000 · EBA · Federal Reserve) — Belastbarkeit unter extremen Szenarien.",
+    "aiShotEfka": "Echte Einkommenslücken gegenüber der griechischen staatlichen Absicherung (ΕΦΚΑ) — Erwerbsunfähigkeit, Tod, Arbeitslosigkeit.",
+    "aiShotInflation": "Wie die Inflation die Kaufkraft aufzehrt — in heutigen Euro.",
+    "aiShotGuardrails": "Dynamische Entnahmeregeln (Guyton-Klinger) auf Basis der Erfolgswahrscheinlichkeit des Plans.",
+    "aiNote": "Die Zahlen sind beispielhaft und dienen der Darstellung der Methode. Kein Bezug zu echten Kundendaten.",
+    "famEyebrow": "Für Privatpersonen & Familien · Warum es wichtig ist",
+    "famTitle": "Drei Zahlen, die Ihren Blick verändern.",
+    "famSub": "Keine Theorie — einfache, klare Beispiele dafür, was wirklich auf dem Spiel steht und was sich aufbauen lässt.",
+    "fam1H": "1. Ihr Einkommen ist Ihr größtes Vermögen",
+    "fam1P": "Stellen Sie sich einen 40-jährigen Angestellten mit 1.800 € netto im Monat vor, 27 Jahre vor der Rente. Das Einkommen, das bis dahin durch seine Hände geht:",
+    "fam1Bar1": "Wert des Einkommens bis zur Rente",
+    "fam1Bar2": "Deckung, die ich in der Praxis oft vorfinde",
+    "fam1Note": "Wenn dieses Einkommen plötzlich ausbliebe — wie viel von den 583.200 € ist heute wirklich geschützt? Dort beginnt das wichtigste Gespräch.",
+    "fam2H": "2. Die Zeit leistet die schwerste Arbeit — kostenlos",
+    "fam2P": "Gleiche Sparrate von 200 € im Monat, gleiche durchschnittliche Rendite. Nur der Startpunkt ändert sich:",
+    "fam2A": "Start mit 30 (37 Jahre)",
+    "fam2B": "Start mit 40 (27 Jahre)",
+    "fam2C": "Start mit 50 (17 Jahre)",
+    "fam2Note": "Fast das Vierfache an Ergebnis, mit genau derselben Mühe. Der beste Zeitpunkt zu beginnen war gestern; der zweitbeste ist heute.",
+    "fam3H": "3. Nicht ein Konto — getrennte Ziele",
+    "fam3P": "Jedes Ziel hat seinen eigenen Horizont und seine eigene Strategie. Wenn alles in einen Topf kommt, wird keinem davon gut gedient.",
+    "fam3G1": "Eigenheim",
+    "fam3G1m": "Horizont 5–10 Jahre",
+    "fam3G2": "Studium der Kinder",
+    "fam3G2m": "Horizont 10–18 Jahre",
+    "fam3G3": "Ruhestand",
+    "fam3G3m": "Horizont 20+ Jahre",
+    "famCta": "Bringen wir Ihre eigenen Zahlen in Ordnung →",
+    "famNote": "Die Beträge sind beispielhaft und sollen die Logik vermitteln — keine Renditeprognose und kein Angebot. Jeder Plan wird mit Ihren eigenen Daten berechnet.",
+    "policyEyebrow": "PolicyLens · Analyse & Vergleich",
+    "policyTitle": "Was zahlt die Police — und was zahlen Sie selbst?",
+    "policySub": "Laden Sie Ihre Police hoch, aus jeder Sparte, und sehen Sie sie klar: Deckungen, Kosten, Lücken — und was ein echter Schadenfall kosten würde.",
+    "policyBranches": "<span>Leben</span><span>Gesundheit</span><span>Fondsgebunden</span><span>Kfz</span><span>Wohnen</span><span>Gewerbe</span>",
+    "policyTabHealth": "Gesundheit / Krankenhaus",
+    "policyTabUL": "Fondsgebunden",
+    "policyEvalTitle": "Passt sie heute zu Ihrem Bedarf?",
+    "policyEvalText": "Schicken Sie mir Ihre Police, und wir bewerten sie gemeinsam — auf Basis von heute, nicht vom Tag der Unterschrift. Kostenlos und unverbindlich.",
+    "policyCta": "Police zur Analyse senden →",
+    "policyNote": "Die Zahlen sind beispielhaft und veranschaulichen die Methode. Kein Vergleich mit einem namentlich genannten Produkt.",
+    "intelligenceEyebrow": "Analytische Ebene der Beratung",
+    "intelligenceTitle": "Technologie ersetzt keine Beratung. Sie macht sie klarer und besser belegt.",
+    "intelligenceText": "Meine Tools helfen, Bedarf, Lücken und alternative Szenarien sichtbar zu machen, bevor wir über Produkte sprechen. Das macht das Gespräch konkreter und die Entscheidungen ruhiger.",
+    "panelOne": "Klarheit der Absicherung",
+    "panelTwo": "Risikolage des Unternehmens",
+    "panelThree": "Entscheidungsszenarien",
+    "panelOneDet": "Wie klar Ihr Bild der Absicherung ist, in einem einzigen Wert: was gedeckt ist, was nicht, was sich überschneidet. Je höher, desto weniger Überraschungen im entscheidenden Moment.",
+    "panelTwoDet": "Wie viele Punkte des Unternehmens ungeschützt sind und Aufmerksamkeit brauchen — von der Schlüsselperson über den Warenkredit bis zu Cyber. Wir erkennen sie, bevor sie zum Problem werden.",
+    "panelThreeDet": "Alternative Szenarien — vorsichtig, Basis, dynamisch — damit Sie Optionen mit echten Zahlen vergleichen, bevor Sie entscheiden, statt zu raten.",
+    "methodEyebrow": "Die Methode",
+    "methodTitle": "Von der Klarheit zum Plan.",
+    "methodIntro": "Der Prozess beginnt bei Ihrem Bedarf, führt über die Analyse und mündet in einen Plan, der begleitet und mit der Zeit angepasst werden kann.",
+    "stepOneTitle": "Bestandsaufnahme",
+    "stepOneText": "Ziele, Verpflichtungen, Risiken und bestehende Deckungen werden zu einem klaren Bild geordnet.",
+    "stepTwoTitle": "Analyse",
+    "stepTwoText": "Daten werden mit praktischen Bewertungstools zu vergleichbaren Szenarien.",
+    "stepThreeTitle": "Plan",
+    "stepThreeText": "Ein Plan für Schutz, Anlage und Prioritäten entsteht — mit realistischen nächsten Schritten.",
+    "stepFourTitle": "Überprüfung",
+    "stepFourText": "Der Plan bleibt lebendig, während sich Familie, Unternehmen oder Märkte verändern.",
+    "stepMore": "Details",
+    "stepOneDetail": "Bevor irgendetwas vorgeschlagen wird, braucht es ein ehrliches Bild. Gemeinsam halten wir Ihre Ziele fest — was Sie schützen und was Sie aufbauen wollen —, Ihre Verpflichtungen und jede bestehende Police: Leben, Gesundheit, Sach, Rente. Oft taucht genau hier etwas Unerwartetes auf: eine Deckung, die Sie zu haben glaubten, die aber nicht mehr gilt, oder eine Lücke, die jahrelang im Dunkeln lag. Wir gehen nicht weiter, bevor das Bild klar ist — und Ihres.",
+    "stepTwoDetail": "Ein Bild ohne Analyse bleibt ein Eindruck. Ich lasse Ihre Daten durch spezialisierte Tools laufen, die aus „Ich glaube, ich bin abgesichert“ Zahlen machen: wo Lücken bestehen, wo Sie zweimal für dasselbe zahlen und wie viel bei einem echten Ereignis aus Ihrer eigenen Tasche käme. Um zu sehen, was Ihr Plan wirklich aushält, verlasse ich mich nicht auf optimistische Annahmen, sondern auf statistische <span class='term' tabindex='0' role='button' aria-label='Begriffserklärung'>Stresstest<span class='tip'>Eine Belastungsprüfung gegen extreme, aber realistische Szenarien — Kursstürze, Inflation, das Unerwartete.</span></span>-Modelle: Tausende von <span class='term' tabindex='0' role='button' aria-label='Begriffserklärung'>Monte-Carlo<span class='tip'>Tausende zufällige Simulationen der Zukunft, die die Bandbreite möglicher Ergebnisse zeigen — nicht eine einzige optimistische Prognose.</span></span>-Simulationen, <span class='term' tabindex='0' role='button' aria-label='Begriffserklärung'>Backtesting<span class='tip'>Prüfung des Plans anhand echter historischer Marktdaten und vergangener Krisen.</span></span> mit echten historischen Marktdaten und Krisen sowie <span class='term' tabindex='0' role='button' aria-label='Begriffserklärung'>Guyton-Klinger<span class='tip'>Regeln (Leitplanken), die Entnahmen so anpassen, dass Ihr Geld durch jede Marktphase reicht.</span></span>-Regeln, die anzeigen, wann ein Plan angepasst werden muss. Sie sehen die Szenarien — auch die unangenehmen — mit eigenen Augen. Deshalb sind die Entscheidungen, die folgen, ruhig und nicht überstürzt.",
+    "stepThreeDetail": "Aus der Analyse entsteht ein schriftlicher, priorisierter Plan — keine Produktliste. Was zuerst geschützt wird, weil es nicht warten kann, was schrittweise aufgebaut wird, was warten kann. Mit realistischen Schritten, transparenten Kosten und Prioritäten, die für Ihr eigenes Budget sinnvoll sind. Kein Druck, sofort zu unterschreiben; lieber eine richtige Entscheidung als eine schnelle.",
+    "stepFourDetail": "Ein Plan in der Schublade veraltet. Deshalb begleiten wir ihn auf zwei Wegen: bei einem festen jährlichen Treffen und immer dann, wenn sich etwas Wesentliches ändert — ein Kind, ein Zuhause, ein neuer unternehmerischer Schritt, eine Marktveränderung. So bleibt keine Deckung vergessen, und jeder Euro, den Sie einsetzen, arbeitet weiter für Ihre Ziele. Die Beziehung endet nicht mit der Unterschrift — dort beginnt sie.",
+    "toolsEyebrow": "Meine Tools",
+    "toolsTitle": "Beratung mit Daten, nicht nur mit Worten.",
+    "toolsText": "Ich habe spezialisierte Anwendungen entwickelt, um Bedarf zu erfassen, Risiken zu bewerten und Szenarien zu vergleichen — damit jede Entscheidung klarer, besser belegt und messbar wird.",
+    "metricOne": "Bedarfskarte",
+    "metricTwo": "Risikolücken",
+    "metricThree": "Szenarien",
+    "calcEyebrow": "Probieren Sie es aus",
+    "calcTitle": "Welches Kapital kann ich aufbauen?",
+    "calcSub": "Wählen Sie ein Ziel oder stellen Sie frei ein.",
+    "calcGoalRetire": "Ruhestand",
+    "calcGoalStudies": "Studium der Kinder",
+    "calcGoalHome": "Erstes Eigenheim",
+    "calcGoalDreams": "Meine Träume",
+    "calcSaveLabel": "Monatliche Sparrate",
+    "calcYearsLabel": "In wie vielen Jahren?",
+    "calcYearsUnit": "Jahre",
+    "calcConservative": "Vorsichtig (3 %)",
+    "calcBalanced": "Ausgewogen (6 %)",
+    "calcDynamic": "Dynamisch (8 %)",
+    "calcTotalYou": "Ihre Einzahlungen",
+    "calcTotalGain": "Ertrag aus Rendite*",
+    "calcNote": "*Ausgewogenes Szenario. Renditen sind nicht garantiert — dies ist eine Orientierung.",
+    "calcCta": "Möchten Sie das Szenario finden, das zu Ihnen passt?",
+    "aboutEyebrow": "Über mich",
+    "aboutTitle": "Die beste Beratung beginnt mit Verstehen, nicht mit Verkaufen.",
+    "aboutText1": "<strong>Über 25 Jahre</strong> in der Finanzbranche — Beginn bei der Ergasias Bank, dann Interamerican, MetLife und heute Allianz. Bankdisziplin, Versicherungswissen, Anlageplanung. Drei Welten, die selten im selben Büro zusammenkommen.",
+    "aboutText2": "Träger der Qualifikation <strong>LUTCF</strong> (Life Underwriter Training Council Fellow) — ein dreijähriges Programm des American College of Financial Services, in Griechenland angeboten über Interamerican. Eine der anerkanntesten internationalen Zertifizierungen in Versicherung und Finanzplanung.",
+    "aboutText3": "Studium der Wirtschaftswissenschaften. Die eigentliche Ausbildung aber kam aus Tausenden von Gesprächen — mit Familien, die ihre Zukunft planten, und Unternehmen, die einen Verbündeten im Risikomanagement brauchten.",
+    "aboutText4": "In den letzten Jahren entwickle ich <strong>eigene KI-gestützte Tools</strong> — Anwendungen für Risikoanalyse, Szenariovergleich und Bedarfserfassung. Sie ersetzen keine Beratung. Sie machen sie präziser, transparenter, persönlicher.",
+    "aboutText5": "<strong>Erfahrung schafft Instinkt. Technologie macht ihn messbar.</strong>",
+    "aboutPersonal": "<em>Außerhalb der Arbeit: klassische Gitarre und vertiefte Musiktheorie. Aktives Mitglied eines professionellen Chors mit klassischem Repertoire — denn in der Musik wie in der Beratung ist Harmonie nie Zufall.</em>",
+    "bookEyebrow": "Der schnellste Weg",
+    "bookTitle": "Wählen Sie selbst einen Termin",
+    "bookText": "Dreißig Minuten, unverbindlich. Sehen Sie, wann ich frei bin, und buchen Sie, was Ihnen passt — auch jetzt sofort, um elf Uhr abends.",
+    "bookCta": "30-Minuten-Gespräch buchen",
+    "bookAlt": "Oder, wenn Sie lieber schreiben, antworte ich Ihnen:",
+    "contactEyebrow": "Nächster Schritt",
+    "contactTitle": "Lassen Sie uns sprechen — unverbindlich, ohne Druck.",
+    "contactText": "Ein Gespräch — ohne Eile, ohne fertige Antworten. Wir schauen einfach gemeinsam, wo Sie stehen und ob ich helfen kann.",
+    "contactCta": "Nachricht senden",
+    "formNameLabel": "Name",
+    "formEmailLabel": "E-Mail",
+    "formMessageLabel": "Nachricht",
+    "formSubmit": "Senden",
+    "inviteLead": "Eine Einladung zu meiner Seite senden:",
+    "footerName": "Ioannis Vardavas, lutcf",
+    "footerRole": "Life, Health, P&C & Investment Architect",
+    "footerReg": "Eingetragener Versicherungsvermittler (Griechenland) · Allg. Reg.-Nr. der Kammer Athen: 177766 · in Zusammenarbeit mit Allianz",
+    "footerContact": "Kontakt",
+    "contactSave": "Meinen Kontakt speichern",
+    "epafiEyebrow": "Kontakt",
+    "epafiTitle": "Meinen Kontakt speichern",
+    "epafiText": "Scannen Sie den Code mit der Handykamera — mein Kontakt öffnet sich, ein Tipp, und er ist in Ihren Kontakten.",
+    "epafiDl": "oder auf diesen Computer herunterladen",
+    "footerQrCap": "Mit der Handykamera scannen, um meinen Kontakt zu speichern",
+    "footerSave": "Kontakt speichern",
+    "footerPrivacy": "Datenschutzerklärung",
+    "footerCopy": "© 2026 Ioannis Vardavas. Alle Rechte vorbehalten.",
+    "formConsent": "Ich habe die <button type='button' class='legal-link' data-target='privacyModal'>Datenschutzerklärung</button> gelesen und akzeptiert und willige in die Verarbeitung meiner Angaben ein, damit Sie mir antworten können.",
+    "privacyEyebrow": "Rechtliches",
+    "privacyTitle": "Datenschutzerklärung",
+    "privacyBody": "<p class='legal-updated'>Stand: August 2026 · Übersetzung; maßgeblich ist die griechische Fassung.</p><p>Der Schutz Ihrer personenbezogenen Daten ist wichtig. Diese Erklärung beschreibt, welche Daten über diese Website erhoben werden, zu welchem Zweck und welche Rechte Sie haben, gemäß der Datenschutz-Grundverordnung (DSGVO — EU 2016/679).</p><h3>1. Verantwortlicher</h3><p>Ioannis Vardavas, Versicherungsvermittler. Kontakt: <a href='mailto:ioannis.vardavas@gmail.com'>ioannis.vardavas@gmail.com</a> · Tel. +30 698 388 0746.</p><h3>2. Welche Daten erhoben werden</h3><p>Nur das, was Sie in das Kontaktformular eingeben: <strong>Ihr Name, Ihre E-Mail-Adresse und Ihre Nachricht</strong>. Die Website <strong>verwendet keine Cookies</strong> und erhebt keine Daten ohne Ihr Wissen. Für anonyme, zusammengefasste Besucherstatistiken nutzt sie <strong>Cloudflare Web Analytics</strong> — ein Werkzeug, das <strong>ohne Cookies</strong> arbeitet und keine personenbezogenen Daten erhebt oder speichert, die Sie identifizieren. Die <strong>Spiele</strong> speichern, was Sie eingeben, <strong>nur lokal auf Ihrem eigenen Gerät</strong> (lokaler Speicher des Browsers); nichts wird irgendwohin gesendet, und Sie können es jederzeit mit der Schaltfläche „Löschen“ entfernen.</p><h3>3. Zweck &amp; Rechtsgrundlage</h3><p>Ihre Angaben werden ausschließlich verwendet, um auf Ihre Anfrage zu antworten und mit Ihnen Kontakt aufzunehmen. Rechtsgrundlage ist Ihre <strong>Einwilligung</strong> (Art. 6 Abs. 1 lit. a DSGVO), die Sie mit dem Absenden des Formulars erteilen.</p><h3>4. Empfänger — Dritte</h3><p>Das Formular wird über den Dienst <strong>Web3Forms</strong> übermittelt, und die Website wird bei <strong>Cloudflare</strong> gehostet. Wenn Sie ein Gespräch buchen, geschieht das über den Dienst <strong>Cal.com</strong>, der sich in einem neuen Tab öffnet: Die dort eingegebenen Angaben (Name, E-Mail, eventuelle Notiz) erhält Cal.com als Auftragsverarbeiter, und zusätzlich gilt dessen eigene Datenschutzerklärung. Diese Website <strong>lädt keinen Code von Cal.com</strong> und verfolgt Sie dort nicht. Ihre Daten werden nicht verkauft und nicht zu Werbezwecken an Dritte weitergegeben.</p><h3>5. Speicherdauer</h3><p>Ihre Angaben werden nur so lange aufbewahrt, wie es für unsere Kommunikation nötig ist, und gelöscht, sobald sie nicht mehr erforderlich sind.</p><h3>6. Ihre Rechte</h3><p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit. Wenden Sie sich dafür an <a href='mailto:ioannis.vardavas@gmail.com'>ioannis.vardavas@gmail.com</a>. Sie haben außerdem das Recht, Beschwerde bei der griechischen Datenschutzbehörde einzulegen (<a href='https://www.dpa.gr' target='_blank' rel='noreferrer'>dpa.gr</a>).</p><h3>7. Sicherheit</h3><p>Es werden angemessene technische und organisatorische Maßnahmen getroffen, um Ihre Daten vor unbefugtem Zugriff oder Gebrauch zu schützen.</p><p class='legal-note'>Diese Erklärung kann aktualisiert werden. Für Versicherungsprodukte gelten zusätzlich die Bedingungen und Datenschutzerklärungen der jeweiligen Versicherungsgesellschaften.</p>",
+    "phoneLabel": "<svg style=\"width:18px;height:18px;vertical-align:middle;margin-right:4px;fill:currentColor\" viewBox=\"0 0 24 24\"><path d=\"M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z\"/></svg>Tel. +30 698 388 0746",
+    "whatsappLabel": "<svg style=\"width:18px;height:18px;vertical-align:middle;fill:currentColor\" viewBox=\"0 0 24 24\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z\"/></svg>",
+    "emailLabel": "<svg style=\"width:18px;height:18px;vertical-align:middle;fill:currentColor\" viewBox=\"0 0 24 24\"><path d=\"M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z\"/></svg>",
+    "linkedinLabel": "<svg style=\"width:18px;height:18px;vertical-align:middle;fill:currentColor\" viewBox=\"0 0 24 24\"><path d=\"M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z\"/></svg>"
   }
 };
 
-/* Πρόταση 4 — νέα κείμενα (EL/EN) για τα κομμάτια που άλλαξαν μορφή. */
+/* Πρόταση 4 — νέα κείμενα (EL/EN/DE) για τα κομμάτια που άλλαξαν μορφή. */
 (function () {
   const paint = (word) =>
     '<span class="paint">' + word +
@@ -5963,6 +6341,31 @@ const copy = {
     v4TipB: "If the money earned a steady 6% a year. In reality, returns go up and down.",
     v4TipD: "If the money earned a steady 8% a year. Higher possible return, bigger ups and downs.",
     philosophyCredo: "Better <mark>no sale</mark> than the wrong sale."
+  });
+  Object.assign(copy.de, {
+    v4Brand: "Ioannis Vardavas",
+    v4NavNumbers: "Zahlen",
+    v4NavGames: "Spiele",
+    v4NavCta: "30 Minuten buchen",
+    v4Tag: "Financial Planning & Risk Management · 25 Jahre",
+    v4HeroTitle: '<span class="h-line">Die Angst vergeht,</span><span class="h-line">wenn das schlimmste Szenario</span><span class="h-line">' + paint("eine Zahl") + " bekommt.</span>",
+    v4Lead: "<b>Ihr Finanzplan, getestet, bevor Sie ihn brauchen.</b> Versicherung, Rente, Anlagen und Risiken für Familien und Unternehmen, in einem klaren Bild. Ohne Kleingedrucktes, ohne Druck.",
+    v4SloganBand: "Die Angst vergeht, wenn das schlimmste Szenario <em>eine Zahl bekommt.</em>",
+    v4Cta1: "Gespräch buchen",
+    v4Cta2: "Mit den Zahlen spielen ↓",
+    v4HeroSave: "Noch nicht? <u>Speichern Sie meinen Kontakt</u> — bevor Sie ihn brauchen.",
+    v4NavSave: "Kontakt speichern",
+    v4Cred1b: "25+ Jahre",
+    v4Cred1: "Ergasias Bank → Allianz",
+    v4Cred2: "internationale Zertifizierung",
+    v4Cred3: "Reg.-Nr. Kammer Athen",
+    v4BandKicker: "Bevor wir sprechen",
+    v4BandTitle: "Zwei Zahlen eingeben.<br />Sehen, was Sie aufbauen.",
+    v4BandText: "Hier und jetzt, ohne Anmeldung und ohne persönliche Angaben. Was Sie eingeben, bleibt auf Ihrem eigenen Bildschirm.",
+    v4TipC: "Wenn das Geld stetig 3 % im Jahr brächte. Eine Annahme zum Vergleich — keine Garantie.",
+    v4TipB: "Wenn das Geld stetig 6 % im Jahr brächte. In Wirklichkeit schwanken Renditen auf und ab.",
+    v4TipD: "Wenn das Geld stetig 8 % im Jahr brächte. Höhere mögliche Rendite, stärkere Schwankungen.",
+    philosophyCredo: "Lieber <mark>kein Verkauf</mark> als ein falscher Verkauf."
   });
 })();
 
@@ -6109,10 +6512,15 @@ if (contactForm) {
       ok: "Thank you! Your message was sent — I'll be in touch soon.",
       err: "Something went wrong. Please try again or call me.",
     },
+    de: {
+      "sending": "Wird gesendet…",
+      "ok": "Danke! Ihre Nachricht ist angekommen — ich melde mich in Kürze.",
+      "err": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder rufen Sie mich an."
+    },
   };
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const lang = (["en", "de"].includes(document.documentElement.lang) ? document.documentElement.lang : "el");
     const m = formMessages[lang];
     statusEl.hidden = false;
     statusEl.className = "form-status";
@@ -6147,7 +6555,7 @@ if (calcSave && calcYears) {
   const fv = (pmt, r, n) => (r === 0 ? pmt * n : pmt * ((Math.pow(1 + r, n) - 1) / r));
 
   function runCalc() {
-    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const lang = (["en", "de"].includes(document.documentElement.lang) ? document.documentElement.lang : "el");
     const monthly = parseInt(calcSave.value, 10);
     const years = parseInt(calcYears.value, 10);
     const months = years * 12;
@@ -6227,12 +6635,12 @@ document.querySelectorAll(".module-tool, .story-btn").forEach((t) =>
    Το link γίνεται αυτόματα κάρτα (og preview) στην άλλη άκρη. */
 (function () {
   const SITE_URL = "https://vardavas-site.pages.dev";
-  const en = () => document.documentElement.lang === "en";
-  const inviteText = () =>
-    (en()
-      ? "Hi! 👋 Here's my site — take a look whenever you have a moment: "
-      : "Γεια σας! 👋 Σας στέλνω τη σελίδα μου — ρίξτε μια ματιά όποτε έχετε λίγο χρόνο: ") +
-    SITE_URL;
+  const INVITE = {
+    el: "Γεια σας! 👋 Σας στέλνω τη σελίδα μου — ρίξτε μια ματιά όποτε έχετε λίγο χρόνο: ",
+    en: "Hi! 👋 Here's my site — take a look whenever you have a moment: ",
+    de: "Hallo! 👋 Hier ist meine Seite — schauen Sie gern hinein, wenn Sie einen Moment Zeit haben: ",
+  };
+  const inviteText = () => (INVITE[document.documentElement.lang] || INVITE.el) + SITE_URL;
 
   const waBtn = document.getElementById("inviteWa");
   if (waBtn) {
@@ -6344,6 +6752,98 @@ if (policyPanel) {
           ["g", "Life cover", "€30,000"]
         ]
       }
+    },
+    de: {
+      "health": {
+        "file": "krankenversicherung.pdf · 14 S.",
+        "costLabel": "Gesamtkosten des Schadens",
+        "scenarioTitle": "5 Tage Aufenthalt in einer Privatklinik",
+        "total": "7.000 €",
+        "pays": "5.500 €",
+        "pocket": "1.500 €",
+        "paysPct": 79,
+        "payLabel": "Die Police zahlt",
+        "pocketLabel": "Aus eigener Tasche",
+        "heatTitle": "Deckungskarte",
+        "heat": [
+          [
+            "g",
+            "Krankenhaus im Vertragsnetz",
+            "100 %"
+          ],
+          [
+            "y",
+            "Krankenhaus außerhalb des Netzes",
+            "90 %"
+          ],
+          [
+            "r",
+            "Ambulant (Arztbesuche, Untersuchungen)",
+            "nicht gedeckt"
+          ],
+          [
+            "g",
+            "Intensivstation / Intermediate Care",
+            "100 %"
+          ],
+          [
+            "y",
+            "Behandlung im Ausland",
+            "90 % außerhalb der USA"
+          ],
+          [
+            "g",
+            "Private Pflegekraft",
+            "mit ärztlicher Begründung"
+          ]
+        ]
+      },
+      "ul": {
+        "file": "fondspolice.pdf · 28 S.",
+        "isValue": true,
+        "scenarioTitle": "Geschätzter Wert nach 20 Jahren (Annahme 5 %)",
+        "value": "37.800 €",
+        "contrib": "24.000 €",
+        "fromLabel": "aus",
+        "contribLabel": "Einzahlungen",
+        "gain": "+13.800 €",
+        "gainLabel": "Nettogewinn",
+        "charges": "−1.850 €",
+        "chargesLabel": "Kosten insgesamt",
+        "heatTitle": "Deckungskarte",
+        "heat": [
+          [
+            "g",
+            "Anlageoptionen",
+            "6 Fonds"
+          ],
+          [
+            "g",
+            "Verwaltungskosten",
+            "niedrig"
+          ],
+          [
+            "y",
+            "Kapitalgarantie",
+            "nur bei Ablauf"
+          ],
+          [
+            "y",
+            "Vorzeitiger Rückkauf (Jahre 1–5)",
+            "gestaffelt"
+          ],
+          [
+            "g",
+            "Zuzahlungen",
+            "möglich"
+          ],
+          [
+            "g",
+            "Todesfallschutz",
+            "30.000 €"
+          ]
+        ]
+      }
     }
   };
 
@@ -6379,7 +6879,7 @@ if (policyPanel) {
   let policyTab = "health";
 
   function renderPolicy() {
-    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const lang = (["en", "de"].includes(document.documentElement.lang) ? document.documentElement.lang : "el");
     policyPanel.innerHTML = plRender(lang, policyTab);
   }
 
@@ -6458,6 +6958,135 @@ if (riskQuestions) {
       scoreLabel: "Exposure index",
       gapsLabel: "Where we focus first",
       noGaps: "No critical gaps found — well done."
+    },
+    de: {
+      "questions": [
+        {
+          "q": "Wenn Ihr Einkommen morgen ausbliebe — wie lange käme Ihre Familie finanziell zurecht?",
+          "gap": "Einkommensschutz",
+          "opts": [
+            {
+              "t": "Über 1 Jahr",
+              "r": 0
+            },
+            {
+              "t": "3–12 Monate",
+              "r": 1
+            },
+            {
+              "t": "Unter 3 Monaten",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Deckt Ihre Lebensversicherung Kredite und Familienausgaben ab?",
+          "gap": "Lebensversicherung",
+          "opts": [
+            {
+              "t": "Ja, vollständig",
+              "r": 0
+            },
+            {
+              "t": "Teilweise, aber niedrig",
+              "r": 1
+            },
+            {
+              "t": "Keine",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Gibt es eine private Krankenversicherung für die Familie?",
+          "gap": "Krankenversicherung",
+          "opts": [
+            {
+              "t": "Ja, für alle",
+              "r": 0
+            },
+            {
+              "t": "Teilweise",
+              "r": 1
+            },
+            {
+              "t": "Nein",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Sparen oder investieren Sie systematisch für die Zukunft?",
+          "gap": "Altersvorsorge / Sparplan",
+          "opts": [
+            {
+              "t": "Ja, mit Plan",
+              "r": 0
+            },
+            {
+              "t": "Ab und zu",
+              "r": 1
+            },
+            {
+              "t": "Nein",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Haben Sie eine Rücklage für 3–6 Monate Unvorhergesehenes?",
+          "gap": "Notgroschen",
+          "opts": [
+            {
+              "t": "Ja",
+              "r": 0
+            },
+            {
+              "t": "Ein wenig",
+              "r": 1
+            },
+            {
+              "t": "Nein",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Gibt es einen Plan für Ausbildung oder Zukunft Ihrer Kinder?",
+          "gap": "Vorsorge für die Kinder",
+          "opts": [
+            {
+              "t": "Keine Kinder",
+              "r": 0
+            },
+            {
+              "t": "Ja, gibt es",
+              "r": 0
+            },
+            {
+              "t": "Noch nicht",
+              "r": 2
+            }
+          ]
+        }
+      ],
+      "levels": {
+        "green": {
+          "t": "Gut abgesichert",
+          "d": "Ihre Familie steht auf soliden Fundamenten. Eine regelmäßige Überprüfung hält es so."
+        },
+        "yellow": {
+          "t": "Es gibt Lücken",
+          "d": "Einige Bereiche brauchen Aufmerksamkeit, bevor sie zum Problem werden."
+        },
+        "red": {
+          "t": "Erhebliche Lücken",
+          "d": "Es gibt ernste Lücken, die in einem schwierigen Moment teuer werden können."
+        }
+      },
+      "scoreLabel": "Lücken-Index",
+      "gapsLabel": "Wo wir zuerst ansetzen",
+      "noGaps": "Keine kritischen Lücken gefunden — sehr gut."
     }
   };
 
@@ -6471,7 +7100,7 @@ if (riskQuestions) {
   }
 
   function renderRisk() {
-    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const lang = (["en", "de"].includes(document.documentElement.lang) ? document.documentElement.lang : "el");
     const d = RISK[lang];
 
     riskQuestions.innerHTML = d.questions.map(function (q, qi) {
@@ -6591,6 +7220,135 @@ if (bizRiskQuestions) {
       scoreLabel: "Exposure index",
       gapsLabel: "Where you're most at risk",
       noGaps: "No critical gaps found — excellent."
+    },
+    de: {
+      "questions": [
+        {
+          "q": "Wenn Ihre Schlüsselperson plötzlich wegfiele — wie stark wäre das Unternehmen betroffen?",
+          "gap": "Keyperson-Absicherung",
+          "opts": [
+            {
+              "t": "Wenig — es gibt einen Plan",
+              "r": 0
+            },
+            {
+              "t": "Spürbar",
+              "r": 1
+            },
+            {
+              "t": "Existenziell — kein Plan",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Gibt es eine Betriebsunterbrechungsversicherung oder einen Kontinuitätsplan?",
+          "gap": "Betriebskontinuität",
+          "opts": [
+            {
+              "t": "Ja, vollständig",
+              "r": 0
+            },
+            {
+              "t": "Teilweise",
+              "r": 1
+            },
+            {
+              "t": "Nein",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Bieten Sie Ihren Mitarbeitern eine Gruppenversicherung (Gesundheit/Leben) an?",
+          "gap": "Mitarbeiterleistungen",
+          "opts": [
+            {
+              "t": "Ja",
+              "r": 0
+            },
+            {
+              "t": "Wir denken darüber nach",
+              "r": 1
+            },
+            {
+              "t": "Nein",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Wenn ein großer Kunde nicht zahlt oder insolvent wird — was passiert dann?",
+          "gap": "Warenkreditversicherung",
+          "opts": [
+            {
+              "t": "Abgesichert / nur Barzahlung",
+              "r": 0
+            },
+            {
+              "t": "Es würde wehtun",
+              "r": 1
+            },
+            {
+              "t": "Ein schwerer Schlag",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Wie gut ist das Unternehmen gegen Cyberangriffe oder Datenpannen (DSGVO) geschützt?",
+          "gap": "Cyber & Datenschutz",
+          "opts": [
+            {
+              "t": "Deckung & Maßnahmen vorhanden",
+              "r": 0
+            },
+            {
+              "t": "Nur das Nötigste",
+              "r": 1
+            },
+            {
+              "t": "Gar nicht",
+              "r": 2
+            }
+          ]
+        },
+        {
+          "q": "Sind Sie als Geschäftsführer gegen persönliche Haftung für unternehmerische Entscheidungen abgesichert?",
+          "gap": "Managerhaftung (D&O)",
+          "opts": [
+            {
+              "t": "Ja",
+              "r": 0
+            },
+            {
+              "t": "Nicht sicher",
+              "r": 1
+            },
+            {
+              "t": "Nein",
+              "r": 2
+            }
+          ]
+        }
+      ],
+      "levels": {
+        "green": {
+          "t": "Solide Basis",
+          "d": "Das Unternehmen hat die wesentlichen Risiken abgedeckt. Eine jährliche Überprüfung hält es so."
+        },
+        "yellow": {
+          "t": "Es gibt Lücken",
+          "d": "Einige Risiken sind noch offen — besser schließen, bevor sie zuschlagen."
+        },
+        "red": {
+          "t": "Erhebliche Lücken",
+          "d": "Große Risiken sind ungedeckt und können in einem schwierigen Moment teuer werden."
+        }
+      },
+      "scoreLabel": "Lücken-Index",
+      "gapsLabel": "Wo Sie am stärksten exponiert sind",
+      "noGaps": "Keine kritischen Lücken gefunden — ausgezeichnet."
     }
   };
 
@@ -6604,7 +7362,7 @@ if (bizRiskQuestions) {
   }
 
   function renderBizRisk() {
-    const lang = document.documentElement.lang === "en" ? "en" : "el";
+    const lang = (["en", "de"].includes(document.documentElement.lang) ? document.documentElement.lang : "el");
     const d = BIZRISK[lang];
 
     bizRiskQuestions.innerHTML = d.questions.map(function (q, qi) {
@@ -6792,7 +7550,7 @@ window._decorateArrows();
   <script>
 /* Πρόταση 4 — γέμισμα των sliders, εξηγήσεις (tooltip) στα σενάρια. */
 (function () {
-  const lang = () => (document.documentElement.lang === "en" ? "en" : "el");
+  const lang = () => (["en", "de"].includes(document.documentElement.lang) ? document.documentElement.lang : "el");
   document.querySelectorAll('.bubble[data-i18n]').forEach((b) => {
     if (!b.textContent.trim()) b.textContent = copy[lang()][b.dataset.i18n] || "";
   });
