@@ -5691,23 +5691,39 @@ if (bizRiskQuestions) {
 const revealNodes = document.querySelectorAll(".reveal");
 
 if ("IntersectionObserver" in window) {
-  const revealObserver = new IntersectionObserver(
+  /* Δύο παρατηρητές με «νεκρή ζώνη» ανάμεσά τους (16/11/2026).
+     Η κρυμμένη κάρτα είναι ανεβασμένη 44px (translateY(-44px)) και ο παρατηρητής
+     μετρά τη ΜΕΤΑΚΙΝΗΜΕΝΗ θέση. Με έναν παρατηρητής, κάρτα πάνω στο κάτω όριο:
+     κρυμμένη → ανεβαίνει 44px → «φαίνεται» → κατεβαίνει 44px → «δεν φαίνεται» → …
+     δεκάδες φορές το δευτερόλεπτο (τρεμόπαιγμα στα Παιχνίδια). Τώρα: εμφανίζεται
+     όταν μπει αρκετά μέσα στην οθόνη, σβήνει ΜΟΝΟ όταν βγει ολόκληρη ≥60px κάτω
+     από την οθόνη — απόσταση μεγαλύτερη από τα 44px της κίνησης, άρα κανένας
+     βρόχος, σε οποιοδήποτε ύψος οθόνης. */
+  const revealShow = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        } else if (entry.boundingClientRect.top > 0) {
-          /* Ξε-αποκαλύπτουμε ΜΟΝΟ όσα ξαναβρέθηκαν κάτω από την οθόνη, ώστε το
-             animation να ξαναπαίζει όταν ανεβοκατεβαίνεις. Αν σβήναμε και όσα
-             βγήκαν από πάνω, κάθε κάρτα στο όριο τρεμόσβηνε. */
-          entry.target.classList.remove("is-visible");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
       });
     },
     { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
   );
+  const revealHide = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        /* Μόνο όσα βρέθηκαν ξανά ΚΑΤΩ από την οθόνη, ώστε η κίνηση να ξαναπαίζει
+           όταν ανεβοκατεβαίνεις· όσα βγήκαν από πάνω μένουν ορατά. */
+        if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+          entry.target.classList.remove("is-visible");
+        }
+      });
+    },
+    { threshold: 0, rootMargin: "0px 0px 60px 0px" }
+  );
 
-  revealNodes.forEach((node) => revealObserver.observe(node));
+  revealNodes.forEach((node) => {
+    revealShow.observe(node);
+    revealHide.observe(node);
+  });
 } else {
   revealNodes.forEach((node) => node.classList.add("is-visible"));
 }
