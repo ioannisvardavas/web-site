@@ -51,6 +51,7 @@ section{padding:44px 0 0}
 .who img{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;
   box-shadow:0 0 0 3px var(--night),0 0 0 5px rgba(242,181,68,.9)}
 .who .n{font-family:'Manrope',sans-serif;font-weight:800;font-size:21px;line-height:1.2}
+.who .lu{font-weight:600;font-size:14px;opacity:.6}
 .who .r{font-size:14px;opacity:.75;line-height:1.35;margin-top:3px}
 .slogan{font-family:'Manrope',sans-serif;font-weight:800;font-size:34px;line-height:1.1;letter-spacing:-.03em;position:relative}
 .slogan em{font-style:normal;background:var(--warm);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -154,18 +155,18 @@ footer a{color:var(--ink);font-weight:600}
 
 <header class="hero">
   <div class="wrap">
-    <div class="brandrow">{{B_SVG}}<span>Γιάννης Βαρδαβάς <small>lutcf</small></span></div>
+    <div class="brandrow">{{B_SVG}}<span><small style="opacity:.75">Financial Planning &amp; Risk Management</small></span></div>
 
     <div class="who">
       <img src="data:image/jpeg;base64,{{FOTO}}" alt="Γιάννης Βαρδαβάς" width="84" height="84">
       <div>
-        <div class="n">Γεια σου, είμαι ο&nbsp;Γιάννης.</div>
-        <div class="r">Σύμβουλος financial planning &amp; risk management<br>για οικογένειες και επιχειρήσεις</div>
+        <div class="n" id="hello">[[Γεια σου, είμαι ο Γιάννης&nbsp;Βαρδαβάς.|Γεια σας, είμαι ο Γιάννης&nbsp;Βαρδαβάς.]]</div>
+        <div class="r">Σύμβουλος για οικογένειες<br>και επιχειρήσεις</div>
       </div>
     </div>
 
     <h1 class="slogan">Ο φόβος φεύγει όταν το χειρότερο σενάριο <em>αποκτήσει αριθμό.</em></h1>
-    <p class="sub">Βάζω σε μία καθαρή εικόνα ασφάλιση, σύνταξη, επενδύσεις και κινδύνους, ώστε να ξέρεις τι αντέχει το σχέδιό σου πριν το χρειαστείς.</p>
+    <p class="sub">Βάζω σε μία καθαρή εικόνα ασφάλιση, σύνταξη, επενδύσεις και κινδύνους, ώστε να [[ξέρεις τι αντέχει το σχέδιό σου πριν το χρειαστείς|ξέρετε τι αντέχει το σχέδιό σας πριν το χρειαστείτε]].</p>
 
     <div class="chips">
       <span class="chip"><b>25+</b> χρόνια</span>
@@ -173,7 +174,7 @@ footer a{color:var(--ink);font-weight:600}
       <span class="chip">Μητρώο <b>177766</b></span>
     </div>
 
-    <a class="btn btn-primary" id="heroCta" href="{{CAL}}" target="_blank" rel="noopener">{{CAL_SVG}}Κλείσε μια συζήτηση</a>
+    <a class="btn btn-primary" id="heroCta" href="{{CAL}}" target="_blank" rel="noopener">{{CAL_SVG}}[[Κλείσε|Κλείστε]] μια συζήτηση</a>
     <p class="cta-note">20 λεπτά · Zoom ή από κοντά · χωρίς δέσμευση</p>
   </div>
 </header>
@@ -187,7 +188,7 @@ footer a{color:var(--ink);font-weight:600}
   </section>
 
   <section aria-labelledby="h-what">
-    <p class="eyebrow">Τι κάνω για σένα</p>
+    <p class="eyebrow">Τι κάνω για [[σένα|εσάς]]</p>
     <h2 id="h-what">Τρία πράγματα, πολύ καλά.</h2>
     <div class="stack">
       <article class="card svc">
@@ -195,8 +196,8 @@ footer a{color:var(--ink);font-weight:600}
         <ul>
           <li>Προστασία εισοδήματος και οικογένειας</li>
           <li>Σχέδιο για σύνταξη και σπουδές παιδιών</li>
-          <li>Επενδύσεις με βάση τους δικούς σου στόχους</li>
-          <li>Υγεία: τι πληρώνει το πρόγραμμα, τι μένει σε σένα</li>
+          <li>Επενδύσεις με βάση τους δικούς [[σου|σας]] στόχους</li>
+          <li>Υγεία: τι πληρώνει το πρόγραμμα, τι μένει σε [[σένα|εσάς]]</li>
         </ul>
       </article>
       <article class="card svc">
@@ -209,10 +210,10 @@ footer a{color:var(--ink);font-weight:600}
         </ul>
       </article>
       <article class="card svc">
-        <h3><span class="ic pol">{{I_POL}}</span>Για ό,τι ήδη έχεις</h3>
+        <h3><span class="ic pol">{{I_POL}}</span>Για ό,τι ήδη [[έχεις|έχετε]]</h3>
         <ul>
-          <li>Ακτινογραφία των συμβολαίων σου, από όποια εταιρεία κι αν είναι</li>
-          <li>Πού πληρώνεις δύο φορές και πού δεν σε καλύπτει τίποτα</li>
+          <li>Ακτινογραφία των συμβολαίων [[σου|σας]], από όποια εταιρεία κι αν είναι</li>
+          <li>Πού [[πληρώνεις|πληρώνετε]] δύο φορές και πού δεν [[σε|σας]] καλύπτει τίποτα</li>
         </ul>
       </article>
     </div>
@@ -220,19 +221,19 @@ footer a{color:var(--ink);font-weight:600}
 
   <section aria-labelledby="h-diff">
     <p class="eyebrow">Γιατί διαφέρω</p>
-    <h2 id="h-diff">Δεν ξεκινώ από προϊόν. Ξεκινώ από σένα.</h2>
-    <div class="quote">Καλύτερα καμμία πώληση παρά μία λάθος πώληση.<span>Αν η σωστή σύσταση είναι να μην αλλάξεις τίποτα, αυτό θα σου πω.</span></div>
+    <h2 id="h-diff">Δεν ξεκινώ από προϊόν. Ξεκινώ από [[σένα|εσάς]].</h2>
+    <div class="quote">Καλύτερα καμμία πώληση παρά μία λάθος πώληση.<span>Αν η σωστή σύσταση είναι να μην [[αλλάξεις|αλλάξετε]] τίποτα, αυτό θα [[σου|σας]] πω.</span></div>
     <div class="why">
-      <div class="row"><span class="num">1</span><div><h3>Αριθμοί, όχι κουβέντες</h3><p>Δεν σου λέω «νομίζω ότι είσαι καλυμμένος». Σου δείχνω πόσα θα έβγαζες από την τσέπη σου σε ένα πραγματικό περιστατικό.</p></div></div>
-      <div class="row"><span class="num">2</span><div><h3>Δικά μου εργαλεία ανάλυσης</h3><p>Τα έχω αναπτύξει ο ίδιος, με τεχνητή νοημοσύνη: χιλιάδες προσομοιώσεις και δοκιμή του σχεδίου σου πάνω σε πραγματικές κρίσεις του παρελθόντος.</p></div></div>
+      <div class="row"><span class="num">1</span><div><h3>Αριθμοί, όχι κουβέντες</h3><p>[[Δεν σου λέω «νομίζω ότι είσαι καλυμμένος». Σου δείχνω πόσα θα έβγαζες από την τσέπη σου|Δεν σας λέω «νομίζω ότι είστε καλυμμένοι». Σας δείχνω πόσα θα βγάζατε από την τσέπη σας]] σε ένα πραγματικό περιστατικό.</p></div></div>
+      <div class="row"><span class="num">2</span><div><h3>Δικά μου εργαλεία ανάλυσης</h3><p>Τα έχω αναπτύξει ο ίδιος, με τεχνητή νοημοσύνη: χιλιάδες προσομοιώσεις και δοκιμή του σχεδίου [[σου|σας]] πάνω σε πραγματικές κρίσεις του παρελθόντος.</p></div></div>
       <div class="row"><span class="num">3</span><div><h3>Μία εικόνα, όχι σκόρπια συμβόλαια</h3><p>Ζωή, υγεία, περιουσία, σύνταξη και επενδύσεις μαζί. Χωρίς διπλές πληρωμές, χωρίς κενά εκεί που μετράει.</p></div></div>
-      <div class="row"><span class="num">4</span><div><h3>Το σχέδιο μένει ζωντανό</h3><p>Το ξαναβλέπουμε κάθε χρόνο, και όποτε αλλάζει κάτι στη ζωή ή στην επιχείρησή σου.</p></div></div>
+      <div class="row"><span class="num">4</span><div><h3>Το σχέδιο μένει ζωντανό</h3><p>Το ξαναβλέπουμε κάθε χρόνο, και όποτε αλλάζει κάτι στη ζωή ή στην επιχείρησή [[σου|σας]].</p></div></div>
     </div>
   </section>
 
   <section aria-labelledby="h-tools">
     <p class="eyebrow">Τα εργαλεία μου</p>
-    <h2 id="h-tools">Ό,τι θα δεις μαζί μου, το βλέπεις στην οθόνη.</h2>
+    <h2 id="h-tools">Ό,τι θα [[δεις|δείτε]] μαζί μου, το [[βλέπεις|βλέπετε]] στην οθόνη.</h2>
         <div class="tools">
       <span class="tool"><i style="background:var(--teal)"></i>Ακτινογραφία συμβολαίων</span>
       <span class="tool"><i style="background:var(--violet)"></i>Οικογενειακός χάρτης προστασίας</span>
@@ -261,11 +262,11 @@ footer a{color:var(--ink);font-weight:600}
 
   <section aria-labelledby="h-20">
     <p class="eyebrow">Γιατί 20 λεπτά</p>
-    <h2 id="h-20">Θα φύγεις με κάτι, ακόμα κι αν δεν ξαναμιλήσουμε.</h2>
+    <h2 id="h-20">Θα [[φύγεις|φύγετε]] με κάτι, ακόμα κι αν δεν ξαναμιλήσουμε.</h2>
     <div class="steps">
-      <div class="step"><div><b>Μου λες τι σε απασχολεί</b><span>Οικογένεια, σύνταξη, επιχείρηση ή απλώς «δεν ξέρω τι έχω».</span></div></div>
-      <div class="step"><div><b>Βλέπουμε μαζί τι ήδη έχεις</b><span>Συμβόλαια, αποταμιεύσεις, καλύψεις. Αν έχεις τα χαρτιά πρόχειρα, ακόμα καλύτερα.</span></div></div>
-      <div class="step"><div><b>Φεύγεις με μια καθαρή εικόνα</b><span>Και με έναν αριθμό για τη δική σου περίπτωση που μέχρι τώρα δεν ήξερες.</span></div></div>
+      <div class="step"><div><b>Μου [[λες τι σε|λέτε τι σας]] απασχολεί</b><span>Οικογένεια, σύνταξη, επιχείρηση ή απλώς «δεν ξέρω τι έχω».</span></div></div>
+      <div class="step"><div><b>Βλέπουμε μαζί τι ήδη [[έχεις|έχετε]]</b><span>Συμβόλαια, αποταμιεύσεις, καλύψεις. Αν [[έχεις|έχετε]] τα χαρτιά πρόχειρα, ακόμα καλύτερα.</span></div></div>
+      <div class="step"><div><b>[[Φεύγεις|Φεύγετε]] με μια καθαρή εικόνα</b><span>Και με έναν αριθμό για τη δική [[σου|σας]] περίπτωση που μέχρι τώρα δεν [[ήξερες|ξέρατε]].</span></div></div>
     </div>
     <div class="nos">
       <div class="no">{{I_OK}}Χωρίς δέσμευση</div>
@@ -275,20 +276,20 @@ footer a{color:var(--ink);font-weight:600}
   </section>
 
   <section class="final" id="final" aria-labelledby="h-final">
-    <h2 id="h-final">Διάλεξε ώρα μόνος σου.</h2>
-    <p class="lede" style="margin-top:8px">Βλέπεις πότε είμαι ελεύθερος και κλείνεις ό,τι σε βολεύει, με Zoom ή από κοντά. Ακόμα και τώρα, στις έντεκα το βράδυ.</p>
-    <a class="btn btn-primary" href="{{CAL}}" target="_blank" rel="noopener">{{CAL_SVG}}Κλείσε μια συζήτηση</a>
-    <p class="cta-note">Ή γράψε μου απευθείας:</p>
+    <h2 id="h-final">[[Διάλεξε ώρα μόνος σου|Διαλέξτε ώρα μόνοι σας]].</h2>
+    <p class="lede" style="margin-top:8px">[[Βλέπεις πότε είμαι ελεύθερος και κλείνεις ό,τι σε βολεύει|Βλέπετε πότε είμαι ελεύθερος και κλείνετε ό,τι σας βολεύει]], με Zoom ή από κοντά. Ακόμα και τώρα, στις έντεκα το βράδυ.</p>
+    <a class="btn btn-primary" href="{{CAL}}" target="_blank" rel="noopener">{{CAL_SVG}}[[Κλείσε|Κλείστε]] μια συζήτηση</a>
+    <p class="cta-note">Ή [[γράψε|γράψτε]] μου απευθείας:</p>
     <div class="alt">
-      <a href="https://wa.me/306983880746?text=%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%BF%CF%85%20%CE%93%CE%B9%CE%AC%CE%BD%CE%BD%CE%B7%2C%20%CE%B8%CE%AD%CE%BB%CF%89%20%CE%BD%CE%B1%20%CE%BA%CE%BB%CE%B5%CE%AF%CF%83%CE%BF%CF%85%CE%BC%CE%B5%2020%20%CE%BB%CE%B5%CF%80%CF%84%CE%AC." target="_blank" rel="noopener">{{I_WA}}WhatsApp</a>
+      <a href="https://wa.me/306983880746?text=[[%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%BF%CF%85%20%CE%93%CE%B9%CE%AC%CE%BD%CE%BD%CE%B7%2C%20%CE%B8%CE%AD%CE%BB%CF%89%20%CE%BD%CE%B1%20%CE%BA%CE%BB%CE%B5%CE%AF%CF%83%CE%BF%CF%85%CE%BC%CE%B5%2020%20%CE%BB%CE%B5%CF%80%CF%84%CE%AC.|%CE%9A%CE%B1%CE%BB%CE%B7%CE%BC%CE%AD%CF%81%CE%B1%20%CE%BA%CF%8D%CF%81%CE%B9%CE%B5%20%CE%92%CE%B1%CF%81%CE%B4%CE%B1%CE%B2%CE%AC%2C%20%CE%B8%CE%B1%20%CE%AE%CE%B8%CE%B5%CE%BB%CE%B1%20%CE%BD%CE%B1%20%CE%BA%CE%BB%CE%B5%CE%AF%CF%83%CE%BF%CF%85%CE%BC%CE%B5%20%CE%BC%CE%B9%CE%B1%20%CF%83%CF%85%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7%2020%20%CE%BB%CE%B5%CF%80%CF%84%CF%8E%CE%BD.]]" target="_blank" rel="noopener">{{I_WA}}WhatsApp</a>
       <a href="viber://chat?number=%2B306983880746">{{I_VI}}Viber</a>
       <a href="tel:+306983880746">{{I_TEL}}Κλήση</a>
     </div>
-    <a class="save" href="https://vardavas.pages.dev/epafi.vcf"><u>Κράτα την επαφή μου</u>, πριν τη χρειαστείς</a>
+    <a class="save" href="https://vardavas.pages.dev/epafi.vcf"><u>[[Κράτα|Κρατήστε]] την επαφή μου</u>, πριν τη [[χρειαστείς|χρειαστείτε]]</a>
   </section>
 
   <footer>
-    <a href="https://vardavas-site.pages.dev/" target="_blank" rel="noopener">Δες όλη την ιστοσελίδα μου →</a><br><br>
+    <a href="https://vardavas-site.pages.dev/" target="_blank" rel="noopener">[[Δες|Δείτε]] όλη την ιστοσελίδα μου →</a><br><br>
     Γιάννης Βαρδαβάς, lutcf · Ασφαλιστικός διαμεσολαβητής<br>
     Αρ. Γεν. Μητρώου Επαγγελματικού Επιμελητηρίου Αθηνών: 177766 · σε συνεργασία με Allianz<br>
     698 388 0746 · ioannis.vardavas@gmail.com
@@ -297,12 +298,15 @@ footer a{color:var(--ink);font-weight:600}
 
 <div class="sticky" id="sticky" aria-hidden="false">
   <div class="in">
-    <a class="btn btn-primary" href="{{CAL}}" target="_blank" rel="noopener">Κλείσε μια συζήτηση</a>
+    <a class="btn btn-primary" href="{{CAL}}" target="_blank" rel="noopener">[[Κλείσε|Κλείστε]] μια συζήτηση</a>
     <a class="wa" href="https://wa.me/306983880746" target="_blank" rel="noopener" aria-label="WhatsApp">{{I_WA}}</a>
   </div>
 </div>
 
 <script>
+(function(){
+[[|  try{ if(new URLSearchParams(location.search).has('g')){ location.replace('g/'); } }catch(e){}]]
+})();
 (function(){
   try{
     var st=document.getElementById('sticky');
